@@ -1,0 +1,42 @@
+[15_CONSOLE_PYTHONMULTIMEDIA]
+python-ogg
+python-ogg-dbg
+python-pyogg
+python-pyvorbis
+python-alsaaudio
+sox
+libsox-fmt-alsa
+libsox1b
+libsox-fmt-base
+libcanberra0
+libsox1
+libsox1a
+mpg123-esd
+libesd0
+esound-common
+esound-clients
+mpg123
+mpg123-alsa
+libmpg123-0
+libportmidi0
+alsa-oss
+libasound2
+libespeak1
+espeak
+espeak-data
+libportaudio2
+libesd-alsa0
+libestools1.2
+gir1.0-gstreamer-0.10
+gstreamer0.10-esd
+moc
+libflite1
+# Voice recognition
+libsphinx2g0
+libsphinxbase1
+sphinx2-bin
+sphinx2-hmm-6k
+flite
+# Warning: libjack0 was found conflicting on previous analysis... taken from
+# 99_prohibited_misc
+libjack0

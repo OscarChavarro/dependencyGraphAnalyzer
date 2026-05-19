@@ -1,0 +1,8 @@
+[41_DEV_BASIC]
+libopenjp2-7-dev
+libhdf5-dev
+libaec-dev
+libaec-dev:amd64
+libcaca-dev
+libslang2-dev
+libslang2-dev:amd64

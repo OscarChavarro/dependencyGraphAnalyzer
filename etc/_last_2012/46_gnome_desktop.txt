@@ -1,0 +1,45 @@
+[46_GNOME_DESKTOP]
+# Compiz
+emerald
+libemeraldengine0
+emerald-themes
+compiz-fusion-plugins-main
+compizconfig-backend-gconf
+compiz-plugins-main-default
+compizconfig-settings-manager
+python-compizconfig
+simple-ccsm
+fusion-icon
+# Screen savers
+gnome-accessibility
+gnome-core
+# Other
+compiz-fusion-plugins-extra
+compiz-wrapper
+# Themes
+ubuntu-artwork
+human-theme
+gnome-themes
+gnome-themes-extras
+gnome-themes-more
+gnome-themes-selected
+gnome-themes-ubuntu
+gnome-brave-icon-theme
+gnome-dust-icon-theme
+gnome-human-icon-theme
+gnome-illustrious-icon-theme
+gnome-noble-icon-theme
+gnome-wine-icon-theme
+gnome-wise-icon-theme
+gnome-colors
+gnome-colors-common
+light-themes
+gnome-icon-theme-gartoon
+breathe-icon-theme
+community-themes
+ubuntu-mono
+compiz-plugins-main
+# Others
+afterstep
+afterstep-data
+ubuntu-tweak-0

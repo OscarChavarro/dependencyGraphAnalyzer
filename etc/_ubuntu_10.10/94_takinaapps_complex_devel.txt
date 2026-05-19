@@ -1,0 +1,17 @@
+[94_TAKINA_APPS_COMPLEX_DEVEL]
+# gtk + multimedia
+lxpanel
+# Depending on WX & GNOME
+playonlinux
+harpia
+# Depending on QT & GNOME
+gnunet-tools
+gnunet-gtk
+gnunet-dev
+gnunet-common
+gnunet-client
+gnunet-server
+libtelepathy-qt4-dev
+# Depending on mono, gnome, glut
+libtaoframework-freeglut-cil-dev
+libtaoframework-opengl-cil-dev

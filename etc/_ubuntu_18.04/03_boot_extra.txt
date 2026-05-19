@@ -1,0 +1,13 @@
+[03_BOOT_EXTRA]
+# Linux from scratch: libcap2
+libpam-cap
+libpam-cap:amd64
+libpam-cap:i386
+# Linux from scratch: apparmor
+apparmor
+# Linux from scratch: systemd
+libnss-systemd
+libnss-systemd:amd64
+libnss-systemd:i386
+# linux from scratch (0001): glibc-2.27
+nscd

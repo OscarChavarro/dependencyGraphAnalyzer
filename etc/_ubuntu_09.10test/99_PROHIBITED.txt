@@ -1,0 +1,5 @@
+[99_PROHIBITED_DONOTUSE_UNINSTALL]
+# These are the free version of flash, do not use, prefer original 32bit flash player
+swfdec-mozilla
+swfdec-gnome
+libswfdec-0.8-0

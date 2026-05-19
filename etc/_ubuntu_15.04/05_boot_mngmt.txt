@@ -1,0 +1,8 @@
+[05_BOOT_MNGMT]
+os-prober
+grub2-common
+grub-common
+grub-gfxpayload-lists
+grub-pc
+grub-pc-bin
+busybox-static

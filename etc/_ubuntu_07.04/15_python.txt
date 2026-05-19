@@ -1,0 +1,8 @@
+[15_PYTHON]
+python
+python2.5
+python2.5-minimal
+python-minimal
+openssl-blacklist
+lsb-release
+lsb

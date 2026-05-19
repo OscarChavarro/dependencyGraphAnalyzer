@@ -1,0 +1,8 @@
+[00_LIBC]
+libc6
+tzdata
+locales
+belocs-locales-bin
+libgcc1
+gcc-4.1-base
+libstdc++6

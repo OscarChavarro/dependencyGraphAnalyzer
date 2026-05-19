@@ -1,0 +1,10 @@
+[98_TAKINA_APPS_EXTRAREPOS]
+# deb http://download.virtualbox.org/virtualbox/debian lucid non-free
+virtualbox-4.0
+# ?
+noip2
+# No apt-get, direct .deb download
+skype
+teamviewer6
+# download from dropbox control version system page
+nautilus-dropbox

@@ -1,0 +1,4 @@
+[98_TAKINA_APPS_WXW]
+gnuplot-nox
+gnuplot-x11
+gnuplot

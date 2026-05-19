@@ -1,0 +1,72 @@
+[99_PROHIBITED_DAEMONS]
+# Not-essencial daemons causing unnecesary system overhead
+# Monopoly game daemon
+gtkatlantic
+monopd
+# Antivirus
+clamav
+clamav-base
+clamav-freshclam
+clamtk
+libclamav6
+# Unknown card game
+pioneers-meta-server
+# Unknown game
+cyphesis-cpp
+# Web servers
+nginx
+nginx-common
+nginx-full
+cherokee-doc
+cherokee
+apache2-doc
+libapache2-mod-python-doc
+libapache2-mod-perl2-doc
+libapache2-mod-rivet-doc
+libapache-mod-jk-doc
+# MMORPG server
+crossfire-server
+crossfire-common
+crossfire-maps
+# Unknown war game
+ggz-game-servers
+ggzd
+# Scrabble server
+pyscrabble-server6
+# Console mouse server
+gpm
+# Network configuration daemon
+python-wicd
+wicd-daemon
+wicd-gtk
+wicd-kde
+# Scrabble server
+pyscrabble-server
+# Backup daemon
+deja-dup
+duplicity
+librsync1
+# Databases
+postgresql
+postgresql-8.3
+postgresql-client-8.3
+postgresql-client-common
+postgresql-common
+postgresql-doc
+postgresql-doc-8.3
+postgresql-doc-8.4
+postgresql-doc-9.1
+# Asterisk
+asterisk
+asterisk-config
+asterisk-core-sounds-en-gsm
+asterisk-modules
+asterisk-moh-opsound-gsm
+asterisk-voicemail
+asterisk-doc
+# Mail servers
+postfix
+# Unknown libc related daemon
+nscd
+# Unknown daemons
+nanny

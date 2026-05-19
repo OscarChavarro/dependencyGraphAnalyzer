@@ -1,0 +1,12 @@
+[64_BLENDER]
+blender
+blender-data
+libblosc1
+libjemalloc1
+liblog4cplus-1.1-9
+libopencolorio1v5
+libopenimageio1.6
+libopenvdb3.2
+libspnav0
+libtinyxml2.6.2v5
+libtinyxml2.6.2v5:i386

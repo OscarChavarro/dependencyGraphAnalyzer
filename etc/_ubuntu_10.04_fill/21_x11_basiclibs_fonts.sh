@@ -1,0 +1,1 @@
+apt-get -y install libxaw7 xfonts-100dpi xfonts-75dpi xfonts-scalable ttf-wqy-microhei ttf-baekmuk ttf-bengali-fonts ttf-kannada-fonts ttf-kochi-gothic ttf-oriya-fonts ttf-telugu-fonts ttf-mscorefonts-installer ttf-freefont xfonts-base x11-xfs-utils libaa1 policykit-1

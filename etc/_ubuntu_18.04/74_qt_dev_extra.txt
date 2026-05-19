@@ -1,0 +1,3 @@
+[74_QT_DEV_EXTRA]
+libqt5svg5-dev
+libqt5svg5-dev:amd64

@@ -1,0 +1,5 @@
+[63_GTK_GL_APPS]
+google-chrome-stable
+google-earth-pro-stable
+code
+view3dscene

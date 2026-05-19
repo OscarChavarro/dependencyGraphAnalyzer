@@ -1,0 +1,9 @@
+[03_LINUX_PERL]
+perl
+perl5
+perl-modules
+libalgorithm-diff-perl
+libalgorithm-merge-perl
+libft-perl
+libalgorithm-diff-xs-perl
+netbase

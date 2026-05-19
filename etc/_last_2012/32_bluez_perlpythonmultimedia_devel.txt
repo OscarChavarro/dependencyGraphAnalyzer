@@ -1,0 +1,14 @@
+[32_BLUEZ_PERLPYTHONMULTIMEDIA_DEVEL]
+libgstreamer-plugins-base0.10-dev
+libgstreamer0.10-dev
+gstreamer0.10-doc
+gstreamer0.10-buzztard-doc
+gstreamer0.10-plugins-bad-doc
+gstreamer0.10-plugins-ugly-doc
+gstreamer0.10-plugins-good-doc
+gstreamer0.10-plugins-base-doc
+python-gst0.10-dev
+libsdl-pango-dev
+libges-0.10-doc
+libtuxcap-dev
+libgoffice-0-6

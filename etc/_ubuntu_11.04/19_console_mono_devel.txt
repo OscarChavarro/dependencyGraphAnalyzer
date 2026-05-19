@@ -1,0 +1,7 @@
+[19_CONSOLE_MONO_DEVEL]
+libndesk-dbus1.0-cil-dev
+libndesk-dbus-glib1.0-cil-dev
+libmono-dev
+libglib2.0-cil-dev
+libart2.0-cil-dev
+libgmime2.4-cil-dev

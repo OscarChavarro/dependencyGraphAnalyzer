@@ -1,0 +1,47 @@
+[00_LINUX_LIBC_NCURSES]
+tzdata
+libc-bin
+debconf
+debconf-i18n
+libtext-charwidth-perl
+libtext-wrapi18n-perl
+perl-base
+dpkg
+xz-utils
+libstdc++6
+libgcc1
+libselinux1
+coreutils
+libtext-iconv-perl
+liblocale-gettext-perl
+libacl1
+libattr1
+libc6
+# Basic 
+libtinfo5
+libncurses5
+libgpm2
+libdb4.7
+# 32 bit
+libc6-i686
+liblzma1
+liblzma2
+liblzma5
+libbz2-1.0
+zlib1g
+libgpmg1
+multiarch-support
+libncursesw5
+# Apt
+libapt-inst1.3
+libapt-inst1.4
+libapt-pkg4.11
+libapt-pkg4.12
+apt-utils
+gpg
+libreadline6
+readline-common
+libdb4.6
+libdb5.1
+gcc-4.6-base
+tar

@@ -1,0 +1,7 @@
+[41_BOOST_DEV]
+libboost-dev
+libboost-dev:amd64
+libboost1.74-dev
+libboost1.74-dev:amd64
+libkml-dev
+libkml-dev:amd64

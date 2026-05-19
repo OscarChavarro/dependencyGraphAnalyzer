@@ -1,0 +1,1 @@
+apt-get -y install python-4suite-xml python-eggtrayicon python-gdl python-gksu2 python-glade2 python-gmenu python-gnome2 python-gnomeapplet python-gst0.10 python-gtkglext1 python-gtkmozembed python-gtksourceview2 python-launchpad-integration python-mako python-metacity python-pygoocanvas python-rsvg python-wnck screen-resolution-extra gnome-user-guide

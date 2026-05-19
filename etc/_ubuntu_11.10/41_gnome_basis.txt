@@ -1,0 +1,18 @@
+[41_GNOME_BASIS]
+# gvfs
+gvfs
+gvfs-daemons
+gvfs-libs
+gvfs-common
+policykit-1-gnome
+libgdu0
+# gnome
+libgnome2-0
+libgnomevfs2-common
+libgnomevfs2-0
+libgnome2-common
+gconf2
+gvfs-bin
+libgnome-keyring0
+gstreamer0.10-plugins-good
+libsoup-gnome2.4-1

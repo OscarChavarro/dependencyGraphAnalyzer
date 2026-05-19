@@ -1,0 +1,25 @@
+[89_NEWUBUNTU1010]
+freeglut3-dbg
+streamer
+# Krakatoa-dev
+liblablgtk2-gl-ocaml
+libgdome2-ocaml
+liblablgtkmathview-ocaml
+liblablgtksourceview-ocaml
+libgdome2-ocaml-dev
+libgtkmathview-dev
+libgtksourceview-dev
+liblablgtk2-gl-ocaml-dev
+liblablgtk2-gnome-ocaml-dev
+liblablgtkmathview-ocaml-dev
+liblablgtksourceview-ocaml-dev
+# Other from takina 2011
+# (unknown repositories ?)
+appinventor-setup 
+libcv4
+libcvaux4
+libhighgui4
+# Sky
+libdc1394-22-doc
+libogre-dev
+libogremain-1.6.4

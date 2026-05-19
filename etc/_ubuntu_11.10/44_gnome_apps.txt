@@ -1,0 +1,205 @@
+[44_GNOME_APPS]
+# Gnome paint
+gnome-paint
+# Color choosers
+agave
+gnome-color-chooser
+# Media player
+gnome-mplayer
+# VNC client
+gtkvncviewer
+# Map viewer ala google earth :)
+emerillon
+libchamplain-0.8-1
+libchamplain-gtk-0.8-1
+# Character map
+gucharmap
+# Dia
+dia-common
+dia-libs
+dia-gnome
+dia
+# Ghex
+ghex
+# Sudo
+gksu
+libgnome2-perl
+libgnome2-vfs-perl
+libgnome2-canvas-perl
+# Firefox & flash plugin (Problematic: Depending on automatic update software)
+firefox-3.0
+firefox-globalmenu
+firefox-3.0-branding
+firefox-3.5
+firefox-3.5-branding
+firefox-3.5-gnome-support
+firefox-gnome-support
+firefox-branding
+firefox
+ubufox
+xul-ext-ubufox
+apturl
+# Print screen application
+shutter
+gnome-web-photo
+# Image viewers
+shotwell
+eog
+libopenrawgnome1
+gstreamer0.10-gnomevfs
+# Scanner frontend
+xsane
+xsane-common
+# Cheese webcam video
+cheese
+libcheese1
+libcheese-gtk20
+cheese-common
+libcheese-gtk18
+# Video editing software (similar to Adobe Premiere/Windows Movie Maker)
+pitivi
+# Gnome shell
+nautilus
+# CD Burner
+python-brasero
+brasero
+brasero-common
+brasero-cdrkit
+libbrasero-media0
+libbrasero-media1
+libbrasero-media3-1
+# Calculator
+gcalctool
+# Text editor
+gedit
+gedit-common
+# Collaborative text editor
+gobby
+# Vector graphics editor
+inkscape
+# Games
+gnome-mastermind
+pychess
+gnomekiss
+gnome-mud
+gnoemoe
+gniall
+glotski
+tenace
+gnome-cards-data
+gnome-games-data
+gnome-games-extra-data
+ghextris
+gamazons
+pioneers
+pioneers-data
+pegsolitaire
+monster-masher
+monkey-bubble
+mathwar
+hitori
+gtetrinet
+quarry
+grhino
+grhino-data
+gnome-breakout
+gnome-hearts
+sgt-puzzles
+iagno
+gnome-mahjongg
+aisleriot
+gnome-sudoku
+gnomine
+gnotravex
+gnotski
+glchess
+glines
+gnect
+gnibbles
+gnobots2
+gtali
+quadrapassel
+gnome-games-common
+atomix
+atomix-data
+# Mail client
+liblpint-bonobo0
+libexchange-storage1.2-3
+libgnome-pilot2x
+gnome-pilot
+gnome-pilot-conduits
+libgnome-pilot2
+# Instant messengers and chat programs
+emesene
+indicator-status-provider-emesene
+pidgin
+pidgin-libnotify
+pidgin-otr
+nautilus-sendto
+libempathy30
+libempathy-common
+libempathy-gtk28
+libempathy-gtk-common
+libtelepathy2
+xchat-gnome
+xchat-gnome-common
+xchat-gnome-indicator
+# CPU temperature sensors! (recommended!)
+libsensors-applet-plugin0
+sensors-applet
+# System utilities
+gnome-system-monitor
+gnome-disk-utility
+libgdu-gtk0
+gcursor
+# PDF document viewer
+evince-gtk
+# Office apps
+gnumeric-doc
+gnumeric-common
+planner
+vim-gnome
+vim-gui-common
+vim-gtk
+# Pulseaudio plugin
+pavumeter
+padevchooser
+paman
+paprefs
+totem
+totem-plugins
+# Web
+totem-mozilla
+# Social networking
+gwibber-service
+gwibber
+gwibber-service-facebook
+gwibber-service-identica
+gwibber-service-twitter
+libgwibber-gtk2
+libgwibber2
+libgwibber0
+libgwibber1
+# Javascript
+gjs
+libgjs0c
+# Window manager
+sawfish
+sawfish-data
+sawfish-dbg
+sawfish-lisp-source
+sawfish-merlin-ugliness
+sawfish-themes
+# Gnome terminal
+gnome-terminal-data
+gnome-terminal
+# Other
+libedataserverui-3.0-1
+libgtkhtml-editor-4.0-0
+libgtkhtml-4.0-0
+libgtkhtml-4.0-common
+indicator-session
+gkdebconf
+libcouchdb-glib-1.0-1
+libcouchdb-glib-1.0-2
+libdesktopcouch-glib-1.0-2

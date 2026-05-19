@@ -1,0 +1,23 @@
+[203_PROHIBITED]
+# This damages detection of sound devices!
+# Ubuntu group packages
+ubuntu-minimal
+# Packages not working, should install .tar version
+update-notifier-common
+update-manager-core
+ubuntu-release-upgrader-core
+libplymouth5
+libplymouth5:amd64
+plymouth
+plymouth-theme-ubuntu-text
+ubuntu-server
+overlayroot
+landscape-common
+python3-twisted
+sosreport
+busybox-static
+iputils-tracepath
+ubuntu-standard
+ubuntu-pro-client
+ubuntu-pro-client-l10n
+ubuntu-server-minimal

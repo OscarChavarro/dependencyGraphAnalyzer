@@ -1,0 +1,15 @@
+[34_GNOME_PYTHON]
+libgdl-1-3
+libgdl-1-common
+libgmime-2.4-2
+libtotem-plparser12
+python-4suite-doc
+python-4suite-xml
+python-eggtrayicon
+python-gdl
+python-gksu2
+python-gtkmozembed
+python-xdg
+python-metacity
+python-rsvg
+python-wnck

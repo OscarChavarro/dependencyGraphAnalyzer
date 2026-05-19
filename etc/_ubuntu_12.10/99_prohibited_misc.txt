@@ -1,0 +1,540 @@
+[99_PROHIBITED_MISC]
+# To remove, use "apt-get remove", no "aptitude purge", so groups don't
+# remove dependants
+# These are the free versions of flash, do not use, prefer original 32bit flash
+# player from package "flashplugin-installer"
+swfdec-mozilla
+swfdec-gnome
+libswfdec-0.8-0
+flashplugin-nonfree
+klash-opengl
+klash
+gnash
+gnash-common
+browser-plugin-gnash
+# Use poppler-data
+cmap-adobe-japan1
+cmap-adobe-japan2
+gs-cjk-resource
+# Use python3-aptdaemon.pkcompat
+packagekit-backend-aptcc
+python-packagekit
+packagekit
+packagekit-tools
+# Use phonon-backend-gstreamer
+phonon-backend-null
+phonon-backend-null:amd64
+# lzma was replaced by xz-lzma
+zeroinstall-injector
+fvwm-crystal
+rox-filer
+lzma
+# Conflicts with gnuplot-x11
+gnuplot-nox
+# Conflicts with rox-filer
+python-aptdaemon.pkcompat
+# Ubuntu included ATI Drivers - DOESN'T WORK - Replace with original ATI
+# drivers downloaded from ATI's website
+fglrx
+fglrx-amdcccle
+# Ubuntu included Nvidia drivers - DOESN'T WORK - Replace with original Nvidia
+# drivers downloaded from http://www.nvivia.com. Don't use jockey tools, 
+# neither ubuntu based nvidia drivers, neither packages depending on it
+# as such edubuntu-desktop-kde and kubuntu-desktop
+edubuntu-desktop-kde
+kubuntu-desktop
+jockey-kde
+jockey-gtk
+jockey-common
+xdiagnose
+nvidia-common
+nvidia-kernel-common
+nvidia-cg-toolkit
+nvidia-173-modaliases
+nvidia-185-modaliases
+nvidia-96-modaliases
+nvidia-current-modaliases
+nvidia-180-kernel-source
+nvidia-180-libvdpau
+nvidia-180-modaliases
+nvidia-71-modaliases
+nvidia-glx-180
+nvidia-glx-180-dev
+nvidia-current
+nvidia-settings
+nvidia-opencl-dev
+linux-restricted-modules-2.6.24-26-generic
+# Unwanted system / desktop behavior: unnecesary/intrusive applets
+alarm-clock-applet
+# Unwanted system / desktop behavior: caching systems -> busy RAM
+ubuntu-minimal
+readahead
+readahead-fedora
+ureadahead
+sreadahead
+# Unwanted system / desktop behavior: desktop search systems
+mlocate
+gnome-do
+gnome-do-plugins
+gnome-do-docklets
+# Unwanted system / desktop behavior: no needed - heavy desktop agent/services
+fast-user-switch-applet
+localepurge
+# Unwanted system / desktop behavior: spyware & non wanted publicity
+update-motd
+popularity-contest
+landscape-client
+landscape-common
+# Unwanted system / desktop behavior: automatic software updates
+ubuntu-release-upgrader-gtk
+update-manager
+language-selector
+gnome-codec-install
+language-selector-gnome
+oneconf
+software-center
+update-notifier
+banshee-extension-ubuntuonemusicstore
+libsyncdaemon-1.0-dev
+libubuntuone-1.0-1
+libubuntuone1.0-cil
+libubuntuone1.0-cil-dev
+python-ubuntuone
+rhythmbox-ubuntuone-music-store
+# Unstable: prevents gnome session from starting up (it halts it) on some
+# installations
+edubuntu-menueditor
+desktop-profiles
+# Conflicting versions
+# use newer versions
+libstdc++6-4.4-dev
+libstdc++6-4.4-doc
+libstdc++6-4.4-pic
+libstdc++6-4.4-dbg
+libstdc++6-4.5-pic
+gobjc-4.4
+gfortran-4.4-doc
+gfortran-4.4
+g++-4.3-multilib
+gcc-4.4-multilib
+g++-4.5-multilib
+g++-4.4-multilib
+g++-4.1
+g++-4.3
+g++-4.4
+g++-4.5
+gcc-4.1
+gcc-4.2
+gcc-4.3
+gcc-4.4
+gcc-4.4-doc
+# Use "extra" versions
+libavcodec53:amd64
+libavcodec53
+libavutil51:amd64
+libavutil51
+libavformat53:amd64
+# Fltk new version is 1.3. Do not use old 1.1. version at least you are trying
+# to compile VTK/ITK
+fltk1.1-games
+fltk1.1-doc
+libfltk1.1-dev
+# Use console-setup + kbd
+console-tools
+# Use im-switch
+im-config
+plasma-widget-uim
+uim-qt
+uim-utils
+libuim6
+libuim-data
+# Problematic versions (conflicting with other packages)
+jackd1-firewire
+jackd1
+libjack0
+libjack0:amd64
+kde-config-grub2
+kde-sc-dev-latest
+kdebase-workspace-dev
+grub
+grub2
+libsnack2
+xubuntu-desktop
+ubiquity
+ubiquity-frontend-kde
+system-config-audit
+raptor2-utils
+oem-config-kde
+oem-config
+python-gamera-dev
+libiodbc2
+libiodbc2-dev
+iodbc
+libjpeg62-dev
+# OpenCV-dev is problematic! pending to check!
+libhighgui-dev
+libcv-dev
+libcvaux-dev
+libopencv-calib3d-dev
+libopencv-features2d-dev
+libopencv-highgui-dev
+# Old versions
+libtiff4-dev
+libfaad0
+libavfilter-extra-1
+libavcodec-extra-52
+libavutil-extra-49
+libavutil-extra-50
+libpostproc-extra-51
+libswscale-extra-0
+libmpcdec3
+# use libgdchart-gd2-xpm instead
+libgdchart-gd2-noxpm
+# lpr conflicts with cups
+a2ps
+xfprint4
+lpr
+# use firefox
+mozilla-browser
+# use libgd2-xpm
+libgd2-noxpm
+# freeglut replaces old glutg3 (currently empty!)
+glutg3
+glutg3-dev
+# This lib breaks C++ toolchain
+libpcre++-dev
+# There are other versions "midtosmall"
+crafty-books-small
+# Conflict with pulseaudio sound infrastructure
+esound
+# Use virtualbox full version, not limited "ose" edition
+virtualbox-ose
+virtualbox-ose-guest-source
+virtualbox-ose-guest-utils
+virtualbox-ose-guest-x11
+virtualbox-ose-qt
+virtualbox-ose-source
+virtualbox-ose-dbg
+virtualbox-ose-dkms
+virtualbox-ose-fuse
+virtualbox-ose-guest-dkms
+# Applies only to linux installations on guested/emulated virtual environments
+virtualbox-guest-additions
+# Old version, use virtualbox-4.0
+virtualbox-3.2
+virtualbox-3.1
+virtualbox-3.0
+# Dependants on some of the above
+# Prefer the libsdl1.2debian-pulseaudio version
+libsdl1.2debian-alsa
+# Prefer newer versions of...
+libreadline5-dev
+# Conflicts with libreadline-gplv2-dev
+libreadline6-dev:amd64
+libreadline6-dev
+libreadline-dev:amd64
+libreadline-dev
+pvm-dev
+e17-dev
+guile-1.8-dev
+libcegui-mk2-dev
+libedje-dev
+liblua5.1-0-dev:amd64
+liblua5.1-0-dev
+liboctave-dev
+octave-pkg-dev
+r-base-dev
+# Do not use package versions of vtk/itk, use customized code versions on TAKINA installations
+libactiviz.net-cil
+libvtkgdcm2.2
+libvtkgdcm-cil
+libvtkgdcm-java
+libvtk-java
+php5-vtkgdcm
+python-vtkgdcm
+python-vtk
+tcl-vtk
+libvtk5.8
+libgdcm-tools
+libgdcm2.0
+libinsighttoolkit3-dev
+libinsighttoolkit3.16
+libnetcdf-dev
+libnetcdf4
+libvtk5-dev
+libvtk5-qt4-dev
+libvtk5.2
+libvtk5.2-qt4
+libvtkgdcm-tools
+libvtkgdcm2-dev
+libvtkgdcm2.0
+kwwidgets-doc
+vtk-doc
+gdcm-doc
+insighttoolkit3-examples
+# Others / unknown / untested / conflicting with other packages
+fam
+laptop-mode-tools
+libfam0
+libgpod4-nogtk
+nautilus-cd-burner
+quanta
+quanta-data
+ttf-ipafont-mincho
+xpdf-utils
+language-support-en
+language-support-es
+e16
+e16-data
+# Old versions
+cpp-4.4-doc
+cpp-4.1
+cpp-4.2
+cpp-4.3
+cpp-4.4
+gcc-4.1-base
+gcc-4.2-base
+gcc-4.3-base
+gcc-4.4-base
+gcc-4.4-base:amd64
+libstdc++6-4.1-dev
+libstdc++6-4.3-dev
+libstdc++6-4.5-dev
+libstdc++6-4.5-doc
+libstdc++6-4.6-doc
+libstdc++6-4.6-pic
+libstdc++6-4.5-dbg
+libstdc++6-4.6-dbg
+# Old libboost versions
+libboost-thread1.42.0
+libboost-date-time1.42.0
+libboost1.35-doc
+libboost1.38-doc
+libboost-date-time1.35.0
+libboost-date-time1.38.0
+libboost-filesystem1.34.1
+libboost-filesystem1.35.0
+libboost-filesystem1.38.0
+libboost-filesystem1.40.0
+libboost-filesystem1.42.0
+libboost-graph1.35.0
+libboost-graph1.38.0
+libboost-iostreams1.35.0
+libboost-iostreams1.38.0
+libboost-iostreams1.40.0
+libboost-iostreams1.42.0
+libboost-math1.38.0
+libboost-program-options1.34.1
+libboost-program-options1.35.0
+libboost-program-options1.38.0
+libboost-program-options1.40.0
+libboost-program-options1.42.0
+libboost-python1.35.0
+libboost-python1.38.0
+libboost-python1.40.0
+libboost-python1.42.0
+libboost-regex1.34.1
+libboost-regex1.35.0
+libboost-regex1.38.0
+libboost-regex1.40.0
+libboost-regex1.42.0
+libboost-serialization1.35.0
+libboost-serialization1.38.0
+libboost-signals1.34.1
+libboost-signals1.35.0
+libboost-signals1.38.0
+libboost-signals1.40.0
+libboost-signals1.42.0
+libboost-system1.35.0
+libboost-system1.38.0
+libboost-system1.40.0
+libboost-system1.42.0
+libboost-test1.35.0
+libboost-test1.38.0
+libboost-thread1.35.0
+libboost-thread1.38.0
+libboost-wave1.35.0
+libboost-wave1.38.0
+libboost1.35-dev
+libboost1.38-dev
+libboost1.40-dev
+libboost1.42-dbg
+libboost1.42-dev
+libboost-date-time1.35-dev
+libboost-date-time1.38-dev
+libboost-filesystem1.35-dev
+libboost-filesystem1.38-dev
+libboost-graph1.35-dev
+libboost-graph1.38-dev
+libboost-iostreams1.35-dev
+libboost-iostreams1.38-dev
+libboost-math1.38-dev
+libboost-program-options1.35-dev
+libboost-program-options1.38-dev
+libboost-regex1.35-dev
+libboost-regex1.38-dev
+libboost-serialization1.35-dev
+libboost-serialization1.38-dev
+libboost-signals1.35-dev
+libboost-signals1.38-dev
+libboost-system1.35-dev
+libboost-system1.38-dev
+libboost-test1.35-dev
+libboost-test1.38-dev
+libboost-thread1.35-dev
+libboost-thread1.38-dev
+libboost-wave1.35-dev
+libboost-wave1.38-dev
+libboost-date-time1.42-dev
+libboost1.40-all-dev
+libboost1.40-dbg
+libboost1.40-doc
+libboost-date-time1.40.0
+libboost-date-time1.40-dev
+libboost-filesystem1.40-dev
+libboost-graph1.40.0
+libboost-graph1.40-dev
+libboost-iostreams1.40-dev
+libboost-math1.40.0
+libboost-math1.40-dev
+libboost-program-options1.40-dev
+libboost-python1.40-dev
+libboost-regex1.40-dev
+libboost-serialization1.40.0
+libboost-serialization1.40-dev
+libboost-signals1.40-dev
+libboost-system1.40-dev
+libboost-test1.40.0
+libboost-test1.40-dev
+libboost-thread1.40.0
+libboost-thread1.40-dev
+libboost-wave1.40.0
+libboost-wave1.40-dev
+libboost-filesystem1.42-dev
+libboost-graph1.42-dev
+libboost-graph1.42.0
+libboost-iostreams1.42-dev
+libboost-math1.42-dev
+libboost-math1.42.0
+libboost-program-options1.42-dev
+libboost-regex1.42-dev
+libboost-serialization1.42-dev
+libboost-serialization1.42.0
+libboost-signals1.42-dev
+libboost-system1.42-dev
+libboost-test1.42-dev
+libboost-test1.42.0
+libboost-thread1.42-dev
+libboost-wave1.42-dev
+libboost-wave1.42.0
+libboost1.42-doc
+# On ubuntu 11.10, this group causes package versions problems, and
+# does not provides any useful file!
+ia32-libs-multiarch:i386
+# On TAKINA installation, changing boot style is not recommended
+xubuntu-plymouth-theme
+edubuntu-artwork
+plymouth-theme-edubuntu
+plymouth-theme-xubuntu-logo
+plymouth-x11
+plymouth-label
+plymouth-theme-kubuntu-logo
+plymouth-theme-kubuntu-text
+plymouth-theme-ubuntu-logo
+plymouth-theme-fade-in
+plymouth-theme-glow
+plymouth-theme-script
+plymouth-theme-solar
+plymouth-theme-spinfinity
+plymouth-theme-text
+# Prefer full OpenGL versions
+kde-window-manager-gles
+libkwineffects1abi2-gles
+# Maximizes windows, so makes weird window manager behaviors!
+maximus
+# This damages gnome theme
+gpe-confd
+# Unwanted system / desktop behavior: crash report system
+apport-gtk
+# Conflicts with libelf-dev (needed to build glib)
+libelfg0-dev
+# Conflicts with libcurl4-openssl-dev
+r-recommended
+r-cran-hdf5
+r-cran-spatial
+r-cran-foreign
+r-cran-nnet
+r-cran-cluster
+r-cran-rpart
+r-cran-survival
+r-cran-kernsmooth
+r-cran-nlme
+r-cran-class
+r-cran-mass
+r-cran-mgcv
+r-cran-matrix
+r-cran-lattice
+r-cran-boot
+r-cran-codetools
+r-base-core
+libedbus-dev
+libefreet-dev
+libecore-dev
+libdap-dev:amd64
+libghc-curl-dev
+libcurl4-gnutls-dev
+libcmis-dev
+libraptor2-dev
+librasqal3-dev
+librdf0-dev
+libdap-dev
+libraptor1-dev
+libusb++-dev
+# Use pm-suspend instead
+uswsusp
+# Use grub instead
+lilo
+lilo-doc
+# Old multimedia systems - not available or inside other packages
+head
+lib32v4l-0
+libdvbpsi5
+libdvbpsi6
+libebml0
+libesd-alsa0
+libfreebob0
+libgdal1-1.7.0
+libiso9660-5
+libiso9660-7
+libmp4v2-0
+libtunepimp5
+libvpx0
+libx264-106
+libx264-116
+libx264-120
+libx264-67
+libx264-85
+libx264-98
+# Unknown reasons
+ubuntu-restricted-addons
+#***************************************************************************
+# ffmpeg - following packages are really never installed, but replaced by
+# complete - non debian/ubuntu GPL'ed censored/limited versions
+# This should be replaced by "libavutil-extra-50" (full unrestricted codecs)
+libavutil49
+libavutil50
+# This should be replaced by "libavcodec-extra-52" (full unrestricted codecs)
+libavcodec52
+# This should be replaced by "libavformat-extra-52" (full unrestricted codecs)
+libavformat52
+libavformat53
+# This should be replaced by "libavfilter-extra-1" (full unrestricted codecs)
+libavfilter0
+libavfilter1
+# This should be replaced by "libswscale-extra-0" (full unrestricted codecs)
+libswscale0
+# This should be replaced by "libavdevice-extra-52" (full unrestricted codecs)
+libavdevice52
+# This should be replaced by "libpostproc-extra-51" (full unrestricted codecs)
+libpostproc51
+#***************************************************************************

@@ -1,0 +1,9 @@
+[75_TK_DEV]
+tk-dev
+tk-dev:amd64
+tk8.6-dev
+tk8.6-dev:amd64
+tcl-dev
+tcl-dev:amd64
+tcl8.6-dev
+tcl8.6-dev:amd64

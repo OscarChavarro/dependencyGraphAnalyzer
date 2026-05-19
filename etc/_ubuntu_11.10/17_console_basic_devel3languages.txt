@@ -1,0 +1,84 @@
+[17_CONSOLE_BASIC_DEVEL3_LANGUAGES]
+# Assemblers
+nasm
+yasm
+# Fortran environment
+libf2c2
+libf2c2-dev
+f2c
+fort77
+cfortran
+gfortran
+gfortran-4.4
+gfortran-4.5
+gfortran-4.6
+gfortran-4.6-doc
+gfortran-4.4-doc
+gfortran-4.5-doc
+gfortran-doc
+libkernlib1-dev
+libpacklib1-dev
+cernlib-base-dev
+# Pascal environment
+fp-ide-2.4.4
+fp-utils-2.4.4
+fp-compiler-2.4.4
+fp-units-rtl-2.4.4
+fp-units-base-2.4.4
+fp-units-fcl-2.4.4
+fp-compiler
+fp-ide
+fp-units-rtl
+fp-units-base
+fp-units-fcl
+fp-utils
+# TCL environment
+tcl8.4-dev
+tcl8.5-dev
+tcl-dev
+# Ocaml
+ocaml-native-compilers
+ocaml-nox
+ocaml-interp
+camlp4
+ledit
+libfindlib-ocaml
+libfindlib-ocaml-dev
+ocaml-findlib
+dh-ocaml
+libapron-ocaml-dev
+libapron
+libapron-dev
+libapron-ocaml
+libmpfr-dev
+libmpc-dev
+libppl0.10-dev
+# LUA
+liblualib50-dev
+liblua50-dev
+liblua5.1-0-dev
+# PHP
+php5-dev
+php-doc
+phpunit-doc
+php5-cli
+php5-common
+# Prolog
+gprolog
+gprolog-doc
+# Lisp
+gcl-doc
+gnu-smalltalk
+gnu-smalltalk-common
+# Smalltalk
+gnu-smalltalk-doc
+# Generic compiler tools
+llvm-2.9
+llvm-2.9-runtime
+llvm-2.9-dev
+# Others languages support
+gcc-4.6-plugin-dev
+libffi-dev
+libgmp-dev
+libgmp3-dev
+libppl0.11-dev

@@ -1,0 +1,1 @@
+aptitude purge plymouth-theme-ubuntu-text libdrm2 libdrm-intel1 libdrm-radeon1 libdbus-1-3 dbus upstart consolekit libpolkit-gobject-1-0 libpam-ck-connector mountall libeggdbus-1-0 libck-connector0 libdbus-glib-1-2 libexpat1 initscripts sysv-rc sysvinit-utils libnih1 libnih-dbus1 libplymouth2 plymouth libdrm-nouveau1 libx11-6 libx11-data libxcb1 libxau6 libxdmcp6 makedev

@@ -1,0 +1,16 @@
+[22_WAYLAND_GL]
+libwayland-egl1-mesa
+libwayland-egl1-mesa:amd64
+libegl-mesa0
+libegl-mesa0:amd64
+libegl-mesa0:i386
+libegl1
+libegl1:amd64
+libegl1:i386
+libegl1-mesa
+libegl1-mesa:amd64
+libgbm1
+libgbm1:amd64
+libgbm1:i386
+libegl1-mesa:i386
+libwayland-egl1-mesa:i386

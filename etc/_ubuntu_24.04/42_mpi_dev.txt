@@ -1,0 +1,10 @@
+[49_MPI_DEV]
+mpi-default-dev
+libopenmpi-dev
+libopenmpi-dev:amd64
+libpmix-dev
+libpmix-dev:amd64
+libhwloc-dev
+libhwloc-dev:amd64
+libibverbs-dev
+libibverbs-dev:amd64

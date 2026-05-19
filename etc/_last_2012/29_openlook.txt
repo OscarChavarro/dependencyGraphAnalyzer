@@ -1,0 +1,7 @@
+[29_OPENLOOK]
+# Warning: See http://www.physionet.org/physiotools/xview/
+# Do not install these from Ubuntu repositories, get them from Debian repositories
+xviewg
+olwm
+olvwm
+xview-clients

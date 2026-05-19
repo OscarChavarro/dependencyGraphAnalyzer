@@ -1,0 +1,16 @@
+[35_BLUEZ_PERLPYTHONMULTIMEDIA]
+# Bluez
+bluez-utils
+bluez-cups
+bluez
+bluez-alsa
+bluez-gstreamer
+bluetooth
+speech-dispatcher-festival
+libopal3.6.8
+gstreamer0.10-plugins-base-apps
+hplip
+libsane-hpaio
+gstreamer0.10-plugins-bad-multiverse
+rss-glx
+debiandoc-sgml

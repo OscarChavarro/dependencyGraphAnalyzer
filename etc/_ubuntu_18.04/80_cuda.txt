@@ -1,0 +1,8 @@
+[80_CUDA]
+screen-resolution-extra
+cuda
+cuda-10-0
+cuda-runtime-10-0
+nvidia-settings
+cuda-drivers
+cuda-demo-suite-10-0

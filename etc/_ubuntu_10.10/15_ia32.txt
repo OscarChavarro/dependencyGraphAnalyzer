@@ -1,0 +1,10 @@
+[15_CONSOLE_IA32]
+libc6-i386
+lib32gcc1
+lib32gomp1
+lib32ncurses5
+lib32stdc++6
+lib32z1
+lib32readline6
+lib32ncursesw5
+lib32bz2-1.0

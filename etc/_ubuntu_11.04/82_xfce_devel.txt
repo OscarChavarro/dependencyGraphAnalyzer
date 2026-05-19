@@ -1,0 +1,8 @@
+[81_XFCE_XUBUNTU_DEVEL]
+libxfce4menu-0.1-dev
+libxfce4util-dev
+libxfcegui4-dev
+libxfconf-0-dev
+libexo-0.3-dev
+libthunar-vfs-1-dev
+xfce4-panel-dev

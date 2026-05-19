@@ -1,0 +1,16 @@
+[17_CONSOLE_MULTIMEDIA_PYTHON_DEVEL]
+libesd0-dev
+libcanberra-doc
+libcanberra-dev
+gstreamer0.10-plugins-ugly-doc
+gstreamer0.10-plugins-good-doc
+gstreamer0.10-plugins-base-doc
+gstreamer0.10-doc
+libgstreamer0.10-dev
+libgstreamer-plugins-base0.10-dev
+libportmidi-dev
+libasound2-dev
+libsphinx2-dev
+flite1-dev
+libespeak-dev
+libsphinxbase-dev

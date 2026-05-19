@@ -1,0 +1,11 @@
+[18_FONTS_MINIMAL]
+libfontenc1
+libfontenc1:i386
+ttf-dejavu
+ttf-dejavu-core
+ttf-dejavu-extra
+fonts-dejavu
+fonts-dejavu-core
+fonts-dejavu-extra
+fonts-freefont-ttf
+ttf-bitstream-vera

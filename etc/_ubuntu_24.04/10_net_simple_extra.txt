@@ -1,0 +1,2 @@
+[10_NET_SIMPLE_EXTRA]
+ufw

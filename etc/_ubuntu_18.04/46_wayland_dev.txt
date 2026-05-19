@@ -1,0 +1,3 @@
+[46_WAYLAND_DEV]
+libwayland-dev
+libwayland-dev:amd64

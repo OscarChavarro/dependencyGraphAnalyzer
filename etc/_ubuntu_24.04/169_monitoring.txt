@@ -1,0 +1,15 @@
+[169_MONITORING]
+mailutils
+mailutils-common
+gsasl-common
+libntlm0
+libntlm0:amd64
+guile-3.0-libs
+guile-3.0-libs:amd64
+sysstat
+libgsasl18
+libgsasl18:amd64
+libmailutils9t64
+libmailutils9t64:amd64
+libgssglue1
+libgssglue1:amd64

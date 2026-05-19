@@ -1,0 +1,44 @@
+[22_X11_TEX_GS]
+# Tex
+tex-common
+texlive-generic-extra
+texlive-humanities
+texlive-humanities-doc
+texlive-latex3
+texlive-base
+texlive-fonts-recommended
+texlive-generic-recommended
+texlive-latex-base
+texlive-luatex
+texlive-base-bin
+texlive-base-bin-doc
+texlive-common
+texlive-doc-base
+texlive-fonts-recommended-doc
+texlive-latex-base-doc
+texlive-latex-recommended-doc
+texlive-pstricks-doc
+texlive-xetex
+preview-latex-style
+# Tex direct dependencies
+lacheck
+lmodern
+doc-base
+tipa
+gsfonts
+# Poppler (pdf support)
+xpdf-reader
+xpdf
+xpdf-common
+pdf-viewer
+dvipdfmx
+luatex
+texlive-binaries
+libwmf0.2-7
+gsfonts-x11
+texlive-science
+texlive-science-doc
+libva-x11-1
+ttf-oflb-asana-math
+xfonts-tipa
+festival-doc

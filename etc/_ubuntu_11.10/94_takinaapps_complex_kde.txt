@@ -1,0 +1,10 @@
+[94_TAKINA_APPS_COMPLEX_KDE]
+oem-config-kde
+ubiquity-frontend-kde
+kdenlive
+kdenlive-data
+kdenlive-dbg
+ubuntu-edu-preschool
+ezgo-games
+junior-kde
+junior-games-card

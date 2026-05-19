@@ -1,0 +1,63 @@
+[01_ENCRYPT]
+# linux from scratch (0001): glibc-2.27
+locales
+locales-all
+# linux from scratch (0118 PYTHON2 BUILD ISSUE, build on minimal/clean ubuntu environment): libcap-ng0
+libcap-ng0
+libcap-ng0:amd64
+libcap-ng0:i386
+# linux from scratch (0119 "dpkg-buildpackage -b -j24" on minimal/clean): audit
+libaudit1
+libaudit1:amd64
+libaudit1:i386
+libaudit-common
+# linux from scratch (0120 PYTHON2 BUILD ISSUE, build on minimal/clean ubuntu environment): libsemanage1
+libsemanage1
+libsemanage1:amd64
+libsemanage1:i386
+libsemanage-common
+# linux from scratch (0121): libgpg-error
+libgpg-error0
+libgpg-error0:amd64
+libgpg-error0:i386
+# linux from scratch (0122): libgcrypt20
+libgcrypt20
+libgcrypt20:amd64
+libgcrypt20:i386
+# linux from scratch (0123): gnupg1
+gpgv1
+# linux from scratch (0124): gnupg2
+gpgv
+gpgv2
+# For perl, remove podcheck.t, customized.t, manifest.t, test_bootstrap.t failing tests
+# linux from scratch (0125 *** Problematic build ***): perl
+perl-base
+# linux from scratch (0126): debconf
+debconf
+# Linux from scratch (0127): openssl
+openssl
+libssl1.1:i386
+libssl1.1
+libssl1.1:amd64
+# Linux from scratch (0128): openssl1.0
+libssl1.0.0
+libssl1.0.0:amd64
+libssl1.0.0:i386
+# Linux from scratch (0129): ca-certificates
+ca-certificates
+# linux from scratch (0130): pam
+libpam0g
+libpam0g:amd64
+libpam0g:i386
+libpam-modules
+libpam-modules:amd64
+libpam-modules:i386
+libpam-modules-bin
+# linux from scratch (0131): libdb53
+libdb5.3
+libdb5.3:amd64
+libdb5.3:i386
+# linux from scratch (0132 dpkg-buildpackage -nc -uc -us -b -j24, build on minimal/clean ubuntu environment): shadow
+passwd
+# linux from scratch (0133): ubuntu-keyring
+ubuntu-keyring

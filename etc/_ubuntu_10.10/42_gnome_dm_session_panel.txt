@@ -1,0 +1,6 @@
+[42_GNOME_DM_SESSION_PANEL]
+gdm
+ubuntu-gdm-themes
+libindicate1
+libubuntuone-1.0-1
+python-ubuntuone

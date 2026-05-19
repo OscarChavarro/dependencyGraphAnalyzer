@@ -1,0 +1,90 @@
+[03_BOOT]
+# Linux from scratch: systemd
+udev
+systemd
+systemd-sysv
+# Linux from scratch: pam
+libpam-runtime
+# Linux from scratch: shadow
+login
+# Linux from scratch: apparmor
+libapparmor1
+libapparmor1:amd64
+libapparmor1:i386
+# Linux from scratch: libtextwrap
+libtextwrap1
+libtextwrap1:amd64
+# Linux from scratch: libdebian-installer
+libdebian-installer4
+libdebian-installer4:amd64
+libdebian-installer-extra4
+libdebian-installer-extra4:amd64
+# Linux from scratch: kmod
+kmod
+libkmod2
+libkmod2:amd64
+libkmod2:i386
+module-init-tools
+# Linux from scratch: libcap2
+libcap2
+libcap2:amd64
+libcap2:i386
+# Linux from scratch: argon2
+libargon2-0
+libargon2-0:amd64
+libargon2-0:i386
+# Linux from scratch: json-c
+libjson-c3
+libjson-c3:amd64
+libjson-c3:i386
+# Linux from scratch: cryptsetup
+libcryptsetup12
+libcryptsetup12:amd64
+libcryptsetup12:i386
+# Linux from scratch: libidn
+libidn11
+libidn11:amd64
+libidn11:i386
+# Linux from scratch: iptables
+libip4tc0
+libip4tc0:amd64
+libip4tc0:i386
+# Linux from scratch: procps
+libprocps6
+libprocps6:amd64
+libprocps6:i386
+procps
+# Linux from scratch: init-system-helpers
+init
+init-system-helpers
+# Linux from scratch: xkeyboard-config
+xkb-data
+# Linux from scratch: console-setup
+keyboard-configuration
+console-setup
+console-setup-linux
+console-setup-mini
+# Linux from scratch: kbd
+kbd
+# Linux from scratch: sysvinit
+sysvinit-utils
+# Linux from scratch: net-tools
+net-tools
+# Linux from scratch: language-pack-en-base
+language-pack-en-base
+# Linux from scratch: language-pack-en
+language-pack-en
+# Linux from scratch: cdebconf
+cdebconf
+# Linux from scratch: slang2
+libslang2
+libslang2:amd64
+libslang2:i386
+# Linux from scratch: newt
+libnewt0.52
+libnewt0.52:amd64
+libnewt0.52:i386
+# Linux from scratch: gettext
+gettext-base
+# Others
+mawk

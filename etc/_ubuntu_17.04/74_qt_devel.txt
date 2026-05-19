@@ -1,0 +1,6 @@
+[74_QT_DEVEL]
+cmake-qt-gui
+libqt4-dev
+libqt4-dev-bin
+libqt4-opengl-dev
+qt4-dev-tools

@@ -1,0 +1,10 @@
+[72_QT_PERL_PYTHON_APPS_DEV]
+cmake
+cmake-data
+cmake-curses-gui
+cmake-qt-gui
+virtualbox
+virtualbox-dkms
+virtualbox-qt
+virtualbox-source
+dkms

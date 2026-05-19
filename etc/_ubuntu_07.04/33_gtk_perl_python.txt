@@ -1,0 +1,10 @@
+[33_GTK_PERL_PYTHON]
+inkscape
+libgnomevfs2-common
+libgnomevfs2-0
+libgnomevfs2-extra
+gconf2
+gconf2-common
+libgconf2-4
+pstoedit
+python-numpy

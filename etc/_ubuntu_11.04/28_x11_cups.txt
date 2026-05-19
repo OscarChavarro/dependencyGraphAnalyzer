@@ -1,0 +1,77 @@
+[28_X11_CUPS_GHOSTSCRIPT]
+# Poppler (pdf support)
+gprolog
+gprolog-doc
+xpdf-reader
+xpdf
+xpdf-common
+poppler-data
+poppler-utils
+# Cups packages
+ghostscript-cups
+cups-driver-gutenprint
+libcupscgi1
+libcupsdriver1
+libcupsmime1
+libcupsppdc1
+cupsddk-drivers
+cups-common
+cups-ppdc
+cups
+cups-bsd
+cups-client
+cupsddk
+splix
+pxljr
+foo2zjs
+# Applications using cups
+libcupsimage2
+gs-common
+ghostscript
+pnm2ppa
+libmagickcore2
+ghostscript-x
+libspectre1
+libmagickwand2
+transfig
+gv
+libmagickcore2-extra
+libmagick++2
+perlmagick
+psutils
+dvipng
+netpbm
+ps2eps
+xfig
+xfig-libs
+libmagickcore3
+libmagickwand3
+texlive-font-utils
+libmagick++3
+gs
+hplip-cups
+foomatic-filters
+foomatic-db-engine
+foomatic-db-compressed-ppds
+hpijs
+# Others non-gtk
+groff
+xscreensaver-data-extra
+xscreensaver-data
+imagemagick
+libmagickcore3-extra
+xscreensaver-gl-extra
+xscreensaver-gl
+librsvg2-2
+tex-gyre
+cupsys-driver-gutenprint
+# Warning: foomatic-db was found conflicting on previous analysis... taken from
+# 99_prohibited_misc
+foomatic-db
+min12xxw
+libgraphicsmagick++3
+libgraphicsmagick3
+gs-cjk-resource
+libgs8
+libgs9
+libgs9-common

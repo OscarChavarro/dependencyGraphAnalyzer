@@ -1,0 +1,7 @@
+[51_JAVA]
+sun-java6-jdk
+sun-java6-bin
+sun-java6-jre
+java-common
+odbcinst1debian1
+unixodbc

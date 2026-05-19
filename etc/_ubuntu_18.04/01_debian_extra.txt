@@ -1,0 +1,20 @@
+[01_DEBIAN_EXTRA]
+# linux from scratch (0101): attr
+attr
+# linux from scratch (0106): bzip2
+bzip2-doc
+# linux from scratch (0110): lz4
+liblz4-tool
+# linux from scratch: systemd
+libnss-myhostname
+libnss-myhostname:amd64
+# linux from scratch: gnutls28
+libgnutls-openssl27
+libgnutls-openssl27:amd64
+libgnutlsxx28
+libgnutlsxx28:amd64
+# Other
+dctrl-tools
+# linux from scratch: gmp
+libgmpxx4ldbl
+libgmpxx4ldbl:amd64

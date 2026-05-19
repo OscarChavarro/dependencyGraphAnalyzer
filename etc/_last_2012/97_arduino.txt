@@ -1,0 +1,10 @@
+[97_ARDUINO]
+arduino
+arduino-core
+avr-libc
+avrdude
+gcc-avr
+binutils-avr
+avrdude-doc
+arduino-mk
+simulavr

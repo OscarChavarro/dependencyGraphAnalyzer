@@ -1,0 +1,71 @@
+# From known sources
+acpi
+acpid
+acpidump
+acpitool
+at
+dosfstools
+freebsd-manpages
+ftp
+htop
+iscsitarget
+memtest86+
+nvclock
+samba-doc
+sharutils
+smbfs
+strace
+tftpd-hpa
+telnet
+time
+traceroute
+unrar
+nano
+acpi-support *
+dchroot *
+debootstrap *
+dhcp3-server *
+ltrace *
+nfs-kernel-server *
+openbsd-inetd *
+samba *
+tcpdump *
+wireless-tools *
+wpasupplicant *
+w3m *
+
+# From Ubuntu base install
+dmidecode
+laptop-detect
+
+iproute
+ubuntu-minimal
+
+klogd
+sysklogd
+
+libcap2
+
+ntpdate
+liblockfile1
+lockfile-progs
+
+libsqlite3-0
+lsb-release
+python
+python2.6
+python2.6-minimal
+python-minimal
+mime-support
+
+tasksel
+tasksel-data
+
+vim-common
+vim-tiny
+
+less
+libatm1
+netcat
+netcat-traditional
+sudo

@@ -1,0 +1,3 @@
+[18_MULTIMEDIA_MINIMAL_EXTRA]
+libheif-plugin-aomenc
+libheif-plugin-aomenc:amd64

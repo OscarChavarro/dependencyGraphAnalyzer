@@ -1,0 +1,24 @@
+[28_X11_LIBREOFFICE]
+# Libreoffice
+mythes-en-us
+libreoffice-presenter-console
+libreoffice-ogltrans
+libreoffice-impress
+libreoffice-calc
+libreoffice-draw
+libreoffice-pdfimport
+libreoffice-l10n-es
+libreoffice-presentation-minimizer
+libreoffice-l10n-en-gb
+libreoffice-dev-doc
+libreoffice-l10n-en-za
+libreoffice-style-human
+libreoffice-style-crystal
+libreoffice-style-hicontrast
+libreoffice-style-tango
+libreoffice-style-oxygen
+libreoffice-style-galaxy
+libreoffice-base-core
+libreoffice-math
+libreoffice-core
+libreoffice-common

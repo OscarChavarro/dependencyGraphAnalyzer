@@ -1,0 +1,143 @@
+[99_PROHIBITED_DAEMONS]
+# Not-essencial daemons causing unnecesary system overhead
+# Monopoly game daemon
+gtkatlantic
+monopd
+# Search database indexers
+tracker-gui
+tracker
+tracker-utils
+tracker-extract
+tracker-miner-fs
+tracker-search-tool
+# Antivirus
+clamav
+clamav-base
+clamav-freshclam
+clamtk
+libclamav6
+# Unknown card game
+pioneers-meta-server
+# Unknown game
+cyphesis-cpp
+# Eats a lot of CPU
+xringd
+# Web servers
+nginx
+nginx-common
+nginx-full
+cherokee-doc
+cherokee
+apache2-doc
+libapache2-mod-python-doc
+libapache2-mod-perl2-doc
+libapache2-mod-rivet-doc
+libapache-mod-jk-doc
+# MMORPG server
+crossfire-server
+crossfire-common
+crossfire-maps
+# Unknown war game
+ggz-game-servers
+ggzd
+# Scrabble server
+pyscrabble-server6
+# Console mouse server
+gpm
+# Network configuration daemon
+python-wicd
+wicd-daemon
+wicd-gtk
+wicd-kde
+# Scrabble server
+pyscrabble-server
+# Backup daemon
+deja-dup
+duplicity
+librsync1:amd64
+librsync1
+# Databases
+cqrlog
+python-poker-network
+libmythtv-perl
+libdbd-mysql-perl
+mythgame
+mythtv-common
+mythtv-frontend
+mysql-client-5.5
+mysql-server-5.5
+mysql-client
+mysql-query-browser
+mysql-gui-tools-common
+mysql-admin
+mysql-client-5.1
+mysql-server
+mysql-server-5.1
+osm2pgsql
+postgresql-9.1-postgis
+postgresql-9.1
+postgresql-client-9.1
+postgresql
+postgresql-8.3
+postgresql-client-8.3
+postgresql-client-common
+postgresql-common
+postgresql-doc
+postgresql-doc-8.3
+postgresql-doc-8.4
+postgresql-doc-9.1
+# Asterisk
+op-panel
+asterisk
+asterisk-config
+asterisk-core-sounds-en-gsm
+asterisk-modules
+asterisk-moh-opsound-gsm
+asterisk-voicemail
+asterisk-doc
+asterisk-core-sounds-en
+asterisk-core-sounds-en-g722
+asterisk-core-sounds-en-wav
+asterisk-core-sounds-es
+asterisk-core-sounds-es-g722
+asterisk-core-sounds-es-gsm
+asterisk-core-sounds-es-wav
+asterisk-core-sounds-fr
+asterisk-core-sounds-fr-g722
+asterisk-core-sounds-fr-gsm
+asterisk-core-sounds-fr-wav
+asterisk-core-sounds-ru
+asterisk-core-sounds-ru-g722
+asterisk-core-sounds-ru-gsm
+asterisk-core-sounds-ru-wav
+asterisk-dahdi
+asterisk-espeak
+asterisk-flite
+asterisk-mobile
+asterisk-moh-opsound-g722
+asterisk-moh-opsound-wav
+asterisk-mp3
+asterisk-mysql
+asterisk-ooh323
+asterisk-prompt-de
+asterisk-prompt-es-co
+asterisk-prompt-it
+asterisk-prompt-it-menardi
+asterisk-prompt-it-menardi-alaw
+asterisk-prompt-it-menardi-gsm
+asterisk-prompt-it-menardi-wav
+asterisk-prompt-se
+# Mail servers
+fetchmail
+mail-transport-agent
+procmail
+postfix
+exim4
+exim4-doc-html
+exim4-doc-info
+exim4-daemon-light
+bsd-mailx
+# Unknown libc related daemon
+nscd
+# Unknown daemons
+nanny

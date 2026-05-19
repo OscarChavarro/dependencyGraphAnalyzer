@@ -1,0 +1,9 @@
+[60_GNOME]
+gksu
+libgksu2-0
+gnome-keyring
+libgnome-keyring0
+libglade2-0
+gparted
+ntfs-config
+libparted1.7-1

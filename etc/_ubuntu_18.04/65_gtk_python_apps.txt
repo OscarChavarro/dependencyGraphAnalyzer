@@ -1,0 +1,16 @@
+[65_GTK_PYTHON_APPS]
+# gimp
+gimp
+gimp-data
+gimp-ufraw
+libgimp2.0
+dia-shapes
+dia
+dia-common
+python-cairo
+python-cairo:amd64
+python-gtk2
+zenmap
+python-cairo:i386
+xsane
+xsane-common

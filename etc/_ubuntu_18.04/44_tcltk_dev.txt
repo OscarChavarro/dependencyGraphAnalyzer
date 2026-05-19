@@ -1,0 +1,7 @@
+[44_TCL_TK_DEV]
+tkcvs
+blt
+subversion
+libsvn1
+libsvn1:amd64
+libsvn1:i386

@@ -1,0 +1,7 @@
+[28_X11_MULTIMEDIA_PERL]
+libalien-sdl-perl
+libsdl-perl
+get-flash-videos
+fvwm
+fvwm-icons
+pangzero

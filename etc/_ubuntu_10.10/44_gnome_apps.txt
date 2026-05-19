@@ -1,0 +1,166 @@
+[44_GNOME_APPS]
+# Character map
+gucharmap
+# Gparted
+gparted
+# Dia
+dia-common
+dia-libs
+dia-gnome
+dia
+# Ghex
+ghex
+# Firefox & flash plugin (Problematic: Depending on automatic update software)
+flashplugin-installer
+nspluginwrapper
+xul-ext-ubufox
+firefox-3.0
+firefox-globalmenu
+firefox-3.0-branding
+firefox-3.5
+firefox-3.5-branding
+firefox-3.5-gnome-support
+firefox-gnome-support
+firefox-branding
+ubufox
+firefox
+# Synaptic (Problematic: Depending on automatic update software)
+apturl
+synaptic
+gksu
+libgnome2-perl
+libgnome2-vfs-perl
+libgnome2-canvas-perl
+software-properties-gtk
+# Cheese webcam video
+cheese
+cheese-common
+libcheese-gtk18
+# Video editing software (similar to Adobe Premiere/Windows Movie Maker)
+pitivi
+# Audio recording / editing software (similar to audacity)
+jokosher
+# CD Burner
+python-brasero
+brasero
+brasero-common
+brasero-cdrkit
+libbrasero-media0
+libbrasero-media1
+rhythmbox
+rhythmbox-plugin-cdrecorder
+rhythmbox-plugins
+# Print screen application
+shutter
+gnome-web-photo
+# Image viewer
+gthumb
+gthumb-data
+libopenrawgnome1
+# Desktop connection helpers for wireless networks
+# (includes network manager and bluetooth applets)
+gnome-bluetooth
+gnome-user-share
+network-manager
+network-manager-pptp
+network-manager-pptp-gnome
+network-manager-gnome
+libgnome-bluetooth7
+libgnome-bluetooth8
+# Scanner frontend
+xsane
+xsane-common
+# Collaborative text editor
+gobby
+# Vector graphics editor
+inkscape
+# Wine and wine-based applications
+pq
+wine
+wine-gecko
+wine1.2
+wine1.2-gecko
+winetricks
+wisotool
+gnome-exe-thumbnailer
+# Games
+sgt-puzzles
+iagno
+gnome-mahjongg
+aisleriot
+gnome-sudoku
+gnomine
+gnotravex
+gnotski
+glchess
+glines
+gnect
+gnibbles
+gnobots2
+gtali
+quadrapassel
+gnome-games-common
+atomix
+atomix-data
+gcompris
+gcompris-data
+gcompris-sound-en
+# Antivirus
+clamtk
+# Mail client
+evolution
+evolution-common
+evolution-couchdb
+evolution-documentation
+evolution-documentation-en
+evolution-documentation-es
+evolution-exchange
+evolution-indicator
+evolution-plugins
+evolution-webcal
+libevolution
+liblpint-bonobo0
+libexchange-storage1.2-3
+libgnome-pilot2x
+gnome-pilot
+gnome-pilot-conduits
+libgnome-pilot2
+# Instant messengers
+pidgin
+pidgin-libnotify
+libpurple0
+empathy
+empathy-common
+empathy-doc
+nautilus-sendto
+nautilus-sendto-empathy
+libempathy30
+libempathy-common
+libempathy-gtk28
+libempathy-gtk-common
+telepathy-butterfly
+libtelepathy-farsight0
+telepathy-haze
+libtelepathy2
+telepathy-core
+# CPU temperature sensors! (recommended!)
+libsensors-applet-plugin0
+sensors-applet
+# Office apps
+gnome-office
+gnumeric
+gnumeric-doc
+gnumeric-common
+planner
+vim-gnome
+vim-gui-common
+vim-gtk
+# Compressed archives manager
+file-roller
+# Basics
+gstreamer0.10-gnonlin
+libcouchdb-glib-1.0-1
+libcouchdb-glib-1.0-2
+libdesktopcouch-glib-1.0-2
+telepathy-mission-control-5
+libmission-control-plugins0

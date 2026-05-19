@@ -1,0 +1,5 @@
+[36_FFMPEG_PYTHON]
+libavformat-extra
+libavformat-extra58
+libavformat-extra58:amd64
+libavformat-extra:amd64

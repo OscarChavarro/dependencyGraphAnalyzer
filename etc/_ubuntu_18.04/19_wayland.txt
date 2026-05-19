@@ -1,0 +1,15 @@
+[19_WAYLAND]
+libwayland-client0
+libwayland-client0:amd64
+libwayland-client0:i386
+libwayland-cursor0
+libwayland-cursor0:amd64
+libwayland-cursor0:i386
+libwayland-server0
+libwayland-server0:amd64
+libwayland-server0:i386
+libwayland-bin
+wayland-protocols
+libwayland-egl1
+libwayland-egl1:amd64
+libwayland-egl1:i386

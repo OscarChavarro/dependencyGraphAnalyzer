@@ -1,0 +1,3 @@
+[02_FS_EXTRA]
+# Linux from scratch: util-linux
+uuid-runtime

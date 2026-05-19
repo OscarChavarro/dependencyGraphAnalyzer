@@ -1,0 +1,5 @@
+[51_WX]
+libwxbase2.8-0
+libwxgtk2.8-0
+python-wxgtk2.8
+python-wxversion

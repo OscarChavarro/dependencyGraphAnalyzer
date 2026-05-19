@@ -1,0 +1,11 @@
+[89_OLDUBUNTU8.04X11]
+bluez-audio
+cups-pdf
+cupsys-bsd
+cupsys
+dhcdbd
+guidance-backends
+powermanagement-interface
+libdjvulibre15
+libnm-util0
+libxevie1

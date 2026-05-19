@@ -1,0 +1,15 @@
+[01_MINI_LIBS]
+media-types
+base-passwd
+libdebconfclient0
+libdebconfclient0:amd64
+netbase
+libreadline8t64
+libreadline8t64:amd64
+libexpat1
+libexpat1:amd64
+readline-common
+distro-info-data
+libexpat1:i386
+libjansson4
+libjansson4:amd64

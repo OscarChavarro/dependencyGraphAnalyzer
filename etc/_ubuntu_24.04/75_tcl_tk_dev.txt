@@ -1,0 +1,11 @@
+[75_TCL_TK_DEV]
+tkcvs
+tcl-dev
+tcl8.6-dev
+tk-dev
+tk8.6-dev
+tcl-dev:amd64
+tcl8.6-dev:amd64
+tk-dev:amd64
+tk8.6-dev:amd64
+cvs

@@ -1,0 +1,1 @@
+aptitude purge python-minimal perl-modules libusb-0.1-4 python python2.6 python2.6-minimal mime-support libreadline6 libsqlite3-0 perl make libgdbm3 netbase ifupdown net-tools readline-common file libncursesw5 libssl0.9.8

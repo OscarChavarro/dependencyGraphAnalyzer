@@ -1,0 +1,1 @@
+apt-get -y install launchpad-integration python-crypto python-lxml python-cupshelpers python-smbc python-apport python-twisted-core python-smartpm python-gnupginterface python-gobject command-not-found hplip-data screen 

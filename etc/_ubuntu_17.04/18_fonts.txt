@@ -1,0 +1,10 @@
+[18_FONTS]
+t1utils
+fonts-droid-fallback
+fonts-lato
+fonts-lmodern
+fonts-noto-mono
+fonts-texgyre
+fonts-ubuntu-font-family-console
+fonts-liberation
+fonts-lyx

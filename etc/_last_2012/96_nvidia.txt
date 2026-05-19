@@ -1,0 +1,51 @@
+[96_NVIDIA]
+# Nvidia cuda
+libcublas4:amd64
+libcudart4:amd64
+libcufft4:amd64
+libcuinj4:amd64
+libcurand4:amd64
+libcusparse4:amd64
+libnpp4:amd64
+libthrust-dev
+nvidia-cuda-dev
+nvidia-cuda-doc
+nvidia-cuda-gdb
+nvidia-cuda-toolkit
+nvidia-visual-profiler
+libcublas4
+libcudart4
+libcufft4
+libcuinj4
+libcurand4
+libcusparse4
+libnpp4
+# Ubuntu included Nvidia drivers - DOESN'T WORK - Replace with original Nvidia
+# drivers downloaded from http://www.nvivia.com. Don't use jockey tools, 
+# neither ubuntu based nvidia drivers, neither packages depending on it
+# as such edubuntu-desktop-kde and kubuntu-desktop.
+# It has seen that installing vanilla nvidia drivers over .deb packages
+# seems to work ... (testing)
+edubuntu-desktop-kde
+kubuntu-desktop
+jockey-kde
+jockey-gtk
+jockey-common
+xdiagnose
+nvidia-common
+nvidia-kernel-common
+nvidia-cg-toolkit
+nvidia-173-modaliases
+nvidia-185-modaliases
+nvidia-96-modaliases
+nvidia-current-modaliases
+nvidia-180-kernel-source
+nvidia-180-libvdpau
+nvidia-180-modaliases
+nvidia-71-modaliases
+nvidia-glx-180
+nvidia-glx-180-dev
+nvidia-current
+nvidia-settings
+nvidia-opencl-dev
+linux-restricted-modules-2.6.24-26-generic

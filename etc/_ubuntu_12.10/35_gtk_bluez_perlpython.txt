@@ -1,0 +1,15 @@
+[35_GTK_BLUEZ_PERLPYTHON]
+python-pygoocanvas
+python-ibus
+python-gtk2
+libzeitgeist-1.0-0
+libzeitgeist-1.0-1
+zeitgeist
+zeitgeist-core
+zeitgeist-datahub
+zeitgeist-extension-fts
+zeitgeist-fts-extension
+python-virtkey
+python3-virtkey
+chirp
+d-rats

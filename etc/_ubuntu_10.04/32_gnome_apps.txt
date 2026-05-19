@@ -1,0 +1,45 @@
+[32_GNOME_APPS]
+# Firefox & flash plugin
+ubufox
+firefox-3.5-branding
+firefox-3.5
+flashplugin-installer
+gksu
+ia32-libs
+lib32asound2
+lib32bz2-1.0
+lib32v4l-0
+libcairo-perl
+libglib-perl
+libgnome2-canvas-perl
+libgnome2-perl
+libgnome2-vfs-perl
+libgnomevfs2-extra
+libgtk2-perl
+libgtkhtml2-0
+libpango-perl
+nspluginwrapper
+python-gtkhtml2
+python-vte
+software-properties-gtk
+synaptic
+firefox-branding
+apturl
+apturl-common
+python-webkit
+firefox
+# Gimp
+libgimp2.0
+gimp-data
+gimp
+# Dia
+dia-common
+dia-libs
+dia
+# Gedit
+gedit-common
+gedit
+# Gnome terminal
+gnome-terminal-data
+gnome-terminal
+scrollkeeper

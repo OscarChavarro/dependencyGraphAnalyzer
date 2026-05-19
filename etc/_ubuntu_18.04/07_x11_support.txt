@@ -1,0 +1,50 @@
+[07_X11_SUPPORT]
+# Linux from scratch: psmisc
+psmisc
+libsqlite3-0:i386
+libsqlite3-0:amd64
+libsqlite3-0
+libelf1:i386
+libelf1:amd64
+libelf1
+gawk
+readline-common
+libreadline7
+libreadline7:amd64
+libreadline7:i386
+libsigsegv2
+libsigsegv2:amd64
+libsigsegv2:i386
+libmpfr6
+libmpfr6:amd64
+libmpfr6:i386
+# linux from scratch: gcc-8
+libatomic1
+lib64atomic1
+libatomic1:amd64
+libatomic1:i386
+libx32atomic1
+lib32atomic1
+# Compiler support, GL/SL is based on this
+libllvm10
+libllvm10:amd64
+libllvm10:i386
+libllvm6.0
+libllvm6.0:amd64
+libllvm6.0:i386
+libgdbm5
+libgdbm5:amd64
+libgdbm5:i386
+libgdbm-compat4
+libgdbm-compat4:amd64
+libgdbm-compat4:i386
+libpipeline1
+libpipeline1:amd64
+libpipeline1:i386
+man-db
+groff-base
+libpsl5
+libpsl5:amd64
+libpsl5:i386
+# Linux from scratch: bsdmainutils
+bsdmainutils

@@ -1,0 +1,54 @@
+[01_DEBIAN]
+# linux from scratch: gmp
+libgmp10
+libgmp10:amd64
+# linux from scratch: systemd
+libudev1
+libudev1:amd64
+libsystemd0
+libsystemd0:amd64
+# linux from scratch: libffi
+libffi8
+libffi8:amd64
+libffi8:i386
+# linux from scratch: p11-kit
+libp11-kit0
+libp11-kit0:amd64
+# linux from scratch: libtasn1
+libtasn1-6
+libtasn1-6:amd64
+# linux from scratch: libunistring
+libunistring2
+libunistring2:amd64
+libunistring2:i386
+# linux from scratch: nettle
+libnettle8
+libnettle8:amd64
+libhogweed6
+libhogweed6:amd64
+# linux from scratch: libidn2
+libidn2-0
+libidn2-0:amd64
+libidn2-0:i386
+libidn12
+libidn12:amd64
+# linux from scratch: gnutls28
+libgnutls30
+libgnutls30:amd64
+# linux from scratch: libseccomp
+libseccomp2
+libseccomp2:amd64
+# apt
+apt
+libapt-pkg6.0
+libapt-pkg6.0:amd64
+# linux from scratch: adduser
+adduser
+# Other
+libxxhash0
+libxxhash0:amd64
+apt-utils
+debian-archive-keyring
+tasksel
+tasksel-data
+apt-transport-https

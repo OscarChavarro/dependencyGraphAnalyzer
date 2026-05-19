@@ -1,0 +1,59 @@
+[46_GNOME_DESKTOP]
+# Compiz
+emerald
+libemeraldengine0
+emerald-themes
+compiz
+compiz-gnome
+compiz-fusion-plugins-main
+compizconfig-backend-gconf
+libcompizconfig0
+compiz-core
+compiz-plugins
+compizconfig-settings-manager
+python-compizconfig
+simple-ccsm
+fusion-icon
+# Screen savers
+electricsheep
+gnome-screensaver
+# Other
+compiz-fusion-plugins-extra
+compiz-wrapper
+# Themes
+ubuntu-artwork
+ubuntu-wallpapers
+human-theme
+gnome-themes
+gnome-themes-extras
+gnome-themes-more
+gnome-themes-selected
+gnome-themes-ubuntu
+humanity-icon-theme
+shiki-colors
+shiki-brave-theme
+shiki-colors-metacity-theme
+shiki-dust-theme
+shiki-human-theme
+shiki-illustrious-theme
+shiki-noble-theme
+shiki-wine-theme
+shiki-wise-theme
+metacity-themes
+gnome-brave-icon-theme
+gnome-dust-icon-theme
+gnome-human-icon-theme
+gnome-illustrious-icon-theme
+gnome-noble-icon-theme
+gnome-wine-icon-theme
+gnome-wise-icon-theme
+gnome-colors
+gnome-colors-common
+light-themes
+gnome-icon-theme-gartoon
+breathe-icon-theme
+community-themes
+ubuntu-mono
+# Utility for making alarm with sound
+alarm-clock
+compiz-plugins-main

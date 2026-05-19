@@ -1,0 +1,36 @@
+[02_LINUX_GLIB]
+# Foreing function interface: call functions of one language from another
+lib32ffi6
+libffi6-dbg
+libffi6-dbg:amd64
+libffi6
+libffi6:amd64
+libffi6:i386
+# Perl compatible regular expresion library
+libpcre3
+libpcre3:amd64
+libpcre3:i386
+# Glib direct dependencies
+libxml2
+libxml2-utils
+libxml2:amd64
+libxml2:i386
+libxml2-dbg
+libxml2-dbg:amd64
+libxml2-utils-dbg
+xml-core
+sgml-base
+shared-mime-info
+# Glib library
+libglib2.0-0-dbg
+libglib2.0-0-refdbg:amd64
+libglib2.0-0-refdbg
+libglib2.0-0
+libglib2.0-0:amd64
+libglib2.0-0:i386
+libglib2.0-data
+# Readline
+libreadline6:amd64
+libreadline6
+readline-common
+lib32readline6

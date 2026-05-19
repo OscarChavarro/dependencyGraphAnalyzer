@@ -1,0 +1,4 @@
+[36_GTK_DEVEL_MULTIMEDIA]
+gcl
+libextractor-dev
+frama-c-base

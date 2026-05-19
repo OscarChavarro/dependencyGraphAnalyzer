@@ -1,0 +1,14 @@
+[21_X11_BASICLIBS]
+libxaw7
+libxmu6
+libxpm4
+libgdchart-gd2-xpm
+libxt6
+libsm6
+libice6
+x11-common
+libxext6
+kbd
+console-setup
+console-terminus
+xkb-data

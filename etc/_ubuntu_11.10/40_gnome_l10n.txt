@@ -1,0 +1,3 @@
+[40_GNOME_L10N]
+language-pack-gnome-es
+language-pack-gnome-es-base

@@ -1,0 +1,12 @@
+[14_GLIB]
+libavahi-glib1
+libavahi-common3
+libavahi-common-data
+libgamin0
+gamin
+libatk1.0-0
+libatk1.0-data
+libglib1.2
+libglib2.0-0
+libglib2.0-data
+libglibmm-2.4-1c2a

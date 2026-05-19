@@ -1,0 +1,14 @@
+[41_SGL]
+render/sgl/Poly.h
+render/sgl/PolyClip.cpp
+render/sgl/PolyScanFlat.cpp
+render/sgl/PolyScanZ.cpp
+render/sgl/Polygon.h
+render/sgl/PolygonBox.h
+render/sgl/PolygonClipResult.h
+render/sgl/PolygonVertex.h
+render/sgl/SglConstants.h
+render/sgl/SglContext.cpp
+render/sgl/SglContext.h
+render/sgl/SglPixelContent.h
+render/sgl/Window.h

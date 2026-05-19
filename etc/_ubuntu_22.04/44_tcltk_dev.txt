@@ -1,0 +1,17 @@
+[44_TCL_TK]
+tk
+tk8.6
+tkcvs
+libtk8.6
+libtk8.6:amd64
+tk8.6-blt2.5
+tcl
+tcl8.6
+libtcl8.6
+libtcl8.6:amd64
+blt
+x11vnc
+stopwatch
+usb-modeswitch
+usb-modeswitch-data
+dirdiff

@@ -1,0 +1,76 @@
+[17_CONSOLE_BASIC_DEVEL1_COMMON]
+# Compression and cypher common libraries
+zlib1g-dev
+libbz2-dev
+libzzip-dev
+libssl-dev
+# Common libraries for parallel and distributed programming
+libopenmpi-dev
+libibverbs-dev
+libpthread-stubs0-dev
+# Development tools and control version
+strace
+ltrace
+bison
+flex
+m4
+autoconf
+autoconf2.13
+autoconf2.59
+autoconf2.64
+libopts25
+libopts25-dev
+autogen
+automake
+automake1.4
+automake1.9
+automake1.10
+autotools-dev
+gccxml
+haddock
+cvs
+libsvn1
+libaprutil1
+libapr1
+subversion
+svn
+# Linkers, profilers & binary format tools
+libltdl-dev
+libtool
+binutils
+oprofile
+libopagent1
+# C/OBJC/C++ compilers - basic C & unix system docs
+libc6-dev
+libc6-dbg
+libc6-prof
+libc-dev-bin
+libgcc1-dbg
+linux-libc-dev
+libstdc++6-4.4-dev
+libstdc++6-4.5-dev
+libstdc++-dev
+libstdc++6-4.4-doc
+libstdc++6-4.4-pic
+libstdc++6-4.4-dbg
+gcc
+gcc-4.1
+gcc-4.2
+gcc-4.3
+gcc-4.4
+gcc-4.5
+gobjc
+gobjc-4.4
+g++
+g++-4.1
+g++-4.3
+g++-4.4
+g++-4.5
+manpages-dev
+manpages-posix-dev
+libcppunit-1.12-1
+libcppunit-dev
+libgpm-dev
+c++-compiler
+# C/C++ dependencies
+gettext

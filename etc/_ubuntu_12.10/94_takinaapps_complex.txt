@@ -1,0 +1,68 @@
+[94_TAKINA_APPS_COMPLEX]
+aptitude-common
+aptitude
+# Depending on perl & X11
+apparmor
+apparmor-utils
+xsensors
+gnome-exe-thumbnailer
+# Torrent client
+transmission-gtk
+# Web browsers
+chromium-browser
+chromium-browser-inspector
+chromium-browser-l10n
+chromium-codecs-ffmpeg
+gpicview
+# Depending on QT & GNOME
+checkbox-qt
+account-plugin-icons
+simple-scan
+texlive-latex-extra-doc
+vlc
+openprinting-ppds
+ia32-libs-multiarch
+ia32-libs
+extra-xdg-menus
+debichem-visualisation
+debichem-modelling
+debichem-tasks
+gis-tasks
+openbve
+openbve-data
+bve-train
+bve-train-br-class-323
+bve-train-br-class-323-3dcab
+v-sim
+v-sim-common
+v-sim-plugins
+# gnustep + wx
+adun.app
+libtaoframework-sdl-cil-dev
+# Chat
+xchat
+xchat-common
+pymol
+python-pmw
+junior-games-gl
+junior-tasks
+tasksel
+tasksel-data
+blender
+blender-ogrexml
+texlive-metapost
+texlive-metapost-doc
+feynmf
+texlive-extra-utils
+libtaoframework-sdl1.2-cil
+guitarix
+emesene
+ubuntu-edu-preschool
+kubuntu-notification-helper
+libmarble-dev
+apport-kde
+freetuxtv
+germinate
+fldigi
+cwirc
+xdg-utils

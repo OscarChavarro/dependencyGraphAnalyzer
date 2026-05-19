@@ -1,0 +1,24 @@
+[21_X11_BASICLIBS2]
+# X11 XCB (X C language Binding)
+libx11-xcb1
+libxcb-dpms0
+libxcb-icccm1
+libxcb-icccm4
+libxcb-image0
+libxcb-property1
+libxcb-randr0
+libxcb-render0
+libxcb-render-util0
+libxcb-shm0
+libxcb-xf86dri0
+libxcb-xf86dri0-dbg
+libxcb-xfixes0
+libxcb-xinerama0
+libxcb-xtest0
+libxcb-xv0
+libxcb-atom1
+libxcb-aux0
+libxcb-keysyms1
+libxcb-util0
+libxcb-shape0
+consolekit

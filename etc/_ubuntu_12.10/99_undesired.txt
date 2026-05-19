@@ -1,0 +1,101 @@
+[99_UNDESIRED_AND_PROBLEMATIC]
+# Groups that are not fully needed - check they do not install wrong java cores
+gnome-devel
+gnome-core-devel
+edubuntu-desktop
+ubuntu-desktop
+ubuntu-restricted-extras
+ubuntu-standard
+# Apache and server tools are undesired, prefer them from .tar.bz2 sources
+cortado
+apache2
+apache2-mpm-worker
+apache2-utils
+apache2.2-bin
+apache2.2-common
+libapache2-mod-dnssd
+libaprutil1-dbd-sqlite3
+libaprutil1-ldap
+dcmtk-www
+# Unwanted: administration software based upon gksu (security risk)
+checkbox-gtk
+computer-janitor-gtk
+gdebi
+gnome-netstatus-applet
+sabayon
+pessulus
+# This puts people to pray!
+monajat-applet
+monajat-data
+python-monajat
+hijra-applet
+python-hijra
+# This puts overhead to gnome-session
+syncmaildir-applet
+parcellite
+glipper
+telepathy-indicator
+krb5-auth-dialog
+kerneloops-applet
+# Evolution mail client puts overhead to gnome-session and is seldom used
+libevolution
+evolution-exchange
+evolution-plugins
+evolution
+evolution-couchdb
+evolution-documentation
+evolution-documentation-en
+evolution-documentation-es
+evolution-dev
+evolution-common
+evolution-indicator
+evolution-webcal
+# Empathy messenger causes gnome session overhead and is seldom used
+empathy
+empathy-common
+empathy-doc
+nautilus-sendto-empathy
+account-plugin-aim
+account-plugin-jabber
+account-plugin-salut
+account-plugin-yahoo
+mcp-account-manager-uoa
+# Allowing web applications to control the desktop is a security risk
+lightdm
+lightdm-gtk-greeter
+lightdm-remote-session-freerdp
+liblightdm-gobject-1-0
+lightdm-remote-session-uccsconfigure
+unity-greeter
+xubuntu-artwork
+xubuntu-default-settings
+xul-ext-unity
+xul-ext-websites-integration
+# wings3d is not installable, but mm3d can work
+mm3d
+wings3d
+# myspell-en-us is not installable, but thunderbird can work
+thunderbird-locale-es
+thunderbird-locale-es-ar
+thunderbird-locale-es-es
+thunderbird-locale-en-gb
+thunderbird-locale-en
+thunderbird-locale-en-us
+thunderbird-globalmenu
+thunderbird-gnome-support
+thunderbird
+myspell-en-us
+# Use evince-gtk instead of evince. Note that epiphany/auctex can be used, and
+# there are here only from a wrong dependence with evince.
+snacc-doc
+gnumeric
+auctex
+gir1.2-epiphany-3.6
+epiphany-extensions
+epiphany-gecko
+epiphany-browser-dev
+epiphany-browser
+epiphany-browser-data
+evince
+# Other
+tictactoe-ng

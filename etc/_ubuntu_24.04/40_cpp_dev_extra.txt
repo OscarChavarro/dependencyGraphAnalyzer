@@ -1,0 +1,11 @@
+[40_CPP_DEV_EXTRA]
+libgcc-10-dev
+libgcc-10-dev:amd64
+libtsan0
+libtsan0:amd64
+libasan6
+libasan6:amd64
+gcc-10-base
+gcc-10-base:amd64
+gcc-11-base
+gcc-11-base:amd64

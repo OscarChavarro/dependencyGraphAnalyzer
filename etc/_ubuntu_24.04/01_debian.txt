@@ -1,0 +1,61 @@
+[01_DEBIAN]
+# linux from scratch: gmp
+libgmp10
+libgmp10:amd64
+# linux from scratch: systemd
+libudev1
+libudev1:amd64
+libsystemd0
+libsystemd0:amd64
+# linux from scratch: libffi
+libffi8
+libffi8:amd64
+# linux from scratch: p11-kit
+libp11-kit0
+libp11-kit0:amd64
+# linux from scratch: libtasn1
+libtasn1-6
+libtasn1-6:amd64
+# linux from scratch: nettle
+# linux from scratch: gnutls28
+# linux from scratch: libseccomp
+libseccomp2
+libseccomp2:amd64
+# apt
+apt
+# linux from scratch: adduser
+adduser
+# linux from scratch (0130): pam
+libpam-modules
+libpam-modules:amd64
+libpam-modules-bin
+libpam0g
+libpam0g:amd64
+libidn2-0:i386
+libunistring5:i386
+# linux from scratch: libidn2
+libidn2-0
+libidn2-0:amd64
+libidn12
+libidn12:amd64
+# linux from scratch: libunistring
+libunistring5
+libunistring5:amd64
+# Other
+libxxhash0
+libxxhash0:amd64
+apt-utils
+libapt-pkg6.0t64
+libapt-pkg6.0t64:amd64
+libgnutls30t64
+libgnutls30t64:amd64
+libdb5.3t64
+libdb5.3t64:amd64
+libhogweed6t64
+libhogweed6t64:amd64
+libnettle8t64
+libnettle8t64:amd64
+passwd
+libffi8:i386
+libgmpxx4ldbl:amd64
+libgmpxx4ldbl

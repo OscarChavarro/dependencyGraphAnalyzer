@@ -1,0 +1,10 @@
+[43_MKL_DEV]
+libmkl-computational-dev:amd64
+libmkl-dev:amd64
+libmkl-full-dev
+libmkl-interface-dev:amd64
+libmkl-threading-dev:amd64
+libmkl-computational-dev
+libmkl-dev
+libmkl-interface-dev
+libmkl-threading-dev

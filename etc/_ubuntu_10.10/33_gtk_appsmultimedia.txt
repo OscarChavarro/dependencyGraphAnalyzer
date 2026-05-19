@@ -1,0 +1,14 @@
+[33_GTK_APPS_MULTIMEDIA]
+recordmydesktop
+icewm
+icewm-common
+wireshark
+wireshark-common
+easytag
+tagtool
+nessus
+gtick
+# Nintendo 64 console emulator
+mupen64plus
+# Camera program similar to cheese
+guvcview

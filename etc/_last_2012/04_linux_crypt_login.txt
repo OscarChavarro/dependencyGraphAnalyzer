@@ -1,0 +1,40 @@
+[04_LINUX_CRYPT_LOGIN]
+# Basic user login
+login
+locales
+bash-completion
+bash
+dash
+# Localization - at least must have one language for perl...
+# The rest of languages goes to 19_l10n
+language-pack-en
+language-pack-en-base
+firefox-locale-en
+# apt
+apt
+ubuntu-keyring
+gnupg
+gpgv
+libusb-0.1-4
+libusb-0.1-4:amd64
+libusb-0.1-4:i386
+# GSS
+libgssapi-krb5-2:amd64
+libgssapi-krb5-2:i386
+libgssapi-krb5-2
+# Kerberos
+krb5-locales
+libkrb5-3:amd64
+libkrb5-3:i386
+libkrb5support0:amd64
+libkrb5support0:i386
+libkrb53
+libkrb5-3
+libkrb5support0
+libk5crypto3:amd64
+libk5crypto3:i386
+libk5crypto3
+# SSL
+libssl1.0.0
+libssl1.0.0:amd64
+libssl1.0.0:i386

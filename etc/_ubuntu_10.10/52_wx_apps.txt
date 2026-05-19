@@ -1,0 +1,39 @@
+[52_WX_APPS]
+audacity
+audacity-data
+gnuplot-nox
+gnuplot-x11
+gnuplot
+gnuplot-doc
+# Octave
+libamd2.2.0
+libarpack2
+libatlas3gf-base
+libcamd2.2.0
+libccolamd2.7.1
+libcholmod1.7.1
+libcxsparse2.2.3
+libglpk0
+libqhull5
+libqrupdate1
+libumfpack5.4.0
+octave3.2
+octave3.2-common
+atlas3-base
+multiget
+maxima
+maxima-emacs
+maxima-share
+xmaxima
+maxima-doc
+maxima-src
+maxima-test
+# Others
+libsvncpp3
+ssh-askpass
+# OpenCV
+libcv2.1
+libcvaux2.1
+libhighgui2.1
+python-opencv
+libklu1.1.0

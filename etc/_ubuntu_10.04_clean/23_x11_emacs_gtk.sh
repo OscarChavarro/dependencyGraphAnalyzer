@@ -1,0 +1,1 @@
+aptitude purge libgtk2.0-common tsconf libdatrie1 libdirectfb-1.2-0 hicolor-icon-theme libatk1.0-0 libatk1.0-data libcairo2 libgtk2.0-0 libgtk2.0-bin libjasper1 libpango1.0-0 libpango1.0-common libsysfs2 libthai0 libthai-data libts-0.0-0 libxcb-render0 libxcb-render-util0 libxcomposite1

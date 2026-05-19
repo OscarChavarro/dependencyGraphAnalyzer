@@ -1,0 +1,13 @@
+[17_WAYLAND]
+libwayland-bin
+libwayland-client0
+libwayland-client0:amd64
+libwayland-client0:i386
+libwayland-cursor0
+libwayland-cursor0:amd64
+libwayland-egl1
+libwayland-egl1:amd64
+libwayland-server0
+libwayland-server0:amd64
+libwayland-server0:i386
+wayland-protocols

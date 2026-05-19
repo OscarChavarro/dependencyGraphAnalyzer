@@ -1,0 +1,1 @@
+apt-get -y install tk8.5-dev libfontenc-dev libglu1-xorg-dev libglut3-dev libmotif-dev libxaw7-dev libxcursor-dev libxdamage-dev libxinerama-dev libxkbfile-dev libxmuu-dev libxp-dev libxtst-dev libxv-dev libxxf86dga-dev libxxf86vm-dev libxrandr-dev

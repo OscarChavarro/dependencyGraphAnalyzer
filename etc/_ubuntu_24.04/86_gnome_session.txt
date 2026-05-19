@@ -1,0 +1,16 @@
+[86_GNOME_SESSION]
+adium-theme-ubuntu
+gdm3
+gnome-screensaver
+light-themes
+ubuntu-artwork
+ubuntu-session
+ubuntu-settings
+ubuntu-wallpapers-jammy
+xserver-xorg
+xserver-xorg-video-fbdev
+xserver-xorg-video-intel
+xserver-xorg-video-vesa
+xwayland
+yaru-theme-gnome-shell
+gnome-session

@@ -1,0 +1,17 @@
+[47_GNOME_GTK_MONO_DEVEL]
+nant
+mono-devel
+libmono-cil-dev
+cli-common-dev
+libglade2.0-cil-dev
+libgtk2.0-cil-dev
+liblaunchpad-integration-cil-dev
+libappindicator0.1-cil-dev
+libmono-addins-cil-dev
+libmono-addins-gui-cil-dev
+libgnome-keyring1.0-cil-dev
+libgnome2.0-cil-dev
+libgnome-vfs2.0-cil-dev
+libgnomepanel2.24-cil-dev
+libnotify-cil-dev
+libubuntuone1.0-cil-dev

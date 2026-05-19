@@ -1,0 +1,205 @@
+[44_GNOME_APPS]
+# Basic multimedia libraries
+gvfs-backends
+# Dictionary
+gnome-dictionary
+# Gnome paint
+gnome-paint
+# Color choosers
+agave
+gnome-color-chooser
+# Media player
+gnome-mplayer
+# VNC client
+gtkvncviewer
+# Map viewer ala google earth :)
+emerillon
+libchamplain-0.8-1
+libchamplain-gtk-0.8-1
+# Character map
+gucharmap
+# Dia
+dia-common
+dia-libs
+dia-gnome
+dia
+# Sudo
+gksu
+libgnome2-perl
+libgnome2-vfs-perl
+libgnome2-canvas-perl
+# Print screen application
+gnome-web-photo
+# Snapshot / screenshot makers / video screenshot similar to Camtasia or xvidcap
+gnome-screenshot
+kazam
+# Image viewers
+fccexam
+hamexam
+eog
+libopenrawgnome1:amd64
+libopenrawgnome1
+gstreamer-dbus-media-service
+gstreamer0.10-gnomevfs:amd64
+gstreamer0.10-gnomevfs
+# Cheese webcam video
+libcheese1
+libcheese-gtk20
+libcheese-gtk23:amd64
+libcheese-gtk23
+libcheese7
+libcheese7:amd64
+cheese-common
+libcheese-gtk18
+# Video streamming
+landell
+# CD ripper
+sound-juicer
+# CD Burner
+python-brasero
+brasero
+brasero-common
+brasero-cdrkit
+libbrasero-media0
+libbrasero-media1
+libbrasero-media3-1
+# Calculator
+gcalctool
+vim-common
+vim-runtime
+vim-tiny
+vim-gnome
+vim-gui-common
+vim-gtk
+# Collaborative text editor
+gobby
+gobby-0.4
+# 3D editors
+k3d
+k3d-data
+# Chemistry programs
+gcrystal
+libgcu0
+# Games
+gnome-video-arcade
+gnome-mastermind
+pychess
+gnomekiss
+gnome-mud
+gnoemoe
+gniall
+glotski
+tenace
+gnome-cards-data
+gnome-games-data
+gnome-games-extra-data
+ghextris
+gamazons
+pioneers
+pioneers-data
+pegsolitaire
+monster-masher
+monkey-bubble
+mathwar
+hitori
+gtetrinet
+quarry
+grhino
+grhino-data
+gnome-breakout
+gnome-hearts
+sgt-puzzles
+iagno
+mahjongg
+gnome-mahjongg
+aisleriot
+gnome-sudoku
+gnomine
+gnotravex
+gnotski
+glines
+gnect
+gnibbles
+gnobots2
+gtali
+quadrapassel
+gnome-games-common
+atomix
+atomix-data
+# Mail client
+liblpint-bonobo0
+libexchange-storage1.2-3
+libgnome-pilot2x
+gnome-pilot
+gnome-pilot-conduits
+libgnome-pilot2
+# Instant messengers and chat programs
+libempathy30
+libempathy-common
+libempathy-gtk28
+libempathy-gtk-common
+libtelepathy2
+xchat-gnome
+xchat-gnome-common
+xchat-gnome-indicator
+# System utilities
+gnome-utils
+gnome-search-tool
+gnome-system-monitor
+gnome-disk-utility
+libgdu-gtk0
+gcursor
+checkbox
+# PDF document viewer
+evince-gtk
+# Office apps
+gnumeric-doc
+planner
+# Pulseaudio plugin
+pavumeter
+padevchooser
+paman
+paprefs
+# Multimedia converters
+libgstrtspserver-0.10-0
+# Digital Video Broadcasting (requires DVB hardware)
+gnome-dvb-client
+gnome-dvb-daemon
+gstreamer-codec-install
+# Video players
+snappy
+gnome-media-player
+gst123
+tumbler-plugins-extra
+# Web
+# Window manager
+sawfish
+sawfish-data
+sawfish-dbg
+sawfish-lisp-source
+sawfish-merlin-ugliness
+sawfish-themes
+# Gnome terminal
+gnome-terminal-data
+gnome-terminal
+# Speech synthesis
+gnome-orca
+# Font viewer
+gnome-font-viewer
+# People contacts directory
+libfolks25
+libfolks-eds25
+# Other
+libedataserverui-3.0-1
+libgtkhtml-editor-4.0-0
+libgtkhtml-4.0-0
+libgtkhtml-4.0-common
+gkdebconf
+libcouchdb-glib-1.0-1
+libcouchdb-glib-1.0-2
+libdesktopcouch-glib-1.0-2
+# StarOffice/Openoffice/Libreoffice
+openoffice.org-gnome
+libreoffice-gnome
+# Radio terminal
+gmfsk

@@ -1,0 +1,2 @@
+[196_GNOME_APPS_EXTRA]
+cracklib-runtime

@@ -1,0 +1,350 @@
+[99_PROHIBITED_MISC]
+# To remove, use "apt-get remove", no "aptitude purge", so groups don't
+# remove dependants
+# These are the free versions of flash, do not use, prefer original 32bit flash
+# player from package "flashplugin-installer"
+swfdec-mozilla
+swfdec-gnome
+browser-plugin-gnash
+gnash
+gnash-common
+libswfdec-0.8-0
+flashplugin-nonfree
+# Use evince-gtk
+snacc-doc
+gnumeric
+evince
+# lzma was replaced by xz-lzma
+zeroinstall-injector
+rox-filer
+lzma
+# Conflicts with rox-filer
+python-aptdaemon.pkcompat
+# Ubuntu included ATI Drivers - DOESN'T WORK - Replace with original ATI
+# drivers downloaded from ATI's website
+fglrx
+fglrx-amdcccle
+# Ubuntu included Nvidia drivers - DOESN'T WORK - Replace with original Nvidia
+# drivers downloaded from http://www.nvivia.com. Don't use jockey tools, 
+# neither ubuntu based nvidia drivers, neither packages depending on it
+# as such edubuntu-desktop-kde and kubuntu-desktop
+edubuntu-desktop-kde
+kubuntu-desktop
+jockey-kde
+jockey-gtk
+jockey-common
+xdiagnose
+nvidia-common
+nvidia-kernel-common
+nvidia-cg-toolkit
+nvidia-173-modaliases
+nvidia-185-modaliases
+nvidia-96-modaliases
+nvidia-current-modaliases
+nvidia-180-kernel-source
+nvidia-180-libvdpau
+nvidia-180-modaliases
+nvidia-71-modaliases
+nvidia-glx-180
+nvidia-glx-180-dev
+nvidia-settings
+linux-restricted-modules-2.6.24-26-generic
+# Unwanted system / desktop behavior: caching systems -> busy RAM
+ubuntu-minimal
+readahead
+readahead-fedora
+ureadahead
+sreadahead
+# Unwanted system / desktop behavior: desktop search systems
+mlocate
+gnome-do
+gnome-do-plugins
+gnome-do-docklets
+# Unwanted system / desktop behavior: no needed - heavy desktop agent/services
+fast-user-switch-applet
+localepurge
+# Unwanted system / desktop behavior: spyware & non wanted publicity
+update-motd
+popularity-contest
+landscape-common
+# Unwanted system / desktop behavior: automatic software updates
+update-manager
+language-selector
+gnome-codec-install
+language-selector-gnome
+oneconf
+software-center
+update-notifier
+banshee-extension-ubuntuonemusicstore
+libsyncdaemon-1.0-dev
+libubuntuone-1.0-1
+libubuntuone1.0-cil
+libubuntuone1.0-cil-dev
+python-ubuntuone
+rhythmbox-ubuntuone-music-store
+# Unstable: prevents gnome session from starting up (it halts it) on some
+# installations
+edubuntu-menueditor
+desktop-profiles
+# Conflicting versions
+# use newer versions
+libstdc++5
+libstdc++6-4.4-dev
+libstdc++6-4.4-doc
+libstdc++6-4.4-pic
+libstdc++6-4.4-dbg
+libstdc++6-4.5-pic
+gobjc-4.4
+g++-4.1
+g++-4.3
+g++-4.4
+gcc-4.1
+gcc-4.2
+gcc-4.3
+gcc-4.4
+# Use "extra" versions
+libavcodec53
+libavutil51
+# use libgdchart-gd2-xpm instead
+libgdchart-gd2-noxpm
+# lpr conflicts with cups
+a2ps
+xfprint4
+lpr
+# use firefox
+mozilla-browser
+# use libgd2-xpm
+libgd2-noxpm
+# freeglut replaces old glutg3 (currently empty!)
+glutg3
+glutg3-dev
+# This lib breaks C++ toolchain
+libpcre++-dev
+# There are other versions "midtosmall"
+crafty-books-small
+# Conflict with pulseaudio sound infrastructure
+esound
+# Use virtualbox full version, not limited "ose" edition
+virtualbox-ose
+virtualbox-ose-guest-source
+virtualbox-ose-guest-utils
+virtualbox-ose-guest-x11
+virtualbox-ose-qt
+virtualbox-ose-source
+virtualbox-ose-dbg
+virtualbox-ose-dkms
+virtualbox-ose-fuse
+virtualbox-ose-guest-dkms
+# Applies only to linux installations on guested/emulated virtual environments
+virtualbox-guest-additions
+# Old version, use virtualbox-4.0
+virtualbox-3.2
+virtualbox-3.1
+virtualbox-3.0
+# Dependants on some of the above
+# Prefer the libsdl1.2debian-pulseaudio version
+libsdl1.2debian-alsa
+# Prefer newer versions of...
+libstdc++6-4.1-dev
+libstdc++6-4.3-dev
+libreadline5-dev
+# Do not use package versions of vtk/itk, use customized code versions on TAKINA installations
+libgdcm-tools
+libgdcm2-dev
+libgdcm2.0
+libinsighttoolkit3-dev
+libinsighttoolkit3.16
+libnetcdf-dev
+libnetcdf4
+libvtk5-dev
+libvtk5-qt4-dev
+libvtk5.2
+libvtk5.2-qt4
+libvtkgdcm-tools
+libvtkgdcm2-dev
+libvtkgdcm2.0
+kwwidgets-doc
+vtk-doc
+libinsighttoolkit3-dev
+insighttoolkit3-examples
+# Others / unknown / untested / conflicting with other packages
+fam
+laptop-mode-tools
+libfam0
+libgpod4-nogtk
+nautilus-cd-burner
+quanta
+quanta-data
+ttf-ipafont-mincho
+xpdf-utils
+language-support-en
+language-support-es
+e16
+e16-data
+# Old versions
+cpp-4.1
+cpp-4.2
+cpp-4.3
+cpp-4.4
+cpp-4.5
+gcc-4.1-base
+gcc-4.2-base
+gcc-4.3-base
+gcc-4.4-base
+gcc-4.5-base
+# Old libboost versions
+libboost-thread1.42.0
+libboost-date-time1.42.0
+libboost1.35-doc
+libboost1.38-doc
+libboost-date-time1.35.0
+libboost-date-time1.38.0
+libboost-filesystem1.34.1
+libboost-filesystem1.35.0
+libboost-filesystem1.38.0
+libboost-filesystem1.40.0
+libboost-filesystem1.42.0
+libboost-graph1.35.0
+libboost-graph1.38.0
+libboost-iostreams1.35.0
+libboost-iostreams1.38.0
+libboost-iostreams1.40.0
+libboost-iostreams1.42.0
+libboost-math1.38.0
+libboost-program-options1.34.1
+libboost-program-options1.35.0
+libboost-program-options1.38.0
+libboost-program-options1.40.0
+libboost-program-options1.42.0
+libboost-python1.35.0
+libboost-python1.38.0
+libboost-python1.40.0
+libboost-python1.42.0
+libboost-regex1.34.1
+libboost-regex1.35.0
+libboost-regex1.38.0
+libboost-regex1.40.0
+libboost-regex1.42.0
+libboost-serialization1.35.0
+libboost-serialization1.38.0
+libboost-signals1.34.1
+libboost-signals1.35.0
+libboost-signals1.38.0
+libboost-signals1.40.0
+libboost-signals1.42.0
+libboost-system1.35.0
+libboost-system1.38.0
+libboost-system1.40.0
+libboost-system1.42.0
+libboost-test1.35.0
+libboost-test1.38.0
+libboost-thread1.35.0
+libboost-thread1.38.0
+libboost-wave1.35.0
+libboost-wave1.38.0
+libboost1.35-dev
+libboost1.38-dev
+libboost1.40-dev
+libboost1.42-dbg
+libboost1.42-dev
+libboost-date-time1.35-dev
+libboost-date-time1.38-dev
+libboost-filesystem1.35-dev
+libboost-filesystem1.38-dev
+libboost-graph1.35-dev
+libboost-graph1.38-dev
+libboost-iostreams1.35-dev
+libboost-iostreams1.38-dev
+libboost-math1.38-dev
+libboost-program-options1.35-dev
+libboost-program-options1.38-dev
+libboost-regex1.35-dev
+libboost-regex1.38-dev
+libboost-serialization1.35-dev
+libboost-serialization1.38-dev
+libboost-signals1.35-dev
+libboost-signals1.38-dev
+libboost-system1.35-dev
+libboost-system1.38-dev
+libboost-test1.35-dev
+libboost-test1.38-dev
+libboost-thread1.35-dev
+libboost-thread1.38-dev
+libboost-wave1.35-dev
+libboost-wave1.38-dev
+libboost-date-time1.42-dev
+libboost1.40-all-dev
+libboost1.40-dbg
+libboost1.40-doc
+libboost-date-time1.40.0
+libboost-date-time1.40-dev
+libboost-filesystem1.40-dev
+libboost-graph1.40.0
+libboost-graph1.40-dev
+libboost-iostreams1.40-dev
+libboost-math1.40.0
+libboost-math1.40-dev
+libboost-program-options1.40-dev
+libboost-python1.40-dev
+libboost-regex1.40-dev
+libboost-serialization1.40.0
+libboost-serialization1.40-dev
+libboost-signals1.40-dev
+libboost-system1.40-dev
+libboost-test1.40.0
+libboost-test1.40-dev
+libboost-thread1.40.0
+libboost-thread1.40-dev
+libboost-wave1.40.0
+libboost-wave1.40-dev
+libboost-filesystem1.42-dev
+libboost-graph1.42-dev
+libboost-graph1.42.0
+libboost-iostreams1.42-dev
+libboost-math1.42-dev
+libboost-math1.42.0
+libboost-program-options1.42-dev
+libboost-regex1.42-dev
+libboost-serialization1.42-dev
+libboost-serialization1.42.0
+libboost-signals1.42-dev
+libboost-system1.42-dev
+libboost-test1.42-dev
+libboost-test1.42.0
+libboost-thread1.42-dev
+libboost-wave1.42-dev
+libboost-wave1.42.0
+libboost1.42-doc
+# Databases
+python-poker-network
+mythgame
+mythtv-common
+mythtv-frontend
+libmythtv-perl
+mysql-client
+mysql-query-browser
+mysql-gui-tools-common
+mysql-admin
+libdbd-mysql-perl
+mysql-client-5.1
+mysql-server
+mysql-server-5.1
+# On ubuntu 11.10, this group causes package versions problems, and
+# does not provides any useful file!
+ia32-libs-multiarch:i386
+# On TAKINA installation, changing boot style is not recommended
+plymouth-label
+plymouth-theme-kubuntu-logo
+plymouth-theme-kubuntu-text
+plymouth-theme-ubuntu-logo
+# Prefer full OpenGL versions
+kde-window-manager-gles
+libkwineffects1abi2-gles
+# Maximizes windows, so makes weird window manager behaviors!
+maximus
+# This damages gnome theme
+gpe-confd
+# Unwanted system / desktop behavior: other/unsorted/unknown
+apport-gtk
+# Unknown reasons
+ubuntu-restricted-addons

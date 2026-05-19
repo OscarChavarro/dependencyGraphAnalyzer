@@ -1,0 +1,154 @@
+[14_CONSOLE_UNIXLIBS_MULTIMEDIA]
+# Grouped independent applications and libraries
+libao-common
+libao4
+virtuoso-nepomuk
+virtuoso-minimal
+libvirtodbc0
+libpocoodbc9
+unixodbc
+odbcinst
+odbcinst1debian1
+odbcinst1debian2
+libfreebob0
+libavc1394-0
+libdc1394-22
+libiec61883-0
+libraw1394-11
+mikmod
+libmikmod2
+aumix
+aumix-common
+oss-compat
+faac
+libfaac0
+libmp4v2-0
+id3v2
+libid3-3.8.3c2a
+libvcdinfo0
+libiso9660-5
+libiso9660-7
+libffado0
+libffado1
+libffado2
+# Single indepentent applications and libraries
+icedax
+id3tool
+libass1
+libass4
+libaudiofile0
+libcdaudio1
+libcddb2
+libcelt0-0
+libdvbpsi5
+libdvbpsi6
+libgme0
+libiptcdata0
+libjack-jackd2-0
+libkate1
+libmimic0
+libmodplug1
+libmpcdec3
+libmpcdec6
+libsdl1.2debian
+libupnp3
+libv4l-0
+libwavpack1
+linux-sound-base
+mpegdemux
+vlc-data
+# other
+mpeg3-utils
+libmpeg3-1
+liba52-0.7.4
+libtwolame0
+libsidplay1
+libmpeg2-4
+libbluray0
+libdv4
+lame
+faad
+liboil0.3
+liborc-0.4-0
+vobcopy
+libdvdread4
+libdvdnav4
+# Depends upon libgstreamer0.10-0
+libgstreamer-plugins-base0.10-0
+gstreamer0.10-ffmpeg
+gstreamer0.10-tools
+gstreamer-tools
+gstreamer0.10-fluendo-mp3
+gstreamer0.10-plugins-ugly-multiverse
+gstreamer0.10-plugins-ugly
+libgstreamer0.10-0
+# software depending upon ffmpeg
+cmus-plugin-ffmpeg
+libquicktime1
+libxine1-ffmpeg
+libxine1-bin
+# libogg0
+cdrdao
+libsndfile1
+libflac++6
+libflac8
+libshout3
+liboggz2
+libogg0
+head
+flac
+vorbis-tools
+twolame
+libportaudio0
+libebml0
+streamripper
+libtunepimp5
+# ffmpeg dependencies
+libxvidcore4
+libdirac-encoder0
+libvpx0
+libva1
+libgsm1
+libfaad0
+libfaad2
+libmp3lame0
+libschroedinger-1.0-0
+libspeex1
+libtheora0
+libvorbisfile3
+libvorbisenc2
+libvorbis0a
+libx264-67
+libx264-85
+libx264-98
+libx264-106
+# ffmpeg
+ffmpegthumbnailer
+libffmpegthumbnailer4
+libavcodec-extra-52
+libavfilter-extra-1
+libavformat-extra-52
+libavutil-extra-49
+libavutil-extra-50
+libpostproc-extra-51
+libswscale-extra-0
+#***************************************************************************
+# ffmpeg - following packages are really never installed, but replaced by
+# complete - non debian/ubuntu GPL'ed censored/limited versions
+# This should be replaced by "libavutil-extra-50" (full unrestricted codecs)
+libavutil49
+libavutil50
+# This should be replaced by "libavcodec-extra-52" (full unrestricted codecs)
+libavcodec52
+# This should be replaced by "libavformat-extra-52" (full unrestricted codecs)
+libavformat52
+# This should be replaced by "libavfilter-extra-1" (full unrestricted codecs)
+libavfilter0
+libavfilter1
+# This should be replaced by "libswscale-extra-0" (full unrestricted codecs)
+libswscale0
+# This should be replaced by "libavdevice-extra-52" (full unrestricted codecs)
+libavdevice52
+# This should be replaced by "libpostproc-extra-51" (full unrestricted codecs)
+libpostproc51
+#***************************************************************************

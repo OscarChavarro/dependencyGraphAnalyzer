@@ -1,0 +1,30 @@
+[17_CONSOLE_BASIC_DEVEL2_GRAPHICSFONTSANDTEXT]
+# Text interaction libraries
+libedit-dev
+libncurses5-dev
+libncursesw5-dev
+libreadline6-dev
+libreadline-dev
+# Font libraries
+libfontconfig1-dev
+libfreetype6-dev
+libexpat1-dev
+# Graphics libraries
+libart-2.0-dev
+libfreeimage-dev
+libgif-dev
+libgl2ps-dev
+libjpeg62-dev
+libnetpbm10-dev
+libopenexr-dev
+libilmbase-dev
+libpixman-1-dev
+libpng12-dev
+libtiff4-dev
+libcaca-dev
+libmng-dev
+liblcms1-dev
+# Supporting libraries
+libslang2-dev
+libbsd-dev
+libvncserver-dev

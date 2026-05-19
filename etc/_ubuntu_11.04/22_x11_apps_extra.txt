@@ -1,0 +1,10 @@
+[22_X11_APPS_EXTRA]
+# Just X11
+tkdiff
+bibtex2html
+xtightvncviewer
+xosview
+tuxpaint-config
+# Window managers
+flwm
+sapphire

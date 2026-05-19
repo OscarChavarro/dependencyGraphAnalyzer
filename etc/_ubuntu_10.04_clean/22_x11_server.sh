@@ -1,0 +1,1 @@
+aptitude purge xdg-utils dbus-x11 libxvmc1 xfonts-mathml xinit x11-session-utils libxxf86misc1 iceweasel xserver-xorg-input-vmmouse libpixman-1-0 x11-xkb-utils xserver-common xserver-xorg xserver-xorg-core xserver-xorg-input-all xserver-xorg-input-evdev xserver-xorg-input-mouse xserver-xorg-input-synaptics xserver-xorg-input-wacom x11-xserver-utils libxrandr2

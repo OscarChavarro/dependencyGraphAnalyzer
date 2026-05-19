@@ -1,0 +1,14 @@
+[31_IO_WRAPPER]
+io/wrapper/FileUncompressWrapper.cpp
+io/wrapper/FileUncompressWrapper.h
+io/wrapper/PersistenceElement.cpp
+io/wrapper/PersistenceElement.h
+io/wrapper/PipeInputStream.cpp
+io/wrapper/PipeInputStream.h
+io/wrapper/PipeOutputStream.cpp
+io/wrapper/PipeOutputStream.h
+io/wrapper/StreamOpenMode.h
+io/wrapper/Matrix2x2Printer.cpp
+io/wrapper/Matrix2x2Printer.h
+io/wrapper/Vector3DPrinter.cpp
+io/wrapper/Vector3DPrinter.h

@@ -1,0 +1,12 @@
+[42_QT_DEVEL]
+qt3-dev-tools
+libqt3-mt-dev
+libaudio-dev
+libmng-dev
+libxrandr-dev
+liblcms1-dev
+x11proto-randr-dev
+libqt3-compat-headers
+libqt3-headers
+cmake-qt-gui
+cmake-gui

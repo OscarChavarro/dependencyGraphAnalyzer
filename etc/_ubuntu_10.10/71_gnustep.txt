@@ -1,0 +1,4 @@
+[71_GNUSTEP]
+gnustep-icons
+unrar-free
+preferences.app

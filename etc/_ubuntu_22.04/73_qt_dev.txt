@@ -1,0 +1,8 @@
+[73_QT_DEV]
+qt5-qmake
+qt5-qmake-bin
+qt5-qmake:amd64
+qtbase5-dev
+qtbase5-dev-tools
+qtbase5-dev:amd64
+qtchooser

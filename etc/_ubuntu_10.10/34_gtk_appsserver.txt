@@ -1,0 +1,6 @@
+[34_GTK_APPS_SERVER]
+chromium-browser
+chromium-browser-inspector
+chromium-browser-l10n
+chromium-codecs-ffmpeg
+gpicview

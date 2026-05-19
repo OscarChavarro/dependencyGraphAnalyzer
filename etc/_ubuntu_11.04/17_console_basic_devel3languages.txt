@@ -1,0 +1,56 @@
+[17_CONSOLE_BASIC_DEVEL3_LANGUAGES]
+# Assemblers
+nasm
+yasm
+# Fortran environment
+libf2c2
+libf2c2-dev
+f2c
+fort77
+cfortran
+gfortran
+gfortran-4.4
+gfortran-4.5
+libkernlib1-dev
+libpacklib1-dev
+cernlib-base-dev
+# Pascal environment
+fp-compiler
+fp-ide
+fp-units-rtl
+fp-units-base
+fp-units-fcl
+fp-utils
+# TCL environment
+tcl8.4-dev
+tcl8.5-dev
+tcl-dev
+# Haskell environment
+haskell-mode
+ghc6
+ghc6-haddock
+ghc6-doc
+libgmp3-dev
+libffi-dev
+# Ocaml
+ocaml-native-compilers
+ocaml-nox
+ocaml-interp
+camlp4
+ledit
+libfindlib-ocaml
+libfindlib-ocaml-dev
+ocaml-findlib
+dh-ocaml
+libapron-ocaml-dev
+libapron
+libapron-dev
+libapron-ocaml
+libmpfr-dev
+libppl0.10-dev
+# LUA
+liblualib50-dev
+liblua50-dev
+liblua5.1-0-dev
+# PHP
+php5-dev

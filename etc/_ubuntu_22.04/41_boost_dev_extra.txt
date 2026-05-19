@@ -1,0 +1,7 @@
+[41_BOOST_DEV_EXTRA]
+libboost-date-time-dev:amd64
+libboost-date-time1.74-dev:amd64
+libboost-date-time-dev
+libboost-date-time1.74-dev
+libboost-serialization1.74-dev:amd64
+libboost-serialization1.74-dev

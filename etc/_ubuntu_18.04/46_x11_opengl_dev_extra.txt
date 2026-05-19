@@ -1,0 +1,3 @@
+[46_X11_OPENGL_DEV_EXTRA]
+libgles2-mesa-dev
+libgles2-mesa-dev:amd64

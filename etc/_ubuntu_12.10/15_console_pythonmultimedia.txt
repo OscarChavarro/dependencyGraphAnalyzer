@@ -1,0 +1,19 @@
+[15_CONSOLE_PYTHONMULTIMEDIA]
+python-ogg
+python-ogg-dbg
+python-pyogg
+python-pyvorbis
+python-alsaaudio
+gstreamer0.10-esd
+# Voice recognition
+libsphinx2g0
+sphinx2-bin
+sphinx2-hmm-6k
+flite
+python-pocketsphinx
+python-pocketsphinx-dbg
+python-sphinxbase
+python-sphinxbase-dbg
+python-tagpy
+python-pymad
+quisk

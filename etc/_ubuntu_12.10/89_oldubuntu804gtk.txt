@@ -1,0 +1,8 @@
+[89_OLDUBUNTU8.04GTK]
+displayconfig-gtk
+gtk2-engines-ubuntulooks
+libpoppler-glib2
+libtracker-gtk0
+language-support-translations-en
+libgpod3
+libmagick10

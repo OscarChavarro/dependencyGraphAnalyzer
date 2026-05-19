@@ -1,0 +1,14 @@
+[11_CONSOLE_UNIXLIBS]
+# Dhcp connection to the internet
+isc-dhcp-client
+isc-dhcp-common
+# ifconfig
+net-tools
+# Not really essential commands, but ubuntu recommended for non-uninstallation
+diffutils
+grep
+gzip
+hostname
+mawk
+bsdutils
+bsdmainutils

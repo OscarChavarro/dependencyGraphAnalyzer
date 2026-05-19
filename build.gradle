@@ -1,0 +1,36 @@
+plugins {
+    id 'java'
+    id 'io.freefair.lombok' version '6.4.1'
+    id 'application'
+}
+
+group 'co.cubestudio'
+version '0.666'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'ch.qos.logback:logback-classic:1.4.11'
+    implementation files('./lib/vsdk.jar')
+}
+
+tasks.withType(JavaCompile) {
+    options.compilerArgs << "-Xlint:unchecked"
+}
+
+ext {
+    selectedMainClassShort = project.hasProperty('app') ? "era.put.${project.property('app')}" : 'co.cubestudio.DebianAnalyzer'
+}
+
+application {
+    mainClass.set(selectedMainClassShort)
+}
+
+run {
+    if (project.hasProperty('app')) {
+        selectedMainClassShort = "era.put.${project.property('app')}"
+        mainClassName = selectedMainClassShort
+    }
+}

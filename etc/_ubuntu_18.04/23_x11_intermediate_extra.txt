@@ -1,0 +1,4 @@
+[23_X11_INTERMEDIATE_EXTRA]
+xorg-docs-core
+xfonts-scalable
+xcursor-themes

@@ -1,0 +1,3 @@
+[02_FS_EXTRA]
+uuid-runtime
+thin-provisioning-tools

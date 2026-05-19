@@ -1,0 +1,6 @@
+[15_MINIMAL_DEPS]
+libxslt1.1
+libxslt1.1:i386
+iso-codes
+libtext-charwidth-perl
+libtext-wrapi18n-perl

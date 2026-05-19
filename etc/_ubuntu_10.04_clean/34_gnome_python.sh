@@ -1,0 +1,1 @@
+aptitude purge python-wnck

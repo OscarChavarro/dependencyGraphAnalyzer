@@ -1,0 +1,4 @@
+[15_CONSOLE_IA32_MULTIMEDIA]
+lib32v4l-0
+ia32-libs
+lib32asound2

@@ -1,0 +1,6 @@
+[24_X11_MULTIMEDIA_GL]
+mesa-vdpau-drivers
+mesa-vdpau-drivers:amd64
+vdpau-driver-all
+vdpau-driver-all:amd64
+vdpauinfo

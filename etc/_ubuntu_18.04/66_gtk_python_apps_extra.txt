@@ -1,0 +1,8 @@
+[66_GTK_PYTHON_APPS_EXTRA]
+python-sphinx
+python-sphinx-rtd-theme
+python3-sphinx
+python3-numpydoc
+gitsome
+sphinx-common
+sphinx-rtd-theme-common

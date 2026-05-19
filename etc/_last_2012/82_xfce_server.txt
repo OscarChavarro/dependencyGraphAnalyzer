@@ -1,0 +1,7 @@
+[82_XFCE_SERVER]
+# XFCE
+xubuntu-gdm-theme
+xfce4
+xfdesktop4
+xfdesktop4-data
+xfce4-utils

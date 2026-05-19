@@ -1,0 +1,4 @@
+[198_GNOME_PANEL_EXTRA]
+gnome-power-manager
+gnome-user-docs
+ubuntu-docs

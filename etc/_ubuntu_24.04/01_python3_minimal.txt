@@ -1,0 +1,17 @@
+[01_PYTHON3_MINIMAL]
+libpython3-stdlib
+libpython3-stdlib:amd64
+python3
+python3-minimal
+python3-cffi-backend
+python3-cffi-backend:amd64
+libpython3.12-minimal
+libpython3.12-minimal:amd64
+libpython3.12-stdlib
+libpython3.12-stdlib:amd64
+libpython3.12t64
+libpython3.12t64:amd64
+python3.12
+python3.12-minimal
+python-apt-common
+python3-apt

@@ -1,0 +1,15 @@
+[43_HDF_DEV]
+libhdf5-openmpi-103-1
+libhdf5-openmpi-103-1:amd64
+libhdf5-openmpi-cpp-103-1
+libhdf5-openmpi-cpp-103-1:amd64
+libhdf5-openmpi-dev
+libhdf5-openmpi-fortran-102
+libhdf5-openmpi-fortran-102:amd64
+libhdf5-openmpi-hl-100
+libhdf5-openmpi-hl-100:amd64
+libhdf5-openmpi-hl-cpp-100
+libhdf5-openmpi-hl-cpp-100:amd64
+libhdf5-openmpi-hl-fortran-100
+libhdf5-openmpi-hl-fortran-100:amd64
+libhdf5-mpi-dev

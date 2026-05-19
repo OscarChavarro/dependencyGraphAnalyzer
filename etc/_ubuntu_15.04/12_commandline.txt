@@ -1,0 +1,11 @@
+[12_COMMANDLINE]
+dmidecode
+ed
+gddrescue
+hdparm
+lshw
+lsof
+wodim
+rsyslog
+libestr0
+laptop-detect

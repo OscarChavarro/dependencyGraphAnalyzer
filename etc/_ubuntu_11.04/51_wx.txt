@@ -1,0 +1,12 @@
+[51_WX]
+# Libs
+libwxbase2.8-0
+libwxgtk2.8-0
+libwxbase2.6-0
+libwxgtk2.6-0
+libvamp-hostsdk3
+python-wxgtk2.8
+python-wxversion
+wx-common
+# Reusable applications
+ipython

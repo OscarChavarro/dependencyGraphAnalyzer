@@ -1,0 +1,54 @@
+[54_GNOME_QT_SESSION_DEVEL]
+# Social networking
+gwibber
+gwibber-service
+gwibber-service-facebook
+gwibber-service-identica
+gwibber-service-twitter
+libgwibber0
+libgwibber1
+libgwibber2
+libgwibber3
+libgwibber-gtk2
+libgwibber-gtk3
+# Image viewers
+shotwell
+# Others
+account-plugin-facebook
+account-plugin-flickr
+account-plugin-google
+account-plugin-identica
+account-plugin-twitter
+account-plugin-windows-live
+alacarte
+gdm
+gnome-applets
+gnome-control-center-signon
+gnome-panel
+gnome-panel-data
+gnome-session
+gnome-session-fallback
+gnome-shell
+libaccount-plugin-1.0-0
+metacity
+libunity-2d-private0
+metacity-themes
+unity
+unity-lens-files
+unity-lens-gwibber
+unity-lens-music
+unity-lens-photos
+unity-lens-video
+unity-scope-gdocs
+unity-scope-musicstores
+unity-scope-video-remote
+# Not depending upon devel: signon
+libsignon-glib1
+libsignon-qt1
+libsignon-plugins-common1
+libsignon-extension1
+signon-plugin-oauth2
+signon-ui
+signond
+signon-keyring-extension
+signon-plugin-password

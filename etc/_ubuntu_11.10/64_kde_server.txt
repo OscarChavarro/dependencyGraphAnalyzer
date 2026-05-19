@@ -1,0 +1,14 @@
+[64_KDE_SERVER]
+kdebase-workspace
+kde-workspace
+kde-window-manager
+kde-workspace-bin
+plasma-desktop
+amor
+kdetoys
+kde-plasma-desktop
+kde-plasma-netbook
+plasma-netbook
+kscreensaver
+kscreensaver-xsavers
+kdeartwork

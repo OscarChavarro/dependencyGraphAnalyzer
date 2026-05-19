@@ -1,0 +1,7 @@
+[47_CUDA_VULCAN]
+libvulkan1
+libvulkan1:amd64
+libplacebo192
+libplacebo192:amd64
+libvulkan-dev:amd64
+libvulkan-dev

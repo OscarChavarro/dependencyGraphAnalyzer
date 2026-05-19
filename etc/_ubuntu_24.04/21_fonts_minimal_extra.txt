@@ -1,0 +1,3 @@
+[21_FONTS_MINIMAL_EXTRA]
+fonts-liberation2
+fonts-liberation-sans-narrow

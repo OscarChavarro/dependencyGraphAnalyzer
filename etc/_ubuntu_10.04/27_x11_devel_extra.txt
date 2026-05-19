@@ -1,0 +1,16 @@
+[27_X11_DEVEL_EXTRA]
+pvm
+pvm-dev
+doxygen
+doxygen-doc
+glut-doc
+libdbus-1-dev
+libdbus-glib-1-dev
+libfltk1.1
+libfltk1.1-dev
+libgraphviz-dev
+libpvm3
+python-msn
+tk-dev
+tk8.4-dev
+# New

@@ -1,0 +1,48 @@
+[00_LINUX_LIBC_NCURSES]
+findutils
+tzdata
+libc-bin
+debconf
+debconf-i18n
+apt-utils
+libdb4.8
+libtext-charwidth-perl
+libtext-wrapi18n-perl
+perl-base
+dpkg
+xz-utils
+libstdc++6
+gcc-4.4-base
+libgcc1
+libselinux1
+coreutils
+libtext-iconv-perl
+liblocale-gettext-perl
+libacl1
+libattr1
+libc6
+# Basic 
+libncurses5
+libgpm2
+gcc-4.3-base
+libdb4.7
+# 32 bit
+libc6-i686
+gcc-4.5-base
+liblzma1
+liblzma2
+libbz2-1.0
+zlib1g
+libgpmg1
+multiarch-support
+# On Ubuntu 10.10 this can go to 13_console_unixlibs
+lzma
+libexpat1
+libncursesw5
+# Apt
+apt
+ubuntu-keyring
+gpg
+gpgv
+libreadline6
+readline-common

@@ -1,0 +1,5 @@
+[09_MULTILANGUAGE_LLVM_EXTRA]
+libboost-date-time1.74.0
+libboost-date-time1.74.0:amd64
+libboost-serialization1.74.0
+libboost-serialization1.74.0:amd64

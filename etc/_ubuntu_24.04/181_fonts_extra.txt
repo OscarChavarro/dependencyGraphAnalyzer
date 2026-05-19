@@ -1,0 +1,4 @@
+[181_FONTS_EXTRA]
+fonts-droid-fallback
+fonts-noto-color-emoji
+fonts-noto-mono

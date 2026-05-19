@@ -1,0 +1,41 @@
+[99_UNDESIRED_AND_PROBLEMATIC]
+# Groups that are not fully needed - check they do not install wrong java cores
+gnome-api-docs
+gnome-devel
+gnome-core-devel
+gnome-games
+gnome-shell
+edubuntu-desktop
+ubuntu-desktop
+ubuntu-restricted-extras
+ubuntu-standard
+# Apache and server tools are undesired, prefer them from .tar.bz2 sources
+apache2
+apache2-mpm-worker
+apache2-utils
+apache2.2-bin
+apache2.2-common
+libapache2-mod-dnssd
+libaprutil1-dbd-sqlite3
+libaprutil1-ldap
+# Unwanted: administration software based upon gksu (security risk)
+checkbox-gtk
+computer-janitor-gtk
+gdebi
+gnome-netstatus-applet
+sabayon
+pessulus
+# Problematic: Video player - check that does not install wrong java cores
+totem
+totem-xine
+totem-gstreamer
+totem-plugins
+totem-mozilla
+totem-common
+# Databases... prefer to have more control over them and install them
+# manually
+postgresql
+postgresql-8.3
+postgresql-client-8.3
+postgresql-client-common
+postgresql-common

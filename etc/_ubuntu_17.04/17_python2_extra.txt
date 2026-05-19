@@ -1,0 +1,4 @@
+[17_PYTHON2_EXTRA]
+python-numpy
+python-lxml
+python-bs4

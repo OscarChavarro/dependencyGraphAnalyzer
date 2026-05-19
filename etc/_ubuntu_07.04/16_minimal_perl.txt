@@ -1,0 +1,16 @@
+[16_MINIMAL_PERL]
+perl
+libft-perl
+perl-modules
+perl-doc
+console-common
+console-data
+console-setup
+console-tools
+console-terminus
+xkb-data
+sgml-base
+man-db
+manpages
+libconsole
+cmatrix

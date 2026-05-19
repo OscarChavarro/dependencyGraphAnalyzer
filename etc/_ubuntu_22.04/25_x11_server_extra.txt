@@ -1,0 +1,14 @@
+[25_X11_SERVER_EXTRA]
+libxatracker2
+libxatracker2:amd64
+xserver-xorg
+xserver-xorg-input-wacom
+xserver-xorg-legacy
+xserver-xorg-video-all
+xserver-xorg-video-amdgpu
+xserver-xorg-video-ati
+xserver-xorg-video-nouveau
+xserver-xorg-video-qxl
+xserver-xorg-video-radeon
+xserver-xorg-video-vmware
+libwacom-bin

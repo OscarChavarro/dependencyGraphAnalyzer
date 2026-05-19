@@ -1,0 +1,3 @@
+[25_X11_SERVER_EXTRA]
+xcvt
+xserver-xorg-input-wacom

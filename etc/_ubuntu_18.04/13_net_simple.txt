@@ -1,0 +1,114 @@
+[13_NET_SIMPLE]
+# Criteria to be here and not on 14_NET:
+# . Not depending on kerberos
+# . Not depending on GPGP
+# . Not depending on C++
+# . Not be composed of several packages (as dnsutils)
+# linux from scratch: iptables
+iptables
+libip6tc0
+libip6tc0:amd64
+libip6tc0:i386
+libiptc0
+libiptc0:amd64
+libiptc0:i386
+libxtables12
+libxtables12:amd64
+libxtables12:i386
+#
+dnsmasq-base
+geoip-database
+ifupdown
+ipheth-utils
+iproute2
+iputils-ping
+iputils-tracepath
+isc-dhcp-client
+isc-dhcp-common
+libdns-export1100
+libgc1c2
+libgc1c2:amd64
+libgeoip1
+libgeoip1:amd64
+libgeoip1:i386
+libimobiledevice6
+libimobiledevice6:amd64
+libimobiledevice6:i386
+libimobiledevice-utils
+libisc169
+libisc169:amd64
+libisc169:i386
+libmnl0
+libmnl0:amd64
+libmnl0:i386
+libnetfilter-conntrack3
+libnetfilter-conntrack3:amd64
+libnetfilter-conntrack3:i386
+libnfnetlink0
+libnfnetlink0:amd64
+libnfnetlink0:i386
+libpcap0.8
+libpcap0.8:amd64
+libpcap0.8:i386
+libpcsclite1
+libpcsclite1:amd64
+libpcsclite1:i386
+libplist3
+libplist3:amd64
+libplist3:i386
+libusbmuxd4
+libusbmuxd4:amd64
+libusbmuxd4:i386
+libwrap0
+libwrap0:amd64
+libwrap0:i386
+lrzsz
+netbase
+netcat-openbsd
+rfkill
+rsync
+socat
+tcpdump
+traceroute
+ufw
+usbmuxd
+w3m
+# Simple applications
+ftp
+lynx
+lynx-common
+telnet
+wget
+# Used by serial communications
+ppp
+pppconfig
+pppoe
+pppoeconf
+minicom
+# Used for WiFi
+libisccc160
+libisccc160:amd64
+libisccc160:i386
+libisc-export169
+libisc-export169:amd64
+libisc-export169:i386
+libiw30
+libiw30:amd64
+libiw30:i386
+liblwres160
+liblwres160:amd64
+liblwres160:i386
+wireless-tools
+wpasupplicant
+# Non standard repositories
+zerotier-one
+libwiretap8
+libwiretap8:amd64
+libwsutil9
+libwsutil9:amd64
+tcpd
+libgc1c2:i386
+libwiretap8:i386
+libwsutil9:i386
+ifuse
+iftop

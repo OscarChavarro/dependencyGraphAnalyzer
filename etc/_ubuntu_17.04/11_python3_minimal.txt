@@ -1,0 +1,16 @@
+[11_PYTHON3_MINIMAL]
+python3
+libpython3-stdlib
+libpython3-stdlib:i386
+python3-minimal
+python3.5-minimal
+python3.5
+libpython3.5
+libpython3.5-minimal
+libpython3.5-minimal:i386
+libpython3.5-stdlib
+libpython3.5-stdlib:i386
+libpython3.5:i386
+dh-python
+vim
+python3-gi

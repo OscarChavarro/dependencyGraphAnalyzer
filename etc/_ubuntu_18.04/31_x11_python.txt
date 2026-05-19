@@ -1,0 +1,5 @@
+[31_X11_PYTHON]
+fontforge
+fontforge-common
+libfontforge2
+libgdraw5

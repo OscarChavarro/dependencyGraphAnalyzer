@@ -1,0 +1,5 @@
+[19_CONSOLE_IA32_DEVEL]
+libc6-dev-i386
+gcc-4.3-multilib
+gcc-multilib
+gcc-4.4-multilib

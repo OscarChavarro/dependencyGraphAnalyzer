@@ -1,0 +1,16 @@
+[89_OLDUBUNTU8.04GNOME]
+bug-buddy
+hwtest-gtk
+hwtest
+gimp-gnomevfs
+gimp-python
+libdeskbar-tracker
+libgnome-desktop-2
+libtotem-plparser10
+libcamel1.2-11
+libgnomekbd2
+libgnomekbdui2
+contact-lookup-applet
+gtkhtml3.14
+libgucharmap6
+libpulsecore5

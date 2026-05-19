@@ -1,0 +1,5 @@
+[25_X11_SERVER_MULTIMEDIA]
+xawtv
+xawtv-plugins
+pia
+scantv

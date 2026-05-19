@@ -1,0 +1,88 @@
+[07_BASIC_LIBS]
+# Linux from scratch: libcap2
+libcap2-bin
+libcap2-bin:i386
+# linux from scratch: gcc-8
+lib64quadmath0
+libquadmath0
+libquadmath0:amd64
+libquadmath0:i386
+lib32quadmath0
+libx32quadmath0
+lib64itm1
+lib32itm1
+libx32itm1
+libitm1
+libitm1:amd64
+libitm1:i386
+libtsan0
+libtsan0:amd64
+lib32mpx2
+liblsan0
+liblsan0:amd64
+# other dependencies
+libmpdec2
+libmpdec2:amd64
+libmpdec2:i386
+mime-support
+libstemmer0d
+libstemmer0d:amd64
+libstemmer0d:i386
+bc
+libsnappy1v5
+libsnappy1v5:amd64
+libsnappy1v5:i386
+libyaml-cpp0.5v5
+libyaml-cpp0.5v5:amd64
+libxapian30
+libxapian30:amd64
+libunwind8
+libunwind8:amd64
+libunwind8:i386
+libc-ares2
+libc-ares2:amd64
+libnl-route-3-200
+libnl-route-3-200:amd64
+libsmi2ldbl
+libsmi2ldbl:amd64
+libmaxminddb0
+libmaxminddb0:amd64
+libfribidi0
+libfribidi0:amd64
+libfribidi0:i386
+# linux from scratch: distro-info-data
+distro-info-data
+# linux from scratch: libtext-iconv-perl
+libtext-iconv-perl
+# linux from scratch: gpm
+gpm
+libgpm2
+libgpm2:amd64
+libgpm2:i386
+# linux from scratch: lsb
+lsb-release
+# apt
+libapt-inst2.0
+libapt-inst2.0:amd64
+libapt-inst2.0:i386
+libzip4
+libzip4:amd64
+libzip4:i386
+# Linux from scratch: dialog
+dialog
+# Others, used by OpenGL
+libevent-2.1-6
+libevent-2.1-6:amd64
+libevent-2.1-6:i386
+base-passwd
+libdebconfclient0
+libdebconfclient0:amd64
+libdebconfclient0:i386
+# Others, basic linux system tools
+linux-tools-common
+libc-ares2:i386
+libmaxminddb0:i386
+libnl-route-3-200:i386
+libsmi2ldbl:i386
+libxapian30:i386
+libyaml-cpp0.5v5:i386

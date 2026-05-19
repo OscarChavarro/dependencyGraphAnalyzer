@@ -1,0 +1,26 @@
+[21_X11_BASE]
+# Prefered pet apps
+xosview
+x11-apps
+xterm
+# Others
+libmotif-common
+libxkbfile1
+libxkbfile1:amd64
+libxm4
+libxm4:amd64
+x11-xkb-utils
+xbitmaps
+libutempter0
+libutempter0:amd64
+libxft2
+libxft2:amd64
+libxft2:i386
+libmrm4:amd64
+libuil4:amd64
+uil
+libmrm4
+libuil4
+mwm
+libepoxy0
+libepoxy0:amd64

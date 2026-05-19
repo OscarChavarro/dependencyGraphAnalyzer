@@ -1,0 +1,53 @@
+[94_TAKINA_APPS_COMPLEX]
+# This group contains packages that depends on several subsystems and are not
+# easyly classified.
+# Depending on perl & python
+aptitude
+# Depending on perl & X11
+i3-wm
+i3
+i3lock
+i3status
+# Depending on WX & X11server side
+filezilla
+filezilla-common
+# Depending on QT, WX & GNOME
+ubuntu-edu-preschool
+ubuntu-edu-primary
+ubuntu-edu-secondary
+ubuntu-edu-tertiary
+# Depending on WX & GNOME
+accerciser
+wxmaxima
+# Depending on QT & GNOME
+libtelepathy-qt4-farsight0
+k3b
+lyx-common
+lyx
+vlc
+kscreensaver
+kscreensaver-xsavers
+kdeartwork
+# Others
+pymol
+python-pmw
+tvtime
+latex2html
+tasksel
+tasksel-data
+blender
+blender-ogrexml
+yofrankie
+kontact
+kmail
+compiz-kde
+compizconfig-backend-kconfig
+python-tunepimp
+listen
+# gtk + perl + python + multimedia
+auctex
+arandr
+# Mono + X11 + Multimedia
+libtaoframework-sdl1.2-cil
+libtaoframework-sdl-cil-dev
+libtaoframework-freeglut2.4-cil

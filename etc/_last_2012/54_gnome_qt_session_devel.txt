@@ -1,0 +1,12 @@
+[54_GNOME_QT_SESSION_DEVEL]
+# Others
+# Not depending upon devel: signon
+libsignon-glib1
+libsignon-qt1
+libsignon-plugins-common1
+libsignon-extension1
+signon-plugin-oauth2
+signon-ui
+signond
+signon-keyring-extension
+signon-plugin-password

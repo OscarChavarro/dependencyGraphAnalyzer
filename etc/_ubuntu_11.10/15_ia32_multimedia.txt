@@ -1,0 +1,8 @@
+[15_CONSOLE_IA32_MULTIMEDIA]
+lib32v4l-0
+ia32-libs
+lib32asound2
+libflac8:i386
+libsndfile1:i386
+libvorbis0a:i386
+libvorbisenc2:i386

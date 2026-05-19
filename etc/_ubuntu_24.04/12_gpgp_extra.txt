@@ -1,0 +1,3 @@
+[12_GPGP_EXTRA]
+gnupg-l10n
+gpg-wks-client

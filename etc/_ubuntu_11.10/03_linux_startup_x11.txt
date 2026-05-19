@@ -1,0 +1,7 @@
+[03_LINUX_STARTUP_X11]
+libx11-6
+libx11-data
+libxcb-xlib0
+libxcb1
+libxau6
+libxdmcp6

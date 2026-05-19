@@ -1,0 +1,13 @@
+[15_PYTHON3_EXTRA]
+python3-launchpadlib
+python3-keyring
+python3-secretstorage
+python3-jeepney
+python3-lazr.restfulclient
+python3-oauthlib
+python3-blinker
+python3-wadllib
+python3-lazr.uri
+python3-jwt
+python3-apport
+python3-problem-report

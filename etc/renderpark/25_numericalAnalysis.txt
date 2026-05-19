@@ -1,0 +1,11 @@
+[25_NUMERICAL_ANALYSIS]
+numericalAnalysis/CubatureRule.h
+numericalAnalysis/CubatureDegree.h
+numericalAnalysis/QuadCubatureRule.cpp
+numericalAnalysis/QuadCubatureRule.h
+numericalAnalysis/TriangleCubatureRule.cpp
+numericalAnalysis/TriangleCubatureRule.h
+numericalAnalysis/PatchVisitor.cpp
+numericalAnalysis/PatchVisitor.h
+numericalAnalysis/MeshSurfaceVisitor.cpp
+numericalAnalysis/MeshSurfaceVisitor.h

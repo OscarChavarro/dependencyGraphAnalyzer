@@ -1,0 +1,9 @@
+[194_QT_EXTRA]
+libqt5multimedia5-plugins
+libqt5multimedia5-plugins:amd64
+libqt5multimediagsttools5
+libqt5multimediagsttools5:amd64
+libqt5multimediawidgets5
+libqt5multimediawidgets5:amd64
+qt5-gtk-platformtheme
+qt5-gtk-platformtheme:amd64

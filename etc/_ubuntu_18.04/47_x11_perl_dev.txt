@@ -1,0 +1,11 @@
+[47_X11_PERL_DEV]
+libmotif-dev
+libmotif-dev:amd64
+libmotif-dev:i386
+libxft-dev
+libxft-dev:i386
+libfontconfig1-dev
+libfontconfig1-dev:i386
+libfontconfig1-dev:amd64
+libgraphics-magick-perl
+findimagedupes

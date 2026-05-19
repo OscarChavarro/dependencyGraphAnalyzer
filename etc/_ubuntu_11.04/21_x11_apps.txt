@@ -1,0 +1,52 @@
+[21_X11_APPS]
+# Xemacs
+xemacs21-support
+xemacs21-mule
+xemacs21-bin
+xemacs21-basesupport
+xemacs21-mulesupport
+xemacs21
+# SSH
+openssh-server
+ssh-import-id
+# Simple X11 applications not requiring extra fonts from 21_X11_FONTS
+motif-clients
+twm
+gmemusage
+oneko
+xasteroids
+xfishtank
+xgalaga
+xlockmore-gl
+xaos
+seyon
+gnuboy-x
+xfractint
+fractxtra
+blockade
+zangband
+zangband-data
+policykit-desktop-privileges
+ace-of-penguins
+xdotool
+libxdo2
+uwm
+xcolors
+xcolorsel
+xmem
+xmountains
+9wm
+aewm++
+aewm++-goodies
+lwm
+vtwm
+w9wm
+xzoom
+# Nearly text
+pppoeconf
+pppconfig
+iscsitarget
+iscsitarget-module
+uswsusp
+# Kernel level profilers
+kexec-tools

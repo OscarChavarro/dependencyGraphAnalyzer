@@ -1,0 +1,8 @@
+[89_OLDUBUNTU8.04X11]
+cupsys-bsd
+cupsys
+dhcdbd
+guidance-backends
+libdjvulibre15
+libnm-util0
+libxevie1

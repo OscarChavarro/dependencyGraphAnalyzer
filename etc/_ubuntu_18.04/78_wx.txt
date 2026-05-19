@@ -1,0 +1,15 @@
+[78_WX]
+audacity
+audacity-data
+libsuil-0-0
+libsuil-0-0:amd64
+libvamp-hostsdk3v5
+libvamp-hostsdk3v5:amd64
+libwxbase3.0-0v5
+libwxbase3.0-0v5:amd64
+libwxgtk3.0-0v5
+libwxgtk3.0-0v5:amd64
+libsuil-0-0:i386
+libvamp-hostsdk3v5:i386
+libwxbase3.0-0v5:i386
+libwxgtk3.0-0v5:i386

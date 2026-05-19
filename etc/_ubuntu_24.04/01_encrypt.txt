@@ -1,0 +1,72 @@
+[01_ENCRYPT]
+# Ugly hack: libssl1.1 is here to support an old version of mongo, in order to run on old CPUs with no AVX instructions
+# linux from scratch (0001): glibc-2.27
+# linux from scratch (0118 PYTHON2 BUILD ISSUE, build on minimal/clean ubuntu environment): libcap-ng0
+libcap-ng0
+libcap-ng0:amd64
+# linux from scratch (0119 "dpkg-buildpackage -b -j24" on minimal/clean): audit
+libaudit1
+libaudit1:amd64
+libaudit-common
+# linux from scratch (0120 PYTHON2 BUILD ISSUE, build on minimal/clean ubuntu environment): libsemanage1
+libsemanage2
+libsemanage2:amd64
+libsemanage-common
+# linux from scratch (0121): libgpg-error
+libgpg-error0
+libgpg-error0:amd64
+# linux from scratch (0122): libgcrypt20
+libgcrypt20
+libgcrypt20:amd64
+# linux from scratch (0123): gnupg1
+# linux from scratch (0124): gnupg2
+gpgv
+# linux from scratch (0125 *** Problematic build ***): perl
+perl-base
+# linux from scratch (0126): debconf
+debconf
+# Linux from scratch (0127): openssl
+openssl
+# Linux from scratch (0129): ca-certificates
+ca-certificates
+# linux from scratch (0131): libdb53
+# linux from scratch (0132 dpkg-buildpackage -nc -uc -us -b -j24, build on minimal/clean ubuntu environment): shadow
+# linux from scratch (0133): ubuntu-keyring
+ubuntu-keyring
+# Linux from scratch: base-files
+base-files
+# Other, new dependencies for Ubuntu 22.04 that previously were at higher levels
+libtirpc-common
+libgssapi-krb5-2
+libgssapi-krb5-2:amd64
+libcom-err2
+libcom-err2:amd64
+libk5crypto3
+libk5crypto3:amd64
+libkrb5-3
+libkrb5-3:amd64
+libkrb5support0
+libkrb5support0:amd64
+libkeyutils1
+libkeyutils1:amd64
+libcap2
+libcap2:amd64
+locales
+libnss3
+libnss3:amd64
+libnspr4
+libnspr4:amd64
+libsqlite3-0
+libsqlite3-0:amd64
+libnpth0t64
+libnpth0t64:amd64
+libssl3t64
+libssl3t64:amd64
+libassuan0
+libassuan0:amd64
+tzdata
+locales-all
+libaacs0:amd64
+libbdplus0:amd64
+libaacs0
+libbdplus0

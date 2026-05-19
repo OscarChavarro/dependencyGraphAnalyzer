@@ -1,0 +1,10 @@
+[12_COMMANDLINE_EXTRA]
+acpi-support
+acpid
+at
+logrotate
+anacron
+cron
+thermald
+wdiff
+sharutils

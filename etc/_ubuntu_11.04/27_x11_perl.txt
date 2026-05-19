@@ -1,0 +1,12 @@
+[27_X11_PERL]
+sysv-rc-conf
+liboobs-1-4
+system-tools-backends
+libnet-dbus-perl
+perl-tk
+liboobs-1-5
+apparmor
+apparmor-utils
+libcairo-perl
+libpango-perl
+samba

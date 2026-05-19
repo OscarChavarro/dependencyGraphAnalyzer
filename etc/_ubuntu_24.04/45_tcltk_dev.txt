@@ -1,0 +1,16 @@
+[45_TCL_TK_DEV]
+tk
+tk8.6
+libtk8.6
+libtk8.6:amd64
+tcl
+tcl8.6
+libtcl8.6
+libtcl8.6:amd64
+x11vnc
+fonts-dejavu
+fonts-dejavu-extra
+stopwatch
+tk8.6-blt2.5
+blt
+tcllib

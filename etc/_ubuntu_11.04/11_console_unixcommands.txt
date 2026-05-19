@@ -1,0 +1,9 @@
+[11_CONSOLE_UNIXCOMMANDS]
+time
+sqlite3
+socat
+# Application for converting some cd formats (.mdf) to iso
+iat
+# Shell!
+csh
+tcsh

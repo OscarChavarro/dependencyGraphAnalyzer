@@ -1,0 +1,16 @@
+[34_CUPS_SAMBA_PYTHON]
+libsmbclient
+libsmbclient:amd64
+samba-libs
+samba-libs:amd64
+python3-talloc
+python3-talloc:amd64
+python3-ldb
+smbclient
+samba
+samba-common-bin
+python3-samba
+python3-tdb
+python3-dnspython
+samba-vfs-modules
+samba-vfs-modules:amd64

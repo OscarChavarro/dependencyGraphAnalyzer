@@ -1,0 +1,12 @@
+[52_QT_APPS]
+unetbootin
+unetbootin-translations
+qcad-data
+qcad-doc
+qcad
+stellarium
+stellarium-data
+nvclock-qt
+xxdiff
+fraqtive
+pdfedit

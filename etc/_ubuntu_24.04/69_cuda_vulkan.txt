@@ -1,0 +1,3 @@
+[69_CUDA_VULKAN]
+nvidia-prime
+nvidia-modprobe

@@ -1,0 +1,16 @@
+[73_QT_DEV]
+libsimde-dev
+qmake6:amd64
+qmake6-bin
+qmake6
+qt6-base-dev
+qt6-base-dev:amd64
+qt6-base-dev-tools
+libqt6concurrent6t64:amd64
+libqt6concurrent6t64
+libqt6sql6-sqlite:amd64
+libqt6sql6t64:amd64
+libqt6sql6-sqlite
+libqt6sql6t64
+libqt6test6t64:amd64
+libqt6test6t64

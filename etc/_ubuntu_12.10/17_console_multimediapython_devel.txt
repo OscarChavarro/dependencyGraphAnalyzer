@@ -1,0 +1,9 @@
+[17_CONSOLE_MULTIMEDIA_PYTHON_DEVEL]
+libesd0-dev
+libportmidi-dev
+libsphinx2-dev
+flite1-dev
+libsphinxbase-dev
+libestools2.1-dev
+libpocketsphinx-dev
+libesd0-dev:amd64

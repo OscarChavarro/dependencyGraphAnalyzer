@@ -1,0 +1,14 @@
+[48_MULTIMEDIA_PYTHON_DEV]
+libpulse-dev:amd64
+libpulse-dev
+libsdl1.2-dev
+libglib2.0-dev
+libglib2.0-dev-bin
+libglib2.0-dev:amd64
+libgstreamer-plugins-base1.0-dev
+libgstreamer-plugins-base1.0-dev:amd64
+libgstreamer1.0-dev
+libgstreamer1.0-dev:amd64
+libgudev-1.0-dev
+libgudev-1.0-dev:amd64
+python3-uritools

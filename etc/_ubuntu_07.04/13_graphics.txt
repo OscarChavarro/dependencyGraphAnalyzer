@@ -1,0 +1,12 @@
+[13_GRAPHICS]
+libpng12-0
+doxygen
+libjpeg62
+libexif12
+libsvga1
+libtiff4
+libungif4g
+libxvidcore4
+libjasper-1.701-1
+libmng1
+liblcms1

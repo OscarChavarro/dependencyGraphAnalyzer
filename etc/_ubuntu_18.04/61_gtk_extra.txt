@@ -1,0 +1,29 @@
+[61_GTK_EXTRA]
+# Software del gobierno de Espanna para tramites en linea
+configuradorfnmt
+# otros
+enchant
+libcanberra-gtk3-module
+libcanberra-gtk3-module:amd64
+wamerican
+librsvg2-bin
+hyphen-en-us
+mythes-en-us
+hunspell-en-us
+wbritish
+libscim8v5
+libscim8v5:amd64
+libcanberra-gtk-module:amd64
+libcanberra-gtk0:amd64
+libcanberra-gtk-module
+libcanberra-gtk0
+libcanberra-gtk0:i386
+libcanberra-gtk3-module:i386
+libcanberra-gtk-module:i386
+libgail-common:amd64
+libgail-common
+libgail-common:i386
+libgail18:i386
+libgail18:amd64
+libgail18
+gir1.2-gtk-2.0

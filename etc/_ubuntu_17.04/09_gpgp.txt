@@ -1,0 +1,14 @@
+[09_GPGP]
+gnupg
+gnupg-agent
+gnupg-l10n
+gnupg1
+gnupg2
+dirmngr
+libassuan0
+libassuan0:i386
+libksba8
+libksba8:i386
+libnpth0
+libnpth0:i386
+pinentry-curses

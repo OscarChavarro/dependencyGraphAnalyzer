@@ -1,0 +1,10 @@
+[02_OPENGL]
+GL/gl.h
+GL/glu.h
+GL/glx.h
+GL/osmesa.h
+GL/glut.h
+OpenGL/gltypes.h
+OpenGL/gl.h
+OpenGL/glu.h
+GLUT/glut.h

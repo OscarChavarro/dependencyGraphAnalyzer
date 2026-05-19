@@ -1,0 +1,12 @@
+[67_ARDUINO]
+arduino
+arduino-builder
+arduino-core-avr
+arduino-ctags
+avrdude
+libftdi1
+libftdi1:amd64
+liblistserialsj-dev
+liblistserialsj-dev:amd64
+liblistserialsj1
+liblistserialsj1:amd64

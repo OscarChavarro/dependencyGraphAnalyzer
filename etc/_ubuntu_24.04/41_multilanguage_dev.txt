@@ -1,0 +1,14 @@
+[41_MULTILANGUAGE_DEV]
+libevent-dev
+libnuma-dev
+libnuma-dev:amd64
+libnl-3-dev
+libnl-3-dev:amd64
+libnl-route-3-dev
+libnl-route-3-dev:amd64
+libgfortran-13-dev:amd64
+libgfortran-13-dev
+gfortran
+gfortran-13
+gfortran-13-x86-64-linux-gnu
+gfortran-x86-64-linux-gnu

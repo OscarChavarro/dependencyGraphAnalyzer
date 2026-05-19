@@ -1,0 +1,14 @@
+[17_CONSOLE_HASKELL]
+# Haskell environment
+cabal-install
+ghc
+ghc-haddock
+ghc6
+ghc6-haddock
+ghc-prof
+libghc-gio-dev
+libghc-gio-prof
+libghc-mtl-dev
+libghc-mtl-prof
+libghc-transformers-dev
+libghc-transformers-prof

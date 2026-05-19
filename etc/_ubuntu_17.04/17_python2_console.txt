@@ -1,0 +1,16 @@
+[17_PYTHON2_CONSOLE]
+libpython2.7
+libpython2.7-minimal
+libpython2.7-minimal:i386
+libpython2.7-stdlib
+libpython2.7-stdlib:i386
+libpython2.7:i386
+python
+python2.7
+python2.7-minimal
+python-minimal
+python3-cffi-backend
+libpython-stdlib
+libpython-stdlib:i386
+python-gobject
+python-pysqlite2

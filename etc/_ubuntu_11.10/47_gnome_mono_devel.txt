@@ -1,0 +1,5 @@
+[47_GNOME_MONO_DEVEL]
+libgnome-keyring1.0-cil-dev
+libgnome2.0-cil-dev
+libgnome-vfs2.0-cil-dev
+libgnomepanel2.24-cil-dev

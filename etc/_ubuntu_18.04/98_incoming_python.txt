@@ -1,0 +1,9 @@
+[98_INCOMING_PYTHON]
+python3-sip
+libboost-python1.65.1
+libboost-python1.65-dev
+libboost-python-dev
+python3-xapian
+apt-xapian-index
+kio-extras
+kio-extras-data

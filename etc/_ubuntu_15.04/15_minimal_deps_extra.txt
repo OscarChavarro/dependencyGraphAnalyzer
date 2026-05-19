@@ -1,0 +1,2 @@
+[15_MINIMAL_DEPS_EXTRA]
+debconf-i18n

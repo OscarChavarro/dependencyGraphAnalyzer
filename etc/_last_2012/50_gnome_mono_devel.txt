@@ -1,0 +1,25 @@
+[50_GNOME_MONO_DEVEL]
+# Gnome control center (linux control panel)
+mousetweaks
+libgnome-control-center1
+ubuntu-docs
+edubuntu-docs
+# Other
+awn-applets-all
+awn-applet-related
+awn-applet-cpufreq
+mutter
+unity-2d-launcher
+unity-2d-panel
+unity-2d-places
+unity-2d-spread
+indicator-me
+avant-window-navigator
+awn-settings
+awn-applet-yama
+gnome-applets-dbg
+gnome-panel-dbg
+unity-place-applications
+unity-place-files
+unity-2d
+unity-2d-shell

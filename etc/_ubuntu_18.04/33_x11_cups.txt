@@ -1,0 +1,14 @@
+[33_X11_CUPS]
+cups
+cups-filters
+cups-core-drivers
+cups-filters-core-drivers
+poppler-utils
+pstoedit
+libpstoedit0c2a
+colord
+colord-data
+libsane1
+libsane1:amd64
+libsane-common
+libsane1:i386

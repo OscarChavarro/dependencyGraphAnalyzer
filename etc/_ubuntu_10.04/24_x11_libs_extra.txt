@@ -1,0 +1,14 @@
+[24_X11_LIBS_EXTRA]
+libgraphviz4
+libmagickcore2
+libpoppler-glib4
+libsdl1.2debian-alsa
+libmagickwand2
+libsdl1.2debian
+libxklavier15
+libpulse0
+libwmf0.2-7
+libaudio2
+dvipdfmx
+libspectre1
+xulrunner-1.9.1

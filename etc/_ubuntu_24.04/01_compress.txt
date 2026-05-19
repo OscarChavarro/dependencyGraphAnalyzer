@@ -1,0 +1,68 @@
+[01_COMPRESS]
+# linux from scratch (0101): attr
+libattr1
+libattr1:amd64
+# linux from scratch (0102): acl
+libacl1
+libacl1:amd64
+# linux from scratch (0103): tar
+tar
+# linux from scratch (0104, DEB_BUILD_OPTIONS=nocheck): libzstd1
+libzstd1
+libzstd1:amd64
+# linux from scratch (0105): zlib1g
+zlib1g
+zlib1g:amd64
+# linux from scratch (0106): bzip2
+bzip2
+libbz2-1.0
+libbz2-1.0:amd64
+# linux from scratch (0107): liblzma5
+xz-utils
+liblzma5
+liblzma5:amd64
+# linux from scratch (0108): lzma
+# linux from scratch (0109): dpkg
+dpkg
+# linux from scratch (0110): lz4
+liblz4-1
+liblz4-1:amd64
+# linux from scratch (0111): texinfo
+# linux from scratch (0112): gzip
+gzip
+# linux from scratch (0113): zip
+zip
+# linux from scratch (0114): unzip
+unzip
+# linux from scratch (0115 sudo?): rar
+# linux from scratch (0116): unrar
+# linux from scratch (0117): p7zip
+# Other
+install-info
+zstd
+liblzo2-2
+liblzo2-2:amd64
+info
+libdeflate0
+libdeflate0:amd64
+libdeflate0:i386
+libbrotli1
+libbrotli1:amd64
+squashfs-tools
+cpio
+# To review if it is fundamental
+7zip
+autopoint
+libx32z1
+lzma
+p7zip-full
+pigz
+rar
+unrar
+zlib1g:i386
+libbz2-1.0:i386
+libbrotli1:i386
+libzstd1:i386
+liblzma5:i386
+libzzip-0-13t64
+libzzip-0-13t64:amd64

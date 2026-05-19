@@ -1,0 +1,2 @@
+[30_GDAL_EXTRA]
+proj-bin

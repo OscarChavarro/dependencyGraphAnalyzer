@@ -1,0 +1,97 @@
+[02_FS]
+# Linux from scratch: init-system-helpers
+init-system-helpers
+# linux from scratch (0125): perl
+liblocale-gettext-perl
+# linux from scratch: coreutils
+coreutils
+# Linux from scratch: util-linux
+libblkid1
+libblkid1:amd64
+libmount1
+libmount1:amd64
+libsmartcols1
+libsmartcols1:amd64
+libuuid1
+libuuid1:amd64
+libuuid1:i386
+mount
+util-linux
+bsdutils
+# Linux from scratch: fuse
+fuse3
+libfuse3-3
+libfuse3-3:amd64
+# Linux from scratch: sed
+sed
+# Linux from scratch: e2fsprogs
+e2fsprogs
+libss2
+libss2:amd64
+# Linux from scratch: file
+file
+libmagic-mgc
+# Linux from scratch: ntfs-3g
+ntfs-3g
+# Linux from scratch: dosfstools
+dosfstools
+# Linux from scratch: lvm2
+dmsetup
+libdevmapper1.02.1
+libdevmapper1.02.1:amd64
+# Linux from scratch: debianutils
+debianutils
+# linux from scratch: sensible-utils
+sensible-utils
+# linux from scratch: ucf
+ucf
+# Minimal shells
+bash
+dash
+# Other
+logsave
+xml-core
+sgml-base
+lsof
+libxml2
+libxml2:amd64
+xfsprogs
+libinih1
+libinih1:amd64
+liblvm2cmd2.03
+liblvm2cmd2.03:amd64
+lvm2
+dmeventd
+libdevmapper-event1.02.1
+libdevmapper-event1.02.1:amd64
+libfdisk1
+libfdisk1:amd64
+fdisk
+libext2fs2t64
+libext2fs2t64:amd64
+libmagic1t64
+libmagic1t64:amd64
+libaio1t64
+libaio1t64:amd64
+libicu74
+libicu74:amd64
+libtirpc3t64
+libtirpc3t64:amd64
+libntfs-3g89t64
+libntfs-3g89t64:amd64
+liburcu8t64
+liburcu8t64:amd64
+libelf1t64
+libelf1t64:amd64
+libelf1t64:i386
+db-util
+db5.3-util
+mtools
+tofrodos
+libicu74:i386
+libxml2:i386
+libxml2-utils
+libmunge2:amd64
+libmunge2
+libcue2:amd64
+libcue2

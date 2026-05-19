@@ -1,0 +1,27 @@
+[59_WX_DEVEL]
+# others
+rapidsvn
+libwxbase2.8-dev
+libwxgtk2.8-dev
+wx2.8-headers
+codeblocks-contrib
+codeblocks-contrib-dbg
+codeblocks-dbg
+codeblocks-dev
+codeblocks
+codeblocks-common
+codeblocks-contrib-common
+libcodeblocks0
+libsuitesparse-dev
+libqrupdate-dev
+libqhull-dev
+libglpk-dev
+libarpack2-dev
+libsvncpp3
+octave3.2-headers
+libwxsmithlib0
+python-gamera-dbg
+# Scanner frontend
+hplip-gui
+xsane
+xsane-common

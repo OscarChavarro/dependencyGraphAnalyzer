@@ -1,0 +1,43 @@
+[15_MINIMAL_DEPS_EXTRA]
+opensp
+libosp5
+libyaml-0-2
+libyaml-0-2:amd64
+libyaml-0-2:i386
+# linux from scratch: gnutls28
+libgnutls-dane0
+libgnutls-dane0:amd64
+libunbound2
+libunbound2:amd64
+# linux from scratch: gcc
+cpp-8
+libubsan1
+libubsan1:amd64
+# Other
+libgnat-8
+libgnat-8:amd64
+libgnatvsn8
+libgnatvsn8:amd64
+libasan5
+libasan5:amd64
+chrpath
+debian-keyring
+diffstat
+libcunit1
+libcunit1:amd64
+libfl2
+libfl2:amd64
+libomxil-bellagio0
+libomxil-bellagio-bin
+libz-mingw-w64
+rdfind
+swig
+swig3.0
+symlinks
+protobuf-compiler
+libprotoc10
+libprotoc10:amd64
+libpfm4:amd64
+nodejs-mozilla
+libpfm4
+libfl2:i386

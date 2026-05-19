@@ -1,0 +1,6 @@
+[89_TAKINA_APPS_EXTRAREPOS]
+# deb http://download.virtualbox.org/virtualbox/debian lucid non-free
+virtualbox-3.1
+linux-headers
+pdf-viewer
+libgl1

@@ -1,0 +1,32 @@
+[35_GTK_GIR]
+# Onboard keyboard for inputing text from locator devices
+onboard
+# Libraries
+libseed-gtk3-0
+# Gir modules
+gir1.2-v-sim-1.0
+gir1.2-mutter-3.0
+gir1.0-mutter-2.31
+gir1.0-clutter-1.0
+gir1.2-clutter-1.0
+gir1.2-gcr-3
+gir1.0-gtk-2.0
+gir1.2-vte-0.0
+gir1.2-vte-2.90
+gir1.2-gtk-2.0
+gir1.2-gtk-3.0
+gir1.2-javascriptcoregtk-3.0
+gir1.2-caribou-1.0
+gir1.2-wnck-3.0
+gir1.2-appindicator3-0.1
+gir1.2-peas-1.0
+gir1.2-panelapplet-3.0
+gir1.2-panelapplet-4.0
+gir1.2-dbusmenu-gtk-0.4
+gir1.2-ebook-1.2
+gir1.2-ecalendar-1.2
+gir1.2-edataserver-1.2
+gir1.2-nautilus-3.0
+gir1.2-cryptui-0.0
+gir1.2-appindicator-0.1
+gir1.2-notify-0.7

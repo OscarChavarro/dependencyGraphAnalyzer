@@ -1,0 +1,26 @@
+[06_COMMANDLINE_MINIMAL]
+# Criteria to put packages here: when trying to unisntall them, ubuntu asks:
+# "I am aware that this is a very bad idea"
+bash-completion
+diffutils
+findutils
+grep
+hostname
+htop
+less
+nano
+sudo
+time
+eject
+vim-common
+vim-tiny
+xxd
+tcsh
+csh
+zsh
+zsh-common
+# sudo get-edid | parse-edid # Read VGA VESA EDID information from monitor
+read-edid
+libx86-1
+libx86-1:amd64
+libx86-1:i386

@@ -1,0 +1,26 @@
+[96_JAVA]
+# The only valid java engine is SUN/Oracle SDK. Do NOT use gjc
+# JDK
+openjdk-7-source
+openjdk-7-doc
+openjdk-7-demo
+openjdk-7-jdk
+openjdk-7-dbg
+default-jdk
+libatk-wrapper-java
+libatk-wrapper-java-jni
+# JRE
+openjdk-7-jre
+openjdk-7-jre-zero
+libaccess-bridge-java-jni
+icedtea-netx
+libaccess-bridge-java
+icedtea-7-jre-cacao
+icedtea-7-jre-jamvm
+openjdk-7-jre-lib
+default-jre
+default-jre-headless
+openjdk-7-jre-headless
+tzdata-java
+java-common
+ca-certificates-java

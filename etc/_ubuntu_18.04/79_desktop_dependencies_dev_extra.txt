@@ -1,0 +1,7 @@
+[79_DESKTOP_DEPENDENCIES_DEV_EXTRA]
+libnotify-dev
+libnotify-dev:amd64
+libsecret-1-dev
+libsecret-1-dev:amd64
+libfluidsynth-dev
+libfluidsynth-dev:amd64

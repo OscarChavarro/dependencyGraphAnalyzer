@@ -1,0 +1,111 @@
+[01_ENCRYPT]
+# Ugly hack: libssl1.1 is here to support an old version of mongo, in order to run on old CPUs with no AVX instructions
+libssl1.1:amd64
+libssl1.1
+# linux from scratch (0001): glibc-2.27
+# linux from scratch (0118 PYTHON2 BUILD ISSUE, build on minimal/clean ubuntu environment): libcap-ng0
+libcap-ng0
+libcap-ng0:amd64
+# linux from scratch (0119 "dpkg-buildpackage -b -j24" on minimal/clean): audit
+libaudit1
+libaudit1:amd64
+libaudit-common
+# linux from scratch (0120 PYTHON2 BUILD ISSUE, build on minimal/clean ubuntu environment): libsemanage1
+libsemanage2
+libsemanage2:amd64
+libsemanage-common
+# linux from scratch (0121): libgpg-error
+libgpg-error0
+libgpg-error0:amd64
+libgpg-error0:i386
+# linux from scratch (0122): libgcrypt20
+libgcrypt20
+libgcrypt20:amd64
+libgcrypt20:i386
+# linux from scratch (0123): gnupg1
+gpgv1
+# linux from scratch (0124): gnupg2
+gpgv
+gpgv2
+# linux from scratch (0125 *** Problematic build ***): perl
+perl-base
+# linux from scratch (0126): debconf
+debconf
+# Linux from scratch (0127): openssl
+openssl
+libssl3
+libssl3:amd64
+libssl3:i386
+# Linux from scratch (0129): ca-certificates
+ca-certificates
+# linux from scratch (0130): pam
+libpam-modules
+libpam-modules:amd64
+libpam-modules-bin
+libpam0g
+libpam0g:amd64
+# linux from scratch (0131): libdb53
+libdb5.3
+libdb5.3:amd64
+# linux from scratch (0132 dpkg-buildpackage -nc -uc -us -b -j24, build on minimal/clean ubuntu environment): shadow
+passwd
+# linux from scratch (0133): ubuntu-keyring
+ubuntu-keyring
+# Linux from scratch: base-files
+base-files
+# Other, new dependencies for Ubuntu 22.04 that previously were at higher levels
+libnsl2
+libnsl2:amd64
+libnsl2:i386
+libtirpc3
+libtirpc3:amd64
+libtirpc3:i386
+libtirpc-common
+libgssapi-krb5-2
+libgssapi-krb5-2:amd64
+libgssapi-krb5-2:i386
+libcom-err2
+libcom-err2:amd64
+libcom-err2:i386
+libk5crypto3
+libk5crypto3:i386
+libk5crypto3:amd64
+libkrb5-3:i386
+libkrb5-3
+libkrb5-3:amd64
+libkrb5support0
+libkrb5support0:amd64
+libkrb5support0:i386
+libkeyutils1
+libkeyutils1:amd64
+libkeyutils1:i386
+libcap2
+libcap2:amd64
+locales
+locales-all
+bubblewrap
+libgsoap-2.8.117
+libgsoap-2.8.117:amd64
+libssh2-1
+libssh2-1:amd64
+libmbedcrypto7
+libmbedcrypto7:amd64
+libmbedtls14
+libmbedtls14:amd64
+libmbedx509-1
+libmbedx509-1:amd64
+libssh-gcrypt-4
+libssh-gcrypt-4:amd64
+libnss3
+libnss3:amd64
+libnss-mdns
+libnss-mdns:amd64
+libnss-nis
+libnss-nis:i386
+libnss-nisplus
+libnss-nisplus:i386
+libnspr4
+libnspr4:amd64
+libsqlite3-0
+libsqlite3-0:amd64
+libc-l10n

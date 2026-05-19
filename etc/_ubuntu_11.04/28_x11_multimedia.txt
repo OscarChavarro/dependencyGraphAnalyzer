@@ -1,0 +1,83 @@
+[28_X11_MULTIMEDIA]
+# pulseaudio
+pulseaudio-utils
+gstreamer0.10-pulseaudio
+libpulse0
+libpulsecore9
+libpulse-mainloop-glib0
+libpulse-browse0
+# ffmpeg
+ffmpeg
+ffmpeg2theora
+# Others
+libaudio2
+google-gadgets-gst
+google-gadgets-common
+libggadget-1.0-0b
+libggadget-1.0-0
+gstreamer0.10-x
+# Nearly text
+gstreamer0.10-nice
+libmjpegtools-1.9
+libvlccore2
+libvlc2
+libass3
+sane-utils
+libopenal1
+libvdpau1
+# Nearly text
+libalut0
+assaultcube
+assaultcube-data
+maelstrom
+rocksndiamonds
+tome
+# SDL
+libsdl-ttf2.0-0
+libsdl-image1.2
+libsdl-pango1
+libsdl-gfx1.2-4
+libsdl-net1.2
+libavifile-0.7c2
+libsane
+fceu
+gnuboy-sdl
+lgeneral 
+powder
+ri-li-data
+ri-li
+gstreamer0.10-sdl
+libopal3.6.1
+libopal3.6.4
+libopal3.6.6
+libsmpeg0
+libsdl-mixer1.2
+libdevil1c2
+libopenthreads12
+libgdal1-1.6.0
+libcegui-mk2-1
+# Not showing multimedia dependencies in simple analysis, but can see it on
+# apt-get build-dep
+snes9x-x
+# ffmpeg
+# vlc
+libvlc5
+libvlccore4
+# xine
+libxine1-x
+libxine1-console
+# other
+libpt2.6.4-plugins
+libpt2.6.5-plugins
+libpt2.6.1-plugins-alsa
+libpt2.6.1-plugins-v4l2
+libpt2.6.1
+libpt2.6.4
+libpt2.6.5
+libxmmsclient6
+libxmmsclient-glib1
+libunicap2
+libgnome2-gconf-perl
+libva-glx1
+libva-tpi1
+libzbar0

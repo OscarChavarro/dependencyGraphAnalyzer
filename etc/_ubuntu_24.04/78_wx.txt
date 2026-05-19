@@ -1,0 +1,17 @@
+[78_WX]
+audacity
+audacity-data
+libflac++10:amd64
+libportsmf0t64:amd64
+libsbsms10:amd64
+libsuil-0-0:amd64
+libvamp-hostsdk3v5:amd64
+libwxbase3.2-1t64:amd64
+libwxgtk3.2-1t64:amd64
+libflac++10
+libportsmf0t64
+libsbsms10
+libsuil-0-0
+libvamp-hostsdk3v5
+libwxbase3.2-1t64
+libwxgtk3.2-1t64

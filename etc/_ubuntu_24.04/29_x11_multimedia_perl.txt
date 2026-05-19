@@ -1,0 +1,13 @@
+[29_X11_MULTIMEDIA_PERL]
+libgraphics-magick-perl
+libinline-perl
+libparse-recdescent-perl
+libpegex-perl
+libxxx-perl
+libyaml-pp-perl
+libfile-desktopentry-perl
+libfile-basedir-perl
+libipc-system-simple-perl
+libfile-mimeinfo-perl
+libjson-pp-perl
+libgraphicsmagick-q16-3t64

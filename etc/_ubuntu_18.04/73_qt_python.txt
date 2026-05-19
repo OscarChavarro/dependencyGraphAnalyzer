@@ -1,0 +1,3 @@
+[73_QT_PYTHON]
+vlc-plugin-samba
+vlc-plugin-samba:amd64

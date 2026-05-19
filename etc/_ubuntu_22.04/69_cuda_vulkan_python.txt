@@ -1,0 +1,9 @@
+[69_CUDA_VULKAN_PYTHON]
+cuda
+cuda-12-2
+cuda-demo-suite-12-2
+cuda-runtime-12-2
+cuda-drivers
+cuda-drivers-535
+nvidia-settings
+screen-resolution-extra

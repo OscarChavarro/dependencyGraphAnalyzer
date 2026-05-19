@@ -1,0 +1,10 @@
+[62_GTK_EXTRA2]
+libfm4
+libunique-1.0-0
+lxpolkit
+synaptic
+xdg-user-dirs-gtk
+libwmf0.2-7-gtk
+libgtk-3-bin
+libgtk2.0-bin
+xdg-user-dirs

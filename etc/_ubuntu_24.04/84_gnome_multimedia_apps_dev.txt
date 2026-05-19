@@ -1,0 +1,2 @@
+[84_GNOME_MULTIMEDIA_APPS_DEV]
+pitivi

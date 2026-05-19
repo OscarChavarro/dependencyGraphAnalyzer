@@ -1,0 +1,12 @@
+[17_PYTHON3_CONSOLE]
+command-not-found
+command-not-found-data
+python3-commandnotfound
+python3-gdbm
+python3-gdbm:i386
+python3-pip
+python-pip-whl
+youtube-dl
+python3-pkg-resources
+python3-apt
+python-apt-common

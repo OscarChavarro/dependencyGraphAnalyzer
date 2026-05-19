@@ -1,0 +1,7 @@
+[40_COMPRESS_ENCRYPT_DEV]
+uuid-dev
+uuid-dev:amd64
+liblzma-dev
+liblzma-dev:amd64
+libdeflate-dev
+libdeflate-dev:amd64

@@ -1,0 +1,197 @@
+[94_TAKINA_APPS_COMPLEX_DEVEL]
+# Depending on mono, gnome, glut
+libtaoframework-freeglut-cil-dev
+libtaoframework-opengl-cil-dev
+# gtk + multimedia
+lxpanel-indicator-applet-plugin
+lxpanel
+# Depending on WX & GNOME
+playonlinux
+harpia
+# Depending on QT & GNOME
+gnunet-tools
+gnunet-gtk
+gnunet-dev
+gnunet-common
+gnunet-client
+gnunet-server
+libtelepathy-qt4-dev
+# RARE!
+linux-headers-2.6.37.2-customsmall
+# Kernel devel, X11 server
+virtualbox-guest-utils
+virtualbox-guest-dkms
+virtualbox-guest-x11
+# Requiring GNUstep + X11 fonts
+gtamsanalyzer.app
+gdm-guest-session
+# This group contains packages that depends on several subsystems and are not
+# easyly classified.
+# Depending on mono + X11 + multimedia
+libtaoframework-freeglut2.4-cil
+cairo-dock-dev
+cairo-dock-core
+cairo-dock-plug-ins
+cairo-dock-plug-ins-integration
+cairo-dock
+# Depending on perl & python
+python-argparse-doc
+goplay
+ept-cache
+sphinxbase-utils
+moc
+apt-clone
+i3-wm-dbg
+i3-wm
+i3
+i3lock
+i3status
+# Depending on perl & X11 server
+tightvncserver
+gnome-office
+# Wine and wine-based applications
+wine-gecko
+wisotool
+pq
+wine
+wine1.2
+wine1.3
+wine1.2-gecko
+wine1.3-gecko
+wine1.4
+wine1.4-amd64
+wine1.4-common
+wine1.4-i386
+winetricks
+wine-gecko1.4:amd64
+wine-gecko1.4:i386
+wine-gecko1.4
+wine1.5
+amsn
+# Depending on WX & X11server side
+filezilla
+filezilla-common
+# Depending on WX & QT
+qtoctave
+# Depending on WX & GNOME
+accerciser
+wxmaxima
+ardour
+libtelepathy-qt4-farsight0
+libtelepathy-qt4-farsight1
+# Others
+tvtime
+latex2html
+ezgo-tasks
+junior-arcade
+junior-games-net
+junior-games-text
+yofrankie
+python-tunepimp
+listen
+# gtk + python
+papaya
+# gtk + perl + python + multimedia
+arandr
+mpg321
+libaudio-scrobbler-perl
+libconfig-inifiles-perl
+#
+context-modules
+context
+python-pydoctor
+python-epydoc
+hevea
+hevea-doc
+python-twill
+texlive-pstricks
+translate-docformat
+linuxdoc-tools-latex
+moovida-plugins-ugly
+moovida
+moovida-plugins-bad
+moovida-plugins-good
+python-moovida
+asymptote
+asymptote-doc
+cairo-dock-plug-ins:amd64
+cairo-dock-plug-ins-dbus-interface-python
+cairo-dock-plug-ins-integration:amd64
+prosper
+texlive-latex-recommended
+jadetex
+latex-xcolor
+lyx
+lyx-common
+maxima-emacs
+pgf
+texlive
+texlive-latex-extra
+docbook-utils
+doxygen-doc
+doxygen-latex
+doxygen
+dblatex
+debiandoc-sgml
+latex-beamer
+sketch
+texlive-pictures
+texlive-pictures-doc
+kde-full
+kde-standard
+plasma-widget-networkmanagement
+network-manager-kde
+hplip-gui
+account-plugin-facebook
+account-plugin-flickr
+account-plugin-google
+account-plugin-identica
+account-plugin-twitter
+account-plugin-windows-live
+gwibber
+gwibber-service
+gwibber-service-facebook
+gwibber-service-identica
+gwibber-service-twitter
+# Image viewers
+shotwell
+unity-lens-gwibber
+unity-lens-photos
+unity-scope-gdocs
+# Social networking
+libgwibber0
+libgwibber1
+libgwibber2
+libgwibber3
+libgwibber-gtk2
+libgwibber-gtk3
+libmarble-dev
+libtaoframework-sdl-cil-dev
+libpurple-dev
+pidgin-dev
+pidgin-libnotify
+pidgin-otr
+network-manager
+network-manager-pptp
+pidgin
+libnm-gtk0
+network-manager-gnome
+network-manager-pptp-gnome
+gnome-control-center-data
+gnome-control-center
+gnome-bluetooth
+gnome-control-center-signon
+gnome-media
+gnome-media-common
+gnome-online-accounts
+indicator-datetime
+indicator-power
+gnome-user-share
+libaccount-plugin-1.0-0
+inkscape
+qimo-games
+activity-log-manager-control-center
+file-roller
+gedit-dev
+libfolks-telepathy-dev
+nautilus-share

@@ -1,0 +1,17 @@
+[99_PROHIBITED_JAVA_DAEMONS]
+# Depending upon servlets and application containers
+gis-osm
+eclipse-jdt
+eclipse-pde
+eclipse
+eclipse-platform-data
+eclipse-platform
+libtomcat7-java
+libtomcat5.5-java
+libtomcat6-java
+libspring-context-java
+libspring-instrument-java
+libspring-transaction-java
+libspring-jdbc-java
+osmosis
+glassfish-javaee

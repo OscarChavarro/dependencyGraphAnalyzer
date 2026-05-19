@@ -1,0 +1,3 @@
+[46_CUDA_VULKAN_DEV_EXTRA]
+libplacebo-dev
+libplacebo-dev:amd64

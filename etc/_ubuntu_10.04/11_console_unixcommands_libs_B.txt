@@ -1,0 +1,14 @@
+[11_CONSOLE_UNIXCOMMANDS_BASICLIBS_LIBC]
+# Basic commands depending on libc only
+dosfstools
+iptables
+iputils-ping
+iputils-tracepath
+locales
+lsof
+mawk
+time
+strace
+# Libraries depending on libc only
+libgif4
+openssl

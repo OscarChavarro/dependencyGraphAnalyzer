@@ -1,0 +1,136 @@
+[17_CONSOLE_BASIC_DEVEL3_LANGUAGES]
+# Assemblers
+nasm
+yasm
+# Fortran based applications and libraries
+libmopac7-1gf
+liblinear-tools
+liblinear1
+nmap
+libatlas3-base
+libparpack2
+libnetcdfc++4
+libnetcdf6
+libnetcdfc7
+libarmadillo3
+liblapack3gf
+liblapack3
+hdf5-tools
+libhdf5-openmpi-1.6.6-0
+libhdf4-0
+libhdf5-doc
+libhdf5-7
+nec
+libf2c2
+libf2c2-dev
+libkernlib1-gfortran
+# Fortran environment
+gfortran-4.6-multilib
+libpacklib1-gfortran
+libgfortran3
+libgfortran3-dbg
+lib32gfortran3
+lib32gfortran3-dbg
+f2c
+fort77
+cfortran
+gfortran
+gfortran-4.5
+gfortran-4.6
+gfortran-4.7
+gfortran-4.7-multilib
+gfortran-4.6-doc
+gfortran-4.7-doc
+gfortran-4.5-doc
+gfortran-doc
+libgfortran3:amd64
+libgfortran3-dbg:amd64
+libkernlib1-dev
+libpacklib1-dev
+cernlib-base-dev
+# Pascal environment
+fp-docs
+fp-docs-2.4.4
+fp-ide-2.6.0
+fp-compiler-2.6.0
+fp-docs-2.6.0
+fp-units-base-2.6.0
+fp-units-fcl-2.6.0
+fp-units-rtl-2.6.0
+fp-utils-2.6.0
+fp-ide-2.4.4
+fp-utils-2.4.4
+fp-compiler-2.4.4
+fp-units-rtl-2.4.4
+fp-units-base-2.4.4
+fp-units-fcl-2.4.4
+fp-compiler
+fp-ide
+fp-units-rtl
+fp-units-base
+fp-units-fcl
+fp-utils
+# TCL environment
+tcl8.4-dev
+tcl8.5-dev
+tcl-dev
+# Ocaml
+ocaml-native-compilers
+ocaml-nox
+ocaml-interp
+camlp4
+ledit
+libfindlib-ocaml
+libfindlib-ocaml-dev
+ocaml-findlib
+dh-ocaml
+libapron-ocaml-dev
+libapron
+libapron-dev
+libapron-ocaml
+libmpfr-dev:amd64
+libmpfr-dev
+libmpc-dev:amd64
+libmpc-dev
+libppl0.11-dev:amd64
+libppl0.10-dev
+# LUA
+liblualib50-dev
+liblua50-dev
+# PHP
+php5-dev
+php-doc
+phpunit-doc
+php5-cli
+php5-common
+# Lisp
+gcl-doc
+gnu-smalltalk
+gnu-smalltalk-common
+# Smalltalk
+gnu-smalltalk-doc
+# Generic compiler tools
+llvm-2.9
+llvm-2.9-runtime
+llvm-2.9-dev
+libffi-dev
+libffi-dev:amd64
+# Google GO
+libgo0
+lib32go0
+lib32go0-dbg
+libgo0-dbg
+libgo0:amd64
+libgo0-dbg:amd64
+gccgo-4.7
+gccgo-4.7-multilib
+gccgo-4.6-multilib
+# JavaScript
+libnspr4-dev
+libmozjs185-dev
+# Others languages support
+gcc-4.6-plugin-dev
+gcc-4.7-plugin-dev
+libgmp-dev
+libgmp3-dev
+libppl0.11-dev

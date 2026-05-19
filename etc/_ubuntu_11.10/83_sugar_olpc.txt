@@ -1,0 +1,23 @@
+[83_SUGAR_OLPC]
+python-sugar-0.90
+python-sugar-toolkit-0.90
+sugar-artwork-0.90
+sugar-emulator-0.90
+sugar-pippy-activity
+sugar-presence-service-0.90
+sugar-session-0.90
+sugar-tools-0.90
+sugar-turtleart-activity
+sugar-0.90
+sugar-session
+sucrose-0.90
+python-carquinyol-0.90
+python-jarabe-0.90
+# lower dependencies
+libhippocanvas-1-0
+python-cjson
+python-box2d
+python-box2d-doc
+python-hippocanvas
+python-carquinyol
+turtleart

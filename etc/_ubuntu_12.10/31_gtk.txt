@@ -1,0 +1,15 @@
+[31_GTK]
+libgail18
+libgail18:amd64
+libgail18:i386
+libgail-common
+libgail-common:amd64
+libgail-common:i386
+libgtk2.0-0
+libgtk2.0-0:amd64
+libgtk2.0-0:i386
+libgtk2.0-bin
+libgtk2.0-common
+gtk2-engines-pixbuf
+gtk2-engines-pixbuf:amd64
+gtk2-engines-pixbuf:i386

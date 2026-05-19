@@ -1,0 +1,78 @@
+[03_BOOT]
+# Linux from scratch: systemd
+udev
+systemd
+systemd-sysv
+# Linux from scratch: pam
+libpam-runtime
+# Linux from scratch: shadow
+login
+# Linux from scratch: apparmor
+apparmor
+libapparmor1
+libapparmor1:amd64
+# Linux from scratch: kmod
+kmod
+libkmod2
+libkmod2:amd64
+# Linux from scratch: libcap2
+libcap2-bin
+# Linux from scratch: argon2
+libargon2-1
+libargon2-1:amd64
+# Linux from scratch: json-c
+libjson-c5
+libjson-c5:amd64
+# Linux from scratch: cryptsetup
+libcryptsetup12
+libcryptsetup12:amd64
+# Linux from scratch: iptables
+libip4tc2
+libip4tc2:amd64
+# Linux from scratch: procps
+procps
+# Linux from scratch: xkeyboard-config
+xkb-data
+# Linux from scratch: console-setup
+keyboard-configuration
+console-setup
+console-setup-linux
+console-setup-mini
+# Linux from scratch: kbd
+kbd
+# Linux from scratch: sysvinit
+init
+sysvinit-utils
+# Linux from scratch: cdebconf
+cdebconf
+# Linux from scratch: gettext
+gettext-base
+# Others
+mawk
+libslang2
+libslang2:amd64
+libnewt0.52
+libnewt0.52:amd64
+net-tools
+acpid
+libnss-systemd
+libnss-systemd:amd64
+systemd-hwe-hwdb
+libproc2-0
+libsystemd-shared:amd64
+libproc2-0:amd64
+libsystemd-shared
+mdadm
+open-iscsi
+libopeniscsiusr
+libisns0t64
+libisns0t64:amd64
+systemd-dev
+systemd-standalone-sysusers
+# linux from scratch: lsb
+lsb-base
+systemd-resolved
+systemd-timesyncd
+apparmor-profiles
+language-pack-en
+language-pack-en-base

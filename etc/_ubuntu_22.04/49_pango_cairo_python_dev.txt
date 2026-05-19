@@ -1,0 +1,13 @@
+[49_PANGO_CAIRO_PYTHON_DEV]
+libpango1.0-dev
+libpango1.0-dev:amd64
+libcairo2-dev
+libcairo2-dev:amd64
+libatk-bridge2.0-dev
+libatk-bridge2.0-dev:amd64
+libatk1.0-dev
+libatk1.0-dev:amd64
+libatspi2.0-dev
+libharfbuzz-dev
+libharfbuzz-dev:amd64
+libatspi2.0-dev:amd64

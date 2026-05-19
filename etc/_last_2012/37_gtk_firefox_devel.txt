@@ -1,0 +1,20 @@
+[37_GTK_FIREFOX_DEVEL]
+python3-aptdaemon.gtk3widgets
+software-properties-gtk
+# Video anotation software
+advene
+# Firefox & flash plugin (Problematic: Depending on automatic update software)
+firefox-mozsymbols
+firefox-3.0
+firefox-3.0-branding
+firefox-3.5
+firefox-3.5-branding
+firefox-branding
+xul-ext-ubufox
+ubufox
+firefox
+firefox-dbg
+firefox-dev
+firefox-globalmenu
+firefox-3.5-gnome-support
+firefox-gnome-support

@@ -1,0 +1,15 @@
+[09_MULTILANGUAGE_LLVM_EXTRA]
+libruby
+libruby3.2
+libruby3.2:amd64
+libruby:amd64
+ruby
+ruby-net-telnet
+ruby-rubygems
+ruby-sdbm
+ruby-sdbm:amd64
+ruby-webrick
+ruby-xmlrpc
+ruby3.2
+rubygems-integration
+rake

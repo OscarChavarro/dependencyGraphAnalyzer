@@ -1,0 +1,4 @@
+[37_MULTIMEDIA_PYTHON_APPS]
+blender
+blender-data
+mplayer

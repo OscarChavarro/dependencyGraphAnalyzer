@@ -1,0 +1,36 @@
+[203_PROHIBITED]
+# This damages detection of sound devices!
+pipewire-pulse
+libcanberra-pulse
+libcanberra-pulse:amd64
+# Ubuntu group packages
+ubuntu-desktop
+ubuntu-desktop-minimal
+ubuntu-minimal
+ubuntu-server-minimal
+ubuntu-drivers-common
+# Packages not working, should install .tar version
+cudnn-local-repo-ubuntu2204-8.9.3.28
+software-properties-gtk
+update-notifier
+update-notifier-common
+apturl
+apturl-common
+update-manager
+update-manager-core
+nautilus-share
+ubuntu-release-upgrader-gtk
+ubuntu-release-upgrader-core
+libplymouth5
+libplymouth5:amd64
+plymouth
+plymouth-label
+plymouth-theme-spinner
+plymouth-theme-ubuntu-text
+ubuntu-server
+overlayroot
+landscape-common
+python3-twisted
+sosreport
+busybox-static
+iputils-tracepath

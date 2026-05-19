@@ -1,0 +1,140 @@
+[94_TAKINA_APPS_COMPLEX]
+# This group contains packages that depends on several subsystems and are not
+# easyly classified.
+# Depending on mono + X11 + multimedia
+libtaoframework-sdl1.2-cil
+libtaoframework-freeglut2.4-cil
+cairo-dock-dev
+cairo-dock-core
+cairo-dock-plug-ins
+cairo-dock-plug-ins-integration
+cairo-dock
+# Depending on perl & python
+python-argparse-doc
+scid
+goplay
+ept-cache
+aptitude
+sphinxbase-utils
+moc
+oem-config
+ubiquity
+apt-clone
+# Depending on perl & X11
+apparmor
+apparmor-utils
+i3-wm-dbg
+i3-wm
+i3
+i3lock
+i3status
+xsensors
+# Depending on perl & X11 server
+tightvncserver
+gnome-office
+simple-scan
+# Wine and wine-based applications
+wine-gecko
+wisotool
+gnome-exe-thumbnailer
+pq
+wine
+wine1.2
+wine1.3
+wine1.2-gecko
+wine1.3-gecko
+winetricks
+amsn
+transmission-gtk
+xchat
+xchat-common
+chromium-browser
+chromium-browser-inspector
+chromium-browser-l10n
+chromium-codecs-ffmpeg
+gpicview
+# Depending on WX & X11server side
+filezilla
+filezilla-common
+# Depending on WX & QT
+qtoctave
+# Depending on WX & GNOME
+accerciser
+wxmaxima
+# Depending on QT & GNOME
+checkbox-qt
+ardour
+libtelepathy-qt4-farsight0
+libtelepathy-qt4-farsight1
+lyx-common
+lyx
+vlc
+# Others
+pymol
+python-pmw
+tvtime
+latex2html
+gnome-games
+ezgo-tasks
+junior-arcade
+junior-games-gl
+junior-games-net
+junior-games-text
+junior-tasks
+tasksel
+tasksel-data
+mm3d
+blender
+blender-ogrexml
+yofrankie
+python-tunepimp
+listen
+# gtk + python
+papaya
+# gtk + perl + python + multimedia
+auctex
+arandr
+mpg321
+libaudio-scrobbler-perl
+libconfig-inifiles-perl
+#
+context
+texlive-metapost
+texlive-metapost-doc
+python-pydoctor
+python-epydoc
+feynmf
+texlive-extra-utils
+hevea
+hevea-doc
+python-twill
+doxygen-doc
+texlive-pstricks
+doxygen-latex
+doxygen
+asciidoc
+xmlto
+dblatex
+docbook-utils
+texlive-latex-extra
+texlive-latex-extra-doc
+texlive-pictures
+texlive-pictures-doc
+pgf
+translate-docformat
+jadetex
+texlive
+latex-xcolor
+linuxdoc-tools-latex
+texlive-latex-recommended
+prosper
+latex-beamer
+openprinting-ppds
+moovida-plugins-ugly
+debiandoc-sgml
+moovida
+moovida-plugins-bad
+moovida-plugins-good
+python-moovida
+asymptote
+asymptote-doc

@@ -1,0 +1,172 @@
+[99_PROHIBITED_MISC]
+# To remove, use "apt-get remove", no "aptitude purge", so groups don't
+# remove dependants
+# These are the free versions of flash, do not use, prefer original 32bit flash
+# player from package "flashplugin-installer"
+swfdec-mozilla
+swfdec-gnome
+browser-plugin-gnash
+gnash
+gnash-common
+libswfdec-0.8-0
+flashplugin-nonfree
+# Ubuntu included ATI Drivers - DOESN'T WORK - Replace with original ATI
+# drivers downloaded from ATI's website
+fglrx
+fglrx-amdcccle
+# Ubuntu included Nvidia drivers - DOESN'T WORK - Replace with original Nvidia
+# drivers downloaded from http://www.nvivia.com
+jockey-gtk
+jockey-common
+linux-restricted-modules-2.6.24-26-generic
+nvidia-kernel-common
+nvidia-cg-toolkit
+nvidia-173-modaliases
+nvidia-185-modaliases
+nvidia-96-modaliases
+nvidia-common
+nvidia-current-modaliases
+nvidia-180-kernel-source
+nvidia-180-libvdpau
+nvidia-180-modaliases
+nvidia-71-modaliases
+nvidia-glx-180
+nvidia-glx-180-dev
+nvidia-settings
+# Unwanted system / desktop behavior: caching systems -> busy RAM
+ubuntu-minimal
+readahead
+readahead-fedora
+ureadahead
+sreadahead
+# Unwanted system / desktop behavior: desktop search systems
+mlocate
+gnome-do
+gnome-do-plugins
+gnome-do-docklets
+# Unwanted system / server behavior: no needed - unnecesary daemons
+nanny
+# Unwanted system / desktop behavior: no needed - heavy desktop agent/services
+fast-user-switch-applet
+localepurge
+# Unwanted system / desktop behavior: spyware & non wanted publicity
+update-motd
+popularity-contest
+landscape-common
+# Unwanted system / desktop behavior: other/unsorted/unknown
+rhythmbox-ubuntuone-music-store
+apport-gtk
+# Unwanted system / desktop behavior: automatic software updates
+update-manager
+language-selector
+gnome-codec-install
+language-selector-gnome
+unity
+software-center
+update-notifier
+# Unstable: prevents gnome session from starting up (it halts it) on some
+# installations
+edubuntu-menueditor
+desktop-profiles
+# Conflicting versions
+# use newer versions
+libstdc++6-4.4-dev
+libstdc++6-4.4-doc
+libstdc++6-4.4-pic
+libstdc++6-4.4-dbg
+gobjc-4.4
+g++-4.1
+g++-4.3
+g++-4.4
+gcc-4.1
+gcc-4.2
+gcc-4.3
+gcc-4.4
+# use libgdchart-gd2-xpm instead
+libgdchart-gd2-noxpm
+# lpr conflicts with cups
+a2ps
+xfprint4
+lpr
+# use firefox
+mozilla-browser
+# use libgd2-xpm
+libgd2-noxpm
+# freeglut replaces old glutg3 (currently empty!)
+glutg3
+glutg3-dev
+# This lib breaks C++ toolchain
+libpcre++-dev
+# There are other versions "midtosmall"
+crafty-books-small
+# Conflict with pulseaudio sound infrastructure
+esound
+# Use virtualbox full version, not limited "ose" edition
+virtualbox-ose
+virtualbox-ose-guest-source
+virtualbox-ose-guest-utils
+virtualbox-ose-guest-x11
+virtualbox-ose-qt
+virtualbox-ose-source
+virtualbox-ose-dbg
+virtualbox-ose-dkms
+virtualbox-ose-fuse
+virtualbox-ose-guest-dkms
+# Applies only to linux installations on guested/emulated virtual environments
+virtualbox-guest-additions
+# Old version, use virtualbox-4.0
+virtualbox-3.2
+virtualbox-3.1
+virtualbox-3.0
+# Dependants on some of the above
+# Prefer the libsdl1.2debian-pulseaudio version
+libsdl1.2debian-alsa
+# Prefer newer versions of...
+libstdc++6-4.1-dev
+libstdc++6-4.3-dev
+libreadline5-dev
+# Others / unknown / untested / conflicting with other packages
+mame
+fam
+laptop-mode-tools
+libfam0
+libgpod4-nogtk
+mame-common
+myspell-en-us
+nautilus-cd-burner
+quanta
+quanta-data
+sdlmame
+ttf-ipafont-mincho
+xpdf-utils
+thunderbird
+gmameui
+language-support-en
+language-support-es
+e16
+e16-data
+# Old libboost versions
+libboost1.40-all-dev
+libboost1.40-dbg
+libboost1.40-doc
+libboost-date-time1.40.0
+libboost-date-time1.40-dev
+libboost-filesystem1.40-dev
+libboost-graph1.40.0
+libboost-graph1.40-dev
+libboost-iostreams1.40-dev
+libboost-math1.40.0
+libboost-math1.40-dev
+libboost-program-options1.40-dev
+libboost-python1.40-dev
+libboost-regex1.40-dev
+libboost-serialization1.40.0
+libboost-serialization1.40-dev
+libboost-signals1.40-dev
+libboost-system1.40-dev
+libboost-test1.40.0
+libboost-test1.40-dev
+libboost-thread1.40.0
+libboost-thread1.40-dev
+libboost-wave1.40.0
+libboost-wave1.40-dev

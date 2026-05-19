@@ -1,0 +1,8 @@
+[15_PYTHON3_EXTRA]
+python3-wadllib
+python3-lazr.uri
+python3-problem-report
+python3-yaml
+python3-cryptography
+python3-httplib2
+javascript-common

@@ -1,0 +1,2 @@
+[24_X11_MULTIMEDIA_EXTRA]
+libgphoto2-l10n

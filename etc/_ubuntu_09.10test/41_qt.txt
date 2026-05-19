@@ -1,0 +1,16 @@
+[41_QT]
+libqtcore4
+libqtgui4
+libqt3-mt
+libqt4-dbus
+libqt4-designer
+libqt4-network
+libqt4-opengl
+libqt4-phonon
+libqt4-qt3support
+libqt4-script
+libqt4-sql
+libqt4-sql-mysql
+libqt4-svg
+libqt4-webkit
+libqt4-xml

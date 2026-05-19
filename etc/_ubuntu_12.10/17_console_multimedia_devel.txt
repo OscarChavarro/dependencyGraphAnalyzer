@@ -1,0 +1,103 @@
+[17_CONSOLE_MULTIMEDIA_DEVEL]
+# ffmpeg-dev
+# Those packages are problematic. In order to develop ffmpeg based applications
+# you must:
+# 1. downgrade extra versions to basic versions
+# 2. install ffmpeg dev packages
+# 3. compile your applications
+# 4. uninstall ffmpeg dev packages
+# 5. re-upgrade system to extra versions
+libavcodec-dev
+libavformat-dev
+libavutil-dev
+libavdevice-dev
+libavfilter-dev
+libswscale-dev
+libpostproc-dev
+ffmpeg-doc
+# Others
+lib32v4l-dev
+libv4l-dev
+libaudiofile-dev:amd64
+libaudiofile-dev
+libraw1394-dev
+libraw1394-dev:amd64
+libdc1394-22-dev
+libdc1394-22-dev:amd64
+liba52-0.7.4-dev
+libgsm1-dev
+libschroedinger-dev
+libspeex-dev
+libtheora-dev
+libvorbis-dev
+libvpx-dev:amd64
+libvpx-dev
+liborc-0.4-dev
+libogg-dev
+libmusicbrainz3-dev
+libmusicbrainz4-dev
+libsndfile1-dev
+libshout3-dev
+liboggz2-dev
+libiec61883-dev
+libflac-dev
+libflac++-dev
+libffado-dev
+libdv4-dev
+libao-dev
+libavc1394-dev
+libdirac-dev
+libdvdread-dev
+libdvdnav-dev
+libfaac-dev
+libfaad-dev
+libid3-3.8.3-dev
+libiso9660-dev
+libiptcdata0-dev
+libmikmod2-dev
+libmodplug-dev
+libmp3lame-dev
+libmp4v2-dev
+libmpeg4ip-dev
+libmpcdec-dev
+libmpeg2-4-dev
+liboil0.3-dev
+libsidplay1-dev
+libtwolame-dev
+libwavpack-dev
+libx264-dev
+libav-doc
+libid3-tools
+libgme-dev
+librplay3-dev
+libschroedinger-doc
+libpoco-dev
+libasound2-dev
+libasound2-dev:amd64
+libcanberra-doc
+libcanberra-dev
+libcanberra-dev:amd64
+libgsm1-dev:amd64
+libmpg123-dev
+libmpg123-dev:amd64
+libao-dev:amd64
+libdirac-dev:amd64
+libfaad-dev:amd64
+libflac++-dev:amd64
+libflac-dev:amd64
+libmikmod2-dev:amd64
+libmp3lame-dev:amd64
+libmpeg2-4-dev:amd64
+libogg-dev:amd64
+libschroedinger-dev:amd64
+libshout3-dev:amd64
+libspeex-dev:amd64
+libtheora-dev:amd64
+libvorbis-dev:amd64
+libx264-dev:amd64
+libwavpack-dev:amd64
+libofx4-dev
+libofx-doc
+libcdio-paranoia-dev
+libcdio-cdda-dev
+libcdio-dev

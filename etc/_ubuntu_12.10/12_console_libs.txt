@@ -1,0 +1,127 @@
+[12_CONSOLE_LIBS]
+# Dconf
+dconf-gsettings-backend
+dconf-gsettings-backend:amd64
+dconf-service
+libdconf1:amd64
+libdconf1
+gsettings-desktop-schemas
+# Proxy
+libproxy0
+libproxy1
+libproxy1-plugin-gsettings
+libproxy1-plugin-networkmanager
+libproxy1:amd64
+libproxy1-plugin-gsettings:amd64
+libproxy1-plugin-networkmanager:amd64
+libproxy1:i386
+# Bind
+bind9-host
+libbind9-30
+libbind9-40
+libbind9-50
+libbind9-60
+libbind9-80
+libisc32
+libisc35
+libisc45
+libisc50
+libisc60
+libisc62
+libisc83
+libisccc30
+libisccc40
+libisccc50
+libisccc60
+libisccc80
+libisccfg62
+libisccfg30
+libisccfg40
+libisccfg50
+libisccfg60
+libisccfg82
+liblwres30
+liblwres40
+liblwres50
+liblwres60
+liblwres80
+# DNS
+libdns32
+libdns36
+libdns45
+libdns46
+libdns50
+libdns53
+libdns64
+libdns66
+libdns69
+libdns81
+# P11-kit
+libp11-kit0:i386
+libp11-kit0:amd64
+libp11-kit0
+# TASN
+libtasn1-3:amd64
+libtasn1-3
+libtasn1-3:i386
+# Geoip
+geoip-database
+libgeoip1
+libgeoip1:amd64
+# Other (old, not on Ubuntu 10.04)
+ssh-client
+laptop-detect
+dmidecode
+libept1
+# On Ubuntu 10.10 this can go up to 13_console_unixlibs
+ca-certificates
+libxapian22
+librtmp0:amd64
+librtmp0
+librtmp0:i386
+# NSPR
+libnspr4-0d:i386
+libnspr4-0d:amd64
+libnspr4-0d
+# SSL
+openssl
+libssl0.9.8:amd64
+libssl0.9.8:i386
+libssl0.9.8
+# Gnutls
+libgnutls26
+libgnutls13
+libgnutls26:amd64
+libgnutls26:i386
+libgnutlsxx27
+libgnutlsxx27:amd64
+libgnutls-openssl27:amd64
+libgnutls-openssl27
+# Glib
+glib-networking
+glib-networking-common
+glib-networking-services
+glib-networking:amd64
+glib-networking:i386
+# Soup
+libsoup2.4-1
+libsoup2.4-1:amd64
+libsoup2.4-1:i386
+# GSS
+libgssdp-1.0-3
+libgssrpc4:amd64
+libgssrpc4
+# Kerberos
+libkadm5clnt-mit8
+libkadm5clnt-mit8:amd64
+libkadm5srv-mit8
+libkadm5srv-mit8:amd64
+libkdb5-6:amd64
+libkdb5-6
+krb5-user
+krb5-config
+# Other
+libreadline6-dbg
+dselect
+rlfe
+libept0

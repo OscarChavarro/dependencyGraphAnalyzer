@@ -1,0 +1,8 @@
+[29_X11_PYTHON_MULTIMEDIA_DEVEL]
+fretsonfire
+fretsonfire-game
+fretsonfire-songs-muldjord
+fretsonfire-songs-sectoid
+libclanlib-dev
+e17-dev
+libespeak-dev

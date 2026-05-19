@@ -1,0 +1,7 @@
+[14_NET_PYTHON3]
+keyutils
+libnfsidmap1:amd64
+nfs-common
+nfs-kernel-server
+rpcbind
+libnfsidmap1

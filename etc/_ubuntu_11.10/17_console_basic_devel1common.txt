@@ -1,0 +1,106 @@
+[17_CONSOLE_BASIC_DEVEL1_COMMON]
+# Compression and cypher common libraries
+zlib1g-dev
+libbz2-dev
+libzzip-dev
+libssl-dev
+libssl-doc
+# Common libraries for parallel and distributed programming
+libopenmpi-dev
+libibverbs-dev
+libpthread-stubs0-dev
+# Development tools and control version
+strace
+ltrace
+bison
+flex
+m4
+autoconf-doc
+autoconf
+autoconf2.13
+autoconf2.59
+autoconf2.64
+libopts25-dev
+autogen
+automake
+automake1.4
+automake1.9
+automake1.10
+autotools-dev
+gccxml
+haddock
+libsvn1
+libaprutil1
+libapr1
+subversion
+svn
+# Linkers, profilers & binary format tools
+libltdl-dev
+libtool
+binutils
+binutils-mingw-w64
+oprofile
+libopagent1
+# C/OBJC/C++ compilers - basic C & unix system docs
+libc6-dev
+libc6-dbg
+libc6-prof
+libc-dev-bin
+libgcc1-dbg
+linux-libc-dev
+libstdc++-dev
+libstdc++6-4.6-dev
+libstdc++6-4.5-dev
+libstdc++6-4.5-doc
+libstdc++6-4.6-doc
+libstdc++6-4.6-pic
+libstdc++6-4.5-dbg
+libstdc++6-4.6-dbg
+libobjc3
+libobjc3-dbg
+gcc-4.4-doc
+gcc-4.5-doc
+gcc-doc
+gcc
+gcc-4.5
+gcc-4.6
+g++
+g++-4.5
+g++-4.6
+gobjc
+gobjc-4.5
+gobjc-4.6
+manpages-dev
+manpages-posix-dev
+libcppunit-1.12-1
+libcppunit-dev
+libgpm-dev
+c++-compiler
+mingw-w64
+mingw-w64-dev
+gcc-mingw-w64
+cpp-doc
+cpp-4.4-doc
+cpp-4.5-doc
+# C/C++ dependencies
+gettext
+# Commonly used by others
+debhelper
+dpkg-dev
+po-debconf
+build-essential
+intltool
+intltool-debian
+# Needed by Boost
+mpi-default-dev
+libicu-dev
+# Other gcc
+fixincludes
+gcc-4.6-locales
+gccgo-4.6
+gobjc++-4.6
+lib32stdc++6-4.6-dbg
+libmudflap0-4.6-dev
+gcc-4.6-doc
+glibc-doc
+cpp-4.6-doc

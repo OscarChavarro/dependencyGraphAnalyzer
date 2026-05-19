@@ -1,0 +1,13 @@
+[02_LINUX_PYTHON]
+python-minimal
+python2.6
+python2.6-minimal
+mime-support
+libreadline6
+libsqlite3-0
+readline-common
+file
+libncursesw5
+libssl0.9.8
+python
+libmagic1

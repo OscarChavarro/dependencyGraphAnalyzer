@@ -1,0 +1,7 @@
+[998_TRANSITION]
+certbot
+python3-certbot
+python3-certbot-nginx
+python3-parsedatetime
+python3-acme
+python3-configargparse

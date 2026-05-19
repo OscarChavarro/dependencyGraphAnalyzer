@@ -1,0 +1,10 @@
+[31_X11_GLIB]
+dbus
+libdbus-1-3
+libdbus-glib-1-2
+wpasupplicant
+libavahi-client3
+libhal-storage1
+libhal1
+libhd13
+hwinfo

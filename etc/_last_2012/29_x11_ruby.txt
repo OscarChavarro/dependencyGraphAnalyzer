@@ -1,0 +1,4 @@
+[29_X11_RUBY]
+ruby-cairo
+ruby-gdk-pixbuf2
+ruby-pango

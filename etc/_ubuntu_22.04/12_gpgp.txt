@@ -1,0 +1,25 @@
+[12_GPGP]
+# linux from scratch: gnupg2
+gnupg
+gnupg-l10n
+gnupg-utils
+libassuan0
+libassuan0:amd64
+libnpth0
+libnpth0:amd64
+libksba8
+libksba8:amd64
+pinentry-curses
+dirmngr
+gpg
+gpg-agent
+gpg-wks-client
+gpg-wks-server
+gpgconf
+gpgsm
+libgpgme11
+libgpgme11:amd64
+gnupg2
+libblockdev-crypto2
+libblockdev-crypto2:amd64
+libvolume-key1

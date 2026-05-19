@@ -1,0 +1,19 @@
+[48_GNOME_SERVEREXTS_THEMES]
+gdm-guest-session
+transmission-gtk
+simple-scan
+# Chat applications
+xchat
+xchat-common
+amsn
+amsn-data
+edubuntu-artwork
+# MACOSX-like panel
+avant-window-navigator
+avant-window-navigator-data
+awn-applets-c-core
+awn-applets-python-core
+awn-manager
+awn-settings
+# Admin
+startupmanager

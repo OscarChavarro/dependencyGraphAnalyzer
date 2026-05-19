@@ -1,0 +1,9 @@
+[195_GTK_EXTRA]
+apport
+packagekit-tools
+packagekit
+software-properties-common
+python3-software-properties
+apport-core-dump-handler
+python3-zstandard
+systemd-coredump

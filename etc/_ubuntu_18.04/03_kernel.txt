@@ -1,0 +1,71 @@
+[03_KERNEL]
+# Linux from scratch: libnl3
+libnl-3-200
+libnl-3-200:amd64
+libnl-3-200:i386
+libnl-genl-3-200
+libnl-genl-3-200:amd64
+libnl-genl-3-200:i386
+# Linux from scratch: linux-firmware
+linux-firmware
+# linux kernel
+linux-aws-5.4-headers-5.4.0-1029
+linux-image-5.4.0-42-generic
+linux-image-5.4.0-52-generic
+linux-image-4.15.0-200-generic
+linux-image-generic
+linux-image-5.4.0-136-generic
+linux-image-5.4.0-99-generic
+linux-modules-5.4.0-99-generic
+linux-modules-5.4.0-136-generic
+linux-modules-extra-5.4.0-136-generic
+linux-modules-4.15.0-200-generic
+linux-modules-extra-4.15.0-200-generic
+linux-modules-5.4.0-42-generic
+linux-modules-5.4.0-52-generic
+linux-modules-extra-5.4.0-42-generic
+linux-modules-extra-5.4.0-52-generic
+linux-image-unsigned-5.4.0-42-generic
+linux-image-unsigned-5.4.0-52-generic
+linux-image-5.4.0-1029-aws
+linux-modules-5.4.0-1029-aws
+linux-modules-extra-5.4.0-1029-aws
+linux-image-5.3.0-28-generic
+linux-image-5.3.0-62-generic
+linux-image-5.4.0-47-generic
+linux-image-5.4.0-48-generic
+linux-image-generic-hwe-18.04
+linux-image-unsigned-5.3.0-28-generic
+linux-image-unsigned-5.3.0-62-generic
+linux-image-unsigned-5.4.0-47-generic
+linux-image-unsigned-5.4.0-48-generic
+linux-modules-5.3.0-28-generic
+linux-modules-5.3.0-62-generic
+linux-modules-5.4.0-47-generic
+linux-modules-5.4.0-48-generic
+linux-modules-extra-5.3.0-28-generic
+linux-modules-extra-5.3.0-62-generic
+linux-modules-extra-5.4.0-47-generic
+linux-modules-extra-5.4.0-48-generic
+linux-image-5.4.0-custom
+linux-image-5.4.74-custom
+linux-image-5.4.0-135-generic
+linux-modules-5.4.0-135-generic
+linux-modules-extra-5.4.0-135-generic
+linux-image-unsigned-5.4.0-135-generic
+# Linux from scratch: linux-base (needed by some kernels)
+linux-base
+# Linux from scratch: iucode-tool
+iucode-tool
+# Linux from scratch: intel-microcode
+intel-microcode
+# Linux from scratch: amd64-microcode
+amd64-microcode
+# Linux from scratch: crda (used by some linux-modules-extra)
+crda
+# Linux from scratch: wireless-crda (used by some linux-modules-extra)
+wireless-crda
+# Linux from scratch: iw (used by some linux-modules-extra)
+iw
+# Linux from scratch: wireless-regdb (used by some linux-modules-extra)
+wireless-regdb

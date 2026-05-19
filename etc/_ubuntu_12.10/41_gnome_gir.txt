@@ -1,0 +1,25 @@
+[41_GNOME_GIR]
+# gir modules
+gir1.0-clutter-gtk-0.10
+gir1.0-dbus-1.0
+gir1.0-soup-2.4
+gir1.2-dee-0.5
+gir1.2-gda-4.0
+gir1.2-gkbd-3.0
+gir1.2-gmenu-3.0
+gir1.2-gnomebluetooth-1.0
+gir1.2-gnomedesktop-3.0
+gir1.2-gnomegamessupport-1.0
+gir1.2-gucharmap-2.90
+gir1.2-gupnp-1.0
+gir1.2-json-glib-1.0
+gir1.2-launchpad-integration-3.0
+gir1.2-rb-3.0
+gir1.2-soup-2.4
+gir1.2-totem-1.0
+gir1.2-totem-plparser-1.0
+gir1.2-webkit-3.0
+gir1.2-gnomekeyring-1.0
+gir1.2-gdata-0.0
+gir1.2-goa-1.0
+gir1.2-webkit-1.0

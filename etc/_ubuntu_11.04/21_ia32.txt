@@ -1,0 +1,2 @@
+[21_X11_IA32]
+lib32nss-mdns

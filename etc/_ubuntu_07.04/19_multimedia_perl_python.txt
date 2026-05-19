@@ -1,0 +1,3 @@
+[19_MULTIMEDIA_PERL_PYTHON]
+alsa-utils
+alsa-base

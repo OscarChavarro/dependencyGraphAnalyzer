@@ -1,0 +1,7 @@
+[73_GNUSTEP_GTK_DEVEL]
+gnustep
+gworkspace.app
+textedit.app
+wrapperfactory.app
+latex.service
+gnustep-games

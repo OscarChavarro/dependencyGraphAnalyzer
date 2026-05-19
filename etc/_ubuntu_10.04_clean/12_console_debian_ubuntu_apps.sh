@@ -1,0 +1,1 @@
+aptitude purge aptitude apt libsub-name-perl libparse-debianchangelog-perl libtimedate-perl libclass-accessor-perl libio-string-perl libept0 libxapian15 libcwidget3 libsigc++-2.0-0c2a ubuntu-keyring gnupg libcurl3-gnutls ca-certificates gpgv openssl libidn11 gnupg-curl

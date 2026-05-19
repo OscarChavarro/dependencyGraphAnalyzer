@@ -1,0 +1,25 @@
+[01_COMPRESS]
+# linux from scratch: zlib
+zlib1g
+zlib1g:i386
+libattr1:i386
+libattr1
+libacl1:i386
+libacl1
+tar
+libzstd1
+bzip2
+libbz2-1.0:i386
+libbz2-1.0
+xz-utils
+liblzma5:i386
+liblzma5
+lzma
+dpkg
+liblz4-1:i386
+liblz4-1
+install-info
+info
+gzip
+p7zip
+p7zip-full

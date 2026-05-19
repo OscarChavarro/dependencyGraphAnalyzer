@@ -1,0 +1,16 @@
+[999_CHATGPT]
+bpfcc-tools
+bpftrace
+e2fsprogs-l10n
+libatm1t64
+libatm1t64:amd64
+libbpfcc
+libbpfcc:amd64
+libdecor-0-plugin-1-gtk
+libdecor-0-plugin-1-gtk:amd64
+python3-boto3
+python3-botocore
+python3-bpfcc
+python3-icu
+python3-s3transfer
+ubuntu-kernel-accessories

@@ -1,0 +1,26 @@
+[81_GNOME]
+# others
+libgnome-autoar-0-0
+libgnome-autoar-0-0:amd64
+libgnome-desktop-3-17
+libgnome-desktop-3-17:amd64
+gnome-desktop3-data
+gnome-keyring
+gir1.2-unity-5.0
+gir1.2-unity-5.0:amd64
+libunity9
+libunity9:amd64
+libunity-protocol-private0
+libunity-protocol-private0:amd64
+libunity-scopes-json-def-desktop
+libindicator3-7
+libappindicator3-1
+pinentry-gnome3
+gcr
+gir1.2-gcr-3
+gir1.2-gcr-3:amd64
+gir1.2-unity-5.0:i386
+libgnome-desktop-3-17:i386
+libunity9:i386
+libunity-protocol-private0:i386
+policykit-1-gnome

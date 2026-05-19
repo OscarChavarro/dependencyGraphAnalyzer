@@ -1,0 +1,4 @@
+[22_X11_OPENGL_EXTRA]
+mesa-vulkan-drivers:i386
+mesa-vulkan-drivers
+mesa-vulkan-drivers:amd64

@@ -1,0 +1,15 @@
+[60_GTK_MULTIMEDIA]
+gstreamer1.0-gtk3
+gstreamer1.0-gtk3:amd64
+libcanberra-gtk3-0
+libcanberra-gtk3-0:amd64
+libclutter-1.0-0
+libclutter-1.0-0:amd64
+libclutter-gst-3.0-0
+libclutter-gst-3.0-0:amd64
+libclutter-gtk-1.0-0
+libclutter-gtk-1.0-0:amd64
+gstreamer1.0-clutter-3.0
+gstreamer1.0-clutter-3.0:amd64
+libosmgpsmap-1.0-1
+libosmgpsmap-1.0-1:amd64

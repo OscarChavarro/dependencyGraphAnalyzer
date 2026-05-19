@@ -1,0 +1,16 @@
+[29_X11_MONO_DEVEL]
+mono-2.0-devel
+libtaglib-cil-dev
+libnunit-cil-dev
+libgconf2.0-cil-dev
+libflickrnet-cil-dev
+libindicate0.1-cil-dev
+libmono-cil-dev
+libmono-winforms1.0-cil
+libmono-winforms2.0-cil
+mono-devel
+nant
+cli-common-dev
+libnunit2.6-cil
+libtaoframework-openal1.1-cil
+gnokii-cli

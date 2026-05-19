@@ -1,0 +1,13 @@
+[03_KERNEL]
+libnl-3-200
+libnl-3-200:i386
+libnl-genl-3-200
+libnl-genl-3-200:i386
+linux-firmware
+linux-image-3.19.0-84-generic
+linux-image-extra-3.19.0-84-generic
+linux-image-generic
+crda
+wireless-crda
+iw
+wireless-regdb

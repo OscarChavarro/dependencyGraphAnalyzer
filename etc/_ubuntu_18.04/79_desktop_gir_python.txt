@@ -1,0 +1,11 @@
+[79_DESKTOP_GIR_PYTHON]
+python3-html5lib
+python3-webencodings
+python3-apport
+python3-cairo
+python3-cairo:amd64
+python3-cups
+python3-cupshelpers
+python3-debian
+python3-requests-unixsocket
+python3-cairo:i386

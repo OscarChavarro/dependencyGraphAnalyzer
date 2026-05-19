@@ -1,0 +1,26 @@
+[35_LATEX_PERL_EXTRA]
+# linux from scratch (0111): texinfo
+texinfo
+texi2html
+texlive-fonts-recommended
+texlive-base
+texlive-latex-base
+texlive-binaries
+libtext-unidecode-perl
+libunicode-linebreak-perl
+libmime-charset-perl
+texlive-plain-generic
+texlive-generic-recommended
+texlive-formats-extra
+texlive-xetex
+dblatex
+dblatex-doc
+texlive-bibtex-extra
+texlive-extra-utils
+texlive-lang-greek
+texlive-latex-recommended
+texlive
+texlive-pictures
+tipa
+texlive-latex-extra
+texlive-science

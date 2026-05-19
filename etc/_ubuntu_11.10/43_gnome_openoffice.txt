@@ -1,0 +1,3 @@
+[43_GNOME_OPENOFFICE]
+openoffice.org-gnome
+libreoffice-gnome

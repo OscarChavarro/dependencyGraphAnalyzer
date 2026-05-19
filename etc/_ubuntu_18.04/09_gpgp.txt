@@ -1,0 +1,30 @@
+[09_GPGP]
+# linux from scratch: gnupg2
+gnupg
+gnupg2
+dirmngr
+gpg-wks-client
+gpg-wks-server
+gpgconf
+gpg-agent
+gpg
+gpgsm
+gnupg-utils
+gnupg-l10n
+# gpg
+libassuan0
+libassuan0:amd64
+libassuan0:i386
+libksba8
+libksba8:amd64
+libksba8:i386
+libnpth0
+libnpth0:amd64
+libnpth0:i386
+pinentry-curses
+libgpgme11
+libgpgme11:amd64
+libgpgme11:i386
+libgpgmepp6
+libgpgmepp6:amd64
+libgpgmepp6:i386

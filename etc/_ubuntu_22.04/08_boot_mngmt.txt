@@ -1,0 +1,34 @@
+[08_BOOT_MNGMT]
+# grub
+grub-common
+grub-gfxpayload-lists
+grub-pc
+grub-pc-bin
+grub2-common
+grub-efi-amd64
+grub-efi-amd64-bin
+grub-efi-amd64-signed
+mokutil
+sbsigntool
+shim-signed
+secureboot-db
+# initramfs
+busybox-initramfs
+initramfs-tools
+initramfs-tools-bin
+initramfs-tools-core
+klibc-utils
+libklibc
+libklibc:amd64
+libefiboot1
+libefiboot1:amd64
+libefivar1
+libefivar1:amd64
+os-prober
+libsgutils2-2
+libsgutils2-2:amd64
+sg3-utils
+sg3-utils-udev
+efibootmgr
+busybox
+syslinux-common

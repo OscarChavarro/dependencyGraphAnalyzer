@@ -1,0 +1,1 @@
+aptitude purge gnome-accessibility-themes gnome-orca eog libgail-gnome-module python-brlapi python-pyatspi python-louis python-speechd gnome-mag libgnome-mag2 speech-dispatcher liblouis0 liblouis-data libbrlapi0.5 at-spi libespeak1 libdotconf1.0 libspeechd2 espeak espeak-data

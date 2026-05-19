@@ -1,0 +1,7 @@
+[12_COMMANDLINE_CPP]
+aptitude
+aptitude-common
+mongodb
+mongodb-clients
+mongodb-server
+mongodb-server-core

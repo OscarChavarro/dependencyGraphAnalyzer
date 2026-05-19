@@ -1,0 +1,5 @@
+[31_POLICYKIT]
+libparted-fs-resize0
+libparted-fs-resize0:i386
+libparted2
+libparted2:i386

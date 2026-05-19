@@ -1,0 +1,10 @@
+[08_KERBEROS_EXTRA]
+krb5-locales
+libkadm5clnt-mit11
+libkadm5clnt-mit11:amd64
+libkadm5srv-mit11
+libkadm5srv-mit11:amd64
+libkdb5-9
+libkdb5-9:amd64
+libgssrpc4
+libgssrpc4:amd64

@@ -1,0 +1,13 @@
+[06_COMMANDLINE_MINIMAL]
+bash-completion
+diffutils
+grep
+hostname
+htop
+less
+nano
+sudo
+time
+eject
+vim-common
+vim-tiny

@@ -1,0 +1,5 @@
+[29_OPENLOOK_DEVEL]
+# Warning: See http://www.physionet.org/physiotools/xview/
+# Do not install these from Ubuntu repositories, get them from Debian repositories
+xviewg-dev
+xview-examples

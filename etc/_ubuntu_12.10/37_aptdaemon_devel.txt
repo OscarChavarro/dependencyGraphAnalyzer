@@ -1,0 +1,27 @@
+[37_APTDAEMON_DEVEL]
+landscape-client-ui-install
+python-aptdaemon
+python-aptdaemon.gtk3widgets
+aptdaemon
+python3-aptdaemon
+python3-aptdaemon.gtk3widgets
+python3-aptdaemon.pkcompat
+ubuntu-drivers-common
+software-properties-gtk
+# Video anotation software
+advene
+# Firefox & flash plugin (Problematic: Depending on automatic update software)
+firefox-mozsymbols
+firefox-3.0
+firefox-3.0-branding
+firefox-3.5
+firefox-3.5-branding
+firefox-branding
+xul-ext-ubufox
+ubufox
+firefox
+firefox-dbg
+firefox-dev
+firefox-globalmenu
+firefox-3.5-gnome-support
+firefox-gnome-support

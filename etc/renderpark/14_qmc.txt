@@ -1,0 +1,17 @@
+[14_QUASI_MONTE_CARLO]
+numericalAnalysis/quasiMonteCarlo/Faure.cpp
+numericalAnalysis/quasiMonteCarlo/Faure.h
+numericalAnalysis/quasiMonteCarlo/Halton.cpp
+numericalAnalysis/quasiMonteCarlo/Halton.h
+numericalAnalysis/quasiMonteCarlo/Niederreiter31.cpp
+numericalAnalysis/quasiMonteCarlo/Niederreiter31.h
+numericalAnalysis/quasiMonteCarlo/Niederreiter63.cpp
+numericalAnalysis/quasiMonteCarlo/Niederreiter63.h
+numericalAnalysis/quasiMonteCarlo/Niederreiter.h
+numericalAnalysis/quasiMonteCarlo/Niederreiter.inc
+numericalAnalysis/quasiMonteCarlo/ScrambledHalton.cpp
+numericalAnalysis/quasiMonteCarlo/ScrambledHalton.h
+numericalAnalysis/quasiMonteCarlo/Sobol.cpp
+numericalAnalysis/quasiMonteCarlo/Sobol.h
+numericalAnalysis/quasiMonteCarlo/NiederreiterCore.txx
+numericalAnalysis/quasiMonteCarlo/FaureSequenceLimits.h

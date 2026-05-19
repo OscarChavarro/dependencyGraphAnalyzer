@@ -1,0 +1,46 @@
+[14_CONSOLE_CUPS_GHOSTSCRIPT]
+# Cups
+libcups2:i386
+libcupsimage2:i386
+libcups2:amd64
+libcupscgi1:amd64
+libcupsfilters1
+libcupsfilters1:amd64
+libcupsimage2:amd64
+libcupsmime1:amd64
+libcupsppdc1:amd64
+cups-client
+cups-ppdc
+cups-common
+libcupsppdc1
+libcupscgi1
+libcupsdriver1
+libcupsmime1
+cupsddk
+cupsddk-drivers
+libcupsimage2
+libcups2
+# Ghostscript
+xfig-libs
+gs-common
+dcraw
+liblcms2-2
+gsfonts
+libpaper1
+libpaper1:amd64
+libpaper-utils
+icc-profiles
+icc-profiles-free
+# Other
+liblcms1
+liblcms1:i386
+liblcms1:amd64
+liblcms2-2:amd64
+libraw5
+libraw5:amd64
+libfreeimage3
+libmng1
+libmng1:i386
+libmng1:amd64
+cups-pk-helper
+efax

@@ -1,0 +1,46 @@
+[56_WX]
+# Libs
+libwxbase2.8-0
+libwxgtk2.8-0
+libwxbase2.6-0
+libwxgtk2.6-0
+libvamp-hostsdk3
+python-wxgtk2.8
+python-wxversion
+wx-common
+# Reusable applications
+ipython
+# Other
+libdconf-qt0
+libqtbamf1
+libqtdee2
+libqtgconf1
+python-wxgtk2.6
+springlobby
+spring
+spring-common
+spring-dbg
+spring-engine
+spring-maps-kernelpanic
+spring-mods-kernelpanic
+libportsmf0
+libklu1.1.0
+libcholmod1.7.1
+libamd2.2.0
+atlas3-base
+libcxsparse2.2.3
+libarpack2
+libqrupdate1
+libumfpack5.4.0
+libatlas3gf-base
+libglpk0
+pdl
+libpdl-io-hdf5-perl
+libplplot9
+tipptrainer
+tipptrainer-data-de
+libcv2.1
+libshogunui6
+libshogun9
+libcsiro0
+libqhull5

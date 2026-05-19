@@ -1,0 +1,401 @@
+[14_CONSOLE_MULTIMEDIA]
+# Multimedia data: sound samples
+sound-theme-freedesktop
+ubuntu-sounds
+sound-icons
+# Multimedia data: metadata (MP3 tags)
+flvmeta
+libtracker-extract-0.14-0
+libtracker-miner-0.14-0
+libtracker-sparql-0.14-0
+libiptcdata0
+libexempi3
+libexempi3:amd64
+libtagc0:amd64
+libtagc0
+libtag-extras1
+libtag1c2a
+libtag1c2a:amd64
+libtag1c2a:i386
+libtag1-vanilla
+libtag1-vanilla:amd64
+libtag1-vanilla:i386
+id3tool
+id3v2
+libid3-3.8.3c2a
+# Multimedia optimizers/low-level: compiler for SIMD instructions / GPU
+libva1
+libva1:amd64
+liborc-0.4-0
+liborc-0.4-0:amd64
+liborc-0.4-0:i386
+liboil0.3
+liboil0.3:amd64
+# Multimedia driver: hardware emulators
+libresid-builder0c2a
+libsidplay1
+libsidplay2
+libsidutils0
+# Multimedia driver: Broadcom Crystal HD BCM70015
+libcrystalhd3:amd64
+libcrystalhd3
+# Multimedia timer
+libev3
+libev4
+# Multimedia port: plug and play
+libupnp6
+libupnp3
+# Multimedia port: IEEE 1394/firewire
+dvgrab
+libffado0
+libffado1
+libffado2
+libavc1394-0:i386
+libavc1394-0:amd64
+libavc1394-0
+libdc1394-22:amd64
+libdc1394-22
+libiec61883-0:amd64
+libiec61883-0:i386
+libiec61883-0
+libraw1394-tools
+libraw1394-11
+libraw1394-11:amd64
+libraw1394-11:i386
+# Multimedia port: infrared remote control
+liblircclient0
+# Multimedia port: media transfer protocol / USB - removable devices
+libmtp-common
+libmtp-runtime
+libmtp9
+libmtp9:amd64
+# Multimedia MUX/DEMUX systems
+aldo
+libao-common
+libao4:amd64
+libao4:i386
+libao4
+libjack-jackd2-0:i386
+libjack-jackd2-0:amd64
+libjack-jackd2-0
+esound-clients
+esound-common
+mpegdemux
+# Sound drivers: ALSA / OSS
+cw
+cwcp
+libcw3
+alsa-oss
+alsa-utils
+alsa-base
+dvsource
+libaubio2
+libcanberra0
+libcanberra0:amd64
+libcanberra0:i386
+libesd0
+libesd0:amd64
+libesd0:i386
+libflite1
+libflite1:amd64
+libportaudio0
+libportaudio2
+libportaudio2:amd64
+pommed
+cwdaemon
+libasound2-doc
+libasound2:amd64
+libasound2:i386
+libasound2
+lib32asound2
+aumix
+aumix-common
+oss-compat
+linux-sound-base
+# Audio codecs: container formats
+libmatroska0
+libmatroska2
+libmatroska3
+libmatroska4
+libmatroska5
+libmatroska5:amd64
+libsndfile1
+libsndfile1:amd64
+libsndfile1:i386
+libogg0
+libogg0:amd64
+libogg0:i386
+liboggz2
+# Audio codecs: lossless
+flac
+libflac++6
+libflac++6:amd64
+libflac8
+libflac8:amd64
+libflac8:i386
+# Audio codecs: high quality loosy
+libmpcdec6
+# Audio codecs: Dolby AC3 - ATSC A/52
+liba52-0.7.4
+# Audio codecs: game music (AY, GBS, GYM, HES, KSS, NSF, SAP, SPC, VGM)
+libgme0
+# Audio codecs: Unix/SGI formats (AIFF, NeXt, Sun)
+libaudiofile1
+libaudiofile1:amd64
+libaudiofile1:i386
+libaudiofile0
+# Audio codecs: MP1
+libmad0
+libmad0:amd64
+libmad0:i386
+# Audio codecs: MP2
+twolame
+libtwolame0
+# Audio codecs: MP3
+lame
+libmp3lame0
+libmp3lame0:amd64
+# Audio codecs: AAC / MPEG4
+faad
+faac
+libfaac0
+libfaad2
+libfaad2:amd64
+# Audio codecs: DTS Coherent (DVDs)
+libdca0
+# Audio codecs: speech oriented
+libopus0
+libgsm1
+libgsm1:amd64
+# Audio codecs: wavpack
+libwavpack1
+libwavpack1:amd64
+libwavpack1:i386
+# Audio codecs: low latency
+libcelt0-0
+# Audio codecs: android / AMR / AMR-WB
+libvo-aacenc0
+libvo-aacenc0:amd64
+libvo-amrwbenc0
+libvo-amrwbenc0:amd64
+libopencore-amrnb0
+libopencore-amrnb0:amd64
+libopencore-amrwb0
+libopencore-amrwb0:amd64
+# Audio codecs: feature extraction
+libvamp-sdk2
+# Audio codecs: vorbis
+libvorbis0a
+libvorbis0a:amd64
+libvorbis0a:i386
+libvorbisenc2
+libvorbisenc2:amd64
+libvorbisenc2:i386
+libvorbisfile3
+libvorbisfile3:amd64
+libvorbisfile3:i386
+# Audio codecs: voice over ip
+libspeex1
+libspeex1:amd64
+libspeex1:i386
+libspeexdsp1
+libspeexdsp1:amd64
+libspeexdsp1:i386
+# Video port: video for linux
+libv4l-0
+libv4l-0:amd64
+libv4l-0:i386
+libv4lconvert0
+libv4lconvert0:amd64
+libv4lconvert0:i386
+# Video codecs: quicktime
+libquicktime1
+libquicktime2
+libquicktime2:amd64
+libquicktime-doc
+# Video codecs: MPEG-2 + audio mp3/ac3
+libmpeg2-4
+libmpeg2-4:amd64
+mpeg3-utils
+libmpeg3-1
+# Video codecs: theora
+libtheora0
+libtheora0:amd64
+libtheora0:i386
+# Video codecs: misc
+libdv4
+libdv4:amd64
+libdv4:i386
+libmimic0
+libx264-123:amd64
+libx264-123
+libschroedinger-1.0-0
+libschroedinger-1.0-0:amd64
+libdirac-decoder0
+libdirac-decoder0:amd64
+libdirac-encoder0
+libdirac-encoder0:amd64
+# Multimedia codec: basic MPEG-2 TS transmission/storage
+libdvbpsi7
+# Multimedia filters: sox tools
+sox
+libsox2
+libsox-fmt-ao
+libsox-fmt-ffmpeg
+libsox-fmt-mp3
+libsox-fmt-oss
+libsox-fmt-alsa
+libsox1b
+libsox-fmt-base
+libsox1
+libsox1a
+# Multimedia filters: pitch / time
+libsonic0
+libsonic0:amd64
+libsoundtouch1c2
+libsoundtouch0
+libsoundtouch0:amd64
+libsamplerate0:i386
+libsamplerate0:amd64
+libsamplerate0
+# Multimedia filters: Gstreamer, graph processor for audio / video
+libgstreamer-plugins-bad1.0-0
+libgstreamer-plugins-base1.0-0
+libgstreamer1.0-0
+libgstreamer-plugins-bad0.10-0
+libgstreamer-plugins-base0.10-0
+libgstreamer0.10-0
+libgstreamer-plugins-bad0.10-0:amd64
+libgstreamer-plugins-bad1.0-0:amd64
+libgstreamer-plugins-base0.10-0:i386
+libgstreamer-plugins-base1.0-0:amd64
+libgstreamer0.10-0:i386
+libgstreamer1.0-0:amd64
+libgstreamer0.10-0:amd64
+libgstreamer-plugins-base0.10-0:amd64
+gstreamer-tools
+gstreamer0.10-alsa
+gstreamer0.10-alsa:amd64
+gstreamer0.10-ffmpeg:amd64
+gstreamer0.10-fluendo-mp3:amd64
+gstreamer0.10-ffmpeg
+gstreamer0.10-fluendo-mp3
+gstreamer0.10-nice
+gstreamer0.10-nice:amd64
+gstreamer0.10-plugins-ugly
+gstreamer0.10-plugins-ugly:amd64
+gstreamer0.10-plugins-ugly-multiverse
+gstreamer0.10-pocketsphinx
+gstreamer0.10-tools
+# Multimedia filters: misc
+dvsink
+# Multimedia text: analog NTSC hidden line data extractor
+# (teletext, closed caption)
+vdr-plugin-infosatepg
+vdr-plugin-svdrpext
+vdr-plugin-svdrposd
+vdr-plugin-games
+libzvbi0:amd64
+libzvbi0
+libzvbi-common
+# Multimedia text: Subtitles
+libass4:amd64
+libass1
+libass4
+# Karaoke text encapsulation
+liboggkate1
+libkate1
+# Midi (freepats are sampler patterns, wildmidi turns midi events into wave
+freepats
+libportmidi0
+libwildmidi-config
+libwildmidi1:amd64
+libwildmidi1
+librtmidi1:amd64
+librtmidi1
+# MOD
+mikmod
+libmikmod2:amd64
+libmikmod2:i386
+libmikmod2
+libmodplug1
+# CD/DVD media, control and audio extraction (ripping). CD databases connection
+dvdrip-utils
+icedax
+libcdaudio1
+libcdio-cdda1
+libcdio-paranoia1
+libcdio13
+libiso9660-8
+libvcdinfo0
+libcddb2
+# CD/DVD burners
+cdrdao
+# DVD media and decryption
+tsdecrypt
+libdvbcsa1
+libdvbcsa1:amd64
+libdvdread4
+libdvdnav4
+libbluray-doc
+libbluray1:amd64
+libbluray0
+libbluray1
+libaacs0:amd64
+libaacs0
+# VLC
+vlc-nox
+vlc-data
+vlc-plugin-zvbi
+libvlc5
+libvlccore5
+# Streamming: audio downloading
+flvstreamer
+dvbstreamer
+dvblast
+streamripper
+libshout3
+libshout3:amd64
+libshout3:i386
+# Software depending upon ffmpeg
+cmus-plugin-ffmpeg
+virtuoso-nepomuk
+vobcopy
+vorbistools
+vorbis-tools
+# ffmpeg
+ffmpegthumbnailer
+libffmpegthumbnailer4
+libavutil-extra-51:amd64
+libavutil-extra-51
+libavformat-extra-52
+libpostproc-extra-52:amd64
+libpostproc-extra-52
+libswscale-extra-2
+libswscale-extra-2:amd64
+libavfilter2
+libavfilter2:amd64
+libpostproc52
+libpostproc52:amd64
+libswscale2
+libswscale2:amd64
+# Multimedia player: remote player
+librplay3
+# Multimedia player: mpg123
+mpg123-esd
+mpg123
+mpg123-alsa
+libmpg123-0
+libmpg123-0:amd64
+libmpg123-0:i386
+# Multimedia analysis: speech analysis / speech recognition
+libestools1.2
+libestools2.1
+libestools2.1:amd64
+libpocketsphinx1
+libsphinxbase1
+pocketsphinx-hmm-tidigits
+pocketsphinx-hmm-wsj1
+pocketsphinx-lm-wsj
+pocketsphinx-utils
+libvalhalla2

@@ -1,0 +1,5 @@
+[07_EVENTS_AND_PORTS_EXTRA]
+libflashrom1
+libflashrom1:amd64
+libftdi1-2
+libftdi1-2:amd64

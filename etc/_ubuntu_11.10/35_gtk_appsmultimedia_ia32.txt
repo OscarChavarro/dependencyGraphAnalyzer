@@ -1,0 +1,4 @@
+[35_GTK_APPS_MULTIMEDIA_IA32]
+flashplugin-downloader:i386
+libgtk2.0-0:i386
+nspluginviewer:i386

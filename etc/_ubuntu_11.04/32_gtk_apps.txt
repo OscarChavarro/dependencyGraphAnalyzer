@@ -1,0 +1,17 @@
+[32_GTK_APPS]
+openvas-client
+parcellite
+nvclock-gtk
+aewm
+afterstep
+libafterimage0
+libafterstep1
+bbrun
+fvwm
+fvwm-icons
+kasumi
+# Applications for formal verification of programs
+why
+coqide
+coq
+coq-theories

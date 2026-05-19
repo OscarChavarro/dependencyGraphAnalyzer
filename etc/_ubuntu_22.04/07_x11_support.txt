@@ -1,0 +1,14 @@
+[07_X11_SUPPORT]
+# Linux from scratch: psmisc
+libpsl5
+libpsl5:amd64
+psmisc
+man-db
+bsdextrautils
+bsdmainutils
+groff-base
+libpipeline1
+libpipeline1:amd64
+libuchardet0
+libuchardet0:amd64
+binfmt-support

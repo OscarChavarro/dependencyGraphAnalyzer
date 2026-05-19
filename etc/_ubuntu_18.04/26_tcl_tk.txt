@@ -1,0 +1,15 @@
+[26_TCL_TK]
+stopwatch
+tk
+tk8.6
+libtk8.6
+libtk8.6:amd64
+libtcl8.6
+libtcl8.6:amd64
+tcl
+tcl8.6
+tk8.6-blt2.5
+x11vnc
+x11vnc-data
+libtk8.6:i386
+libtcl8.6:i386

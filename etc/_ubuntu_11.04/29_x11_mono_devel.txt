@@ -1,0 +1,7 @@
+[29_X11_MONO_DEVEL]
+mono-2.0-devel
+libtaglib-cil-dev
+libnunit-cil-dev
+libgconf2.0-cil-dev
+libflickrnet-cil-dev
+libindicate0.1-cil-dev

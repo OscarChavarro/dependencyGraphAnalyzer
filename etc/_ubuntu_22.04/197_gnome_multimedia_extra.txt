@@ -1,0 +1,3 @@
+[197_GNOME_MULTIMEDIA_EXTRA]
+nautilus-extension-gnome-terminal
+rhythmbox-plugin-alternative-toolbar

@@ -1,0 +1,26 @@
+[14_NET_KERBEROS_HEIMDAL]
+curl
+libcurl3
+libcurl3-gnutls
+libcurl3-gnutls:amd64
+libcurl3-gnutls:i386
+libcurl3-nss
+libcurl4
+libcurl4:amd64
+librtmp1
+librtmp1:amd64
+librtmp1:i386
+rtmpdump
+libnghttp2-14
+libnghttp2-14:amd64
+libnghttp2-14:i386
+libcurl4:i386
+# NFS
+nfs-kernel-server
+keyutils
+libnfsidmap2:amd64
+libtirpc1:amd64
+nfs-common
+rpcbind
+libnfsidmap2
+libtirpc1

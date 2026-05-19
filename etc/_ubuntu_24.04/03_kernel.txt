@@ -1,0 +1,32 @@
+[03_KERNEL]
+# Linux from scratch: linux-firmware
+# linux kernel
+# Linux from scratch: linux-base (needed by some kernels)
+linux-base
+# Linux from scratch: iucode-tool
+iucode-tool
+# Linux from scratch: intel-microcode
+intel-microcode
+# Linux from scratch: amd64-microcode
+amd64-microcode
+# Linux from scratch: wireless-regdb (used by some linux-modules-extra)
+linux-image-6.8.0-1027-aws
+linux-image-6.8.0-1029-aws
+linux-image-unsigned-6.8.0-1027-aws
+linux-image-unsigned-6.8.0-1029-aws
+linux-modules-6.8.0-1027-aws
+linux-modules-6.8.0-1029-aws
+linux-firmware
+linux-image-6.8.0-63-generic
+linux-modules-6.8.0-63-generic
+linux-modules-extra-6.8.0-63-generic
+linux-image-6.8.0-62-generic
+linux-modules-6.8.0-62-generic
+linux-modules-extra-6.8.0-62-generic
+wireless-regdb
+linux-image-generic
+linux-image-6.8.0-101-generic
+linux-image-6.8.0-90-generic
+linux-image-virtual
+linux-modules-6.8.0-101-generic
+linux-modules-6.8.0-90-generic

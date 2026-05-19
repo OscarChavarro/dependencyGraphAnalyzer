@@ -1,0 +1,1 @@
+aptitude purge libmono-sharpzip2.84-cil libmono-cairo2.0-cil libart2.0-cil libgconf2.0-cil libndesk-dbus1.0-cil libmono-system2.0-cil cli-common libmono-security2.0-cil mono-2.0-gac mono-gac mono-runtime libmono-corlib2.0-cil libmono-i18n-west2.0-cil libmono-posix2.0-cil libglib2.0-cil

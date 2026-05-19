@@ -1,0 +1,17 @@
+[11_CONSOLE_UNIXLIBS]
+# Used by openssh-client
+libedit2
+libbsd0
+isc-dhcp-client
+isc-dhcp-common
+# ifconfig
+net-tools
+# Essential commands
+diffutils
+grep
+gzip
+hostname
+ncurses-base
+bsdutils
+bsdmainutils
+mawk

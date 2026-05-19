@@ -1,0 +1,1 @@
+aptitude purge python-gnomekeyring evince libevdocument2 libevview2 libkpathsea5

@@ -1,0 +1,8 @@
+[28_X11_PYTHON_SERVER]
+xserver-xorg-video-all
+xserver-xorg-video-intel
+xorg
+xinit
+xserver-xorg
+xbase-clients
+xserver-xorg-core

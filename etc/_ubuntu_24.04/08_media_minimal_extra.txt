@@ -1,0 +1,4 @@
+[08_MEDIA_MINIMAL_EXTRA]
+libjpeg-turbo-progs
+libturbojpeg
+libturbojpeg:amd64

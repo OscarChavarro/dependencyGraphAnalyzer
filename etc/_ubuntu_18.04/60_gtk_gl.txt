@@ -1,0 +1,16 @@
+[60_GTK_GL]
+libgstreamer-gl1.0-0
+libgstreamer-gl1.0-0:amd64
+gstreamer1.0-gtk3
+gstreamer1.0-gtk3:amd64
+gir1.2-gst-plugins-base-1.0
+gir1.2-gst-plugins-base-1.0:amd64
+libwebkit2gtk-4.0-37
+libwebkit2gtk-4.0-37:amd64
+libcanberra-gtk3-0
+libcanberra-gtk3-0:amd64
+libcanberra-gtk3-0:i386
+gir1.2-gst-plugins-base-1.0:i386
+gstreamer1.0-gtk3:i386
+libgstreamer-gl1.0-0:i386
+libwebkit2gtk-4.0-37:i386

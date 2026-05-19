@@ -1,0 +1,4 @@
+[11_NET_LDAP_KERBEROS_HEIMDAL_EXTRA]
+libsoup-2.4-1:amd64
+libsoup2.4-common
+libsoup-2.4-1

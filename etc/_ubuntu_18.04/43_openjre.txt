@@ -1,0 +1,9 @@
+[43_OPENJRE]
+openjdk-11-jre
+openjdk-11-jre:amd64
+default-jre
+default-jre-headless
+java-common
+ca-certificates-java
+openjdk-11-jre-headless
+openjdk-11-jre-headless:amd64

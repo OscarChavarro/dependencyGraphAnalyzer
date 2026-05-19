@@ -1,0 +1,17 @@
+[19_CONSOLE_IA32_DEVEL]
+libc6-dev-i386
+gcc-4.3-multilib
+gcc-multilib
+gcc-4.4-multilib
+g++-4.3-multilib
+g++-4.4-multilib
+lib32ncursesw5-dev
+lib32ncurses5-dev
+lib32readline6-dev
+libc6-dev-amd64
+lib64gcc1
+lib64gomp1
+lib64stdc++6
+libc6-amd64
+g++-multilib
+lib32v4l-dev

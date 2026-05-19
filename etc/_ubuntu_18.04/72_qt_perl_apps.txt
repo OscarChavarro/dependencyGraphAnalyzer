@@ -1,0 +1,6 @@
+[72_QT_PERL_APPS]
+virtualbox
+virtualbox-6.1
+virtualbox-dkms
+virtualbox-qt
+virtualbox-source

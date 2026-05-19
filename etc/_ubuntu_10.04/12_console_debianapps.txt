@@ -1,0 +1,37 @@
+[12_CONSOLE_DEBIAN_UBUNTU_APPS]
+# Aptitude
+aptitude
+libparse-debianchangelog-perl
+libept0
+libxapian15
+libio-string-perl
+libclass-accessor-perl
+libsub-name-perl
+libtimedate-perl
+libcwidget3
+libsigc++-2.0-0c2a
+# Apt
+apt
+ubuntu-keyring
+gnupg
+gpgv
+gnupg-curl
+libcurl3-gnutls
+ca-certificates
+libidn11
+libsasl2-modules
+libsasl2-2
+libk5crypto3
+libkeyutils1
+libkrb5support0
+libgpg-error0
+libtasn1-3
+libgcrypt11
+libgnutls26
+libkrb5-3
+libgssapi-krb5-2
+libldap-2.4-2
+# Other (old, not on Ubuntu 10.04)
+libdb4.6
+libreadline5
+libkrb53

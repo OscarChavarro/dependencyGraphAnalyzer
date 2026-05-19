@@ -1,0 +1,1 @@
+apt-get -y install libxss1 motif-clients openssh-server twm x11-apps xterm mesa-utils xemacs21-bin freeglut3 gmemusage oneko xasteroids xfishtank xgalaga xlockmore-gl xosview xtightvncviewer rdesktop hal libstartup-notification0 libxrandr2 libftgl2

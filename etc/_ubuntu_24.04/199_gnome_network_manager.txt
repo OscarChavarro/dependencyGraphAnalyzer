@@ -1,0 +1,5 @@
+[199_GNOME_NETWORK_MANAGER]
+# Not that disabling this does:
+# 1. Network is controlled by the legacy way (files on /etc)
+# 2. Gnome does not show networking indicator (wifi*)
+networkd-dispatcher

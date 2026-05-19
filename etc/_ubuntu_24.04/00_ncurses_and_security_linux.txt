@@ -1,0 +1,40 @@
+[00_NCURSES_AND_SECURITY_LINUX]
+# linux from scratch (0003): ncurses
+libncurses6
+libncurses6:amd64
+libncursesw6
+libncursesw6:amd64
+libtinfo6
+libtinfo6:amd64
+ncurses-base
+ncurses-bin
+ncurses-term
+# linux from scratch (0004): pcre3
+libpcre2-8-0
+libpcre2-8-0:amd64
+# linux from scratch (0005 PYTHON2 BUILD ISSUE, build on minimal/clean ubuntu environment): libselinux1
+libselinux1
+libselinux1:amd64
+# linux from scratch (0006): sepol
+libsepol2
+libsepol2:amd64
+# Linux from scratch: libbsd
+libbsd0
+libbsd0:amd64
+# Other
+libedit2
+libedit2:amd64
+libmd0
+libmd0:amd64
+libpcre2-16-0
+libpcre2-16-0:amd64
+libpcre2-32-0
+libpcre2-32-0:amd64
+libpcre2-posix3
+libpcre2-posix3:amd64
+libpopt0
+libpopt0:amd64
+libbsd0:i386
+libmd0:i386
+libtinfo6:i386
+libedit2:i386

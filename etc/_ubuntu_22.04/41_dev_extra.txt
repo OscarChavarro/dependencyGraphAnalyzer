@@ -1,0 +1,6 @@
+[41_DEV_EXTRA]
+kbuild
+libfribidi-dev
+libfribidi-dev:amd64
+libgraphite2-dev
+libgraphite2-dev:amd64

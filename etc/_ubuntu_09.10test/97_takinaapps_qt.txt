@@ -1,0 +1,4 @@
+[97_TAKINA_APPS_QT]
+virtualbox-3.1
+xxdiff
+libsdl-ttf2.0-0

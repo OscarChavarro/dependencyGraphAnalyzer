@@ -1,0 +1,19 @@
+[53_WX_DEVEL]
+# OpenCV-dev
+libhighgui-dev
+libcv-dev
+libcvaux-dev
+opencv-doc
+# others
+rapidsvn
+libwxbase2.8-dev
+libwxgtk2.8-dev
+wx2.8-headers
+codeblocks
+codeblocks-common
+libcodeblocks0
+libsuitesparse-dev
+libqrupdate-dev
+libqhull-dev
+libglpk-dev
+libarpack2-dev

@@ -1,0 +1,15 @@
+[32_GIR_DEPENDENCIES]
+at-spi2-core
+libatk-bridge2.0-0
+libatk-bridge2.0-0:i386
+libatspi2.0-0
+libatspi2.0-0:i386
+librest-0.7-0
+librest-0.7-0:i386
+libsoup-gnome2.4-1
+libsoup-gnome2.4-1:i386
+libatk1.0-0
+libatk1.0-0:i386
+libatk1.0-data
+libatkmm-1.6-1v5
+libatkmm-1.6-1v5:i386

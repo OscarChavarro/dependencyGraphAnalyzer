@@ -1,0 +1,40 @@
+[01_LINUX_NCURSES_PNG_COREUTILS]
+# Ncurses: terminal control library
+libncurses5:amd64
+libncursesw5:amd64
+libncurses5
+libncurses5:i386
+lib32ncurses5
+lib32ncursesw5
+libncursesw5:i386
+libncursesw5
+ncurses-bin
+ncurses-term
+ncurses-examples
+lib32tinfo5
+libtinfo5:i386
+libtinfo5:amd64
+libtinfo5
+ncurses-base
+# Gpm: terminal mouse control
+libgpmg1
+libgpm2:i386
+libgpm2:amd64
+libgpm2
+# Libpng: basic image format
+libpng3:amd64
+libpng3
+libpng12-0:amd64
+libpng12-0:i386
+libpng12-0
+# Basic unix commands
+sed
+coreutils
+gpg
+# Basic unix libraries
+libacl1:amd64
+libacl1:i386
+libacl1
+libattr1:amd64
+libattr1:i386
+libattr1

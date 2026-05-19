@@ -1,0 +1,3 @@
+[31_X11_PYTHON]
+python3-matplotlib
+python-matplotlib-data
