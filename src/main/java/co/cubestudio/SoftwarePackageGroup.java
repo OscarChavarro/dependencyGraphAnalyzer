@@ -52,7 +52,7 @@ public class SoftwarePackageGroup
                     b = graph.searchNodeByName(name);
                     if ( a != null && b != null ) {
                         b.setParentGroupNode(a);
-                        a.addChild(b);
+                        graph.addDependency(a, b);
                         list.add(b);
 		    }
 		}

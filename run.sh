@@ -1,5 +1,5 @@
 rm -f `find ./output -type f`
-java -Xms200m -Xmx200m -classpath ./classes:./lib/vsdk.jar co.cubestudio.DebianAnalyzer $@ 2> e
+java -Xms200m -Xmx200m -classpath ./classes:./lib/vsdk.jar:./build/runtime-libs/* co.cubestudio.DebianAnalyzer $@ 2> e
 chmod 755 output/cleansh/*.sh
 #dot -Tdia output/general.dot -o output/general.dia
 

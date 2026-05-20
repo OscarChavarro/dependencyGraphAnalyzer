@@ -71,7 +71,7 @@ public class DebianAnalyzer {
                         if ( a == null ) {
                             System.err.println("No puedo leer nodo " + source);
                         }
-                        a.addChild(b);
+                        graph.addDependency(a, b);
                     }
 
                 }

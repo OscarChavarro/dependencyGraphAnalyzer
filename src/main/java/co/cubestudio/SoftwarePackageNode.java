@@ -134,7 +134,9 @@ public class SoftwarePackageNode
 
     public void addChild(SoftwarePackageNode c)
     {
-        children.add(c);
+        if (!children.contains(c)) {
+            children.add(c);
+        }
     }
 
     public ArrayList<SoftwarePackageNode> getChildren()

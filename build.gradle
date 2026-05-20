@@ -13,7 +13,13 @@ repositories {
 
 dependencies {
     implementation 'ch.qos.logback:logback-classic:1.4.11'
+    implementation 'org.jgrapht:jgrapht-core:1.5.2'
     implementation files('./lib/vsdk.jar')
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
 
 tasks.withType(JavaCompile) {
@@ -33,4 +39,9 @@ run {
         selectedMainClassShort = "era.put.${project.property('app')}"
         mainClassName = selectedMainClassShort
     }
+}
+
+tasks.register('copyRuntimeDeps', Copy) {
+    from configurations.runtimeClasspath
+    into "$buildDir/runtime-libs"
 }

@@ -6,23 +6,30 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Hashtable;
+import java.util.List;
+import java.util.Set;
 import java.util.StringTokenizer;
+import co.cubestudio.graph.DirectedPackageGraphOperations;
+import co.cubestudio.graph.JGraphTPackageGraphOperations;
+import co.cubestudio.graph.PackageEdge;
 import vsdk.toolkit.io.PersistenceElement;
 
 public class SoftwarePackageGraph {
-    private ArrayList<SoftwarePackageNode> nodes;
-
-    private Hashtable<String, SoftwarePackageNode> nodeIndex;
+    private final ArrayList<SoftwarePackageNode> nodes;
+    private final Hashtable<String, SoftwarePackageNode> nodeIndex;
+    private final DirectedPackageGraphOperations graph;
 
     public SoftwarePackageGraph() {
-        nodes = new ArrayList<SoftwarePackageNode>();
-        nodeIndex = new Hashtable<String, SoftwarePackageNode>();
+        nodes = new ArrayList<>();
+        nodeIndex = new Hashtable<>();
+        graph = new JGraphTPackageGraphOperations();
     }
 
-    private String
-    normalizeFilename(String in) {
+    private String normalizeFilename(String in) {
         String out = "";
         char c;
         int i;
@@ -45,54 +52,63 @@ public class SoftwarePackageGraph {
         return out.toLowerCase();
     }
 
-    public SoftwarePackageNode
-    addNode(String name) {
-        SoftwarePackageNode n;
-
-        int i;
-        for (i = 0; i < nodes.size(); i++) {
-            n = nodes.get(i);
-            if (name.equals(n.getName())) {
-                return n;
-            }
+    public SoftwarePackageNode addNode(String name) {
+        SoftwarePackageNode n = nodeIndex.get(name);
+        if (n != null) {
+            return n;
         }
 
         n = new SoftwarePackageNode(name);
         nodes.add(n);
         nodeIndex.put(name, n);
+        graph.addVertex(n);
         return n;
     }
 
-    public void
-    addBadNode(String name) {
-        SoftwarePackageNode n;
+    public void addBadNode(String name) {
+        SoftwarePackageNode n = nodeIndex.get(name);
+        if (n != null) {
+            n.markAsBad();
+            return;
+        }
         n = new SoftwarePackageNode(name);
         n.markAsBad();
         nodes.add(n);
         nodeIndex.put(name, n);
+        graph.addVertex(n);
     }
 
-    public SoftwarePackageNode
-    searchNodeByName(String n) {
+    public SoftwarePackageNode searchNodeByName(String n) {
         return nodeIndex.get(n);
     }
 
-    public ArrayList<SoftwarePackageNode>
-    getNodes() {
+    public ArrayList<SoftwarePackageNode> getNodes() {
         return nodes;
     }
 
-    public void
-    labelLastGroup(ArrayList<SoftwarePackageGroup> groups) {
-        //n.setVariant(groups.get(i).areAllSources());
+    public boolean addDependency(SoftwarePackageNode from, SoftwarePackageNode to) {
+        if (from == null || to == null) {
+            return false;
+        }
+        boolean added = graph.addEdge(from, to);
+        if (added) {
+            from.addChild(to);
+        }
+        return added;
+    }
+
+    private void removeDependency(SoftwarePackageNode from, SoftwarePackageNode to) {
+        if (graph.removeEdge(from, to)) {
+            from.getChildren().remove(to);
+        }
+    }
+
+    public void labelLastGroup(ArrayList<SoftwarePackageGroup> groups) {
         SoftwarePackageGroup last = groups.get(groups.size() - 1);
         markVariants(last, groups);
     }
 
-    public void
-    markVariants(
-            SoftwarePackageGroup general,
-            ArrayList<SoftwarePackageGroup> groups) {
+    public void markVariants(SoftwarePackageGroup general, ArrayList<SoftwarePackageGroup> groups) {
         for (SoftwarePackageNode n : general.list) {
             n.setVariant(false);
             for (SoftwarePackageGroup g : groups) {
@@ -100,30 +116,23 @@ public class SoftwarePackageGraph {
                     if (g.areAllSources()) {
                         n.setVariant(true);
                     }
-                    continue;
+                    break;
                 }
             }
         }
     }
 
-    public void
-    exportDotNode(OutputStream os, SoftwarePackageNode node, boolean indent)
-            throws Exception {
-        String n;
-
-        if (node.getName().startsWith("_[") &&
-                !node.getName().startsWith("_[00") &&
-                node.getChildren().size() <= 0) {
+    public void exportDotNode(OutputStream os, SoftwarePackageNode node, boolean indent) throws Exception {
+        if (node.getName().startsWith("_[") && !node.getName().startsWith("_[00") && graph.outDegreeOf(node) <= 0) {
             return;
         }
 
-        n = "    \"" + node.getName() + "\"";
+        String n = "    \"" + node.getName() + "\"";
         if (indent) {
             n = "        \"" + node.getName() + "\"";
         }
 
         String shape = ",fontsize=10";
-
         if (node.getName().startsWith("[")) {
             shape = ",shape=polygon,sides=4";
         } else if (node.getName().startsWith("*")) {
@@ -131,11 +140,7 @@ public class SoftwarePackageGraph {
         }
 
         if (node.getBoldName()) {
-            //if (node.getSource()) {
-            //    shape += ",peripheries=3";
-            //} else {
             shape += ",peripheries=2";
-            //}
         }
 
         if (!node.getIsBad()) {
@@ -159,9 +164,7 @@ public class SoftwarePackageGraph {
         PersistenceElement.writeAsciiLine(os, n);
     }
 
-    private void
-    exportDotNodes(OutputStream os, SoftwarePackageGroup g, int i)
-            throws Exception {
+    private void exportDotNodes(OutputStream os, SoftwarePackageGroup g, int i) throws Exception {
         PersistenceElement.writeAsciiLine(os, "    subgraph cluster" + i + " {");
         PersistenceElement.writeAsciiLine(os, "        color=black;");
         PersistenceElement.writeAsciiLine(os, "        fillcolor=lightgray;");
@@ -169,47 +172,33 @@ public class SoftwarePackageGraph {
         exportDotNode(os, g.header, true);
         g.header.setGroup(true);
 
-        int j;
-        for (j = 0; j < g.list.size(); j++) {
-            exportDotNode(os, g.list.get(j), true);
-            g.list.get(j).setGroup(true);
+        for (SoftwarePackageNode node : g.list) {
+            exportDotNode(os, node, true);
+            node.setGroup(true);
         }
         PersistenceElement.writeAsciiLine(os, "    }");
         PersistenceElement.writeAsciiLine(os, "    ");
     }
 
-    public void
-    exportDot(String filename, ArrayList<SoftwarePackageGroup> groups) {
+    public void exportDot(String filename, ArrayList<SoftwarePackageGroup> groups) {
         exportDot(filename, groups, -1);
     }
 
     private boolean namesAreGroupsAndFirstGreater(String a, String b) {
-        StringTokenizer parser1;
-        StringTokenizer parser2;
-
         if (!a.startsWith("_[") || !b.startsWith("_[")) {
             return false;
         }
 
-        parser1 = new StringTokenizer(a, "[]_");
-        parser2 = new StringTokenizer(b, "[]_");
-        int na, nb;
-
-        na = Integer.parseInt(parser1.nextToken());
-        nb = Integer.parseInt(parser2.nextToken());
-
-        if (na < nb) {
-            return true;
-        }
-        return false;
+        StringTokenizer parser1 = new StringTokenizer(a, "[]_");
+        StringTokenizer parser2 = new StringTokenizer(b, "[]_");
+        int na = Integer.parseInt(parser1.nextToken());
+        int nb = Integer.parseInt(parser2.nextToken());
+        return na < nb;
     }
 
-    private void
-    exportDot(String filename, ArrayList<SoftwarePackageGroup> groups, int id) {
+    private void exportDot(String filename, ArrayList<SoftwarePackageGroup> groups, int id) {
         try {
-            File fd = new File(filename);
-            FileOutputStream fos = new FileOutputStream(fd);
-            int i, j;
+            FileOutputStream fos = new FileOutputStream(new File(filename));
 
             PersistenceElement.writeAsciiLine(fos, "digraph G {");
             PersistenceElement.writeAsciiLine(fos, "    //= NODES ==============================================================");
@@ -217,7 +206,7 @@ public class SoftwarePackageGraph {
             ungroupAllNodes();
 
             if (id == -1) {
-                for (i = 0; i < groups.size(); i++) {
+                for (int i = 0; i < groups.size(); i++) {
                     exportDotNodes(fos, groups.get(i), i);
                 }
             } else {
@@ -226,47 +215,33 @@ public class SoftwarePackageGraph {
 
             if (id == -1) {
                 System.out.print("Exporting nodes not in groups...");
-                for (i = 0; i < nodes.size(); i++) {
-                    if ((nodes.get(i).getGroup() == false) &&
-                            !(nodes.get(i).getName().startsWith("[")) &&
-                            !(nodes.get(i).getName().startsWith("_["))) {
-                        exportDotNode(fos, nodes.get(i), false);
-                        //System.err.println(nodes.get(i).getName());
+                for (SoftwarePackageNode node : nodes) {
+                    if (!node.getGroup() && !node.getName().startsWith("[") && !node.getName().startsWith("_[")) {
+                        exportDotNode(fos, node, false);
                     }
                 }
                 System.out.println(" Ok!");
             }
 
             PersistenceElement.writeAsciiLine(fos, "\n    //= ARCS ===============================================================");
-            ArrayList<SoftwarePackageNode> children;
 
-            for (i = 0; i < nodes.size(); i++) {
-                children = nodes.get(i).getChildren();
-                for (j = 0; j < children.size(); j++) {
-                    String a;
-                    String b;
-                    String r;
+            for (PackageEdge edge : graph.edges()) {
+                SoftwarePackageNode aNode = edge.from();
+                SoftwarePackageNode bNode = edge.to();
+                String a = aNode.getName();
+                String b = bNode.getName();
 
-                    if (nodes.get(i) == null || children.get(j) == null) {
-                        continue;
-                    }
-                    a = nodes.get(i).getName();
-                    b = children.get(j).getName();
+                String r = "    \"" + a + "\" -> \"" + b + "\";";
+                if (namesAreGroupsAndFirstGreater(a, b)) {
+                    r = "    \"" + a + "\" -> \"" + b + "\" [color=\"red\"];";
+                }
 
-                    r = "    \"" + a + "\" -> \"" + b + "\";";
-                    if (namesAreGroupsAndFirstGreater(a, b)) {
-                        r = "    \"" + a + "\" -> \"" + b + "\" [color=\"red\"];";
-                        //System.out.println(a + "->" + b);
-                    }
-
-                    if ((id == -1) || groups.get(id).contains(children.get(j))) {
-                        PersistenceElement.writeAsciiLine(fos, r);
-                    }
+                if ((id == -1) || groups.get(id).contains(bNode)) {
+                    PersistenceElement.writeAsciiLine(fos, r);
                 }
             }
 
             PersistenceElement.writeAsciiLine(fos, "}");
-
             fos.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -275,41 +250,28 @@ public class SoftwarePackageGraph {
 
     public void exportGroups(ArrayList<SoftwarePackageGroup> groups) {
         try {
-            int i;
-            int j;
-            String filename;
-            File fd;
-            FileOutputStream fos;
-            BufferedOutputStream bos;
-            SoftwarePackageNode n;
-
             ungroupAllNodes();
-            for (i = 0; i < groups.size(); i++) {
-                SoftwarePackageNode parent;
-
-                parent = groups.get(i).header;
-
-                if (parent.getChildren().size() == 0) {
+            for (SoftwarePackageGroup group : groups) {
+                SoftwarePackageNode parent = group.header;
+                if (graph.outDegreeOf(parent) == 0) {
                     continue;
                 }
 
                 parent.setGroup(true);
-                filename = "./output/txt/" + normalizeFilename(groups.get(i).header.getName()) + ".txt";
-                fd = new File(filename);
-                fos = new FileOutputStream(fd);
-                bos = new BufferedOutputStream(fos);
+                String filename = "./output/txt/" + normalizeFilename(group.header.getName()) + ".txt";
+                FileOutputStream fos = new FileOutputStream(new File(filename));
+                BufferedOutputStream bos = new BufferedOutputStream(fos);
 
                 PersistenceElement.writeAsciiLine(bos, parent.getName());
                 PersistenceElement.writeAsciiLine(bos, "#- Top packages ------------------------------------------------------------");
 
-                for (j = 0; j < parent.getChildren().size(); j++) {
-                    n = parent.getChildren().get(j);
+                for (SoftwarePackageNode n : graph.outgoingOf(parent)) {
                     n.setGroup(true);
                     PersistenceElement.writeAsciiLine(bos, n.getName());
                 }
+
                 PersistenceElement.writeAsciiLine(bos, "#- Dependent packages ------------------------------------------------------");
-                for (j = 0; j < groups.get(i).list.size(); j++) {
-                    n = groups.get(i).list.get(j);
+                for (SoftwarePackageNode n : group.list) {
                     if (!n.getGroup()) {
                         PersistenceElement.writeAsciiLine(bos, n.getName());
                     }
@@ -326,46 +288,31 @@ public class SoftwarePackageGraph {
 
     public void exportCleanScripts(ArrayList<SoftwarePackageGroup> groups) {
         try {
-            int i;
-            int j;
-            String filename;
-            File fd;
-            FileOutputStream fos;
-            BufferedOutputStream bos;
-            SoftwarePackageNode n;
-
             ungroupAllNodes();
-            for (i = 0; i < groups.size(); i++) {
-                SoftwarePackageNode parent;
-
-                parent = groups.get(i).header;
-
-                if (parent.getChildren().size() == 0) {
+            for (SoftwarePackageGroup group : groups) {
+                SoftwarePackageNode parent = group.header;
+                if (graph.outDegreeOf(parent) == 0) {
                     continue;
                 }
 
                 parent.setGroup(true);
-                filename = "./output/cleansh/" + normalizeFilename(groups.get(i).header.getName()) + ".sh";
-                fd = new File(filename);
-                fos = new FileOutputStream(fd);
-                bos = new BufferedOutputStream(fos);
+                String filename = "./output/cleansh/" + normalizeFilename(group.header.getName()) + ".sh";
+                FileOutputStream fos = new FileOutputStream(new File(filename));
+                BufferedOutputStream bos = new BufferedOutputStream(fos);
 
                 PersistenceElement.writeAsciiLine(bos, "# " + parent.getName());
+                StringBuilder command = new StringBuilder("apt-get purge ");
 
-                String command = "apt-get purge ";
-
-                for (j = 0; j < parent.getChildren().size(); j++) {
-                    n = parent.getChildren().get(j);
+                for (SoftwarePackageNode n : graph.outgoingOf(parent)) {
                     n.setGroup(true);
-                    command = command + n.getName() + " ";
+                    command.append(n.getName()).append(' ');
                 }
-                for (j = 0; j < groups.get(i).list.size(); j++) {
-                    n = groups.get(i).list.get(j);
+                for (SoftwarePackageNode n : group.list) {
                     if (!n.getGroup()) {
-                        command = command + n.getName() + " ";
+                        command.append(n.getName()).append(' ');
                     }
                 }
-                PersistenceElement.writeAsciiLine(bos, command);
+                PersistenceElement.writeAsciiLine(bos, command.toString());
 
                 bos.close();
                 fos.close();
@@ -378,47 +325,33 @@ public class SoftwarePackageGraph {
 
     public void exportTopNodesPerGroups(ArrayList<SoftwarePackageGroup> groups) {
         try {
-            int i;
-            int j;
-            String filename;
-            File fd;
-            FileOutputStream fos;
-            BufferedOutputStream bos;
-            SoftwarePackageNode n;
-
             ungroupAllNodes();
-            for (i = 0; i < groups.size(); i++) {
-                SoftwarePackageNode parent;
-
-                parent = groups.get(i).header;
-
-                if (parent.getChildren().size() == 0) {
+            for (SoftwarePackageGroup group : groups) {
+                SoftwarePackageNode parent = group.header;
+                if (graph.outDegreeOf(parent) == 0) {
                     continue;
                 }
 
                 parent.setGroup(true);
-                filename = "./output/tops/" + normalizeFilename(groups.get(i).header.getName()) + ".sh";
-                fd = new File(filename);
-                fos = new FileOutputStream(fd);
-                bos = new BufferedOutputStream(fos);
+                String filename = "./output/tops/" + normalizeFilename(group.header.getName()) + ".sh";
+                FileOutputStream fos = new FileOutputStream(new File(filename));
+                BufferedOutputStream bos = new BufferedOutputStream(fos);
 
                 PersistenceElement.writeAsciiLine(bos, "# " + parent.getName());
 
-                String command = "apt-get install ";
+                StringBuilder command = new StringBuilder("apt-get install ");
                 int count = 0;
 
-                for (j = 0; j < parent.getChildren().size(); j++) {
-                    n = parent.getChildren().get(j);
+                for (SoftwarePackageNode n : graph.outgoingOf(parent)) {
                     n.setGroup(true);
                     if (n.getBoldName()) {
-                        command = command + n.getName() + " ";
+                        command.append(n.getName()).append(' ');
                         count++;
                     }
                 }
-                for (j = 0; j < groups.get(i).list.size(); j++) {
-                    n = groups.get(i).list.get(j);
+                for (SoftwarePackageNode n : group.list) {
                     if (!n.getGroup() && n.getBoldName()) {
-                        command = command + n.getName() + " ";
+                        command.append(n.getName()).append(' ');
                         count++;
                     }
                 }
@@ -426,7 +359,7 @@ public class SoftwarePackageGraph {
                 if (count == 0) {
                     PersistenceElement.writeAsciiLine(bos, "# no top nodes");
                 } else {
-                    PersistenceElement.writeAsciiLine(bos, command);
+                    PersistenceElement.writeAsciiLine(bos, command.toString());
                 }
 
                 bos.close();
@@ -444,42 +377,26 @@ public class SoftwarePackageGraph {
 
     public void exportInstallScripts(ArrayList<SoftwarePackageGroup> groups) {
         try {
-            int i;
-            int j;
-            String filename;
-            File fd;
-            FileOutputStream fos;
-            BufferedOutputStream bos;
-            SoftwarePackageNode n;
-
             ungroupAllNodes();
-            for (i = 0; i < groups.size(); i++) {
-                SoftwarePackageNode parent;
-
-                parent = groups.get(i).header;
-
-                if (parent.getChildren().size() == 0) {
+            for (SoftwarePackageGroup group : groups) {
+                SoftwarePackageNode parent = group.header;
+                if (graph.outDegreeOf(parent) == 0) {
                     continue;
                 }
 
                 parent.setGroup(true);
-                filename = "./output/installsh/" + normalizeFilename(groups.get(i).header.getName()) + ".sh";
-                fd = new File(filename);
-                fos = new FileOutputStream(fd);
-                bos = new BufferedOutputStream(fos);
+                String filename = "./output/installsh/" + normalizeFilename(group.header.getName()) + ".sh";
+                FileOutputStream fos = new FileOutputStream(new File(filename));
+                BufferedOutputStream bos = new BufferedOutputStream(fos);
 
                 PersistenceElement.writeAsciiLine(bos, "# " + parent.getName());
+                StringBuilder command = new StringBuilder("apt-get install ");
 
-                String command = "apt-get install ";
-
-                for (j = 0; j < parent.getChildren().size(); j++) {
-                    n = parent.getChildren().get(j);
+                for (SoftwarePackageNode n : graph.outgoingOf(parent)) {
                     n.setGroup(true);
-                    //if (n.getMark()) {
-                    command = command + n.getName() + " ";
-                    //}
+                    command.append(n.getName()).append(' ');
                 }
-                PersistenceElement.writeAsciiLine(bos, command);
+                PersistenceElement.writeAsciiLine(bos, command.toString());
 
                 bos.close();
                 fos.close();
@@ -490,201 +407,146 @@ public class SoftwarePackageGraph {
         }
     }
 
-    public void
-    exportDotByGroups(ArrayList<SoftwarePackageGroup> groups) {
-        int i;
-
+    public void exportDotByGroups(ArrayList<SoftwarePackageGroup> groups) {
         int N = 24;
-        ArrayList<ArrayList<String[]>> egroups = new ArrayList<ArrayList<String[]>>();
-        for (i = 0; i < N; i++) {
-            egroups.add(new ArrayList<String[]>());
+        ArrayList<ArrayList<String[]>> egroups = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            egroups.add(new ArrayList<>());
         }
 
-        for (i = 0; i < groups.size(); i++) {
-            String filename;
+        for (int i = 0; i < groups.size(); i++) {
             System.out.print(".");
-            filename = "./output/dot/" + normalizeFilename(normalizeFilename(groups.get(i).header.getName())) + ".dot";
+            String filename = "./output/dot/" + normalizeFilename(normalizeFilename(groups.get(i).header.getName())) + ".dot";
 
-            SoftwarePackageNode parent;
-            String args[] = new String[6];
-
-            parent = groups.get(i).header;
-            if (parent.getChildren().size() == 0 &&
-                    !parent.getName().equals("[STRUCTURE]")) {
+            SoftwarePackageNode parent = groups.get(i).header;
+            if (graph.outDegreeOf(parent) == 0 && !parent.getName().equals("[STRUCTURE]")) {
                 continue;
             }
 
             exportDot(filename, groups, i);
-            args[0] = "/usr/bin/dot";
-            args[1] = "-Gnodesep=0";
-            args[2] = "-Tpng";
-            args[3] = filename;
-            args[4] = "-o";
-            args[5] = "./output/png/" + normalizeFilename(groups.get(i).header.getName()) + ".png";
+            String[] args = new String[] {
+                "/usr/bin/dot",
+                "-Gnodesep=0",
+                "-Tpng",
+                filename,
+                "-o",
+                "./output/png/" + normalizeFilename(groups.get(i).header.getName()) + ".png"
+            };
             egroups.get(i % N).add(args);
         }
 
-        Thread ts[] = new Thread[N];
-        for (i = 0; i < N; i++) {
+        Thread[] ts = new Thread[N];
+        for (int i = 0; i < N; i++) {
             DotRunner unit = new DotRunner(egroups.get(i));
             ts[i] = new Thread(unit);
             ts[i].start();
         }
 
-        for (i = 0; i < N; i++) {
+        for (int i = 0; i < N; i++) {
             try {
                 ts[i].join();
-            } catch (Exception e) {
+            } catch (Exception ignored) {
             }
         }
     }
 
-    private boolean
-    thereIsAPath(SoftwarePackageNode a, SoftwarePackageNode b, SoftwarePackageNode exclude) {
-        int i;
-
-        if (a == null || b == null || a.getMark() == true || a == exclude) {
-            return false;
-        }
-
-        ArrayList<SoftwarePackageNode> children = a.getChildren();
-        a.setMark(true);
-
-        for (i = 0; i < children.size(); i++) {
-            if (children.get(i) == b ||
-                    thereIsAPath(children.get(i), b, exclude)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private void
-    unmarkAllNodes() {
-        int i;
-        for (i = 0; i < nodes.size(); i++) {
-            nodes.get(i).setMark(false);
+    private void ungroupAllNodes() {
+        for (SoftwarePackageNode node : nodes) {
+            node.setGroup(false);
         }
     }
 
-    private void
-    ungroupAllNodes() {
-        int i;
-        for (i = 0; i < nodes.size(); i++) {
-            nodes.get(i).setGroup(false);
-        }
-    }
-
-    public void
-    removeTransitiveArcs() {
+    public void removeTransitiveArcs() {
         System.out.print("Removing transitive arcs for " + nodes.size() + " nodes: ");
-        int i, j, k;
 
-        for (i = 0; i < nodes.size(); i++) {
-            //System.out.print(".");
-            if (i > 1 && (i % 200 == 0)) {
-                //System.out.print(" [" + i + "] ");
+        List<PackageEdge> edges = new ArrayList<>(graph.edges());
+        int checked = 0;
+
+        for (PackageEdge edge : edges) {
+            SoftwarePackageNode source = edge.from();
+            SoftwarePackageNode target = edge.to();
+
+            removeDependency(source, target);
+            boolean hasAlternatePath = graph.hasPath(source, target);
+            if (!hasAlternatePath) {
+                addDependency(source, target);
+            }
+
+            checked++;
+            if (checked > 1 && (checked % 200 == 0)) {
                 System.out.print(".");
             }
-            ArrayList<SoftwarePackageNode> children = nodes.get(i).getChildren();
-            SoftwarePackageNode source, target;
-            for (j = 0; j < children.size(); j++) {
-                target = children.get(j);
-                for (k = 0; k < children.size(); k++) {
-                    if (j != k) {
-                        source = children.get(k);
-                        unmarkAllNodes();
-                        if (thereIsAPath(source, target, nodes.get(i))) {
-                            children.remove(j);
-                            j--;
-                            //System.out.print("X");
-                            break;
-                        }
-                    }
-                }
-            }
         }
+
         System.out.println(" Ok!");
     }
 
-    void
-    anotateGroupNodeByName(String pattern) {
-        int i;
+    void anotateGroupNodeByName(String pattern) {
         String name = "_" + pattern;
 
-        for (i = 0; i < nodes.size(); i++) {
-            if (nodes.get(i).getName().equals(name)) {
-                nodes.get(i).setMark(true);
-                nodes.get(i).setSource(true);
+        for (SoftwarePackageNode node : nodes) {
+            if (node.getName().equals(name)) {
+                node.setMark(true);
+                node.setSource(true);
                 return;
             }
         }
     }
 
-    public void
-    anotateGroups() {
-        int i;
-        for (i = 0; i < nodes.size(); i++) {
-            if (nodes.get(i).getName().startsWith("[") &&
-                    nodes.get(i).getMark()) {
-                anotateGroupNodeByName(nodes.get(i).getName());
+    public void anotateGroups() {
+        for (SoftwarePackageNode node : nodes) {
+            if (node.getName().startsWith("[") && node.getMark()) {
+                anotateGroupNodeByName(node.getName());
             }
         }
     }
 
-    public void
-    inundarV2(SoftwarePackageNode n) {
-        int i;
+    public void inundarV2(SoftwarePackageNode n) {
+        ArrayDeque<SoftwarePackageNode> pending = new ArrayDeque<>();
+        pending.push(n);
 
-        if (n.getMark() == true) {
-            return;
-        }
-        n.setSource(true);
-        n.setMark(true);
+        while (!pending.isEmpty()) {
+            SoftwarePackageNode current = pending.pop();
+            if (current.getMark()) {
+                continue;
+            }
+            current.setSource(true);
+            current.setMark(true);
 
-        ArrayList<SoftwarePackageNode> children = n.getChildren();
-        for (i = 0; i < children.size(); i++) {
-            inundarV2(children.get(i));
-        }
-    }
-
-    public void
-    inundarV3(SoftwarePackageNode n) {
-        int i, j;
-
-        if (n.getMark() == true) {
-            return;
-        }
-        n.setSource(true);
-        n.setMark(true);
-
-        SoftwarePackageNode p;
-        for (i = 0; i < nodes.size(); i++) {
-            p = nodes.get(i);
-            ArrayList<SoftwarePackageNode> brothers = p.getChildren();
-            for (j = 0; j < brothers.size(); j++) {
-                if (brothers.get(j) == n) {
-                    inundarV3(p);
-                }
+            for (SoftwarePackageNode next : graph.outgoingOf(current)) {
+                pending.push(next);
             }
         }
     }
 
-    public void
-    initNodesAnotation() {
-        int i;
+    public void inundarV3(SoftwarePackageNode n) {
+        ArrayDeque<SoftwarePackageNode> pending = new ArrayDeque<>();
+        pending.push(n);
 
-        for (i = 0; i < nodes.size(); i++) {
-            nodes.get(i).setSource(false);
-            nodes.get(i).setSink(false);
-            nodes.get(i).setMark(false);
+        while (!pending.isEmpty()) {
+            SoftwarePackageNode current = pending.pop();
+            if (current.getMark()) {
+                continue;
+            }
+            current.setSource(true);
+            current.setMark(true);
+
+            for (SoftwarePackageNode previous : graph.incomingOf(current)) {
+                pending.push(previous);
+            }
         }
     }
 
-    public void
-    anotateSingleNode(String seed) {
-        SoftwarePackageNode n;
-        n = searchNodeByName(seed);
+    public void initNodesAnotation() {
+        for (SoftwarePackageNode node : nodes) {
+            node.setSource(false);
+            node.setSink(false);
+            node.setMark(false);
+        }
+    }
+
+    public void anotateSingleNode(String seed) {
+        SoftwarePackageNode n = searchNodeByName(seed);
         if (n == null) {
             return;
         }
@@ -692,12 +554,8 @@ public class SoftwarePackageGraph {
         n.setSource(true);
     }
 
-    public void
-    anotateNodesV2(String seed) {
-        int i;
-
-        SoftwarePackageNode n;
-        n = searchNodeByName(seed);
+    public void anotateNodesV2(String seed) {
+        SoftwarePackageNode n = searchNodeByName(seed);
         if (n == null) {
             return;
         }
@@ -705,62 +563,36 @@ public class SoftwarePackageGraph {
         n.setSource(true);
         n.setBoldName(true);
 
-        ArrayList<SoftwarePackageNode> children = n.getChildren();
-        for (i = 0; i < children.size(); i++) {
-            inundarV2(children.get(i));
+        for (SoftwarePackageNode child : graph.outgoingOf(n)) {
+            inundarV2(child);
         }
     }
 
-    public void
-    anotateNodesV3(String seed) {
-        int i, j;
-
-        SoftwarePackageNode n, p;
-        n = searchNodeByName(seed);
+    public void anotateNodesV3(String seed) {
+        SoftwarePackageNode n = searchNodeByName(seed);
         if (n == null) {
             return;
         }
         n.setMark(true);
         n.setSource(true);
 
-        for (i = 0; i < nodes.size(); i++) {
-            p = nodes.get(i);
-            ArrayList<SoftwarePackageNode> brothers = p.getChildren();
-            for (j = 0; j < brothers.size(); j++) {
-                if (n == brothers.get(j)) {
-                    inundarV3(p);
-                }
-            }
+        for (SoftwarePackageNode parent : graph.incomingOf(n)) {
+            inundarV3(parent);
         }
     }
 
-    public void
-    anotateNodes(ArrayList<SoftwarePackageGroup> groups) {
+    public void anotateNodes(ArrayList<SoftwarePackageGroup> groups) {
         System.out.print("Anotating nodes... ");
-        int i, j, k;
 
-        for (i = 0; i < nodes.size(); i++) {
-            nodes.get(i).setSource(true);
-            nodes.get(i).setSink(false);
+        for (SoftwarePackageNode node : nodes) {
+            node.setSource(graph.inDegreeOf(node) == 0);
+            node.setSink(graph.outDegreeOf(node) == 0);
         }
 
-        for (i = 0; i < nodes.size(); i++) {
-            ArrayList<SoftwarePackageNode> children = nodes.get(i).getChildren();
-            if (children.size() == 0) {
-                nodes.get(i).setSink(true);
-            }
-
-            for (j = 0; j < children.size(); j++) {
-                children.get(j).setSource(false);
-            }
-
-        }
-
-        for (i = 0; i < groups.size(); i++) {
-            SoftwarePackageNode n;
-            n = groups.get(i).header;
-            for (j = 0; j < n.getChildren().size(); j++) {
-                n.getChildren().get(j).setSource(true);
+        for (SoftwarePackageGroup group : groups) {
+            SoftwarePackageNode header = group.header;
+            for (SoftwarePackageNode n : graph.outgoingOf(header)) {
+                n.setSource(true);
             }
         }
 
@@ -769,24 +601,18 @@ public class SoftwarePackageGraph {
 
     public void save(String filename) {
         try {
-            File fd = new File(filename);
-            FileOutputStream fos = new FileOutputStream(fd);
+            FileOutputStream fos = new FileOutputStream(new File(filename));
 
-            int i, j;
-            String line;
-
-            for (i = 0; i < nodes.size(); i++) {
-                line = "n " + nodes.get(i).getName() + ((nodes.get(i).getIsBad()) ? " bad" : " good");
+            for (SoftwarePackageNode node : nodes) {
+                String line = "n " + node.getName() + (node.getIsBad() ? " bad" : " good");
                 PersistenceElement.writeAsciiLine(fos, line);
             }
 
-            ArrayList<SoftwarePackageNode> children;
-            for (i = 0; i < nodes.size(); i++) {
-                children = nodes.get(i).getChildren();
-                for (j = 0; j < children.size(); j++) {
-                    line = "r " + nodes.get(i).getName() + " " + children.get(j).getName();
-                    PersistenceElement.writeAsciiLine(fos, line);
-                }
+            for (PackageEdge edge : graph.edges()) {
+                SoftwarePackageNode source = edge.from();
+                SoftwarePackageNode target = edge.to();
+                String line = "r " + source.getName() + " " + target.getName();
+                PersistenceElement.writeAsciiLine(fos, line);
             }
 
             fos.close();
@@ -795,90 +621,64 @@ public class SoftwarePackageGraph {
         }
     }
 
-    private boolean isOnList(ArrayList<SoftwarePackageNode> list,
-                             SoftwarePackageNode subject) {
-        int i;
-        for (i = 0; i < list.size(); i++) {
-            if (list.get(i) == subject) {
+    private boolean isOnList(ArrayList<SoftwarePackageNode> list, SoftwarePackageNode subject) {
+        for (SoftwarePackageNode node : list) {
+            if (node == subject) {
                 return true;
             }
         }
         return false;
     }
 
-    /**
-     * Given a list of graph nodes (that are part of the same group), this routine
-     * simplifies the graph, to contain references to groupnode, instead of
-     * dependant list.
-     */
-    public void cleangroup(ArrayList<SoftwarePackageNode> list,
-                           SoftwarePackageNode groupParent) {
-        ArrayList<SoftwarePackageNode> children;
-        int i, j;
-        SoftwarePackageNode n;
+    public void cleangroup(ArrayList<SoftwarePackageNode> list, SoftwarePackageNode groupParent) {
+        Set<SoftwarePackageNode> groupSet = new HashSet<>(list);
 
-        for (i = 0; i < nodes.size(); i++) {
-            n = nodes.get(i);
-            if (groupParent.getName().equals(n.getName()) ||
-                    isOnList(list, n) || n.getParentGroupNode() == null) {
+        for (SoftwarePackageNode n : nodes) {
+            if (groupParent.getName().equals(n.getName()) || groupSet.contains(n) || n.getParentGroupNode() == null) {
                 continue;
             }
-            children = n.getChildren();
-            for (j = 0; j < children.size(); j++) {
-                SoftwarePackageNode cj = children.get(j);
-                if (isOnList(list, cj)) {
-                    children.remove(j);
-                    j--;
+
+            List<SoftwarePackageNode> toRemove = new ArrayList<>();
+            for (SoftwarePackageNode child : graph.outgoingOf(n)) {
+                if (groupSet.contains(child)) {
+                    toRemove.add(child);
                     if (n.getParentGroupNode() != null) {
-                        System.err.println(n.getParentGroupNode().getName() + "." + n.getName() + " -> " + groupParent.getName() + "." + cj.getName());
-                        n.getParentGroupNode().addExternalGroupDependency(
-                                groupParent);
+                        System.err.println(n.getParentGroupNode().getName() + "." + n.getName() + " -> " + groupParent.getName() + "." + child.getName());
+                        n.getParentGroupNode().addExternalGroupDependency(groupParent);
                     }
                 }
+            }
+
+            for (SoftwarePackageNode child : toRemove) {
+                removeDependency(n, child);
             }
         }
     }
 
-    private void addGroupDependency(SoftwarePackageNode from,
-                                    SoftwarePackageNode to) {
+    private void addGroupDependency(SoftwarePackageNode from, SoftwarePackageNode to) {
         String fromName = "_" + from.getName();
         String toName = "_" + to.getName();
-        SoftwarePackageNode a;
-        SoftwarePackageNode b;
-        a = searchNodeByName(fromName);
-        b = searchNodeByName(toName);
+        SoftwarePackageNode a = searchNodeByName(fromName);
+        SoftwarePackageNode b = searchNodeByName(toName);
         if (a != null && b != null) {
-            a.addChild(b);
+            addDependency(a, b);
         } else {
             System.err.println("ERROR: broken links");
         }
     }
 
-    /**
-     * Given a set of groups, this method adds a new node to the graph
-     * for each group, and groups them in to a new node, in order to give
-     * a brief/abstract group that documents the superstructure of the
-     * whole graph.
-     */
-    public void
-    addGroupNodes(ArrayList<SoftwarePackageGroup> groups) {
-        SoftwarePackageGroup ng;
-        SoftwarePackageNode n;
-        int i;
-        int j;
+    public void addGroupNodes(ArrayList<SoftwarePackageGroup> groups) {
+        SoftwarePackageGroup ng = new SoftwarePackageGroup("[STRUCTURE]");
 
-        ng = new SoftwarePackageGroup("[STRUCTURE]");
-        for (i = 0; i < groups.size(); i++) {
-            n = addNode(("_" + groups.get(i).header.getName()));
+        for (SoftwarePackageGroup group : groups) {
+            SoftwarePackageNode n = addNode("_" + group.header.getName());
             ng.list.add(n);
         }
 
-        for (i = 0; i < groups.size(); i++) {
-            n = groups.get(i).header;
-            for (j = 0;
-                 j < n.getExternalGroupDependencies().size();
-                 j++) {
-                addGroupDependency(n, n.getExternalGroupDependencies().get(j));
+        for (SoftwarePackageGroup group : groups) {
+            SoftwarePackageNode n = group.header;
+            for (SoftwarePackageNode dependency : n.getExternalGroupDependencies()) {
+                addGroupDependency(n, dependency);
             }
         }
 
@@ -886,13 +686,8 @@ public class SoftwarePackageGraph {
     }
 
     public void reportNodesOutsideGroups() {
-        int i;
-        for (i = 0; i < nodes.size(); i++) {
-            SoftwarePackageNode n;
-
-            n = nodes.get(i);
-            if (n.getParentGroupNode() == null &&
-                    !n.getName().startsWith("[")) {
+        for (SoftwarePackageNode n : nodes) {
+            if (n.getParentGroupNode() == null && !n.getName().startsWith("[")) {
                 System.out.println("  - Orphaned node: " + n.getName());
             }
         }

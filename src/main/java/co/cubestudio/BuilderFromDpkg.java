@@ -71,12 +71,12 @@ public class BuilderFromDpkg {
             child = graph.searchNodeByName(key);
 
             if ( child != null ) {
-                e.node.addChild(child);
+                graph.addDependency(e.node, child);
             }
             else {
                 graph.addBadNode(key);
                 child = graph.searchNodeByName(key);
-                e.node.addChild(child);
+                graph.addDependency(e.node, child);
             }
         }
     }
@@ -121,8 +121,8 @@ public class BuilderFromDpkg {
                 SoftwarePackageNode o, d;
                 o = graph.searchNodeByName(nn);
                 d = graph.addNode(x);
-                o.addChild(d);
-                d.addChild(o);
+                graph.addDependency(o, d);
+                graph.addDependency(d, o);
             }
         }
     }
