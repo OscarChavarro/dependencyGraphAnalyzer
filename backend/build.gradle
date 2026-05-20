@@ -1,0 +1,68 @@
+plugins {
+    id 'java'
+    id 'io.freefair.lombok' version '6.4.1'
+    id 'application'
+}
+
+group 'co.cubestudio'
+version '0.666'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'ch.qos.logback:logback-classic:1.4.11'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.17.2'
+    implementation 'org.jgrapht:jgrapht-core:1.5.2'
+    implementation 'co.cubestudio:base:1.2'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java']
+        }
+        resources {
+            srcDirs = ['src/main/resources']
+        }
+    }
+    test {
+        java {
+            srcDirs = ['src/test/java']
+        }
+        resources {
+            srcDirs = ['src/test/resources']
+        }
+    }
+}
+
+tasks.withType(JavaCompile) {
+    options.compilerArgs << "-Xlint:unchecked"
+}
+
+ext {
+    selectedMainClassShort = project.hasProperty('app') ? "era.put.${project.property('app')}" : 'entryPoints.CommandLineApp'
+}
+
+application {
+    mainClass.set(selectedMainClassShort)
+}
+
+run {
+    if (project.hasProperty('app')) {
+        selectedMainClassShort = "era.put.${project.property('app')}"
+        mainClassName = selectedMainClassShort
+    }
+}
+
+tasks.register('copyRuntimeDeps', Copy) {
+    from configurations.runtimeClasspath
+    into "$buildDir/runtime-libs"
+}
