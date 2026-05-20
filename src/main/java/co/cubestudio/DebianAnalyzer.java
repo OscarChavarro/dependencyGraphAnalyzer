@@ -152,48 +152,48 @@ public class DebianAnalyzer {
         MarkerJedilink mj = new MarkerJedilink(graph);
         mj.markCustomJedilink();
 
-        //graph.anotateNodesV3("raycasting/bidirectionalRaytracing/FlagChain.h");
+        //graph.markPackageAndItsClients("raycasting/bidirectionalRaytracing/FlagChain.h");
 
-        //graph.anotateNodesV3("GL/gl.h");
-        //graph.anotateNodesV3("GL/glu.h");
-        //graph.anotateNodesV3("GL/glx.h");
-        //graph.anotateNodesV3("GL/osmesa.h");
-        //graph.anotateNodesV3("GL/glut.h");
-        //graph.anotateNodesV3("OpenGL/gl.h");
-        //graph.anotateNodesV3("OpenGL/glu.h");
-        //graph.anotateNodesV3("GLUT/glut.h");
-        //graph.anotateNodesV3("render/Opengl.h");
-        //graph.anotateNodesV3("GL/osmesa.h");
+        //graph.markPackageAndItsClients("GL/gl.h");
+        //graph.markPackageAndItsClients("GL/glu.h");
+        //graph.markPackageAndItsClients("GL/glx.h");
+        //graph.markPackageAndItsClients("GL/osmesa.h");
+        //graph.markPackageAndItsClients("GL/glut.h");
+        //graph.markPackageAndItsClients("OpenGL/gl.h");
+        //graph.markPackageAndItsClients("OpenGL/glu.h");
+        //graph.markPackageAndItsClients("GLUT/glut.h");
+        //graph.markPackageAndItsClients("render/Opengl.h");
+        //graph.markPackageAndItsClients("GL/osmesa.h");
 
-	//graph.anotateNodesV2("spring-cloud-starter");
-        //graph.anotateNodesV2("org.junit:junit-bom:5.8.2");
-        //graph.anotateNodesV2("com.fasterxml.jackson.core:jackson-core:2.15.2");
-        //graph.anotateNodesV2("logback-classic");
+	//graph.markPackageAndItsDependencies("spring-cloud-starter");
+        //graph.markPackageAndItsDependencies("org.junit:junit-bom:5.8.2");
+        //graph.markPackageAndItsDependencies("com.fasterxml.jackson.core:jackson-core:2.15.2");
+        //graph.markPackageAndItsDependencies("logback-classic");
 
         // Landmarks
-        //graph.anotateNodesV3("cli-common"); // Mono
-        //graph.anotateNodesV3("libmono0");
-        //graph.anotateNodesV3("libmono-2.0-1");
+        //graph.markPackageAndItsClients("cli-common"); // Mono
+        //graph.markPackageAndItsClients("libmono0");
+        //graph.markPackageAndItsClients("libmono-2.0-1");
 
-        //graph.anotateNodesV3("libxfce4util4"); // XFCE
+        //graph.markPackageAndItsClients("libxfce4util4"); // XFCE
 
-        //graph.anotateNodesV3("xserver-common"); // X11 server
-        //graph.anotateNodesV3("x11-xserver-utils");
+        //graph.markPackageAndItsClients("xserver-common"); // X11 server
+        //graph.markPackageAndItsClients("x11-xserver-utils");
 
         // Known gnome applications
-        //graph.anotateNodesV2("cheese");
-        //graph.anotateNodesV2("gedit");
-        //graph.anotateNodesV2("gnome-terminal");
-        //graph.anotateNodesV2("dia");
-        //graph.anotateNodesV2("gimp");
-        //graph.anotateNodesV2("ghex");
-        //graph.anotateNodesV2("gparted");
-        //graph.anotateNodesV2("firefox");
-        //graph.anotateNodesV2("flashplugin-installer");
-        //graph.anotateNodesV3("gimp-help-common");
-        //graph.anotateNodesV3("xfonts-utils");
-        //graph.anotateNodesV3("libxaw7");
-        //graph.anotateNodesV3("libva2");
+        //graph.markPackageAndItsDependencies("cheese");
+        //graph.markPackageAndItsDependencies("gedit");
+        //graph.markPackageAndItsDependencies("gnome-terminal");
+        //graph.markPackageAndItsDependencies("dia");
+        //graph.markPackageAndItsDependencies("gimp");
+        //graph.markPackageAndItsDependencies("ghex");
+        //graph.markPackageAndItsDependencies("gparted");
+        //graph.markPackageAndItsDependencies("firefox");
+        //graph.markPackageAndItsDependencies("flashplugin-installer");
+        //graph.markPackageAndItsClients("gimp-help-common");
+        //graph.markPackageAndItsClients("xfonts-utils");
+        //graph.markPackageAndItsClients("libxaw7");
+        //graph.markPackageAndItsClients("libva2");
 
 
         //graph.anotateNodes(groups);

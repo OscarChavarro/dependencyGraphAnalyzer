@@ -1,6 +1,8 @@
 classes/*
 output/*
 .idea
+.gradle/
+build/
 u
 v
 e

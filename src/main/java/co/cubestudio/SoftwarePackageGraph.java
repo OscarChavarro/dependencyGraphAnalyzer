@@ -554,7 +554,7 @@ public class SoftwarePackageGraph {
         n.setSource(true);
     }
 
-    public void anotateNodesV2(String seed) {
+    public void markPackageAndItsDependencies(String seed) {
         SoftwarePackageNode n = searchNodeByName(seed);
         if (n == null) {
             return;
@@ -568,7 +568,7 @@ public class SoftwarePackageGraph {
         }
     }
 
-    public void anotateNodesV3(String seed) {
+    public void markPackageAndItsClients(String seed) {
         SoftwarePackageNode n = searchNodeByName(seed);
         if (n == null) {
             return;
