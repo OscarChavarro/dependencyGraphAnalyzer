@@ -1,6 +1,7 @@
 package entryPoints;
 
 import core.DebianAnalyzer;
+import core.OutputFormats;
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.FileSystems;
@@ -37,6 +38,6 @@ public class CommandLineApp {
             }
         }
 
-        instance.run(expandedArgs.toArray(new String[0]));
+        instance.run(expandedArgs.toArray(new String[0]), OutputFormats.PNG);
     }
 }

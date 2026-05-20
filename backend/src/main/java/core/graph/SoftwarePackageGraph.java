@@ -1,5 +1,6 @@
 package core.graph;
 
+import core.OutputFormats;
 import core.grouper.SoftwarePackageGroup;
 import core.exporters.DotWriter;
 import java.io.BufferedOutputStream;
@@ -409,9 +410,19 @@ public class SoftwarePackageGraph {
         }
     }
 
-    public void exportDotByGroups(ArrayList<SoftwarePackageGroup> groups) {
+    public void exportDotByGroups(ArrayList<SoftwarePackageGroup> groups, OutputFormats outputFormat) {
         int N = 24;
         ArrayList<ArrayList<String[]>> egroups = new ArrayList<>();
+        String graphvizType = outputFormat == OutputFormats.SVG ? "svg" : "png";
+        String outputDir = "./output/" + graphvizType;
+
+        try {
+            Files.createDirectories(Paths.get(outputDir));
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.exit(9);
+        }
+
         for (int i = 0; i < N; i++) {
             egroups.add(new ArrayList<>());
         }
@@ -429,10 +440,10 @@ public class SoftwarePackageGraph {
             String[] args = new String[] {
                 "/usr/bin/dot",
                 "-Gnodesep=0",
-                "-Tpng",
+                "-T" + graphvizType,
                 filename,
                 "-o",
-                "./output/png/" + normalizeFilename(groups.get(i).header.getName()) + ".png"
+                outputDir + "/" + normalizeFilename(groups.get(i).header.getName()) + "." + graphvizType
             };
             egroups.get(i % N).add(args);
         }

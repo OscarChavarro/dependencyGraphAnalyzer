@@ -1,0 +1,21 @@
+meta {
+  name: POST /v1/updateGraphModel
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/v1/updateGraphModel
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "generator": "CACHE_LOADER"
+  }
+}

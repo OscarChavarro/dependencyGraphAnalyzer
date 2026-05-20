@@ -28,7 +28,7 @@ public class DebianAnalyzer {
         outputFile = "./output/general.dot";
     }
     
-    private void exec(String args[]) {
+    private void exec(String args[], OutputFormats outputFormat) {
         CacheLoaderGenerator cacheLoader = new CacheLoaderGenerator(graph);
         DebianPackageGenerator packageGenerator = new DebianPackageGenerator(graph);
         GroupSubgraphGrouper groupSubgraphGrouper = new GroupSubgraphGrouper(graph);
@@ -159,7 +159,7 @@ public class DebianAnalyzer {
         //----------------------------------------------------------------
         System.out.print("Exporting individual groups: ");
         graph.labelLastGroup(groups);
-        graph.exportDotByGroups(groups);
+        graph.exportDotByGroups(groups, outputFormat);
         graph.exportGroups(groups);
         graph.exportCleanScripts(groups);
         graph.exportInstallScripts(groups);
@@ -168,6 +168,10 @@ public class DebianAnalyzer {
     }
 
     public void run(String[] args) {
-        exec(args);
+        run(args, OutputFormats.PNG);
+    }
+
+    public void run(String[] args, OutputFormats outputFormat) {
+        exec(args, outputFormat);
     }
 }
