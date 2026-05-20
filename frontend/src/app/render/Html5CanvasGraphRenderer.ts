@@ -121,6 +121,17 @@ export class Html5CanvasGraphRenderer {
     };
   }
 
+  public pickNodeNameFromEvent(event: MouseEvent): string | null {
+    const point = this.canvasPointFromEvent(event);
+    const world = this.screenToWorld(point.x, point.y);
+    for (const ellipse of this.interactiveEllipses) {
+      if (this.isInsideEllipse(ellipse, world.x, world.y)) {
+        return ellipse.nodeName;
+      }
+    }
+    return null;
+  }
+
   public getZoomOutCenteringProgress(): number {
     return this.computeZoomOutCenteringProgress();
   }
@@ -672,6 +683,15 @@ export class Html5CanvasGraphRenderer {
 
   private isInteractiveEllipse(layer: SvgLayer): boolean {
     return layer === 'node';
+  }
+
+  private isInsideEllipse(ellipse: InteractiveEllipse, x: number, y: number): boolean {
+    if (ellipse.rx <= 0 || ellipse.ry <= 0) {
+      return false;
+    }
+    const dx = (x - ellipse.cx) / ellipse.rx;
+    const dy = (y - ellipse.cy) / ellipse.ry;
+    return dx * dx + dy * dy <= 1;
   }
 
   private clampCameraScale(): void {

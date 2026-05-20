@@ -52,3 +52,10 @@
 
   <app-menu-renderer [searchPlaceholder]="t(i18nKeys.shell.MENU_SEARCH_PLACEHOLDER)"></app-menu-renderer>
 </main>
+
+<app-relation-dialog
+  [visible]="relationBoxVisible"
+  [text]="relationBoxText"
+  [closeAriaLabel]="t(i18nKeys.shell.CLOSE_RELATION_BOX_ARIA)"
+  (closeRequested)="closeRelationBox()"
+></app-relation-dialog>

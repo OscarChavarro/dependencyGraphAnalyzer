@@ -13,10 +13,14 @@ export class KeyboardInteractionTechniques {
   }
 
   private readonly onKeyDown = (event: KeyboardEvent): void => {
-    if (event.key.toLowerCase() === 'f') {
-      event.preventDefault();
-      this.toggleFullScreen();
+    if (event.key.toLowerCase() !== 'f') {
+      return;
     }
+    if (event.shiftKey || event.ctrlKey || event.metaKey || event.altKey) {
+      return;
+    }
+    event.preventDefault();
+    this.toggleFullScreen();
   };
 
   private toggleFullScreen(): void {

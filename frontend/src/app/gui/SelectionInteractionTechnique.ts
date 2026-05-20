@@ -1,23 +1,5 @@
 import { GraphModel } from '../model/graph-model';
-import { Html5CanvasGraphRenderer, InteractiveEllipse } from '../render/Html5CanvasGraphRenderer';
-
-class Ellipse {
-  public constructor(
-    private readonly cx: number,
-    private readonly cy: number,
-    private readonly rx: number,
-    private readonly ry: number
-  ) {}
-
-  public inside(x: number, y: number): boolean {
-    if (this.rx <= 0 || this.ry <= 0) {
-      return false;
-    }
-    const dx = (x - this.cx) / this.rx;
-    const dy = (y - this.cy) / this.ry;
-    return dx * dx + dy * dy <= 1;
-  }
-}
+import { Html5CanvasGraphRenderer } from '../render/Html5CanvasGraphRenderer';
 
 export class SelectionInteractionTechnique {
   public constructor(
@@ -62,20 +44,6 @@ export class SelectionInteractionTechnique {
   };
 
   private pickNodeFromEvent(event: MouseEvent): string | null {
-    const point = this.renderer.canvasPointFromEvent(event);
-    const world = this.renderer.screenToWorld(point.x, point.y);
-    const interactiveEllipses = this.renderer.getInteractiveEllipses();
-
-    for (const ellipse of interactiveEllipses) {
-      if (this.isInsideEllipse(ellipse, world.x, world.y)) {
-        return ellipse.nodeName;
-      }
-    }
-
-    return null;
-  }
-
-  private isInsideEllipse(ellipse: InteractiveEllipse, x: number, y: number): boolean {
-    return new Ellipse(ellipse.cx, ellipse.cy, ellipse.rx, ellipse.ry).inside(x, y);
+    return this.renderer.pickNodeNameFromEvent(event);
   }
 }

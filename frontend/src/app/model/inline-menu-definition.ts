@@ -14,7 +14,8 @@ interface MenuJson {
 export class InlineMenuDefinition {
   public static readonly STRUCTURE_MENU_JSON: MenuJson = {
     options: [
-      { id: 'shell.MENU_OPEN_NEW_SVG', actionKey: 'open_new_svg' }
+      { id: 'shell.MENU_OPEN_NEW_SVG', actionKey: 'open_new_svg' },
+      { id: 'shell.MENU_SHOW_RELATION', actionKey: 'show_relation' }
     ]
   };
 

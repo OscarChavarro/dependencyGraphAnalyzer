@@ -7,6 +7,9 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideHttpClient(),
-    { provide: BACKEND_BASE_URL, useValue: 'http://localhost:8080' }
+    {
+      provide: BACKEND_BASE_URL,
+      useFactory: () => `${window.location.protocol}//${window.location.hostname}:8080`
+    }
   ]
 };

@@ -1,7 +1,9 @@
 package backend.infrastructure.http.controller;
 
 import backend.application.port.in.UpdateGraphModelUseCase;
+import backend.application.port.in.BuildEnrichedEdgesUseCase;
 import backend.infrastructure.http.dto.UpdateGraphModelRequest;
+import backend.infrastructure.http.dto.EnrichedEdgesResponse;
 import backend.infrastructure.http.dto.UpdateGraphModelResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -21,9 +23,13 @@ import org.springframework.web.server.ResponseStatusException;
 })
 public class GraphModelController {
     private final UpdateGraphModelUseCase updateGraphModelUseCase;
+    private final BuildEnrichedEdgesUseCase buildEnrichedEdgesUseCase;
 
-    public GraphModelController(UpdateGraphModelUseCase updateGraphModelUseCase) {
+    public GraphModelController(
+            UpdateGraphModelUseCase updateGraphModelUseCase,
+            BuildEnrichedEdgesUseCase buildEnrichedEdgesUseCase) {
         this.updateGraphModelUseCase = updateGraphModelUseCase;
+        this.buildEnrichedEdgesUseCase = buildEnrichedEdgesUseCase;
     }
 
     @PostMapping({"/updateGraph", "/updateGraphModel"})
@@ -37,5 +43,18 @@ public class GraphModelController {
 
         return new UpdateGraphModelResponse(
                 updateGraphModelUseCase.execute(request.generator(), request.groupsDefinitionFolder()));
+    }
+
+    @PostMapping({"/enrichedEdges"})
+    public EnrichedEdgesResponse enrichedEdges(@RequestBody UpdateGraphModelRequest request) {
+        if (request == null || request.generator() == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "generator is required");
+        }
+        if (request.groupsDefinitionFolder() == null || request.groupsDefinitionFolder().isBlank()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "groupsDefinitionFolder is required");
+        }
+
+        return new EnrichedEdgesResponse(
+                buildEnrichedEdgesUseCase.execute(request.generator(), request.groupsDefinitionFolder()));
     }
 }

@@ -12,10 +12,13 @@ export class SelectedNodeActionMenuInteractionTechnique {
   public constructor(
     private readonly graphModel: GraphModel,
     private readonly menuRenderer: MenuRenderer,
+    private readonly pickNodeFromEvent: (event: MouseEvent) => string | null,
+    private readonly onSelectionChanged: (selectedNodes: string[]) => void,
     private readonly isStructureGraphProvider: () => boolean,
     private readonly openGraphByFilename: (filename: string) => void,
     private readonly inundateDependencies: (selectedNodes: string[]) => void,
     private readonly inundateClients: (selectedNodes: string[]) => void,
+    private readonly showRelation: (selectedNodes: string[]) => void,
     private readonly moveTo: (selectedNodes: string[], targetGroup: string) => void,
     private readonly listStructureGroups: () => string[],
     private readonly translate: (id: TranslationKey) => string
@@ -24,6 +27,7 @@ export class SelectedNodeActionMenuInteractionTechnique {
   public attach(): void {
     window.addEventListener('mousemove', this.onMouseMove);
     window.addEventListener('keydown', this.onKeyDown);
+    window.addEventListener('contextmenu', this.onContextMenu);
   }
 
   public closeMenu(): void {
@@ -62,6 +66,30 @@ export class SelectedNodeActionMenuInteractionTechnique {
     this.menuRenderer.open(menu, this.lastMouseX, this.lastMouseY);
   };
 
+  private readonly onContextMenu = (event: MouseEvent): void => {
+    const hoveredNodeName = this.pickNodeFromEvent(event);
+    if (!hoveredNodeName) {
+      return;
+    }
+    event.preventDefault();
+
+    if (event.ctrlKey || event.metaKey) {
+      this.graphModel.toggleMultiSelection(hoveredNodeName);
+    } else if (!this.graphModel.selectedNodes.includes(hoveredNodeName)) {
+      this.graphModel.selectSingle(hoveredNodeName);
+    }
+    this.onSelectionChanged([...this.graphModel.selectedNodes]);
+
+    this.lastMouseX = event.clientX;
+    this.lastMouseY = event.clientY;
+
+    const menu = this.buildMenuModel();
+    if (menu.options.length === 0) {
+      return;
+    }
+    this.menuRenderer.open(menu, this.lastMouseX, this.lastMouseY);
+  };
+
   private buildMenuModel(): Menu {
     const structure = this.isStructureGraphProvider();
 
@@ -73,6 +101,7 @@ export class SelectedNodeActionMenuInteractionTechnique {
           this.openGraphByFilename(filename);
         }
       },
+      show_relation: () => this.showRelation([...this.graphModel.selectedNodes]),
       flood_dependencies: () => this.inundateDependencies([...this.graphModel.selectedNodes]),
       flood_clients: () => this.inundateClients([...this.graphModel.selectedNodes])
     };
@@ -82,12 +111,16 @@ export class SelectedNodeActionMenuInteractionTechnique {
       'shell.MENU_MOVE_TO': moveToSubmenu
     };
 
-    return InlineMenuDefinition.buildMenuFromJson(
+    const menu = InlineMenuDefinition.buildMenuFromJson(
       structure ? InlineMenuDefinition.STRUCTURE_MENU_JSON : InlineMenuDefinition.NON_STRUCTURE_MENU_JSON,
       actionRegistry,
       dynamicSubmenus,
       (id) => this.translate(id as TranslationKey)
     );
+    if (!structure || this.graphModel.selectedNodes.length !== 2) {
+      return new Menu(menu.options.filter((option) => option.id !== 'shell.MENU_SHOW_RELATION'));
+    }
+    return menu;
   }
 
   private buildMoveToSubmenu(): Menu {

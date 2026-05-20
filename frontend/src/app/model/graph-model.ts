@@ -30,10 +30,15 @@ export interface GraphModelSnapshot {
   nodes: GraphModelNode[];
   edges: GraphModelEdge[];
   structure: GraphModelStructure;
+  enrichedEdges?: GraphModelEdge[];
 }
 
 export interface UpdateGraphModelResponse {
   graphModel: GraphModelSnapshot;
+}
+
+export interface EnrichedEdgesResponse {
+  enrichedEdges: GraphModelEdge[];
 }
 
 export class GraphModel {

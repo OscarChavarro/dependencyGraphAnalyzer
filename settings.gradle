@@ -1,0 +1,3 @@
+rootProject.name = 'vsdk-debian-package-analyzer-root'
+
+includeBuild('backend')

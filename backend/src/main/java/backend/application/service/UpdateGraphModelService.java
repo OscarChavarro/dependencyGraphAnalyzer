@@ -118,4 +118,5 @@ public class UpdateGraphModelService implements UpdateGraphModelUseCase {
         }
         throw new IllegalArgumentException("groupsDefinitionFolder does not exist or is not a directory: " + groupsDefinitionFolder);
     }
+
 }

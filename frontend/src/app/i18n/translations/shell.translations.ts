@@ -61,6 +61,10 @@ export const SHELL_TRANSLATIONS = {
     en: 'Open group',
     es: 'Abrir grupo'
   },
+  MENU_SHOW_RELATION: {
+    en: 'Show relation',
+    es: 'Mostrar relación'
+  },
   MENU_FLOOD_DEPENDENCIES: {
     en: 'Flood dependencies',
     es: 'Inundar dependencias'
@@ -76,5 +80,9 @@ export const SHELL_TRANSLATIONS = {
   MENU_NO_GROUPS_AVAILABLE: {
     en: 'No groups available',
     es: 'Sin grupos disponibles'
+  },
+  CLOSE_RELATION_BOX_ARIA: {
+    en: 'Close relation box',
+    es: 'Cerrar cuadro de relación'
   }
 } as const satisfies Record<string, TranslationValue>;
