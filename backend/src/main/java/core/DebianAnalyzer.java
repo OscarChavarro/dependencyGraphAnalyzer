@@ -167,6 +167,11 @@ public class DebianAnalyzer {
         if (!groups.isEmpty()) {
             graph.labelLastGroup(groups);
             graph.exportDotByGroups(groups, outputFormat);
+            if (outputFormat == OutputFormats.SVG) {
+                graph.exportDotByGroups(groups, OutputFormats.PNG);
+            } else if (outputFormat == OutputFormats.PNG) {
+                graph.exportDotByGroups(groups, OutputFormats.SVG);
+            }
             graph.exportGroups(groups);
             graph.exportCleanScripts(groups);
             graph.exportInstallScripts(groups);

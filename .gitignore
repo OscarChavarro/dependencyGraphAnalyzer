@@ -1,5 +1,6 @@
 classes/*
 output/*
+frontend/public/output
 .idea
 .gradle/
 build/

@@ -448,10 +448,14 @@ public class SoftwarePackageGraph {
             String filename = "./output/dot/" + normalizeFilename(normalizeFilename(groups.get(i).header.getName())) + ".dot";
 
             SoftwarePackageNode parent = groups.get(i).header;
-            if (parent == null || searchNodeByName(parent.getName()) == null) {
+            if (parent == null) {
                 continue;
             }
-            if (graph.outDegreeOf(parent) == 0 && !parent.getName().equals("[STRUCTURE]")) {
+            boolean isStructureGroup = "[STRUCTURE]".equals(parent.getName());
+            if (!isStructureGroup && searchNodeByName(parent.getName()) == null) {
+                continue;
+            }
+            if (!isStructureGroup && graph.outDegreeOf(parent) == 0) {
                 continue;
             }
 

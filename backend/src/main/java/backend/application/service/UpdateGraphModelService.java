@@ -5,6 +5,7 @@ import backend.domain.model.GraphModelEdge;
 import backend.domain.model.GraphModelGenerator;
 import backend.domain.model.GraphModelNode;
 import backend.domain.model.GraphModelSnapshot;
+import backend.domain.model.GraphModelStructure;
 import core.DebianAnalyzer;
 import core.OutputFormats;
 import core.graph.PackageEdge;
@@ -15,6 +16,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import org.springframework.stereotype.Service;
@@ -39,8 +41,9 @@ public class UpdateGraphModelService implements UpdateGraphModelUseCase {
         List<GraphModelEdge> edges = allEdges.stream()
                 .map(this::mapEdge)
                 .toList();
+        GraphModelStructure structure = buildStructureGraph(graph.getNodes(), allEdges);
 
-        return new GraphModelSnapshot(nodes, edges);
+        return new GraphModelSnapshot(nodes, edges, structure);
     }
 
     private GraphModelNode mapNode(SoftwarePackageNode node) {
@@ -57,6 +60,30 @@ public class UpdateGraphModelService implements UpdateGraphModelUseCase {
 
     private GraphModelEdge mapEdge(PackageEdge edge) {
         return new GraphModelEdge(edge.from().getName(), edge.to().getName());
+    }
+
+    private GraphModelStructure buildStructureGraph(List<SoftwarePackageNode> allNodes, Set<PackageEdge> allEdges) {
+        Set<String> structureNodeNames = allNodes.stream()
+                .map(SoftwarePackageNode::getName)
+                .filter(this::isStructureNodeName)
+                .collect(HashSet::new, Set::add, Set::addAll);
+
+        List<GraphModelNode> structureNodes = allNodes.stream()
+                .filter(node -> structureNodeNames.contains(node.getName()))
+                .map(this::mapNode)
+                .toList();
+
+        List<GraphModelEdge> structureEdges = allEdges.stream()
+                .filter(edge -> structureNodeNames.contains(edge.from().getName())
+                        && structureNodeNames.contains(edge.to().getName()))
+                .map(this::mapEdge)
+                .toList();
+
+        return new GraphModelStructure(structureNodes, structureEdges);
+    }
+
+    private boolean isStructureNodeName(String nodeName) {
+        return nodeName.startsWith("_[");
     }
 
     private String[] resolveGroupDefinitionFiles(String groupsDefinitionFolder) {
