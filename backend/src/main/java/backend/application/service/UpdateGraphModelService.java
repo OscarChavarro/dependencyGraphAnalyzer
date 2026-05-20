@@ -1,13 +1,94 @@
 package backend.application.service;
 
 import backend.application.port.in.UpdateGraphModelUseCase;
+import backend.domain.model.GraphModelEdge;
 import backend.domain.model.GraphModelGenerator;
+import backend.domain.model.GraphModelNode;
+import backend.domain.model.GraphModelSnapshot;
+import core.DebianAnalyzer;
+import core.OutputFormats;
+import core.graph.PackageEdge;
+import core.graph.SoftwarePackageGraph;
+import core.graph.SoftwarePackageNode;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Set;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UpdateGraphModelService implements UpdateGraphModelUseCase {
     @Override
-    public void execute(GraphModelGenerator generator) {
-        // Placeholder for orchestration with core internal API.
+    public GraphModelSnapshot execute(GraphModelGenerator generator, String groupsDefinitionFolder) {
+        String[] groupsDefinitionFiles = resolveGroupDefinitionFiles(groupsDefinitionFolder);
+        DebianAnalyzer analyzer = new DebianAnalyzer();
+
+        switch (generator) {
+            case CACHE_LOADER -> analyzer.runFromCache(groupsDefinitionFiles, OutputFormats.SVG);
+            case DEBIAN_PACKAGE_GENERATOR -> analyzer.runFromDebian(groupsDefinitionFiles, OutputFormats.SVG);
+        }
+
+        SoftwarePackageGraph graph = analyzer.getGraph();
+        List<GraphModelNode> nodes = graph.getNodes().stream()
+                .map(this::mapNode)
+                .toList();
+        Set<PackageEdge> allEdges = graph.getEdges();
+        List<GraphModelEdge> edges = allEdges.stream()
+                .map(this::mapEdge)
+                .toList();
+
+        return new GraphModelSnapshot(nodes, edges);
+    }
+
+    private GraphModelNode mapNode(SoftwarePackageNode node) {
+        return new GraphModelNode(
+                node.getName(),
+                node.getIsBad(),
+                node.getMark(),
+                node.getGroup(),
+                node.getSink(),
+                node.getSource(),
+                node.getVariant(),
+                node.getBoldName());
+    }
+
+    private GraphModelEdge mapEdge(PackageEdge edge) {
+        return new GraphModelEdge(edge.from().getName(), edge.to().getName());
+    }
+
+    private String[] resolveGroupDefinitionFiles(String groupsDefinitionFolder) {
+        Path folder = resolveExistingFolder(groupsDefinitionFolder);
+        try {
+            List<String> files = Files.list(folder)
+                    .filter(Files::isRegularFile)
+                    .filter(path -> path.getFileName().toString().endsWith(".txt"))
+                    .sorted(Comparator.comparing(Path::toString))
+                    .map(Path::toString)
+                    .toList();
+            if (files.isEmpty()) {
+                throw new IllegalArgumentException("No .txt files found in groupsDefinitionFolder: " + groupsDefinitionFolder);
+            }
+            return files.toArray(new String[0]);
+        } catch (IOException e) {
+            throw new IllegalArgumentException("Failed to list groupsDefinitionFolder: " + groupsDefinitionFolder, e);
+        }
+    }
+
+    private Path resolveExistingFolder(String groupsDefinitionFolder) {
+        List<Path> candidates = List.of(
+                Paths.get(groupsDefinitionFolder).normalize(),
+                Paths.get(".").resolve(groupsDefinitionFolder).normalize(),
+                Paths.get("backend").resolve(groupsDefinitionFolder).normalize(),
+                Paths.get(groupsDefinitionFolder.replaceFirst("^\\.\\./", "")).normalize());
+
+        for (Path candidate : candidates) {
+            if (Files.isDirectory(candidate)) {
+                return candidate;
+            }
+        }
+        throw new IllegalArgumentException("groupsDefinitionFolder does not exist or is not a directory: " + groupsDefinitionFolder);
     }
 }

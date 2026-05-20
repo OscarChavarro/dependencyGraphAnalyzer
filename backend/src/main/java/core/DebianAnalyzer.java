@@ -19,6 +19,11 @@ import java.io.File;
 //===========================================================================
 
 public class DebianAnalyzer {
+    private enum GeneratorMode {
+        CACHE_LOADER,
+        DEBIAN_PACKAGE_GENERATOR
+    }
+
     private SoftwarePackageGraph graph;
     private ArrayList<SoftwarePackageGroup> groups;
     private String outputFile;
@@ -28,7 +33,7 @@ public class DebianAnalyzer {
         outputFile = "./output/general.dot";
     }
     
-    private void exec(String args[], OutputFormats outputFormat) {
+    private void exec(String args[], OutputFormats outputFormat, GeneratorMode generatorMode) {
         CacheLoaderGenerator cacheLoader = new CacheLoaderGenerator(graph);
         DebianPackageGenerator packageGenerator = new DebianPackageGenerator(graph);
         GroupSubgraphGrouper groupSubgraphGrouper = new GroupSubgraphGrouper(graph);
@@ -36,10 +41,9 @@ public class DebianAnalyzer {
 
         //----------------------------------------------------------------
         File fd = new File("cache.txt");
-        if ( fd.exists() ) {
+        if (generatorMode == GeneratorMode.CACHE_LOADER) {
             cacheLoader.generateFromCache(fd);
-        }
-        else {
+        } else {
             packageGenerator.generateFromSystemPackageManager();
             graph.save("cache.txt");
             System.out.println("Cache graph written to cache.txt");
@@ -56,7 +60,9 @@ public class DebianAnalyzer {
         groups = new ArrayList<SoftwarePackageGroup>();
         for ( i = 0; i < args.length; i++ ) {
             g = new SoftwarePackageGroup(args[i], graph);
-            groups.add(g);
+            if (g.header != null) {
+                groups.add(g);
+            }
         }
 
         //----------------------------------------------------------------
@@ -158,12 +164,14 @@ public class DebianAnalyzer {
 
         //----------------------------------------------------------------
         System.out.print("Exporting individual groups: ");
-        graph.labelLastGroup(groups);
-        graph.exportDotByGroups(groups, outputFormat);
-        graph.exportGroups(groups);
-        graph.exportCleanScripts(groups);
-        graph.exportInstallScripts(groups);
-        graph.exportTopNodesPerGroups(groups);
+        if (!groups.isEmpty()) {
+            graph.labelLastGroup(groups);
+            graph.exportDotByGroups(groups, outputFormat);
+            graph.exportGroups(groups);
+            graph.exportCleanScripts(groups);
+            graph.exportInstallScripts(groups);
+            graph.exportTopNodesPerGroups(groups);
+        }
         System.out.println(" Ok!");
     }
 
@@ -172,6 +180,18 @@ public class DebianAnalyzer {
     }
 
     public void run(String[] args, OutputFormats outputFormat) {
-        exec(args, outputFormat);
+        exec(args, outputFormat, GeneratorMode.DEBIAN_PACKAGE_GENERATOR);
+    }
+
+    public void runFromCache(String[] args, OutputFormats outputFormat) {
+        exec(args, outputFormat, GeneratorMode.CACHE_LOADER);
+    }
+
+    public void runFromDebian(String[] args, OutputFormats outputFormat) {
+        exec(args, outputFormat, GeneratorMode.DEBIAN_PACKAGE_GENERATOR);
+    }
+
+    public SoftwarePackageGraph getGraph() {
+        return graph;
     }
 }

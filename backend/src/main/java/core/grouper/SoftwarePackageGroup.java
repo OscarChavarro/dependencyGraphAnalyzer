@@ -35,15 +35,16 @@ public class SoftwarePackageGroup
             String name;
 
             while ( (lineOfText = br.readLine()) != null ) {
-                if ( lineOfText.startsWith("#") ) {
+                String trimmed = lineOfText.trim();
+                if (trimmed.isEmpty() || trimmed.startsWith("#")) {
                     continue;
 		}
                 StringTokenizer parser;
-                parser = new StringTokenizer(lineOfText, " \n");
-                name = parser.nextToken();
-                if ( name == null ) {
+                parser = new StringTokenizer(trimmed, " \n");
+                if (!parser.hasMoreTokens()) {
                     continue;
 		}
+                name = parser.nextToken();
                 if ( headerMark ) {
                     headerMark = false;
                     graph.addNode(name);

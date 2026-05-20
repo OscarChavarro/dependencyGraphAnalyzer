@@ -2,13 +2,19 @@
   <aside class="left-panel">
     <h1 class="panel-title">Generador de Grafos</h1>
 
-    <button class="action-button" type="button">
+    <button class="action-button" type="button" (click)="createGraphFromCache()" [disabled]="isLoading">
       Crear grafo desde cache.txt
     </button>
 
-    <button class="action-button" type="button">
+    <button class="action-button" type="button" (click)="analyzeDebianSystem()" [disabled]="isLoading">
       Analizar sistema Debian
     </button>
+
+    <p class="status-line" *ngIf="isLoading">Procesando...</p>
+    <p class="status-line status-line-error" *ngIf="errorMessage">{{ errorMessage }}</p>
+    <p class="status-line" *ngIf="graphModel">
+      Nodos: {{ graphModel.nodes.length }} | Aristas: {{ graphModel.edges.length }}
+    </p>
   </aside>
 
   <section class="workspace-area" aria-label="Area de trabajo">

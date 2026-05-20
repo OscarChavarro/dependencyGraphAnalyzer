@@ -1,4 +1,6 @@
 package backend.infrastructure.http.dto;
 
-public record UpdateGraphModelResponse(String data) {
+import backend.domain.model.GraphModelSnapshot;
+
+public record UpdateGraphModelResponse(GraphModelSnapshot graphModel) {
 }

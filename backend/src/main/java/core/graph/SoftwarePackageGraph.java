@@ -89,6 +89,10 @@ public class SoftwarePackageGraph {
         return nodes;
     }
 
+    public Set<PackageEdge> getEdges() {
+        return graph.edges();
+    }
+
     public boolean addDependency(SoftwarePackageNode from, SoftwarePackageNode to) {
         if (from == null || to == null) {
             return false;
@@ -256,6 +260,9 @@ public class SoftwarePackageGraph {
             ungroupAllNodes();
             for (SoftwarePackageGroup group : groups) {
                 SoftwarePackageNode parent = group.header;
+                if (parent == null || searchNodeByName(parent.getName()) == null) {
+                    continue;
+                }
                 if (graph.outDegreeOf(parent) == 0) {
                     continue;
                 }
@@ -294,6 +301,9 @@ public class SoftwarePackageGraph {
             ungroupAllNodes();
             for (SoftwarePackageGroup group : groups) {
                 SoftwarePackageNode parent = group.header;
+                if (parent == null || searchNodeByName(parent.getName()) == null) {
+                    continue;
+                }
                 if (graph.outDegreeOf(parent) == 0) {
                     continue;
                 }
@@ -331,6 +341,9 @@ public class SoftwarePackageGraph {
             ungroupAllNodes();
             for (SoftwarePackageGroup group : groups) {
                 SoftwarePackageNode parent = group.header;
+                if (parent == null || searchNodeByName(parent.getName()) == null) {
+                    continue;
+                }
                 if (graph.outDegreeOf(parent) == 0) {
                     continue;
                 }
@@ -383,6 +396,9 @@ public class SoftwarePackageGraph {
             ungroupAllNodes();
             for (SoftwarePackageGroup group : groups) {
                 SoftwarePackageNode parent = group.header;
+                if (parent == null || searchNodeByName(parent.getName()) == null) {
+                    continue;
+                }
                 if (graph.outDegreeOf(parent) == 0) {
                     continue;
                 }
@@ -432,6 +448,9 @@ public class SoftwarePackageGraph {
             String filename = "./output/dot/" + normalizeFilename(normalizeFilename(groups.get(i).header.getName())) + ".dot";
 
             SoftwarePackageNode parent = groups.get(i).header;
+            if (parent == null || searchNodeByName(parent.getName()) == null) {
+                continue;
+            }
             if (graph.outDegreeOf(parent) == 0 && !parent.getName().equals("[STRUCTURE]")) {
                 continue;
             }

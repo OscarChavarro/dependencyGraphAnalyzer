@@ -19,13 +19,16 @@ public class GraphModelController {
         this.updateGraphModelUseCase = updateGraphModelUseCase;
     }
 
-    @PostMapping("/updateGraphModel")
+    @PostMapping({"/updateGraph", "/updateGraphModel"})
     public UpdateGraphModelResponse updateGraphModel(@RequestBody UpdateGraphModelRequest request) {
         if (request == null || request.generator() == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "generator is required");
         }
+        if (request.groupsDefinitionFolder() == null || request.groupsDefinitionFolder().isBlank()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "groupsDefinitionFolder is required");
+        }
 
-        updateGraphModelUseCase.execute(request.generator());
-        return new UpdateGraphModelResponse("ok");
+        return new UpdateGraphModelResponse(
+                updateGraphModelUseCase.execute(request.generator(), request.groupsDefinitionFolder()));
     }
 }
