@@ -62,7 +62,8 @@ export class SelectionInteractionTechnique {
   };
 
   private pickNodeFromEvent(event: MouseEvent): string | null {
-    const world = this.renderer.screenToWorld(event.offsetX, event.offsetY);
+    const point = this.renderer.canvasPointFromEvent(event);
+    const world = this.renderer.screenToWorld(point.x, point.y);
     const interactiveEllipses = this.renderer.getInteractiveEllipses();
 
     for (const ellipse of interactiveEllipses) {

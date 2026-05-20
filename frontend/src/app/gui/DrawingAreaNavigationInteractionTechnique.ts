@@ -4,10 +4,12 @@ export class DrawingAreaNavigationInteractionTechnique {
   private isDragging = false;
   private dragLastX = 0;
   private dragLastY = 0;
+  private scrollContainer: HTMLElement | null = null;
 
   public constructor(private readonly renderer: Html5CanvasGraphRenderer) {}
 
-  public attach(canvas: HTMLCanvasElement): void {
+  public attach(canvas: HTMLCanvasElement, scrollContainer: HTMLElement | null | undefined): void {
+    this.scrollContainer = scrollContainer ?? null;
     canvas.addEventListener('wheel', this.onWheel, { passive: false });
     canvas.addEventListener('mousedown', this.onMouseDown);
     window.addEventListener('mouseup', this.onMouseUp);
@@ -20,18 +22,24 @@ export class DrawingAreaNavigationInteractionTechnique {
 
     if (event.ctrlKey) {
       // Trackpad pinch gesture (macOS browsers): use as zoom.
-      this.renderer.zoomAt(event.offsetX, event.offsetY, event.deltaY);
+      const point = this.renderer.canvasPointFromEvent(event);
+      this.renderer.zoomAt(point.x, point.y, event.deltaY);
+      if (event.deltaY > 0) {
+        this.moveScrollbarsTowardCenter();
+      }
       return;
     }
 
     // Two-finger scroll gesture: pan viewport using both axes.
-    this.renderer.panBy(-event.deltaX, -event.deltaY);
+    const delta = this.renderer.canvasDeltaFromCss(-event.deltaX, -event.deltaY);
+    this.renderer.panBy(delta.x, delta.y);
   };
 
   private readonly onMouseDown = (event: MouseEvent): void => {
     this.isDragging = true;
-    this.dragLastX = event.clientX;
-    this.dragLastY = event.clientY;
+    const point = this.renderer.canvasPointFromEvent(event);
+    this.dragLastX = point.x;
+    this.dragLastY = point.y;
   };
 
   private readonly onMouseUp = (): void => {
@@ -42,10 +50,11 @@ export class DrawingAreaNavigationInteractionTechnique {
     if (!this.isDragging) {
       return;
     }
-    const dx = event.clientX - this.dragLastX;
-    const dy = event.clientY - this.dragLastY;
-    this.dragLastX = event.clientX;
-    this.dragLastY = event.clientY;
+    const point = this.renderer.canvasPointFromEvent(event);
+    const dx = point.x - this.dragLastX;
+    const dy = point.y - this.dragLastY;
+    this.dragLastX = point.x;
+    this.dragLastY = point.y;
     this.renderer.panBy(dx, dy);
   };
 
@@ -62,4 +71,24 @@ export class DrawingAreaNavigationInteractionTechnique {
     event.preventDefault();
     this.renderer.moveAndCenterToFit();
   };
+
+  private moveScrollbarsTowardCenter(): void {
+    if (!this.scrollContainer) {
+      return;
+    }
+
+    const progress = this.renderer.getZoomOutCenteringProgress();
+    if (progress <= 0) {
+      return;
+    }
+
+    const maxScrollLeft = this.scrollContainer.scrollWidth - this.scrollContainer.clientWidth;
+    const maxScrollTop = this.scrollContainer.scrollHeight - this.scrollContainer.clientHeight;
+    const targetLeft = maxScrollLeft * 0.5;
+    const targetTop = maxScrollTop * 0.5;
+    const damping = Math.min(0.45, progress * 0.45);
+
+    this.scrollContainer.scrollLeft += (targetLeft - this.scrollContainer.scrollLeft) * damping;
+    this.scrollContainer.scrollTop += (targetTop - this.scrollContainer.scrollTop) * damping;
+  }
 }

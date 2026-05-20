@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Inject, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Inject, OnDestroy, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { BACKEND_BASE_URL } from './config-tokens';
@@ -27,7 +27,7 @@ import type { TranslationKey } from './i18n/translations/translations-by-namespa
   templateUrl: './app.html',
   styleUrl: './app.sass'
 })
-export class App implements AfterViewInit {
+export class App implements AfterViewInit, OnDestroy {
   @ViewChild('workspaceArea')
   private workspaceAreaRef?: ElementRef<HTMLElement>;
 
@@ -54,6 +54,9 @@ export class App implements AfterViewInit {
   private readonly drawingAreaNavigationInteractionTechnique = new DrawingAreaNavigationInteractionTechnique(this.graphRenderer);
   private readonly selectionInteractionTechnique = new SelectionInteractionTechnique(this.graphSelectionModel, this.graphRenderer);
   private selectedNodeActionMenuInteractionTechnique?: SelectedNodeActionMenuInteractionTechnique;
+  private readonly onWindowResize = (): void => {
+    this.syncCanvasResolutionWithDisplay();
+  };
 
   constructor(
     private readonly httpClient: HttpClient,
@@ -71,9 +74,11 @@ export class App implements AfterViewInit {
       this.errorMessage = this.t(this.i18nKeys.shell.CANVAS_INIT_ERROR);
       return;
     }
+    this.syncCanvasResolutionWithDisplay();
+    window.addEventListener('resize', this.onWindowResize);
 
-    this.keyboardInteractionTechniques.attach(this.workspaceAreaRef?.nativeElement);
-    this.drawingAreaNavigationInteractionTechnique.attach(canvas);
+    this.keyboardInteractionTechniques.attach(document.body);
+    this.drawingAreaNavigationInteractionTechnique.attach(canvas, this.workspaceAreaRef?.nativeElement);
     this.selectionInteractionTechnique.attach(canvas);
     if (this.menuRenderer) {
       this.selectedNodeActionMenuInteractionTechnique = new SelectedNodeActionMenuInteractionTechnique(
@@ -90,6 +95,10 @@ export class App implements AfterViewInit {
       this.selectedNodeActionMenuInteractionTechnique.attach();
     }
     this.loadAndRenderGraphSvg('structure.svg');
+  }
+
+  public ngOnDestroy(): void {
+    window.removeEventListener('resize', this.onWindowResize);
   }
 
   public createGraphFromCache(): void {
@@ -181,5 +190,20 @@ export class App implements AfterViewInit {
       return fromSnapshot;
     }
     return this.cachedStructureGroupNames;
+  }
+
+  private syncCanvasResolutionWithDisplay(): void {
+    const canvas = this.workspaceCanvasRef?.nativeElement;
+    if (!canvas) {
+      return;
+    }
+    const dpr = Math.max(1, window.devicePixelRatio || 1);
+    const targetWidth = Math.max(1, Math.round(canvas.clientWidth * dpr));
+    const targetHeight = Math.max(1, Math.round(canvas.clientHeight * dpr));
+    if (canvas.width !== targetWidth || canvas.height !== targetHeight) {
+      canvas.width = targetWidth;
+      canvas.height = targetHeight;
+    }
+    this.graphRenderer.render();
   }
 }

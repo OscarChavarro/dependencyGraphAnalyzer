@@ -58,6 +58,7 @@ export class Html5CanvasGraphRenderer {
   private svgPrimitives: SvgPrimitive[] = [];
   private svgViewBox: ViewBoxRect | null = null;
   private interactiveEllipses: InteractiveEllipse[] = [];
+  private sceneBounds: BBoxRect | null = null;
   private hoveredNodeName: string | null = null;
   private selectedNodeNames = new Set<string>();
   private cameraScale = 1;
@@ -65,6 +66,10 @@ export class Html5CanvasGraphRenderer {
   private cameraOffsetY = 0;
   private readonly minScale = 0.05;
   private readonly maxScale = 8;
+  private readonly zoomInFactor = 1.12;
+  private readonly zoomOutFactor = 0.89;
+  private readonly minZoomOutDamping = 0.15;
+  private readonly minVisibleSceneAreaRatio = 0.05;
 
   public attach(canvas: HTMLCanvasElement): boolean {
     this.canvas = canvas;
@@ -92,6 +97,34 @@ export class Html5CanvasGraphRenderer {
     };
   }
 
+  public canvasPointFromEvent(event: MouseEvent): { x: number; y: number } {
+    if (!this.canvas) {
+      return { x: event.offsetX, y: event.offsetY };
+    }
+    const rect = this.canvas.getBoundingClientRect();
+    const scaleX = rect.width > 0 ? this.canvas.width / rect.width : 1;
+    const scaleY = rect.height > 0 ? this.canvas.height / rect.height : 1;
+    return {
+      x: (event.clientX - rect.left) * scaleX,
+      y: (event.clientY - rect.top) * scaleY
+    };
+  }
+
+  public canvasDeltaFromCss(deltaX: number, deltaY: number): { x: number; y: number } {
+    if (!this.canvas) {
+      return { x: deltaX, y: deltaY };
+    }
+    const rect = this.canvas.getBoundingClientRect();
+    return {
+      x: deltaX * (rect.width > 0 ? this.canvas.width / rect.width : 1),
+      y: deltaY * (rect.height > 0 ? this.canvas.height / rect.height : 1)
+    };
+  }
+
+  public getZoomOutCenteringProgress(): number {
+    return this.computeZoomOutCenteringProgress();
+  }
+
   public setHoveredNode(nodeName: string | null): void {
     if (this.hoveredNodeName === nodeName) {
       return;
@@ -115,7 +148,8 @@ export class Html5CanvasGraphRenderer {
       return;
     }
 
-    this.clampCameraToSvgBounds();
+    this.clampCameraScale();
+    this.keepSceneAtLeastPartlyVisible();
 
     const viewportWorld: BBoxRect = {
       minX: (0 - this.cameraOffsetX) / this.cameraScale,
@@ -153,37 +187,45 @@ export class Html5CanvasGraphRenderer {
   public zoomAt(screenX: number, screenY: number, wheelDeltaY: number): void {
     const worldBeforeX = (screenX - this.cameraOffsetX) / this.cameraScale;
     const worldBeforeY = (screenY - this.cameraOffsetY) / this.cameraScale;
-    const zoomFactor = wheelDeltaY < 0 ? 1.12 : 0.89;
-    const minScaleToFit = this.computeMinScaleToFit();
+    const previousScale = this.cameraScale;
 
-    this.cameraScale = Math.max(minScaleToFit, Math.min(this.maxScale, this.cameraScale * zoomFactor));
+    this.cameraScale = this.computeNextZoomScale(wheelDeltaY);
     this.cameraOffsetX = screenX - worldBeforeX * this.cameraScale;
     this.cameraOffsetY = screenY - worldBeforeY * this.cameraScale;
-    this.clampCameraToSvgBounds();
+    if (this.cameraScale < previousScale) {
+      this.applyZoomOutRecentering();
+    }
+    this.keepSceneAtLeastPartlyVisible();
     this.render();
   }
 
   public panBy(deltaX: number, deltaY: number): void {
     this.cameraOffsetX += deltaX;
     this.cameraOffsetY += deltaY;
-    this.clampCameraToSvgBounds();
+    this.keepSceneAtLeastPartlyVisible();
     this.render();
   }
 
   public moveAndCenterToFit(): void {
-    if (!this.canvas || !this.svgViewBox) {
+    if (!this.canvas) {
       return;
     }
 
-    const scaleX = this.canvas.width / this.svgViewBox.width;
-    const scaleY = this.canvas.height / this.svgViewBox.height;
-    this.cameraScale = Math.max(this.minScale, Math.min(this.maxScale, Math.max(scaleX, scaleY)));
+    const bounds = this.getSceneBoundsRect();
+    if (!bounds || bounds.width <= 0 || bounds.height <= 0) {
+      return;
+    }
 
-    const centerX = this.svgViewBox.x + this.svgViewBox.width * 0.5;
-    const centerY = this.svgViewBox.y + this.svgViewBox.height * 0.5;
+    const scaleX = this.canvas.width / bounds.width;
+    const scaleY = this.canvas.height / bounds.height;
+    this.cameraScale = Math.max(this.minScale, Math.min(this.maxScale, Math.min(scaleX, scaleY)));
+
+    const centerX = bounds.x + bounds.width * 0.5;
+    const centerY = bounds.y + bounds.height * 0.5;
     this.cameraOffsetX = this.canvas.width * 0.5 - centerX * this.cameraScale;
     this.cameraOffsetY = this.canvas.height * 0.5 - centerY * this.cameraScale;
-    this.clampCameraToSvgBounds();
+    this.clampCameraScale();
+    this.keepSceneAtLeastPartlyVisible();
     this.render();
   }
 
@@ -197,6 +239,7 @@ export class Html5CanvasGraphRenderer {
       this.svgPrimitives = [];
       this.svgViewBox = null;
       this.interactiveEllipses = [];
+      this.sceneBounds = null;
       return;
     }
 
@@ -317,19 +360,25 @@ export class Html5CanvasGraphRenderer {
 
     this.svgPrimitives = primitives;
     this.interactiveEllipses = interactiveEllipses;
+    this.sceneBounds = this.computeSceneBounds(primitives);
   }
 
   private fitCameraToScene(): void {
-    if (!this.canvas || !this.svgViewBox) {
+    if (!this.canvas) {
+      return;
+    }
+    const bounds = this.getSceneBoundsRect();
+    if (!bounds) {
       return;
     }
     const minScaleToFit = this.computeMinScaleToFit();
     this.cameraScale = minScaleToFit;
-    const centerX = this.svgViewBox.x + this.svgViewBox.width * 0.5;
-    const centerY = this.svgViewBox.y + this.svgViewBox.height * 0.5;
+    const centerX = bounds.x + bounds.width * 0.5;
+    const centerY = bounds.y + bounds.height * 0.5;
     this.cameraOffsetX = this.canvas.width * 0.5 - centerX * this.cameraScale;
     this.cameraOffsetY = this.canvas.height * 0.5 - centerY * this.cameraScale;
-    this.clampCameraToSvgBounds();
+    this.clampCameraScale();
+    this.keepSceneAtLeastPartlyVisible();
   }
 
   private drawPrimitive(primitive: SvgPrimitive): void {
@@ -470,6 +519,29 @@ export class Html5CanvasGraphRenderer {
     return { minX, minY, maxX, maxY };
   }
 
+  private computeSceneBounds(primitives: SvgPrimitive[]): BBoxRect | null {
+    let minX = Number.POSITIVE_INFINITY;
+    let minY = Number.POSITIVE_INFINITY;
+    let maxX = Number.NEGATIVE_INFINITY;
+    let maxY = Number.NEGATIVE_INFINITY;
+
+    for (const primitive of primitives) {
+      if (!primitive.bbox) {
+        continue;
+      }
+      minX = Math.min(minX, primitive.bbox.minX);
+      minY = Math.min(minY, primitive.bbox.minY);
+      maxX = Math.max(maxX, primitive.bbox.maxX);
+      maxY = Math.max(maxY, primitive.bbox.maxY);
+    }
+
+    if (!Number.isFinite(minX) || !Number.isFinite(minY) || !Number.isFinite(maxX) || !Number.isFinite(maxY)) {
+      return null;
+    }
+
+    return { minX, minY, maxX, maxY };
+  }
+
   private normalizeColor(value: string | null): string | null {
     if (!value || value.trim() === '') {
       return null;
@@ -602,44 +674,141 @@ export class Html5CanvasGraphRenderer {
     return layer === 'node';
   }
 
-  private clampCameraToSvgBounds(): void {
-    if (!this.canvas || !this.svgViewBox) {
+  private clampCameraScale(): void {
+    const minScaleToFit = this.computeMinScaleToFit();
+    this.cameraScale = Math.max(minScaleToFit, Math.min(this.maxScale, this.cameraScale));
+  }
+
+  private computeNextZoomScale(wheelDeltaY: number): number {
+    const minScaleToFit = this.computeMinScaleToFit();
+    if (wheelDeltaY < 0) {
+      return Math.max(minScaleToFit, Math.min(this.maxScale, this.cameraScale * this.zoomInFactor));
+    }
+
+    const fitScale = this.computeFitScale();
+    const zoomOutRange = Number.isFinite(fitScale) ? Math.max(0.000001, fitScale - minScaleToFit) : 1;
+    const distanceFromMin = Math.max(0, Math.min(1, (this.cameraScale - minScaleToFit) / zoomOutRange));
+    const dampedZoomOutFactor = 1 - (1 - this.zoomOutFactor) * (this.minZoomOutDamping + (1 - this.minZoomOutDamping) * distanceFromMin);
+    return Math.max(minScaleToFit, Math.min(this.maxScale, this.cameraScale * dampedZoomOutFactor));
+  }
+
+  private applyZoomOutRecentering(): void {
+    if (!this.canvas) {
       return;
     }
 
+    const fitScale = this.computeFitScale();
+    if (this.cameraScale >= fitScale) {
+      return;
+    }
+
+    const bounds = this.getSceneBoundsRect();
+    if (!bounds) {
+      return;
+    }
+
+    const centerX = bounds.x + bounds.width * 0.5;
+    const centerY = bounds.y + bounds.height * 0.5;
+    const centeredOffsetX = this.canvas.width * 0.5 - centerX * this.cameraScale;
+    const centeredOffsetY = this.canvas.height * 0.5 - centerY * this.cameraScale;
+    const recenterFactor = this.computeZoomOutCenteringProgress();
+
+    this.cameraOffsetX += (centeredOffsetX - this.cameraOffsetX) * recenterFactor;
+    this.cameraOffsetY += (centeredOffsetY - this.cameraOffsetY) * recenterFactor;
+  }
+
+  private keepSceneAtLeastPartlyVisible(): void {
+    if (!this.canvas) {
+      return;
+    }
+
+    const bounds = this.getSceneBoundsRect();
+    if (!bounds) {
+      return;
+    }
+
+    const visibleCanvas = this.getVisibleCanvasRect();
+    const sceneWidth = bounds.width * this.cameraScale;
+    const sceneHeight = bounds.height * this.cameraScale;
+    const minVisibleEdgeRatio = Math.sqrt(this.minVisibleSceneAreaRatio);
+    const minVisibleWidth = Math.min(sceneWidth, visibleCanvas.width, sceneWidth * minVisibleEdgeRatio);
+    const minVisibleHeight = Math.min(sceneHeight, visibleCanvas.height, sceneHeight * minVisibleEdgeRatio);
+
+    const minOffsetX = visibleCanvas.x + minVisibleWidth - (bounds.x + bounds.width) * this.cameraScale;
+    const maxOffsetX = visibleCanvas.x + visibleCanvas.width - minVisibleWidth - bounds.x * this.cameraScale;
+    const minOffsetY = visibleCanvas.y + minVisibleHeight - (bounds.y + bounds.height) * this.cameraScale;
+    const maxOffsetY = visibleCanvas.y + visibleCanvas.height - minVisibleHeight - bounds.y * this.cameraScale;
+
+    this.cameraOffsetX = Math.max(minOffsetX, Math.min(maxOffsetX, this.cameraOffsetX));
+    this.cameraOffsetY = Math.max(minOffsetY, Math.min(maxOffsetY, this.cameraOffsetY));
+  }
+
+  private computeZoomOutCenteringProgress(): number {
+    const fitScale = this.computeFitScale();
+    if (!Number.isFinite(fitScale) || this.cameraScale >= fitScale) {
+      return 0;
+    }
+
     const minScaleToFit = this.computeMinScaleToFit();
-    this.cameraScale = Math.max(minScaleToFit, Math.min(this.maxScale, this.cameraScale));
-
-    const scaledWidth = this.svgViewBox.width * this.cameraScale;
-    const scaledHeight = this.svgViewBox.height * this.cameraScale;
-    const svgLeft = -this.svgViewBox.x * this.cameraScale;
-    const svgTop = -this.svgViewBox.y * this.cameraScale;
-
-    const minOffsetX = this.canvas.width - (svgLeft + scaledWidth);
-    const maxOffsetX = -svgLeft;
-    const minOffsetY = this.canvas.height - (svgTop + scaledHeight);
-    const maxOffsetY = -svgTop;
-
-    if (scaledWidth <= this.canvas.width) {
-      this.cameraOffsetX = (this.canvas.width - scaledWidth) * 0.5 - svgLeft;
-    } else {
-      this.cameraOffsetX = Math.max(minOffsetX, Math.min(maxOffsetX, this.cameraOffsetX));
-    }
-
-    if (scaledHeight <= this.canvas.height) {
-      this.cameraOffsetY = (this.canvas.height - scaledHeight) * 0.5 - svgTop;
-    } else {
-      this.cameraOffsetY = Math.max(minOffsetY, Math.min(maxOffsetY, this.cameraOffsetY));
-    }
+    const zoomOutRange = Math.max(0.000001, fitScale - minScaleToFit);
+    return Math.max(0, Math.min(1, (fitScale - this.cameraScale) / zoomOutRange));
   }
 
   private computeMinScaleToFit(): number {
-    if (!this.canvas || !this.svgViewBox || this.svgViewBox.width <= 0 || this.svgViewBox.height <= 0) {
+    const fitScale = this.computeFitScale();
+    if (!Number.isFinite(fitScale)) {
       return this.minScale;
     }
-    const scaleX = this.canvas.width / this.svgViewBox.width;
-    const scaleY = this.canvas.height / this.svgViewBox.height;
-    const fitScale = Math.min(scaleX, scaleY);
     return Math.max(this.minScale, Math.min(this.maxScale, fitScale * 0.5));
+  }
+
+  private computeFitScale(): number {
+    if (!this.canvas) {
+      return Number.NaN;
+    }
+    const bounds = this.getSceneBoundsRect();
+    if (!bounds || bounds.width <= 0 || bounds.height <= 0) {
+      return Number.NaN;
+    }
+    const scaleX = this.canvas.width / bounds.width;
+    const scaleY = this.canvas.height / bounds.height;
+    return Math.min(scaleX, scaleY);
+  }
+
+  private getSceneBoundsRect(): ViewBoxRect | null {
+    if (this.sceneBounds) {
+      return {
+        x: this.sceneBounds.minX,
+        y: this.sceneBounds.minY,
+        width: this.sceneBounds.maxX - this.sceneBounds.minX,
+        height: this.sceneBounds.maxY - this.sceneBounds.minY
+      };
+    }
+    if (!this.svgViewBox) {
+      return null;
+    }
+    return this.svgViewBox;
+  }
+
+  private getVisibleCanvasRect(): ViewBoxRect {
+    if (!this.canvas) {
+      return { x: 0, y: 0, width: 1, height: 1 };
+    }
+
+    const rect = this.canvas.getBoundingClientRect();
+    const scaleX = rect.width > 0 ? this.canvas.width / rect.width : 1;
+    const scaleY = rect.height > 0 ? this.canvas.height / rect.height : 1;
+    const scrollContainer = this.canvas.parentElement;
+
+    if (!scrollContainer) {
+      return { x: 0, y: 0, width: this.canvas.width, height: this.canvas.height };
+    }
+
+    return {
+      x: scrollContainer.scrollLeft * scaleX,
+      y: scrollContainer.scrollTop * scaleY,
+      width: Math.min(this.canvas.width, scrollContainer.clientWidth * scaleX),
+      height: Math.min(this.canvas.height, scrollContainer.clientHeight * scaleY)
+    };
   }
 }
