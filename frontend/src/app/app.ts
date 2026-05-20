@@ -14,10 +14,11 @@ import { KeyboardInteractionTechniques } from './gui/KeyboardInteractionTechniqu
 import { DrawingAreaNavigationInteractionTechnique } from './gui/DrawingAreaNavigationInteractionTechnique';
 import { SelectionInteractionTechnique } from './gui/SelectionInteractionTechnique';
 import { SelectedNodeActionMenuInteractionTechnique } from './gui/SelectedNodeActionMenuInteractionTechnique';
+import { MenuRenderer } from './gui/menu-renderer';
 
 @Component({
   selector: 'app-root',
-  imports: [CommonModule],
+  imports: [CommonModule, MenuRenderer],
   templateUrl: './app.html',
   styleUrl: './app.sass'
 })
@@ -27,6 +28,9 @@ export class App implements AfterViewInit {
 
   @ViewChild('workspaceCanvas')
   private workspaceCanvasRef?: ElementRef<HTMLCanvasElement>;
+
+  @ViewChild(MenuRenderer)
+  private menuRenderer?: MenuRenderer;
 
   public graphModel: GraphModelSnapshot | null = null;
   public isLoading = false;
@@ -38,17 +42,11 @@ export class App implements AfterViewInit {
   private readonly graphRenderer = new Html5CanvasGraphRenderer();
   private readonly graphSelectionModel = new GraphModel();
   private currentSvgFilename = 'structure.svg';
+  private cachedStructureGroupNames: string[] = [];
   private readonly keyboardInteractionTechniques = new KeyboardInteractionTechniques(this.graphSelectionModel);
   private readonly drawingAreaNavigationInteractionTechnique = new DrawingAreaNavigationInteractionTechnique(this.graphRenderer);
   private readonly selectionInteractionTechnique = new SelectionInteractionTechnique(this.graphSelectionModel, this.graphRenderer);
-  private readonly selectedNodeActionMenuInteractionTechnique = new SelectedNodeActionMenuInteractionTechnique(
-    this.graphSelectionModel,
-    () => this.currentSvgFilename === 'structure.svg',
-    (filename) => this.loadAndRenderGraphSvg(filename),
-    (selectedNodes) => this.onInundateDependencies(selectedNodes),
-    (selectedNodes) => this.onInundateClients(selectedNodes),
-    (selectedNodes) => this.onMoveTo(selectedNodes)
-  );
+  private selectedNodeActionMenuInteractionTechnique?: SelectedNodeActionMenuInteractionTechnique;
 
   constructor(
     private readonly httpClient: HttpClient,
@@ -67,7 +65,19 @@ export class App implements AfterViewInit {
     this.keyboardInteractionTechniques.attach(this.workspaceAreaRef?.nativeElement);
     this.drawingAreaNavigationInteractionTechnique.attach(canvas);
     this.selectionInteractionTechnique.attach(canvas);
-    this.selectedNodeActionMenuInteractionTechnique.attach();
+    if (this.menuRenderer) {
+      this.selectedNodeActionMenuInteractionTechnique = new SelectedNodeActionMenuInteractionTechnique(
+        this.graphSelectionModel,
+        this.menuRenderer,
+        () => this.currentSvgFilename === 'structure.svg',
+        (filename) => this.loadAndRenderGraphSvg(filename),
+        (selectedNodes) => this.onInundateDependencies(selectedNodes),
+        (selectedNodes) => this.onInundateClients(selectedNodes),
+        (selectedNodes, targetGroup) => this.onMoveTo(selectedNodes, targetGroup),
+        () => this.listStructureGroupNames()
+      );
+      this.selectedNodeActionMenuInteractionTechnique.attach();
+    }
     this.loadAndRenderGraphSvg('structure.svg');
   }
 
@@ -97,6 +107,7 @@ export class App implements AfterViewInit {
         this.graphModel = response.graphModel;
         this.graphSelectionModel.clearSelection();
         this.graphRenderer.setSelectedNodes(this.graphSelectionModel.selectedNodes);
+        this.selectedNodeActionMenuInteractionTechnique?.closeMenu();
         this.loadAndRenderGraphSvg('structure.svg');
         this.isLoading = false;
       },
@@ -115,6 +126,13 @@ export class App implements AfterViewInit {
         next: (svgText) => {
           this.graphRenderer.loadFromSvgText(svgText);
           this.graphRenderer.setSelectedNodes(this.graphSelectionModel.selectedNodes);
+          if (filename === 'structure.svg') {
+            this.cachedStructureGroupNames = this.graphRenderer
+              .getInteractiveEllipses()
+              .map((ellipse) => ellipse.nodeName)
+              .filter((name) => name.startsWith('_[') && name !== '_[STRUCTURE]')
+              .map((name) => name.replace(/^_\[(.+)\]$/, '$1').toLowerCase());
+          }
         },
         error: () => {
           this.errorMessage = `No se pudo cargar output/svg/${filename}`;
@@ -130,7 +148,19 @@ export class App implements AfterViewInit {
     console.log('SelectedNodeAction: inundar clientes', selectedNodes);
   }
 
-  private onMoveTo(selectedNodes: string[]): void {
-    console.log('SelectedNodeAction: mover a...', selectedNodes);
+  private onMoveTo(selectedNodes: string[], targetGroup: string): void {
+    console.log('SelectedNodeAction: mover a...', selectedNodes, '->', targetGroup);
+  }
+
+  private listStructureGroupNames(): string[] {
+    const nodes = this.graphModel?.structure.nodes ?? [];
+    const fromSnapshot = nodes
+      .map((node) => node.name)
+      .filter((name) => name.startsWith('_[') && name !== '_[STRUCTURE]')
+      .map((name) => name.replace(/^_\[(.+)\]$/, '$1').toLowerCase());
+    if (fromSnapshot.length > 0) {
+      return fromSnapshot;
+    }
+    return this.cachedStructureGroupNames;
   }
 }

@@ -1,23 +1,31 @@
 import { GraphModel } from '../model/graph-model';
-import { PopupMenuOption, PopupOptionsMenu } from './PopupOptionsMenu';
+import { InlineMenuDefinition } from '../model/inline-menu-definition';
+import { Menu } from '../model/menu';
+import { MenuOption } from '../model/menu-option';
+import { MenuRenderer } from './menu-renderer';
 
 export class SelectedNodeActionMenuInteractionTechnique {
   private lastMouseX = 0;
   private lastMouseY = 0;
-  private readonly popupOptionsMenu = new PopupOptionsMenu();
 
   public constructor(
     private readonly graphModel: GraphModel,
+    private readonly menuRenderer: MenuRenderer,
     private readonly isStructureGraphProvider: () => boolean,
     private readonly openGraphByFilename: (filename: string) => void,
     private readonly inundateDependencies: (selectedNodes: string[]) => void,
     private readonly inundateClients: (selectedNodes: string[]) => void,
-    private readonly moveTo: (selectedNodes: string[]) => void
+    private readonly moveTo: (selectedNodes: string[], targetGroup: string) => void,
+    private readonly listStructureGroups: () => string[]
   ) {}
 
   public attach(): void {
     window.addEventListener('mousemove', this.onMouseMove);
     window.addEventListener('keydown', this.onKeyDown);
+  }
+
+  public closeMenu(): void {
+    this.menuRenderer.close();
   }
 
   private readonly onMouseMove = (event: MouseEvent): void => {
@@ -27,27 +35,11 @@ export class SelectedNodeActionMenuInteractionTechnique {
 
   private readonly onKeyDown = (event: KeyboardEvent): void => {
     if (event.key === 'Escape') {
-      this.popupOptionsMenu.close();
+      this.menuRenderer.close();
       return;
     }
 
-    if (this.popupOptionsMenu.isOpen()) {
-      if (event.key === 'ArrowDown') {
-        event.preventDefault();
-        this.popupOptionsMenu.moveSelectionDown();
-        return;
-      }
-      if (event.key === 'ArrowUp') {
-        event.preventDefault();
-        this.popupOptionsMenu.moveSelectionUp();
-        return;
-      }
-      if (event.key === 'Enter') {
-        event.preventDefault();
-        if (this.popupOptionsMenu.runSelected()) {
-          this.popupOptionsMenu.close();
-        }
-      }
+    if (this.menuRenderer.visible) {
       return;
     }
 
@@ -59,50 +51,59 @@ export class SelectedNodeActionMenuInteractionTechnique {
     if (this.graphModel.selectedNodes.length === 0) {
       return;
     }
-    this.openMenuAtCurrentMousePosition();
-  };
 
-  private openMenuAtCurrentMousePosition(): void {
-    const options = this.buildActions();
-    if (options.length === 0) {
+    const menu = this.buildMenuModel();
+    if (menu.options.length === 0) {
       return;
     }
-    this.popupOptionsMenu.openAt(this.lastMouseX, this.lastMouseY, options);
-  }
 
-  private buildActions(): PopupMenuOption[] {
+    this.menuRenderer.open(menu, this.lastMouseX, this.lastMouseY);
+  };
+
+  private buildMenuModel(): Menu {
     const structure = this.isStructureGraphProvider();
-    if (!structure) {
-      return [
-        {
-          label: 'inundar dependencias',
-          onSelect: () => this.inundateDependencies([...this.graphModel.selectedNodes])
-        },
-        {
-          label: 'inundar clientes',
-          onSelect: () => this.inundateClients([...this.graphModel.selectedNodes])
-        },
-        {
-          label: 'mover a...',
-          onSelect: () => this.moveTo([...this.graphModel.selectedNodes])
-        },
-      ];
-    }
 
-    const selectedNodeName = this.graphModel.selectedNodes[0];
-    const filename = this.mapNodeNameToSvgFilename(selectedNodeName);
-    if (!filename) {
-      return [];
-    }
-
-    return [
-      {
-        label: `openNewSvg (${filename})`,
-        onSelect: () => {
+    const actionRegistry: Record<string, (() => void) | undefined> = {
+      open_new_svg: () => {
+        const selectedNodeName = this.graphModel.selectedNodes[0];
+        const filename = this.mapNodeNameToSvgFilename(selectedNodeName);
+        if (filename) {
           this.openGraphByFilename(filename);
         }
-      }
-    ];
+      },
+      flood_dependencies: () => this.inundateDependencies([...this.graphModel.selectedNodes]),
+      flood_clients: () => this.inundateClients([...this.graphModel.selectedNodes])
+    };
+
+    const moveToSubmenu = this.buildMoveToSubmenu();
+    const dynamicSubmenus: Record<string, Menu> = {
+      'mover a...': moveToSubmenu
+    };
+
+    return InlineMenuDefinition.buildMenuFromJson(
+      structure ? InlineMenuDefinition.STRUCTURE_MENU_JSON : InlineMenuDefinition.NON_STRUCTURE_MENU_JSON,
+      actionRegistry,
+      dynamicSubmenus
+    );
+  }
+
+  private buildMoveToSubmenu(): Menu {
+    const groups = this.listStructureGroups();
+    if (groups.length === 0) {
+      return new Menu([
+        new MenuOption('sin grupos disponibles', null, null, null)
+      ]);
+    }
+    const options = groups.map(
+      (groupName) =>
+        new MenuOption(
+          groupName,
+          () => this.moveTo([...this.graphModel.selectedNodes], groupName),
+          null,
+          null
+        )
+    );
+    return new Menu(options);
   }
 
   private mapNodeNameToSvgFilename(nodeName: string | undefined): string | null {
