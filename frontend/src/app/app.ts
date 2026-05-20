@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { BACKEND_BASE_URL } from './config-tokens';
 
 type GraphModelGenerator = 'CACHE_LOADER' | 'DEBIAN_PACKAGE_GENERATOR';
 
@@ -45,10 +46,15 @@ export class App {
   public isLoading = false;
   public errorMessage = '';
 
-  private readonly endpointUrl = 'http://localhost:8080/v1/updateGraph';
+  private readonly endpointUrl: string;
   private readonly groupsDefinitionFolder = '../u/';
 
-  constructor(private readonly httpClient: HttpClient) {}
+  constructor(
+    private readonly httpClient: HttpClient,
+    @Inject(BACKEND_BASE_URL) backendBaseUrl: string
+  ) {
+    this.endpointUrl = `${backendBaseUrl}/v1/updateGraph`;
+  }
 
   public createGraphFromCache(): void {
     this.updateGraphModel('CACHE_LOADER');

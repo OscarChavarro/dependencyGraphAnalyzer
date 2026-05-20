@@ -4,6 +4,7 @@ import backend.application.port.in.UpdateGraphModelUseCase;
 import backend.infrastructure.http.dto.UpdateGraphModelRequest;
 import backend.infrastructure.http.dto.UpdateGraphModelResponse;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +13,12 @@ import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping("/v1")
+@CrossOrigin(originPatterns = {
+        "http://192.168.1.*",
+        "http://192.168.1.*:*",
+        "https://192.168.1.*",
+        "https://192.168.1.*:*"
+})
 public class GraphModelController {
     private final UpdateGraphModelUseCase updateGraphModelUseCase;
 
