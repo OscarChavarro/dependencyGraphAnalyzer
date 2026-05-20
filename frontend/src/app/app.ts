@@ -15,6 +15,11 @@ import { DrawingAreaNavigationInteractionTechnique } from './gui/DrawingAreaNavi
 import { SelectionInteractionTechnique } from './gui/SelectionInteractionTechnique';
 import { SelectedNodeActionMenuInteractionTechnique } from './gui/SelectedNodeActionMenuInteractionTechnique';
 import { MenuRenderer } from './gui/menu-renderer';
+import { I18nStateService } from './i18n/services/i18n-state.service';
+import { I18nService } from './i18n/services/i18n.service';
+import { I18N_KEYS } from './i18n/translations/i18n-keys.const';
+import type { SupportedLanguage } from './i18n/types/supported-language.type';
+import type { TranslationKey } from './i18n/translations/translations-by-namespace.const';
 
 @Component({
   selector: 'app-root',
@@ -36,6 +41,8 @@ export class App implements AfterViewInit {
   public isLoading = false;
   public errorMessage = '';
   public isPanelCollapsed = false;
+  public readonly selectedLanguage;
+  public readonly i18nKeys = I18N_KEYS;
 
   private readonly endpointUrl: string;
   private readonly groupsDefinitionFolder = '../u/';
@@ -50,15 +57,18 @@ export class App implements AfterViewInit {
 
   constructor(
     private readonly httpClient: HttpClient,
+    private readonly i18nStateService: I18nStateService,
+    private readonly i18nService: I18nService,
     @Inject(BACKEND_BASE_URL) backendBaseUrl: string
   ) {
     this.endpointUrl = `${backendBaseUrl}/v1/updateGraph`;
+    this.selectedLanguage = this.i18nStateService.selectedLanguage;
   }
 
   public ngAfterViewInit(): void {
     const canvas = this.workspaceCanvasRef?.nativeElement;
     if (!canvas || !this.graphRenderer.attach(canvas)) {
-      this.errorMessage = 'No se pudo inicializar el canvas';
+      this.errorMessage = this.t(this.i18nKeys.shell.CANVAS_INIT_ERROR);
       return;
     }
 
@@ -74,7 +84,8 @@ export class App implements AfterViewInit {
         (selectedNodes) => this.onInundateDependencies(selectedNodes),
         (selectedNodes) => this.onInundateClients(selectedNodes),
         (selectedNodes, targetGroup) => this.onMoveTo(selectedNodes, targetGroup),
-        () => this.listStructureGroupNames()
+        () => this.listStructureGroupNames(),
+        (id) => this.t(id)
       );
       this.selectedNodeActionMenuInteractionTechnique.attach();
     }
@@ -91,6 +102,14 @@ export class App implements AfterViewInit {
 
   public toggleSidePanel(): void {
     this.isPanelCollapsed = !this.isPanelCollapsed;
+  }
+
+  public setLanguage(language: SupportedLanguage): void {
+    this.i18nStateService.setLanguage(language);
+  }
+
+  public t(id: TranslationKey): string {
+    return this.i18nService.get(id, this.selectedLanguage());
   }
 
   private updateGraphModel(generator: GraphModelGenerator): void {
@@ -112,7 +131,7 @@ export class App implements AfterViewInit {
         this.isLoading = false;
       },
       error: () => {
-        this.errorMessage = 'No se pudo actualizar el grafo';
+        this.errorMessage = this.t(this.i18nKeys.shell.GRAPH_UPDATE_ERROR);
         this.isLoading = false;
       }
     });
@@ -135,7 +154,7 @@ export class App implements AfterViewInit {
           }
         },
         error: () => {
-          this.errorMessage = `No se pudo cargar output/svg/${filename}`;
+          this.errorMessage = `${this.t(this.i18nKeys.shell.LOAD_SVG_ERROR_PREFIX)} output/svg/${filename}`;
         }
       });
   }

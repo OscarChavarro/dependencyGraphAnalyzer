@@ -3,6 +3,7 @@ import { InlineMenuDefinition } from '../model/inline-menu-definition';
 import { Menu } from '../model/menu';
 import { MenuOption } from '../model/menu-option';
 import { MenuRenderer } from './menu-renderer';
+import type { TranslationKey } from '../i18n/translations/translations-by-namespace.const';
 
 export class SelectedNodeActionMenuInteractionTechnique {
   private lastMouseX = 0;
@@ -16,7 +17,8 @@ export class SelectedNodeActionMenuInteractionTechnique {
     private readonly inundateDependencies: (selectedNodes: string[]) => void,
     private readonly inundateClients: (selectedNodes: string[]) => void,
     private readonly moveTo: (selectedNodes: string[], targetGroup: string) => void,
-    private readonly listStructureGroups: () => string[]
+    private readonly listStructureGroups: () => string[],
+    private readonly translate: (id: TranslationKey) => string
   ) {}
 
   public attach(): void {
@@ -77,13 +79,14 @@ export class SelectedNodeActionMenuInteractionTechnique {
 
     const moveToSubmenu = this.buildMoveToSubmenu();
     const dynamicSubmenus: Record<string, Menu> = {
-      'mover a...': moveToSubmenu
+      'shell.MENU_MOVE_TO': moveToSubmenu
     };
 
     return InlineMenuDefinition.buildMenuFromJson(
       structure ? InlineMenuDefinition.STRUCTURE_MENU_JSON : InlineMenuDefinition.NON_STRUCTURE_MENU_JSON,
       actionRegistry,
-      dynamicSubmenus
+      dynamicSubmenus,
+      (id) => this.translate(id as TranslationKey)
     );
   }
 
@@ -91,12 +94,19 @@ export class SelectedNodeActionMenuInteractionTechnique {
     const groups = this.listStructureGroups();
     if (groups.length === 0) {
       return new Menu([
-        new MenuOption('sin grupos disponibles', null, null, null)
+        new MenuOption(
+          'shell.MENU_NO_GROUPS_AVAILABLE',
+          this.translate('shell.MENU_NO_GROUPS_AVAILABLE'),
+          null,
+          null,
+          null
+        )
       ]);
     }
     const options = groups.map(
       (groupName) =>
         new MenuOption(
+          groupName,
           groupName,
           () => this.moveTo([...this.graphModel.selectedNodes], groupName),
           null,

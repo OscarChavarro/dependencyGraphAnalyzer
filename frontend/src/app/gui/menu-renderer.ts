@@ -23,7 +23,7 @@ import { MenuOption } from '../model/menu-option';
             type="text"
             [(ngModel)]="searchByLevel[level]"
             (ngModelChange)="onSearchChange(level)"
-            placeholder="Buscar..."
+            [placeholder]="searchPlaceholder"
           />
         </div>
 
@@ -35,7 +35,7 @@ import { MenuOption } from '../model/menu-option';
             (mouseleave)="clearActive(level)"
             (click)="onOptionClick(level, idx, $event)"
           >
-            {{ option.text }}
+            {{ option.label }}
           </li>
         </ul>
       </div>
@@ -107,6 +107,7 @@ export class MenuRenderer {
   @Input() public visible = false;
   @Input() public positionX = 0;
   @Input() public positionY = 0;
+  @Input() public searchPlaceholder = '';
 
   @Output() public closeRequested = new EventEmitter<void>();
 
@@ -141,7 +142,7 @@ export class MenuRenderer {
     if (!query) {
       return options;
     }
-    return options.filter((option) => option.text.toLowerCase().includes(query));
+    return options.filter((option) => option.label.toLowerCase().includes(query));
   }
 
   public setActive(level: number, index: number): void {
@@ -218,7 +219,7 @@ export class MenuRenderer {
     }
 
     const option = options[activeIndex];
-    console.log('Menu option activated:', option.text, { hasAction: !!option.action, hasSubmenu: !!option.submenu });
+    console.log('Menu option activated:', option.id, { hasAction: !!option.action, hasSubmenu: !!option.submenu });
     if (option.action) {
       option.action();
       this.close();
@@ -234,7 +235,7 @@ export class MenuRenderer {
       this.menuStack.push(option.submenu);
       this.activeByLevel.push(-1);
       this.searchByLevel.push('');
-      console.log('Opening submenu for option:', option.text, 'with', option.submenu.options.length, 'options');
+      console.log('Opening submenu for option:', option.id, 'with', option.submenu.options.length, 'options');
       queueMicrotask(() => this.clampMenuToViewport());
     }
   }

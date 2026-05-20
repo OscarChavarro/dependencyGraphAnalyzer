@@ -1,31 +1,54 @@
 <main class="main-layout" [class.main-layout-collapsed]="isPanelCollapsed">
   <aside class="left-panel" [class.left-panel-collapsed]="isPanelCollapsed">
     <button class="panel-toggle-button" type="button" (click)="toggleSidePanel()" [attr.aria-expanded]="!isPanelCollapsed">
-      {{ isPanelCollapsed ? '» Panel' : '« Colapsar' }}
+      {{ isPanelCollapsed ? '» ' + t(i18nKeys.shell.PANEL_LABEL) : '« ' + t(i18nKeys.shell.PANEL_COLLAPSE) }}
     </button>
 
     <div class="panel-content" *ngIf="!isPanelCollapsed">
-      <h1 class="panel-title">Generador de Grafos</h1>
+      <div class="panel-header-row">
+        <h1 class="panel-title">{{ t(i18nKeys.shell.GRAPH_GENERATOR_TITLE) }}</h1>
+        <div class="language-switch" [attr.aria-label]="t(i18nKeys.shell.LANGUAGE_SELECTOR_ARIA)">
+          <button
+            type="button"
+            class="language-flag-button"
+            [class.language-flag-button-active]="selectedLanguage() === 'es'"
+            (click)="setLanguage('es')"
+            aria-label="Spanish"
+          >
+            🇪🇸
+          </button>
+          <button
+            type="button"
+            class="language-flag-button"
+            [class.language-flag-button-active]="selectedLanguage() === 'en'"
+            (click)="setLanguage('en')"
+            aria-label="English"
+          >
+            🇺🇸
+          </button>
+        </div>
+      </div>
 
       <button class="action-button" type="button" (click)="createGraphFromCache()" [disabled]="isLoading">
-        Crear grafo desde cache.txt
+        {{ t(i18nKeys.shell.CREATE_GRAPH_FROM_CACHE) }}
       </button>
 
       <button class="action-button" type="button" (click)="analyzeDebianSystem()" [disabled]="isLoading">
-        Analizar sistema Debian
+        {{ t(i18nKeys.shell.ANALYZE_DEBIAN_SYSTEM) }}
       </button>
 
-      <p class="status-line" *ngIf="isLoading">Procesando...</p>
+      <p class="status-line" *ngIf="isLoading">{{ t(i18nKeys.shell.PROCESSING) }}</p>
       <p class="status-line status-line-error" *ngIf="errorMessage">{{ errorMessage }}</p>
       <p class="status-line" *ngIf="graphModel">
-        Nodos: {{ graphModel.nodes.length }} | Aristas: {{ graphModel.edges.length }}
+        {{ t(i18nKeys.shell.NODES) }}: {{ graphModel.nodes.length }} | {{ t(i18nKeys.shell.EDGES) }}:
+        {{ graphModel.edges.length }}
       </p>
     </div>
   </aside>
 
-  <section #workspaceArea class="workspace-area" aria-label="Area de trabajo">
+  <section #workspaceArea class="workspace-area" [attr.aria-label]="t(i18nKeys.shell.WORKSPACE_AREA_ARIA)">
     <canvas #workspaceCanvas class="workspace-canvas" width="2400" height="1600"></canvas>
   </section>
 
-  <app-menu-renderer></app-menu-renderer>
+  <app-menu-renderer [searchPlaceholder]="t(i18nKeys.shell.MENU_SEARCH_PLACEHOLDER)"></app-menu-renderer>
 </main>
