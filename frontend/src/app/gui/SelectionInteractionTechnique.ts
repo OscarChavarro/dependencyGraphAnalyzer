@@ -1,6 +1,5 @@
 import { GraphModel } from '../model/graph-model';
 import { Html5CanvasGraphRenderer, InteractiveEllipse } from '../render/Html5CanvasGraphRenderer';
-import { KeyboardInteractionTechniques } from './KeyboardInteractionTechniques';
 
 class Ellipse {
   public constructor(
@@ -20,11 +19,10 @@ class Ellipse {
   }
 }
 
-export class MouseInteractionTechniques {
+export class SelectionInteractionTechnique {
   public constructor(
     private readonly graphModel: GraphModel,
-    private readonly renderer: Html5CanvasGraphRenderer,
-    private readonly keyboardInteractionTechniques: KeyboardInteractionTechniques
+    private readonly renderer: Html5CanvasGraphRenderer
   ) {}
 
   public attach(canvas: HTMLCanvasElement): void {
@@ -40,15 +38,16 @@ export class MouseInteractionTechniques {
 
   private readonly onMouseClick = (event: MouseEvent): void => {
     const hoveredNodeName = this.pickNodeFromEvent(event);
+
     if (!hoveredNodeName) {
-      if (!this.keyboardInteractionTechniques.isMultiSelectModifierPressed()) {
+      if (!event.ctrlKey && !event.metaKey) {
         this.graphModel.clearSelection();
         this.renderer.setSelectedNodes(this.graphModel.selectedNodes);
       }
       return;
     }
 
-    if (this.keyboardInteractionTechniques.isMultiSelectModifierPressed()) {
+    if (event.ctrlKey || event.metaKey) {
       this.graphModel.toggleMultiSelection(hoveredNodeName);
     } else {
       this.graphModel.selectSingle(hoveredNodeName);

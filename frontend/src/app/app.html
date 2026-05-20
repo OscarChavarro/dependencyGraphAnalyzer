@@ -1,20 +1,26 @@
-<main class="main-layout">
-  <aside class="left-panel">
-    <h1 class="panel-title">Generador de Grafos</h1>
-
-    <button class="action-button" type="button" (click)="createGraphFromCache()" [disabled]="isLoading">
-      Crear grafo desde cache.txt
+<main class="main-layout" [class.main-layout-collapsed]="isPanelCollapsed">
+  <aside class="left-panel" [class.left-panel-collapsed]="isPanelCollapsed">
+    <button class="panel-toggle-button" type="button" (click)="toggleSidePanel()" [attr.aria-expanded]="!isPanelCollapsed">
+      {{ isPanelCollapsed ? '» Panel' : '« Colapsar' }}
     </button>
 
-    <button class="action-button" type="button" (click)="analyzeDebianSystem()" [disabled]="isLoading">
-      Analizar sistema Debian
-    </button>
+    <div class="panel-content" *ngIf="!isPanelCollapsed">
+      <h1 class="panel-title">Generador de Grafos</h1>
 
-    <p class="status-line" *ngIf="isLoading">Procesando...</p>
-    <p class="status-line status-line-error" *ngIf="errorMessage">{{ errorMessage }}</p>
-    <p class="status-line" *ngIf="graphModel">
-      Nodos: {{ graphModel.nodes.length }} | Aristas: {{ graphModel.edges.length }}
-    </p>
+      <button class="action-button" type="button" (click)="createGraphFromCache()" [disabled]="isLoading">
+        Crear grafo desde cache.txt
+      </button>
+
+      <button class="action-button" type="button" (click)="analyzeDebianSystem()" [disabled]="isLoading">
+        Analizar sistema Debian
+      </button>
+
+      <p class="status-line" *ngIf="isLoading">Procesando...</p>
+      <p class="status-line status-line-error" *ngIf="errorMessage">{{ errorMessage }}</p>
+      <p class="status-line" *ngIf="graphModel">
+        Nodos: {{ graphModel.nodes.length }} | Aristas: {{ graphModel.edges.length }}
+      </p>
+    </div>
   </aside>
 
   <section #workspaceArea class="workspace-area" aria-label="Area de trabajo">

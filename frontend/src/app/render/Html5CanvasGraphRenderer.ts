@@ -63,9 +63,6 @@ export class Html5CanvasGraphRenderer {
   private cameraScale = 1;
   private cameraOffsetX = 0;
   private cameraOffsetY = 0;
-  private isDragging = false;
-  private dragLastX = 0;
-  private dragLastY = 0;
   private readonly minScale = 0.05;
   private readonly maxScale = 8;
 
@@ -75,7 +72,6 @@ export class Html5CanvasGraphRenderer {
     if (!this.context) {
       return false;
     }
-    this.setupInteractions();
     return true;
   }
 
@@ -154,53 +150,41 @@ export class Html5CanvasGraphRenderer {
     this.context.restore();
   }
 
-  private setupInteractions(): void {
-    if (!this.canvas) {
+  public zoomAt(screenX: number, screenY: number, wheelDeltaY: number): void {
+    const worldBeforeX = (screenX - this.cameraOffsetX) / this.cameraScale;
+    const worldBeforeY = (screenY - this.cameraOffsetY) / this.cameraScale;
+    const zoomFactor = wheelDeltaY < 0 ? 1.12 : 0.89;
+    const minScaleToFit = this.computeMinScaleToFit();
+
+    this.cameraScale = Math.max(minScaleToFit, Math.min(this.maxScale, this.cameraScale * zoomFactor));
+    this.cameraOffsetX = screenX - worldBeforeX * this.cameraScale;
+    this.cameraOffsetY = screenY - worldBeforeY * this.cameraScale;
+    this.clampCameraToSvgBounds();
+    this.render();
+  }
+
+  public panBy(deltaX: number, deltaY: number): void {
+    this.cameraOffsetX += deltaX;
+    this.cameraOffsetY += deltaY;
+    this.clampCameraToSvgBounds();
+    this.render();
+  }
+
+  public moveAndCenterToFit(): void {
+    if (!this.canvas || !this.svgViewBox) {
       return;
     }
 
-    this.canvas.addEventListener('wheel', (event: WheelEvent) => {
-      event.preventDefault();
-      if (!this.canvas) {
-        return;
-      }
+    const scaleX = this.canvas.width / this.svgViewBox.width;
+    const scaleY = this.canvas.height / this.svgViewBox.height;
+    this.cameraScale = Math.max(this.minScale, Math.min(this.maxScale, Math.max(scaleX, scaleY)));
 
-      const rect = this.canvas.getBoundingClientRect();
-      const mouseX = event.clientX - rect.left;
-      const mouseY = event.clientY - rect.top;
-      const worldBeforeX = (mouseX - this.cameraOffsetX) / this.cameraScale;
-      const worldBeforeY = (mouseY - this.cameraOffsetY) / this.cameraScale;
-
-      const zoomFactor = event.deltaY < 0 ? 1.12 : 0.89;
-      const minScaleToFit = this.computeMinScaleToFit();
-      this.cameraScale = Math.max(minScaleToFit, Math.min(this.maxScale, this.cameraScale * zoomFactor));
-      this.cameraOffsetX = mouseX - worldBeforeX * this.cameraScale;
-      this.cameraOffsetY = mouseY - worldBeforeY * this.cameraScale;
-      this.clampCameraToSvgBounds();
-      this.render();
-    });
-
-    this.canvas.addEventListener('mousedown', (event: MouseEvent) => {
-      this.isDragging = true;
-      this.dragLastX = event.clientX;
-      this.dragLastY = event.clientY;
-    });
-
-    window.addEventListener('mouseup', () => {
-      this.isDragging = false;
-    });
-
-    window.addEventListener('mousemove', (event: MouseEvent) => {
-      if (!this.isDragging) {
-        return;
-      }
-      this.cameraOffsetX += event.clientX - this.dragLastX;
-      this.cameraOffsetY += event.clientY - this.dragLastY;
-      this.dragLastX = event.clientX;
-      this.dragLastY = event.clientY;
-      this.clampCameraToSvgBounds();
-      this.render();
-    });
+    const centerX = this.svgViewBox.x + this.svgViewBox.width * 0.5;
+    const centerY = this.svgViewBox.y + this.svgViewBox.height * 0.5;
+    this.cameraOffsetX = this.canvas.width * 0.5 - centerX * this.cameraScale;
+    this.cameraOffsetY = this.canvas.height * 0.5 - centerY * this.cameraScale;
+    this.clampCameraToSvgBounds();
+    this.render();
   }
 
   private parseSvgScene(svgText: string): void {

@@ -10,14 +10,16 @@ import {
   UpdateGraphModelRequest,
   UpdateGraphModelResponse
 } from './model/graph-model';
-import { MouseInteractionTechniques } from './gui/MouseInteractionTechniques';
 import { KeyboardInteractionTechniques } from './gui/KeyboardInteractionTechniques';
+import { DrawingAreaNavigationInteractionTechnique } from './gui/DrawingAreaNavigationInteractionTechnique';
+import { SelectionInteractionTechnique } from './gui/SelectionInteractionTechnique';
+import { SelectedNodeActionMenuInteractionTechnique } from './gui/SelectedNodeActionMenuInteractionTechnique';
 
 @Component({
   selector: 'app-root',
   imports: [CommonModule],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrl: './app.sass'
 })
 export class App implements AfterViewInit {
   @ViewChild('workspaceArea')
@@ -29,16 +31,23 @@ export class App implements AfterViewInit {
   public graphModel: GraphModelSnapshot | null = null;
   public isLoading = false;
   public errorMessage = '';
+  public isPanelCollapsed = false;
 
   private readonly endpointUrl: string;
   private readonly groupsDefinitionFolder = '../u/';
   private readonly graphRenderer = new Html5CanvasGraphRenderer();
   private readonly graphSelectionModel = new GraphModel();
+  private currentSvgFilename = 'structure.svg';
   private readonly keyboardInteractionTechniques = new KeyboardInteractionTechniques(this.graphSelectionModel);
-  private readonly mouseInteractionTechniques = new MouseInteractionTechniques(
+  private readonly drawingAreaNavigationInteractionTechnique = new DrawingAreaNavigationInteractionTechnique(this.graphRenderer);
+  private readonly selectionInteractionTechnique = new SelectionInteractionTechnique(this.graphSelectionModel, this.graphRenderer);
+  private readonly selectedNodeActionMenuInteractionTechnique = new SelectedNodeActionMenuInteractionTechnique(
     this.graphSelectionModel,
-    this.graphRenderer,
-    this.keyboardInteractionTechniques
+    () => this.currentSvgFilename === 'structure.svg',
+    (filename) => this.loadAndRenderGraphSvg(filename),
+    (selectedNodes) => this.onInundateDependencies(selectedNodes),
+    (selectedNodes) => this.onInundateClients(selectedNodes),
+    (selectedNodes) => this.onMoveTo(selectedNodes)
   );
 
   constructor(
@@ -56,8 +65,10 @@ export class App implements AfterViewInit {
     }
 
     this.keyboardInteractionTechniques.attach(this.workspaceAreaRef?.nativeElement);
-    this.mouseInteractionTechniques.attach(canvas);
-    this.loadAndRenderStructureSvgVector();
+    this.drawingAreaNavigationInteractionTechnique.attach(canvas);
+    this.selectionInteractionTechnique.attach(canvas);
+    this.selectedNodeActionMenuInteractionTechnique.attach();
+    this.loadAndRenderGraphSvg('structure.svg');
   }
 
   public createGraphFromCache(): void {
@@ -66,6 +77,10 @@ export class App implements AfterViewInit {
 
   public analyzeDebianSystem(): void {
     this.updateGraphModel('DEBIAN_PACKAGE_GENERATOR');
+  }
+
+  public toggleSidePanel(): void {
+    this.isPanelCollapsed = !this.isPanelCollapsed;
   }
 
   private updateGraphModel(generator: GraphModelGenerator): void {
@@ -82,7 +97,7 @@ export class App implements AfterViewInit {
         this.graphModel = response.graphModel;
         this.graphSelectionModel.clearSelection();
         this.graphRenderer.setSelectedNodes(this.graphSelectionModel.selectedNodes);
-        this.loadAndRenderStructureSvgVector();
+        this.loadAndRenderGraphSvg('structure.svg');
         this.isLoading = false;
       },
       error: () => {
@@ -92,17 +107,30 @@ export class App implements AfterViewInit {
     });
   }
 
-  private loadAndRenderStructureSvgVector(): void {
+  private loadAndRenderGraphSvg(filename: string): void {
+    this.currentSvgFilename = filename;
     this.httpClient
-      .get(`/output/svg/structure.svg?ts=${Date.now()}`, { responseType: 'text' })
+      .get(`/output/svg/${filename}?ts=${Date.now()}`, { responseType: 'text' })
       .subscribe({
         next: (svgText) => {
           this.graphRenderer.loadFromSvgText(svgText);
           this.graphRenderer.setSelectedNodes(this.graphSelectionModel.selectedNodes);
         },
         error: () => {
-          this.errorMessage = 'No se pudo cargar output/svg/structure.svg';
+          this.errorMessage = `No se pudo cargar output/svg/${filename}`;
         }
       });
+  }
+
+  private onInundateDependencies(selectedNodes: string[]): void {
+    console.log('SelectedNodeAction: inundar dependencias', selectedNodes);
+  }
+
+  private onInundateClients(selectedNodes: string[]): void {
+    console.log('SelectedNodeAction: inundar clientes', selectedNodes);
+  }
+
+  private onMoveTo(selectedNodes: string[]): void {
+    console.log('SelectedNodeAction: mover a...', selectedNodes);
   }
 }
