@@ -66,8 +66,8 @@ export const SHELL_TRANSLATIONS = {
     es: 'Abrir grupo'
   },
   MENU_SHOW_RELATION: {
-    en: 'Show relation',
-    es: 'Mostrar relación'
+    en: 'Show relationships',
+    es: 'Mostrar relaciones'
   },
   MENU_FLOOD_DEPENDENCIES: {
     en: 'Flood dependencies',
@@ -80,6 +80,10 @@ export const SHELL_TRANSLATIONS = {
   MENU_MOVE_TO: {
     en: 'Move to...',
     es: 'Mover a...'
+  },
+  MOVE_VERB: {
+    en: 'Move',
+    es: 'Mover'
   },
   MENU_NO_GROUPS_AVAILABLE: {
     en: 'No groups available',

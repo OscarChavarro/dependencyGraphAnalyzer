@@ -64,4 +64,6 @@
   [lines]="relationBoxLines"
   [closeAriaLabel]="t(i18nKeys.shell.CLOSE_RELATION_BOX_ARIA)"
   (closeRequested)="closeRelationBox()"
+  (endpointClicked)="onRelationEndpointClick($event)"
+  (endpointContextMenuRequested)="onRelationEndpointContextMenu($event)"
 ></app-relation-dialog>

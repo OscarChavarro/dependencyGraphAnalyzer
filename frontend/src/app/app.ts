@@ -23,7 +23,13 @@ import type { SupportedLanguage } from './i18n/types/supported-language.type';
 import type { TranslationKey } from './i18n/translations/translations-by-namespace.const';
 import { GroupRelationshipQuery } from './localProcessing/GroupRelationshipQuery';
 import { InvalidRelationshipDetector } from './localProcessing/InvalidRelationshipDetector';
-import { RelationDialogComponent, RelationLineViewModel } from './relation-dialog.component';
+import {
+  RelationDialogComponent,
+  RelationEndpointClickEvent,
+  RelationLineViewModel
+} from './relation-dialog.component';
+import { Menu } from './model/menu';
+import { MenuOption } from './model/menu-option';
 
 @Component({
   selector: 'app-root',
@@ -157,6 +163,54 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
 
   public setLanguage(language: SupportedLanguage): void {
     this.i18nStateService.setLanguage(language);
+  }
+
+  public onRelationEndpointClick(event: RelationEndpointClickEvent): void {
+    this.jumpToGroupWithSelectedNode(event.endpoint);
+  }
+
+  public onRelationEndpointContextMenu(event: RelationEndpointClickEvent): void {
+    const packageName = this.extractPackageFromEndpoint(event.endpoint);
+    if (!packageName) {
+      return;
+    }
+    const counterpartGroupName = this.extractGroupFromEndpoint(event.counterpartEndpoint ?? '');
+    const counterpartGroupLower = counterpartGroupName?.toLowerCase() ?? null;
+    const groups = this.listStructureGroupNames();
+    const submenu = new Menu(
+      groups.map(
+        (groupName) =>
+          new MenuOption(
+            groupName,
+            groupName,
+            () => this.onMoveTo([packageName], groupName),
+            null,
+            null
+          )
+      )
+    );
+    const options: MenuOption[] = [
+      new MenuOption(
+        'shell.MENU_MOVE_TO',
+        this.t(this.i18nKeys.shell.MENU_MOVE_TO),
+        null,
+        submenu.options[0] ?? null,
+        submenu
+      )
+    ];
+    if (counterpartGroupLower) {
+      options.push(
+        new MenuOption(
+          `shell.MENU_MOVE_TO_${counterpartGroupLower}`,
+          `${this.t(this.i18nKeys.shell.MOVE_VERB)} a ${counterpartGroupLower}`,
+          () => this.onMoveTo([packageName], counterpartGroupLower),
+          null,
+          null
+        )
+      );
+    }
+    const menu = new Menu(options);
+    this.menuRenderer?.open(menu, event.mouseX, event.mouseY);
   }
 
   public t(id: TranslationKey): string {
@@ -312,8 +366,44 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     }
     return lines.map((line) => ({
       text: line,
-      invalid: this.invalidRelationshipDetector.isInvalid(line)
+      invalid: this.invalidRelationshipDetector.isInvalid(line),
+      ...this.parseRelationLine(line)
     }));
+  }
+
+  private parseRelationLine(line: string): Omit<RelationLineViewModel, 'text' | 'invalid'> {
+    const parts = line.split('->').map((value) => value.trim());
+    if (parts.length !== 2 || !parts[0] || !parts[1]) {
+      return { clickable: false };
+    }
+    return {
+      sourceEndpoint: parts[0],
+      targetEndpoint: parts[1],
+      clickable: true
+    };
+  }
+
+  private extractPackageFromEndpoint(endpoint: string): string | null {
+    const match = endpoint.trim().match(/^\[[^\]]+\]\.(.+)$/);
+    return match?.[1] ?? null;
+  }
+
+  private extractGroupFromEndpoint(endpoint: string): string | null {
+    const match = endpoint.trim().match(/^\[([^\]]+)\]\./);
+    return match?.[1] ?? null;
+  }
+
+  private jumpToGroupWithSelectedNode(endpoint: string): void {
+    const groupName = this.extractGroupFromEndpoint(endpoint);
+    const packageName = this.extractPackageFromEndpoint(endpoint);
+    if (!groupName || !packageName) {
+      return;
+    }
+    const filename = `${groupName.toLowerCase()}.svg`;
+    this.graphSelectionModel.selectSingle(packageName);
+    this.graphRenderer.setSelectedNodes(this.graphSelectionModel.selectedNodes);
+    this.selectedNodeActionMenuInteractionTechnique?.closeMenu();
+    this.loadAndRenderGraphSvg(filename, 0);
   }
 
   private listStructureGroupNames(): string[] {

@@ -4,6 +4,16 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
 export interface RelationLineViewModel {
   text: string;
   invalid: boolean;
+  sourceEndpoint?: string;
+  targetEndpoint?: string;
+  clickable?: boolean;
+}
+
+export interface RelationEndpointClickEvent {
+  endpoint: string;
+  counterpartEndpoint?: string;
+  mouseX: number;
+  mouseY: number;
 }
 
 @Component({
@@ -15,7 +25,28 @@ export interface RelationLineViewModel {
       <button type="button" class="relation-box-close" (click)="onCloseClick()" [attr.aria-label]="closeAriaLabel">X</button>
       <div class="relation-box-content" *ngIf="lines.length > 0; else plainTextBlock">
         <div class="relation-box-line" *ngFor="let line of lines" [class.relation-box-line-invalid]="line.invalid">
-          {{ line.text }}
+          <ng-container *ngIf="line.clickable && line.sourceEndpoint && line.targetEndpoint; else plainLineBlock">
+            <span>{{ endpointGroupPrefix(line.sourceEndpoint) }}</span>
+            <a
+              href="#"
+              class="relation-box-link"
+              [class.relation-box-link-invalid]="line.invalid"
+              (click)="onLinkClick($event, line.sourceEndpoint)"
+              (contextmenu)="onLinkContextMenu($event, line.sourceEndpoint, line.targetEndpoint)"
+              >{{ endpointNodeName(line.sourceEndpoint) }}</a
+            >
+            <span> -> </span>
+            <span>{{ endpointGroupPrefix(line.targetEndpoint) }}</span>
+            <a
+              href="#"
+              class="relation-box-link"
+              [class.relation-box-link-invalid]="line.invalid"
+              (click)="onLinkClick($event, line.targetEndpoint)"
+              (contextmenu)="onLinkContextMenu($event, line.targetEndpoint, line.sourceEndpoint)"
+              >{{ endpointNodeName(line.targetEndpoint) }}</a
+            >
+          </ng-container>
+          <ng-template #plainLineBlock>{{ line.text }}</ng-template>
         </div>
       </div>
       <ng-template #plainTextBlock>
@@ -84,6 +115,16 @@ export interface RelationLineViewModel {
       .relation-box-line-invalid {
         color: #b42318;
       }
+
+      .relation-box-link {
+        color: #102a43;
+        text-decoration: underline;
+        cursor: pointer;
+      }
+
+      .relation-box-link-invalid {
+        color: #b42318;
+      }
     `
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -95,8 +136,39 @@ export class RelationDialogComponent {
   @Input() public closeAriaLabel = 'Close';
 
   @Output() public closeRequested = new EventEmitter<void>();
+  @Output() public endpointClicked = new EventEmitter<RelationEndpointClickEvent>();
+  @Output() public endpointContextMenuRequested = new EventEmitter<RelationEndpointClickEvent>();
 
   public onCloseClick(): void {
     this.closeRequested.emit();
+  }
+
+  public onLinkClick(event: MouseEvent, endpoint: string): void {
+    event.preventDefault();
+    this.endpointClicked.emit({
+      endpoint,
+      mouseX: event.clientX,
+      mouseY: event.clientY
+    });
+  }
+
+  public onLinkContextMenu(event: MouseEvent, endpoint: string, counterpartEndpoint?: string): void {
+    event.preventDefault();
+    this.endpointContextMenuRequested.emit({
+      endpoint,
+      counterpartEndpoint,
+      mouseX: event.clientX,
+      mouseY: event.clientY
+    });
+  }
+
+  public endpointGroupPrefix(endpoint: string): string {
+    const match = endpoint.trim().match(/^(\[[^\]]+\]\.)/);
+    return match?.[1] ?? '';
+  }
+
+  public endpointNodeName(endpoint: string): string {
+    const match = endpoint.trim().match(/^\[[^\]]+\]\.(.+)$/);
+    return match?.[1] ?? endpoint;
   }
 }

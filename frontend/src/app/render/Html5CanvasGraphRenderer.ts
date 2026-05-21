@@ -82,8 +82,7 @@ export class Html5CanvasGraphRenderer {
 
   public loadFromSvgText(svgText: string): void {
     this.parseSvgScene(svgText);
-    this.fitCameraToScene();
-    this.render();
+    this.moveAndCenterToFit();
   }
 
   public getInteractiveEllipses(): ReadonlyArray<InteractiveEllipse> {

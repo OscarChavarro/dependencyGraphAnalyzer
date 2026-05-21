@@ -45,7 +45,7 @@ import { MenuOption } from '../model/menu-option';
     `
       .popup-menu-root {
         position: fixed;
-        z-index: 2200;
+        z-index: 4000;
         display: flex;
         gap: 10px;
       }
