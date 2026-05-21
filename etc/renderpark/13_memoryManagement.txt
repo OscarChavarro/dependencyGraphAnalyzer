@@ -1,5 +1,1 @@
 [13_MEMORY_MANAGEMENT]
-common/memoryManagement/CppReAlloc.cpp
-common/memoryManagement/CppReAlloc.h
-common/memoryManagement/MemoryPool.h
-common/memoryManagement/MemoryPool.txx
