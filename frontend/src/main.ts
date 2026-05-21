@@ -3,7 +3,7 @@ import { appConfig } from './app/app.config';
 import { App } from './app/app';
 import { BACKEND_BASE_URL } from './app/config-tokens';
 
-interface SecretsFile {
+interface EnvironmentFile {
   backend?: {
     url?: string;
   };
@@ -22,15 +22,15 @@ async function bootstrap(): Promise<void> {
   let backendUrl = 'http://localhost:8080';
 
   try {
-    const response = await fetch('/secrets.json', { cache: 'no-store' });
+    const response = await fetch('/environment.json', { cache: 'no-store' });
     if (response.ok) {
-      const secrets = (await response.json()) as SecretsFile;
-      if (secrets.backend?.url) {
-        backendUrl = normalizeBackendUrl(secrets.backend.url);
+      const environment = (await response.json()) as EnvironmentFile;
+      if (environment.backend?.url) {
+        backendUrl = normalizeBackendUrl(environment.backend.url);
       }
     }
   } catch (error) {
-    console.warn('Could not load /secrets.json, using default backend URL.', error);
+    console.warn('Could not load /environment.json, using default backend URL.', error);
   }
 
   await bootstrapApplication(App, {

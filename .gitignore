@@ -9,3 +9,5 @@ v
 e
 cache.txt
 AGENTS.md
+secrets.json
+backend/secrets.json
