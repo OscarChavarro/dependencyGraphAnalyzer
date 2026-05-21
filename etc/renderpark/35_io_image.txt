@@ -1,1 +1,10 @@
 [35_IO_IMAGE]
+
+vsdk/toolkit/io/image/Dkcolor.cpp
+vsdk/toolkit/io/image/Dkcolor.h
+vsdk/toolkit/io/image/ImageOutputHandle.cpp
+vsdk/toolkit/io/image/ImageOutputHandle.h
+vsdk/toolkit/io/image/PicOutputHandle.cpp
+vsdk/toolkit/io/image/PicOutputHandle.h
+vsdk/toolkit/io/image/PPMOutputHandle.cpp
+vsdk/toolkit/io/image/PPMOutputHandle.h

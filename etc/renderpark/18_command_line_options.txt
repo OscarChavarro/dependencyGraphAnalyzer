@@ -1,0 +1,8 @@
+[18_COMMAND_LINE_OPTIONS]
+vsdk/toolkit/common/commandLineOptions/DefaultParser.h
+vsdk/toolkit/common/commandLineOptions/OptionGroup.h
+vsdk/toolkit/common/commandLineOptions/OptionParser.h
+vsdk/toolkit/common/commandLineOptions/TypedOption.h
+vsdk/toolkit/common/commandLineOptions/OptionGroup.txx
+vsdk/toolkit/common/commandLineOptions/OptionParser.txx
+vsdk/toolkit/common/commandLineOptions/TypedOption.txx

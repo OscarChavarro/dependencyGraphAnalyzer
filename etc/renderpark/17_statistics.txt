@@ -1,0 +1,14 @@
+[17_STATISTICS]
+
+vsdk/toolkit/common/statistics/PotentialStatistics.cpp
+vsdk/toolkit/common/statistics/PotentialStatistics.h
+vsdk/toolkit/common/statistics/RadianceStatistics.cpp
+vsdk/toolkit/common/statistics/RadianceStatistics.h
+vsdk/toolkit/common/statistics/RayTracerStatistics.cpp
+vsdk/toolkit/common/statistics/RayTracerStatistics.h
+vsdk/toolkit/common/statistics/ReaderStatistics.cpp
+vsdk/toolkit/common/statistics/ReaderStatistics.h
+vsdk/toolkit/common/statistics/ShadowStatistics.cpp
+vsdk/toolkit/common/statistics/ShadowStatistics.h
+vsdk/toolkit/common/statistics/Statistics.cpp
+vsdk/toolkit/common/statistics/Statistics.h

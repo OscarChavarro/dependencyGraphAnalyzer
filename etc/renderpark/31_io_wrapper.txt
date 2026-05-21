@@ -1,1 +1,15 @@
 [31_IO_WRAPPER]
+
+vsdk/toolkit/io/wrapper/FileUncompressWrapper.cpp
+vsdk/toolkit/io/wrapper/FileUncompressWrapper.h
+vsdk/toolkit/io/wrapper/Matrix2x2Printer.cpp
+vsdk/toolkit/io/wrapper/Matrix2x2Printer.h
+vsdk/toolkit/io/wrapper/PersistenceElement.cpp
+vsdk/toolkit/io/wrapper/PersistenceElement.h
+vsdk/toolkit/io/wrapper/PipeInputStream.cpp
+vsdk/toolkit/io/wrapper/PipeInputStream.h
+vsdk/toolkit/io/wrapper/PipeOutputStream.cpp
+vsdk/toolkit/io/wrapper/PipeOutputStream.h
+vsdk/toolkit/io/wrapper/StreamOpenMode.h
+vsdk/toolkit/io/wrapper/Vector3DPrinter.cpp
+vsdk/toolkit/io/wrapper/Vector3DPrinter.h

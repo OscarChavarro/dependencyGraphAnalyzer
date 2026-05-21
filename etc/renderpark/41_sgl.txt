@@ -1,1 +1,15 @@
 [41_SGL]
+
+vsdk/toolkit/render/sgl/Poly.h
+vsdk/toolkit/render/sgl/PolyClip.cpp
+vsdk/toolkit/render/sgl/Polygon.h
+vsdk/toolkit/render/sgl/PolygonBox.h
+vsdk/toolkit/render/sgl/PolygonClipResult.h
+vsdk/toolkit/render/sgl/PolygonVertex.h
+vsdk/toolkit/render/sgl/PolyScanFlat.cpp
+vsdk/toolkit/render/sgl/PolyScanZ.cpp
+vsdk/toolkit/render/sgl/SglConstants.h
+vsdk/toolkit/render/sgl/SglContext.cpp
+vsdk/toolkit/render/sgl/SglContext.h
+vsdk/toolkit/render/sgl/SglPixelContent.h
+vsdk/toolkit/render/sgl/Window.h

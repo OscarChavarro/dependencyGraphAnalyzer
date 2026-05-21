@@ -10,3 +10,7 @@ Radiance.cpp
 Raytrace.cpp
 RpkApplication.cpp
 SceneBuilder.cpp
+Radiance.h
+Raytrace.h
+RpkApplication.h
+SceneBuilder.h

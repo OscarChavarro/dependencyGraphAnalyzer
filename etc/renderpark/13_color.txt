@@ -1,1 +1,7 @@
 [13_COLOR]
+
+vsdk/toolkit/common/color/Cie.cpp
+vsdk/toolkit/common/color/Cie.h
+vsdk/toolkit/common/color/ColorRgb.h
+vsdk/toolkit/common/color/ColorRgbMutable.cpp
+vsdk/toolkit/common/color/ColorRgbMutable.h
