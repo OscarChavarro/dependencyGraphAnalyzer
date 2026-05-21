@@ -22,6 +22,7 @@ import core.graph.PackageEdge;
 import vsdk.toolkit.io.PersistenceElement;
 
 public class SoftwarePackageGraph {
+    private static final int MAX_PRACTICAL_GRAPH_SIZE = 500;
     private final ArrayList<SoftwarePackageNode> nodes;
     private final Hashtable<String, SoftwarePackageNode> nodeIndex;
     private final DirectedPackageGraphOperations graph;
@@ -187,6 +188,52 @@ public class SoftwarePackageGraph {
         PersistenceElement.writeAsciiLine(os, "    ");
     }
 
+    private void exportDotNodesPracticalGrid(OutputStream os, SoftwarePackageGroup group, int groupId) throws Exception {
+        PersistenceElement.writeAsciiLine(os, "    subgraph cluster" + groupId + " {");
+        PersistenceElement.writeAsciiLine(os, "        color=black;");
+        PersistenceElement.writeAsciiLine(os, "        fillcolor=lightgray;");
+        PersistenceElement.writeAsciiLine(os, "        style=\"filled,bold\";");
+        exportDotNode(os, group.header, true);
+        group.header.setGroup(true);
+
+        int nodeCount = group.list.size();
+        int cols = Math.max(1, (int) Math.ceil(Math.sqrt(nodeCount / 3.0)));
+        int rowCount = (int) Math.ceil(nodeCount / (double) cols);
+
+        for (int row = 0; row < rowCount; row++) {
+            String anchor = "\"_grid_anchor_" + groupId + "_" + row + "\"";
+            PersistenceElement.writeAsciiLine(os, "        " + anchor
+                + " [label=\"\",shape=point,width=0,height=0,style=invis];");
+        }
+
+        for (int row = 0; row < rowCount - 1; row++) {
+            String from = "\"_grid_anchor_" + groupId + "_" + row + "\"";
+            String to = "\"_grid_anchor_" + groupId + "_" + (row + 1) + "\"";
+            PersistenceElement.writeAsciiLine(os, "        " + from + " -> " + to
+                + " [style=invis,weight=100,constraint=true];");
+        }
+
+        for (int start = 0; start < nodeCount; start += cols) {
+            int row = start / cols;
+            String anchor = "\"_grid_anchor_" + groupId + "_" + row + "\"";
+            PersistenceElement.writeAsciiLine(os, "        { rank=same;");
+            PersistenceElement.writeAsciiLine(os, "            " + anchor + ";");
+            int end = Math.min(start + cols, nodeCount);
+            for (int j = start; j < end; j++) {
+                SoftwarePackageNode node = group.list.get(j);
+                exportDotNode(os, node, true);
+                node.setGroup(true);
+                String nodeName = "\"" + node.getName() + "\"";
+                PersistenceElement.writeAsciiLine(os, "        " + anchor + " -> " + nodeName
+                    + " [style=invis,weight=50,constraint=true];");
+            }
+            PersistenceElement.writeAsciiLine(os, "        }");
+        }
+
+        PersistenceElement.writeAsciiLine(os, "    }");
+        PersistenceElement.writeAsciiLine(os, "    ");
+    }
+
     public void exportDot(String filename, ArrayList<SoftwarePackageGroup> groups) {
         exportDot(filename, groups, -1);
     }
@@ -217,7 +264,12 @@ public class SoftwarePackageGraph {
                     exportDotNodes(fos, groups.get(i), i);
                 }
             } else {
-                exportDotNodes(fos, groups.get(id), id);
+                SoftwarePackageGroup group = groups.get(id);
+                if (group.list.size() > MAX_PRACTICAL_GRAPH_SIZE) {
+                    exportDotNodesPracticalGrid(fos, group, id);
+                } else {
+                    exportDotNodes(fos, group, id);
+                }
             }
 
             if (id == -1) {
@@ -232,19 +284,22 @@ public class SoftwarePackageGraph {
 
             PersistenceElement.writeAsciiLine(fos, "\n    //= ARCS ===============================================================");
 
-            for (PackageEdge edge : graph.edges()) {
-                SoftwarePackageNode aNode = edge.from();
-                SoftwarePackageNode bNode = edge.to();
-                String a = aNode.getName();
-                String b = bNode.getName();
+            boolean skipArcsForPracticalGroup = id != -1 && groups.get(id).list.size() > MAX_PRACTICAL_GRAPH_SIZE;
+            if (!skipArcsForPracticalGroup) {
+                for (PackageEdge edge : graph.edges()) {
+                    SoftwarePackageNode aNode = edge.from();
+                    SoftwarePackageNode bNode = edge.to();
+                    String a = aNode.getName();
+                    String b = bNode.getName();
 
-                String r = "    \"" + a + "\" -> \"" + b + "\";";
-                if (namesAreGroupsAndFirstGreater(a, b)) {
-                    r = "    \"" + a + "\" -> \"" + b + "\" [color=\"red\"];";
-                }
+                    String r = "    \"" + a + "\" -> \"" + b + "\";";
+                    if (namesAreGroupsAndFirstGreater(a, b)) {
+                        r = "    \"" + a + "\" -> \"" + b + "\" [color=\"red\"];";
+                    }
 
-                if ((id == -1) || groups.get(id).contains(bNode)) {
-                    PersistenceElement.writeAsciiLine(fos, r);
+                    if ((id == -1) || groups.get(id).contains(bNode)) {
+                        PersistenceElement.writeAsciiLine(fos, r);
+                    }
                 }
             }
 
