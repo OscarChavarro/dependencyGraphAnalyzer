@@ -41,6 +41,17 @@ export interface EnrichedEdgesResponse {
   enrichedEdges: GraphModelEdge[];
 }
 
+export interface MoveNodeRequest {
+  groupFolder: string;
+  originGroup: string;
+  originNode: string;
+  destinationGroup: string;
+}
+
+export interface MoveNodeResponse {
+  moved: boolean;
+}
+
 export class GraphModel {
   public selectedNodes: string[] = [];
 

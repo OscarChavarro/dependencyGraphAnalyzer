@@ -105,18 +105,24 @@ public class UpdateGraphModelService implements UpdateGraphModelUseCase {
     }
 
     private Path resolveExistingFolder(String groupsDefinitionFolder) {
-        List<Path> candidates = List.of(
-                Paths.get(groupsDefinitionFolder).normalize(),
-                Paths.get(".").resolve(groupsDefinitionFolder).normalize(),
-                Paths.get("backend").resolve(groupsDefinitionFolder).normalize(),
-                Paths.get(groupsDefinitionFolder.replaceFirst("^\\.\\./", "")).normalize());
-
-        for (Path candidate : candidates) {
-            if (Files.isDirectory(candidate)) {
-                return candidate;
-            }
+        Path cwd = getCwd();
+        Path literalPath = Paths.get(groupsDefinitionFolder);
+        Path normalizedPath = literalPath.normalize();
+        if (Files.isDirectory(literalPath)) {
+            return normalizedPath;
         }
-        throw new IllegalArgumentException("groupsDefinitionFolder does not exist or is not a directory: " + groupsDefinitionFolder);
+        throw new IllegalArgumentException("groupsDefinitionFolder does not exist or is not a directory. input='"
+                + groupsDefinitionFolder + "', literalPath='" + literalPath + "', normalizedPath='"
+                + normalizedPath + "', tried=[" + toAbsoluteFromCwd(literalPath, cwd) + ", "
+                + toAbsoluteFromCwd(normalizedPath, cwd) + "]");
+    }
+
+    private Path getCwd() {
+        return Paths.get("").toAbsolutePath().normalize();
+    }
+
+    private Path toAbsoluteFromCwd(Path path, Path cwd) {
+        return cwd.resolve(path).normalize();
     }
 
 }

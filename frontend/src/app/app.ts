@@ -8,6 +8,8 @@ import {
   GraphModelGenerator,
   GraphModelSnapshot,
   EnrichedEdgesResponse,
+  MoveNodeRequest,
+  MoveNodeResponse,
   UpdateGraphModelRequest,
   UpdateGraphModelResponse
 } from './model/graph-model';
@@ -296,7 +298,71 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private onMoveTo(selectedNodes: string[], targetGroup: string): void {
-    console.log('SelectedNodeAction: mover a...', selectedNodes, '->', targetGroup);
+    this.selectedNodeActionMenuInteractionTechnique?.closeMenu();
+    this.menuRenderer?.close();
+
+    if (this.isLoading) {
+      return;
+    }
+
+    const originNode = selectedNodes[0]?.trim();
+    if (!originNode) {
+      this.errorMessage = 'Debes seleccionar un nodo para mover.';
+      return;
+    }
+
+    const originGroup = this.extractGroupFromCurrentSvgFilename();
+    if (!originGroup) {
+      this.errorMessage = 'Solo puedes mover nodos desde un SVG de grupo.';
+      return;
+    }
+
+    this.isLoading = true;
+    this.errorMessage = '';
+
+    const movePayload: MoveNodeRequest = {
+      groupFolder: this.groupsDefinitionFolder,
+      originGroup,
+      originNode,
+      destinationGroup: targetGroup
+    };
+
+    this.httpClient.post<MoveNodeResponse>(`${this.backendBaseUrl}/v1/moveNode`, movePayload).subscribe({
+      next: () => this.refreshGraphModelAndReloadCurrentSvg(),
+      error: () => {
+        this.errorMessage = 'No se pudo mover el nodo al grupo destino.';
+        this.isLoading = false;
+      }
+    });
+  }
+
+  private refreshGraphModelAndReloadCurrentSvg(): void {
+    const payload: UpdateGraphModelRequest = {
+      generator: this.lastGraphGenerator,
+      groupsDefinitionFolder: this.groupsDefinitionFolder
+    };
+    const svgToReload = this.currentSvgFilename;
+
+    this.httpClient.post<UpdateGraphModelResponse>(this.endpointUrl, payload).subscribe({
+      next: (response) => {
+        try {
+          this.setGraphModelSnapshot(response.graphModel);
+          this.graphSelectionModel.clearSelection();
+          this.graphRenderer.setSelectedNodes(this.graphSelectionModel.selectedNodes);
+          this.selectedNodeActionMenuInteractionTechnique?.closeMenu();
+          this.menuRenderer?.close();
+          queueMicrotask(() => this.loadAndRenderGraphSvg(svgToReload, 0));
+        } catch {
+          this.errorMessage = `${this.t(this.i18nKeys.shell.GRAPH_UPDATE_ERROR)} (post-process)`;
+        } finally {
+          this.isLoading = false;
+        }
+      },
+      error: () => {
+        this.errorMessage = this.t(this.i18nKeys.shell.GRAPH_UPDATE_ERROR);
+        this.isLoading = false;
+      }
+    });
   }
 
   private onShowRelation(selectedNodes: string[]): void {
@@ -404,6 +470,17 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     this.graphRenderer.setSelectedNodes(this.graphSelectionModel.selectedNodes);
     this.selectedNodeActionMenuInteractionTechnique?.closeMenu();
     this.loadAndRenderGraphSvg(filename, 0);
+  }
+
+  private extractGroupFromCurrentSvgFilename(): string | null {
+    if (this.currentSvgFilename === 'structure.svg') {
+      return null;
+    }
+    const match = this.currentSvgFilename.match(/^(.+)\.svg$/i);
+    if (!match || !match[1]) {
+      return null;
+    }
+    return match[1];
   }
 
   private listStructureGroupNames(): string[] {

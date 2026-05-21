@@ -19,6 +19,7 @@ dependencies {
     implementation 'org.jgrapht:jgrapht-core:1.5.2'
     implementation 'co.cubestudio:base:1.2'
     implementation 'org.springframework.boot:spring-boot-starter-web:3.3.5'
+    implementation 'org.springframework.boot:spring-boot-starter-validation:3.3.5'
 }
 
 java {

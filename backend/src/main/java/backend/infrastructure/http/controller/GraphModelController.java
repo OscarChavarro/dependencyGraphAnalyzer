@@ -2,9 +2,13 @@ package backend.infrastructure.http.controller;
 
 import backend.application.port.in.UpdateGraphModelUseCase;
 import backend.application.port.in.BuildEnrichedEdgesUseCase;
+import backend.application.port.in.MoveNodeUseCase;
 import backend.infrastructure.http.dto.UpdateGraphModelRequest;
 import backend.infrastructure.http.dto.EnrichedEdgesResponse;
+import backend.infrastructure.http.dto.MoveNodeRequest;
+import backend.infrastructure.http.dto.MoveNodeResponse;
 import backend.infrastructure.http.dto.UpdateGraphModelResponse;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,12 +32,15 @@ import org.springframework.web.server.ResponseStatusException;
 public class GraphModelController {
     private final UpdateGraphModelUseCase updateGraphModelUseCase;
     private final BuildEnrichedEdgesUseCase buildEnrichedEdgesUseCase;
+    private final MoveNodeUseCase moveNodeUseCase;
 
     public GraphModelController(
             UpdateGraphModelUseCase updateGraphModelUseCase,
-            BuildEnrichedEdgesUseCase buildEnrichedEdgesUseCase) {
+            BuildEnrichedEdgesUseCase buildEnrichedEdgesUseCase,
+            MoveNodeUseCase moveNodeUseCase) {
         this.updateGraphModelUseCase = updateGraphModelUseCase;
         this.buildEnrichedEdgesUseCase = buildEnrichedEdgesUseCase;
+        this.moveNodeUseCase = moveNodeUseCase;
     }
 
     @PostMapping({"/updateGraph", "/updateGraphModel"})
@@ -60,5 +67,15 @@ public class GraphModelController {
 
         return new EnrichedEdgesResponse(
                 buildEnrichedEdgesUseCase.execute(request.generator(), request.groupsDefinitionFolder()));
+    }
+
+    @PostMapping({"/moveNode"})
+    public MoveNodeResponse moveNode(@Valid @RequestBody MoveNodeRequest request) {
+        String message = moveNodeUseCase.execute(
+                request.groupFolder(),
+                request.originGroup(),
+                request.originNode(),
+                request.destinationGroup());
+        return new MoveNodeResponse(true, message);
     }
 }
