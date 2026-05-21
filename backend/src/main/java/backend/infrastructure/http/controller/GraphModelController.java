@@ -27,7 +27,11 @@ import org.springframework.web.server.ResponseStatusException;
         "http://192.168.1.*",
         "http://192.168.1.*:*",
         "https://192.168.1.*",
-        "https://192.168.1.*:*"
+        "https://192.168.1.*:*",
+        "http://10.243.112.75",
+        "http://10.243.112.75:*",
+        "https://10.243.112.75",
+        "https://10.243.112.75:*"
 })
 public class GraphModelController {
     private final UpdateGraphModelUseCase updateGraphModelUseCase;
