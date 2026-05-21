@@ -1,59 +1,41 @@
-# FrontendApp
+# Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.26.
+Angular application for interactive dependency graph exploration.
 
-## Development server
+## Responsibilities
 
-To start a local development server, run:
+- Render SVG graphs on canvas (`Html5CanvasGraphRenderer`).
+- Navigate between `structure.svg` and group-specific views.
+- Select nodes (single and multiple) from canvas and side list.
+- Open a contextual action menu on the current selection.
+- Execute UI actions: show relations, flood dependencies/clients, move group nodes.
+- Display relation results in a dialog with contextual actions.
+- Support i18n (es/en) with typed keys.
 
-```bash
-ng serve
-```
+## Backend Integration
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Endpoints consumed from `App`:
 
-## Code scaffolding
+- `POST /v1/updateGraph`
+- `POST /v1/enrichedEdges`
+- `POST /v1/groupRelations`
+- `POST /v1/moveNode`
+- `GET /output/svg/{filename}`
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Base URL configurable through the `BACKEND_BASE_URL` token and `public/environment.json`.
 
-```bash
-ng generate component component-name
-```
+## Relevant Structure
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+- `src/app/app.ts`: state orchestration, HTTP calls, and interaction coordination.
+- `src/app/gui/`: interaction techniques (selection, navigation, keyboard, contextual menu).
+- `src/app/render/`: canvas renderer and node picking.
+- `src/app/i18n/`: language state, translation service, and keys.
+- `src/app/localProcessing/`: local logic for relations/flooding where applicable.
 
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## Commands
 
 ```bash
-ng test
+npm install
+npm run build
+npm start
 ```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
