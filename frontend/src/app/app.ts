@@ -22,7 +22,8 @@ import { I18N_KEYS } from './i18n/translations/i18n-keys.const';
 import type { SupportedLanguage } from './i18n/types/supported-language.type';
 import type { TranslationKey } from './i18n/translations/translations-by-namespace.const';
 import { GroupRelationshipQuery } from './localProcessing/GroupRelationshipQuery';
-import { RelationDialogComponent } from './relation-dialog.component';
+import { InvalidRelationshipDetector } from './localProcessing/InvalidRelationshipDetector';
+import { RelationDialogComponent, RelationLineViewModel } from './relation-dialog.component';
 
 @Component({
   selector: 'app-root',
@@ -47,6 +48,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   public isPanelCollapsed = false;
   public relationBoxVisible = false;
   public relationBoxText = '';
+  public relationBoxLines: RelationLineViewModel[] = [];
   public readonly selectedLanguage;
   public readonly i18nKeys = I18N_KEYS;
 
@@ -55,6 +57,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   private readonly groupsDefinitionFolder = '../u/';
   private readonly graphRenderer = new Html5CanvasGraphRenderer();
   private readonly groupRelationshipQuery = new GroupRelationshipQuery();
+  private readonly invalidRelationshipDetector = new InvalidRelationshipDetector();
   private readonly graphSelectionModel = new GraphModel();
   private currentSvgFilename = 'structure.svg';
   private lastGraphGenerator: GraphModelGenerator = 'CACHE_LOADER';
@@ -123,6 +126,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   public closeRelationBox(): void {
     this.relationBoxVisible = false;
     this.relationBoxText = '';
+    this.relationBoxLines = [];
   }
 
   public createGraphFromCache(): void {
@@ -135,6 +139,20 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
 
   public toggleSidePanel(): void {
     this.isPanelCollapsed = !this.isPanelCollapsed;
+  }
+
+  public isInStructureMode(): boolean {
+    return this.currentSvgFilename === 'structure.svg';
+  }
+
+  public backToStructure(): void {
+    if (this.currentSvgFilename === 'structure.svg') {
+      return;
+    }
+    this.graphSelectionModel.clearSelection();
+    this.graphRenderer.setSelectedNodes(this.graphSelectionModel.selectedNodes);
+    this.selectedNodeActionMenuInteractionTechnique?.closeMenu();
+    this.loadAndRenderGraphSvg('structure.svg', 0);
   }
 
   public setLanguage(language: SupportedLanguage): void {
@@ -229,30 +247,31 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
 
   private onShowRelation(selectedNodes: string[]): void {
     if (selectedNodes.length !== 2) {
-      this.relationBoxText = 'Debes seleccionar exactamente 2 nodos.';
+      this.setRelationBoxContent('Debes seleccionar exactamente 2 nodos.');
       this.relationBoxVisible = true;
       return;
     }
 
     const snapshot = this.graphModel ?? this.getGraphModelFromSession();
     if (snapshot?.enrichedEdges?.length) {
-      this.relationBoxText = this.groupRelationshipQuery.queryFromEnrichedEdges(
+      this.setRelationBoxContent(this.groupRelationshipQuery.queryFromEnrichedEdges(
         snapshot.enrichedEdges,
         selectedNodes[0],
         selectedNodes[1]
-      );
+      ));
       this.relationBoxVisible = true;
       return;
     }
 
     if (!snapshot) {
-      this.relationBoxText =
-        'No hay grafo en sesión. Primero ejecuta "Crear grafo desde cache.txt" o "Analizar sistema Debian".';
+      this.setRelationBoxContent(
+        'No hay grafo en sesión. Primero ejecuta "Crear grafo desde cache.txt" o "Analizar sistema Debian".'
+      );
       this.relationBoxVisible = true;
       return;
     }
 
-    this.relationBoxText = 'Cargando relaciones...';
+    this.setRelationBoxContent('Cargando relaciones...');
     this.relationBoxVisible = true;
 
     const payload: UpdateGraphModelRequest = {
@@ -262,19 +281,39 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
 
     this.httpClient.post<EnrichedEdgesResponse>(`${this.backendBaseUrl}/v1/enrichedEdges`, payload).subscribe({
       next: (response) => {
-        this.relationBoxText = this.groupRelationshipQuery.queryFromEnrichedEdges(
+        this.setRelationBoxContent(this.groupRelationshipQuery.queryFromEnrichedEdges(
           response.enrichedEdges,
           selectedNodes[0],
           selectedNodes[1]
-        );
+        ));
         this.relationBoxVisible = true;
       },
       error: () => {
-        this.relationBoxText =
-          'No se pudieron cargar las relaciones enriquecidas desde backend. Ejecuta "Crear grafo desde cache.txt" o "Analizar sistema Debian".';
+        this.setRelationBoxContent(
+          'No se pudieron cargar las relaciones enriquecidas desde backend. Ejecuta "Crear grafo desde cache.txt" o "Analizar sistema Debian".'
+        );
         this.relationBoxVisible = true;
       }
     });
+  }
+
+  private setRelationBoxContent(text: string): void {
+    this.relationBoxText = text;
+    this.relationBoxLines = this.buildRelationLineView(text);
+  }
+
+  private buildRelationLineView(text: string): RelationLineViewModel[] {
+    const lines = text
+      .split('\n')
+      .map((line) => line.trim())
+      .filter((line) => line.length > 0);
+    if (lines.length === 0 || lines.some((line) => !line.includes('->'))) {
+      return [];
+    }
+    return lines.map((line) => ({
+      text: line,
+      invalid: this.invalidRelationshipDetector.isInvalid(line)
+    }));
   }
 
   private listStructureGroupNames(): string[] {

@@ -37,6 +37,11 @@
         {{ t(i18nKeys.shell.ANALYZE_DEBIAN_SYSTEM) }}
       </button>
 
+      <button class="action-button" type="button" (click)="backToStructure()" *ngIf="!isInStructureMode()">
+        {{ t(i18nKeys.shell.BACK_TO_STRUCTURE) }}
+      </button>
+
+
       <p class="status-line" *ngIf="isLoading">{{ t(i18nKeys.shell.PROCESSING) }}</p>
       <p class="status-line status-line-error" *ngIf="errorMessage">{{ errorMessage }}</p>
       <p class="status-line" *ngIf="graphModel">
@@ -56,6 +61,7 @@
 <app-relation-dialog
   [visible]="relationBoxVisible"
   [text]="relationBoxText"
+  [lines]="relationBoxLines"
   [closeAriaLabel]="t(i18nKeys.shell.CLOSE_RELATION_BOX_ARIA)"
   (closeRequested)="closeRelationBox()"
 ></app-relation-dialog>

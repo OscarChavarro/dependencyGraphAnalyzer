@@ -16,6 +16,10 @@ import org.springframework.web.server.ResponseStatusException;
 @RestController
 @RequestMapping("/v1")
 @CrossOrigin(originPatterns = {
+        "http://localhost",
+        "http://localhost:*",
+        "https://localhost",
+        "https://localhost:*",
         "http://192.168.1.*",
         "http://192.168.1.*:*",
         "https://192.168.1.*",

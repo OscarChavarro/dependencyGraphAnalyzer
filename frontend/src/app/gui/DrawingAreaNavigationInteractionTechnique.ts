@@ -5,8 +5,11 @@ export class DrawingAreaNavigationInteractionTechnique {
   private dragLastX = 0;
   private dragLastY = 0;
   private scrollContainer: HTMLElement | null = null;
+  private readonly inputPlatform: 'mac' | 'linux' | 'other';
 
-  public constructor(private readonly renderer: Html5CanvasGraphRenderer) {}
+  public constructor(private readonly renderer: Html5CanvasGraphRenderer) {
+    this.inputPlatform = this.detectInputPlatform();
+  }
 
   public attach(canvas: HTMLCanvasElement, scrollContainer: HTMLElement | null | undefined): void {
     this.scrollContainer = scrollContainer ?? null;
@@ -19,6 +22,15 @@ export class DrawingAreaNavigationInteractionTechnique {
 
   private readonly onWheel = (event: WheelEvent): void => {
     event.preventDefault();
+
+    if (this.inputPlatform === 'linux') {
+      const point = this.renderer.canvasPointFromEvent(event);
+      this.renderer.zoomAt(point.x, point.y, event.deltaY);
+      if (event.deltaY > 0) {
+        this.moveScrollbarsTowardCenter();
+      }
+      return;
+    }
 
     if (event.ctrlKey) {
       // Trackpad pinch gesture (macOS browsers): use as zoom.
@@ -90,5 +102,17 @@ export class DrawingAreaNavigationInteractionTechnique {
 
     this.scrollContainer.scrollLeft += (targetLeft - this.scrollContainer.scrollLeft) * damping;
     this.scrollContainer.scrollTop += (targetTop - this.scrollContainer.scrollTop) * damping;
+  }
+
+  private detectInputPlatform(): 'mac' | 'linux' | 'other' {
+    const uaDataPlatform = (navigator as Navigator & { userAgentData?: { platform?: string } }).userAgentData?.platform ?? '';
+    const platform = `${uaDataPlatform} ${navigator.platform} ${navigator.userAgent}`.toLowerCase();
+    if (platform.includes('mac')) {
+      return 'mac';
+    }
+    if (platform.includes('linux')) {
+      return 'linux';
+    }
+    return 'other';
   }
 }

@@ -1,6 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
+export interface RelationLineViewModel {
+  text: string;
+  invalid: boolean;
+}
+
 @Component({
   selector: 'app-relation-dialog',
   standalone: true,
@@ -8,7 +13,14 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
   template: `
     <div class="relation-box" *ngIf="visible">
       <button type="button" class="relation-box-close" (click)="onCloseClick()" [attr.aria-label]="closeAriaLabel">X</button>
-      <textarea class="relation-box-textarea" [value]="text" readonly></textarea>
+      <div class="relation-box-content" *ngIf="lines.length > 0; else plainTextBlock">
+        <div class="relation-box-line" *ngFor="let line of lines" [class.relation-box-line-invalid]="line.invalid">
+          {{ line.text }}
+        </div>
+      </div>
+      <ng-template #plainTextBlock>
+        <textarea class="relation-box-textarea" [value]="text" readonly></textarea>
+      </ng-template>
     </div>
   `,
   styles: [
@@ -51,6 +63,27 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
         font: 12px/1.35 monospace;
         color: #102a43;
       }
+
+      .relation-box-content {
+        width: 100%;
+        height: 14rem;
+        overflow: auto;
+        border: 1px solid #bcccdc;
+        border-radius: 0.35rem;
+        padding: 0.6rem;
+        box-sizing: border-box;
+        font: 12px/1.35 monospace;
+        color: #102a43;
+        white-space: pre;
+      }
+
+      .relation-box-line {
+        color: #102a43;
+      }
+
+      .relation-box-line-invalid {
+        color: #b42318;
+      }
     `
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -58,6 +91,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
 export class RelationDialogComponent {
   @Input() public visible = false;
   @Input() public text = '';
+  @Input() public lines: RelationLineViewModel[] = [];
   @Input() public closeAriaLabel = 'Close';
 
   @Output() public closeRequested = new EventEmitter<void>();

@@ -21,6 +21,10 @@ export const SHELL_TRANSLATIONS = {
     en: 'Analyze Debian system',
     es: 'Analizar sistema Debian'
   },
+  BACK_TO_STRUCTURE: {
+    en: 'Back to structure',
+    es: 'Volver a structure'
+  },
   PROCESSING: {
     en: 'Processing...',
     es: 'Procesando...'
