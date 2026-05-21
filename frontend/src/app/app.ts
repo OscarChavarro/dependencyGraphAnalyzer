@@ -92,7 +92,8 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     this.graphRenderer,
     () => this.currentSvgFilename === 'structure.svg',
     (filename) => this.loadAndRenderGraphSvg(filename),
-    (selectedNodes) => this.applySelection(selectedNodes)
+    (selectedNodes) => this.applySelection(selectedNodes),
+    () => this.backToStructure()
   );
   private selectedNodeActionMenuInteractionTechnique?: SelectedNodeActionMenuInteractionTechnique;
   private readonly onWindowResize = (): void => {
@@ -217,6 +218,14 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     }
     const selectedNodes = Array.from(target.selectedOptions).map((option) => option.value);
     this.applySelection(selectedNodes);
+  }
+
+  public onNodeListContextMenu(event: MouseEvent): void {
+    const nodeName = this.extractNodeNameFromListContextMenuEvent(event);
+    if (!nodeName) {
+      return;
+    }
+    this.selectedNodeActionMenuInteractionTechnique?.openContextMenuForNode(nodeName, event);
   }
 
   public isNodeSelected(nodeName: string): boolean {
@@ -778,6 +787,21 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
         .filter((name) => name && !name.startsWith('[') && !name.startsWith('_['))
     );
     return [...uniqueNames].sort((a, b) => a.localeCompare(b));
+  }
+
+  private extractNodeNameFromListContextMenuEvent(event: MouseEvent): string | null {
+    const targetElement = event.target as HTMLElement | null;
+    const targetOption = targetElement?.closest('option');
+    if (targetOption) {
+      return targetOption.getAttribute('value') ?? targetOption.textContent?.trim() ?? null;
+    }
+
+    const elementAtPoint = document.elementFromPoint(event.clientX, event.clientY);
+    if (elementAtPoint instanceof HTMLOptionElement) {
+      return elementAtPoint.value || elementAtPoint.textContent?.trim() || null;
+    }
+
+    return null;
   }
 
   private applySelection(selectedNodes: string[]): void {

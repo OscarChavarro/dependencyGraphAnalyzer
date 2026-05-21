@@ -19,9 +19,22 @@ export class KeyboardInteractionTechniques {
     if (event.shiftKey || event.ctrlKey || event.metaKey || event.altKey) {
       return;
     }
+    if (this.isTypingContext(event.target)) {
+      return;
+    }
     event.preventDefault();
     this.toggleFullScreen();
   };
+
+  private isTypingContext(target: EventTarget | null): boolean {
+    if (!(target instanceof HTMLElement)) {
+      return false;
+    }
+    if (target.isContentEditable) {
+      return true;
+    }
+    return target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement;
+  }
 
   private toggleFullScreen(): void {
     if (!this.fullScreenTarget) {

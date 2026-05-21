@@ -7,7 +7,8 @@ export class SelectionInteractionTechnique {
     private readonly renderer: Html5CanvasGraphRenderer,
     private readonly isStructureGraphProvider: () => boolean,
     private readonly openGraphByFilename: (filename: string) => void,
-    private readonly onSelectionChanged: (selectedNodes: string[]) => void
+    private readonly onSelectionChanged: (selectedNodes: string[]) => void,
+    private readonly returnToStructure: () => void
   ) {}
 
   public attach(canvas: HTMLCanvasElement): void {
@@ -51,6 +52,10 @@ export class SelectionInteractionTechnique {
 
   private readonly onDoubleClick = (event: MouseEvent): void => {
     if (!this.isStructureGraphProvider()) {
+      const rectangularNodeName = this.renderer.pickRectangularNodeNameFromEvent(event);
+      if (rectangularNodeName) {
+        this.returnToStructure();
+      }
       return;
     }
     const hoveredNodeName = this.pickNodeFromEvent(event);

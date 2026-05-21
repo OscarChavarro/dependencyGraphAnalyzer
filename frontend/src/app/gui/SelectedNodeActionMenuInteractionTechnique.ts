@@ -34,6 +34,10 @@ export class SelectedNodeActionMenuInteractionTechnique {
     this.menuRenderer.close();
   }
 
+  public openContextMenuForNode(nodeName: string, event: MouseEvent): void {
+    this.openContextMenu(event, nodeName);
+  }
+
   private readonly onMouseMove = (event: MouseEvent): void => {
     this.lastMouseX = event.clientX;
     this.lastMouseY = event.clientY;
@@ -68,6 +72,10 @@ export class SelectedNodeActionMenuInteractionTechnique {
 
   private readonly onContextMenu = (event: MouseEvent): void => {
     const hoveredNodeName = this.pickNodeFromEvent(event);
+    this.openContextMenu(event, hoveredNodeName);
+  };
+
+  private openContextMenu(event: MouseEvent, hoveredNodeName: string | null): void {
     if (!hoveredNodeName) {
       return;
     }
@@ -88,7 +96,7 @@ export class SelectedNodeActionMenuInteractionTechnique {
       return;
     }
     this.menuRenderer.open(menu, this.lastMouseX, this.lastMouseY);
-  };
+  }
 
   private buildMenuModel(): Menu {
     const structure = this.isStructureGraphProvider();

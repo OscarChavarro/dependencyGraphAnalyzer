@@ -132,6 +132,26 @@ export class Html5CanvasGraphRenderer {
     return null;
   }
 
+  public pickRectangularNodeNameFromEvent(event: MouseEvent): string | null {
+    const point = this.canvasPointFromEvent(event);
+    const world = this.screenToWorld(point.x, point.y);
+    for (let index = this.svgPrimitives.length - 1; index >= 0; index -= 1) {
+      const primitive = this.svgPrimitives[index];
+      if (
+        primitive.kind !== 'polygon' ||
+        primitive.layer !== 'node' ||
+        !primitive.nodeName ||
+        !primitive.bbox
+      ) {
+        continue;
+      }
+      if (this.isInsideBBox(primitive.bbox, world.x, world.y)) {
+        return primitive.nodeName;
+      }
+    }
+    return null;
+  }
+
   public getZoomOutCenteringProgress(): number {
     return this.computeZoomOutCenteringProgress();
   }
@@ -591,6 +611,10 @@ export class Html5CanvasGraphRenderer {
 
   private intersects(a: BBoxRect, b: BBoxRect): boolean {
     return !(a.maxX < b.minX || a.minX > b.maxX || a.maxY < b.minY || a.minY > b.maxY);
+  }
+
+  private isInsideBBox(bounds: BBoxRect, x: number, y: number): boolean {
+    return x >= bounds.minX && x <= bounds.maxX && y >= bounds.minY && y <= bounds.maxY;
   }
 
   private parseGraphvizTransform(transform: string | null | undefined): SimpleTransform {
