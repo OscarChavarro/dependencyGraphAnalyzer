@@ -121,18 +121,31 @@ public class BuildEnrichedEdgesService implements BuildEnrichedEdgesUseCase {
     }
 
     private Path resolveExistingFolder(String groupsDefinitionFolder) {
-        List<Path> candidates = List.of(
-                Paths.get(groupsDefinitionFolder).normalize(),
-                Paths.get(".").resolve(groupsDefinitionFolder).normalize(),
-                Paths.get("backend").resolve(groupsDefinitionFolder).normalize(),
-                Paths.get(groupsDefinitionFolder.replaceFirst("^\\.\\./", "")).normalize());
-
-        for (Path candidate : candidates) {
-            if (Files.isDirectory(candidate)) {
-                return candidate;
-            }
+        Path cwd = getCwd();
+        Path firstTry = Paths.get(groupsDefinitionFolder);
+        if (Files.isDirectory(firstTry)) {
+            return firstTry.normalize();
         }
-        throw new IllegalArgumentException("groupsDefinitionFolder does not exist or is not a directory: " + groupsDefinitionFolder);
+        String fallbackInput = groupsDefinitionFolder.replaceFirst("^\\.\\./", "");
+        Path secondTry = Paths.get(fallbackInput);
+        if (!fallbackInput.equals(groupsDefinitionFolder) && Files.isDirectory(secondTry)) {
+            return secondTry.normalize();
+        }
+        Path firstTryNormalized = firstTry.normalize();
+        Path secondTryNormalized = secondTry.normalize();
+        throw new IllegalArgumentException("groupsDefinitionFolder does not exist or is not a directory. input='"
+                + groupsDefinitionFolder + "', tried=[" + toAbsoluteFromCwd(firstTry, cwd) + ", "
+                + toAbsoluteFromCwd(firstTryNormalized, cwd) + ", "
+                + toAbsoluteFromCwd(secondTry, cwd) + ", "
+                + toAbsoluteFromCwd(secondTryNormalized, cwd) + "]");
+    }
+
+    private Path getCwd() {
+        return Paths.get("").toAbsolutePath().normalize();
+    }
+
+    private Path toAbsoluteFromCwd(Path path, Path cwd) {
+        return cwd.resolve(path).normalize();
     }
 
     private Path resolveExistingFile(String... candidates) {

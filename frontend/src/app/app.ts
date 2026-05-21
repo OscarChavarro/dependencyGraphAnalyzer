@@ -185,7 +185,10 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
           new MenuOption(
             groupName,
             groupName,
-            () => this.onMoveTo([packageName], groupName),
+            () => {
+              this.closeRelationBox();
+              this.onMoveTo([packageName], groupName, this.extractGroupFromEndpoint(event.endpoint));
+            },
             null,
             null
           )
@@ -205,7 +208,10 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
         new MenuOption(
           `shell.MENU_MOVE_TO_${counterpartGroupLower}`,
           `${this.t(this.i18nKeys.shell.MOVE_VERB)} a ${counterpartGroupLower}`,
-          () => this.onMoveTo([packageName], counterpartGroupLower),
+          () => {
+            this.closeRelationBox();
+            this.onMoveTo([packageName], counterpartGroupLower, this.extractGroupFromEndpoint(event.endpoint));
+          },
           null,
           null
         )
@@ -297,7 +303,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     console.log('SelectedNodeAction: inundar clientes', selectedNodes);
   }
 
-  private onMoveTo(selectedNodes: string[], targetGroup: string): void {
+  private onMoveTo(selectedNodes: string[], targetGroup: string, originGroupHint: string | null = null): void {
     this.selectedNodeActionMenuInteractionTechnique?.closeMenu();
     this.menuRenderer?.close();
 
@@ -311,9 +317,11 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
       return;
     }
 
-    const originGroup = this.extractGroupFromCurrentSvgFilename();
+    const originGroupRaw = originGroupHint ?? this.extractGroupFromCurrentSvgFilename();
+    const originGroup = originGroupRaw?.toLowerCase() ?? null;
+    const destinationGroup = targetGroup.toLowerCase();
     if (!originGroup) {
-      this.errorMessage = 'Solo puedes mover nodos desde un SVG de grupo.';
+      this.errorMessage = 'No se pudo determinar el grupo origen para mover el nodo.';
       return;
     }
 
@@ -324,7 +332,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
       groupFolder: this.groupsDefinitionFolder,
       originGroup,
       originNode,
-      destinationGroup: targetGroup
+      destinationGroup
     };
 
     this.httpClient.post<MoveNodeResponse>(`${this.backendBaseUrl}/v1/moveNode`, movePayload).subscribe({

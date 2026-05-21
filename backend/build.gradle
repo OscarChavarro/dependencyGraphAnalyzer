@@ -59,6 +59,7 @@ application {
 }
 
 run {
+    workingDir = rootDir.toPath().resolve("..").normalize().toFile()
     if (project.hasProperty('app')) {
         selectedMainClassShort = project.property('app')
         mainClass = selectedMainClassShort

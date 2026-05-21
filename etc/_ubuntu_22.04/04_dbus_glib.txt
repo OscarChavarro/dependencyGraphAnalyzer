@@ -81,3 +81,5 @@ dbus-session-bus-common
 dbus-broker
 libduktape207
 libduktape207:amd64
+
+libdbus-1-3:i386

@@ -109,15 +109,22 @@ public class MoveNodeService implements MoveNodeUseCase {
 
     private Path resolveExistingFolder(String groupFolder) {
         Path cwd = getCwd();
-        Path literalPath = Paths.get(groupFolder);
-        Path normalizedPath = literalPath.normalize();
-        if (Files.isDirectory(literalPath)) {
-            return normalizedPath;
+        Path firstTry = Paths.get(groupFolder);
+        if (Files.isDirectory(firstTry)) {
+            return firstTry.normalize();
         }
+        String fallbackInput = groupFolder.replaceFirst("^\\.\\./", "");
+        Path secondTry = Paths.get(fallbackInput);
+        if (!fallbackInput.equals(groupFolder) && Files.isDirectory(secondTry)) {
+            return secondTry.normalize();
+        }
+        Path firstTryNormalized = firstTry.normalize();
+        Path secondTryNormalized = secondTry.normalize();
         throw new IllegalArgumentException("groupFolder does not exist or is not a directory. input='"
-                + groupFolder + "', literalPath='" + literalPath + "', normalizedPath='" + normalizedPath
-                + "', tried=[" + toAbsoluteFromCwd(literalPath, cwd) + ", "
-                + toAbsoluteFromCwd(normalizedPath, cwd) + "]");
+                + groupFolder + "', tried=[" + toAbsoluteFromCwd(firstTry, cwd) + ", "
+                + toAbsoluteFromCwd(firstTryNormalized, cwd) + ", "
+                + toAbsoluteFromCwd(secondTry, cwd) + ", "
+                + toAbsoluteFromCwd(secondTryNormalized, cwd) + "]");
     }
 
     private Path getCwd() {

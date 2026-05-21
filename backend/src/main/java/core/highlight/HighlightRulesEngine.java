@@ -2,7 +2,9 @@ package core.highlight;
 
 import core.graph.SoftwarePackageGraph;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,13 +24,53 @@ public class HighlightRulesEngine {
     }
 
     public static HighlightRulesEngine fromJsonFile(SoftwarePackageGraph graph, Path path) {
+        Path resolvedPath = resolveRulesPath(path);
         try {
             ObjectMapper mapper = new ObjectMapper();
-            HighlightRuleSet set = mapper.readValue(path.toFile(), HighlightRuleSet.class);
+            HighlightRuleSet set = mapper.readValue(resolvedPath.toFile(), HighlightRuleSet.class);
             return new HighlightRulesEngine(graph, set);
         } catch (Exception e) {
-            throw new RuntimeException("Cannot load highlight rules from " + path, e);
+            throw new RuntimeException("Cannot load highlight rules. input='" + path + "', tried=["
+                    + toAbsolute(path) + ", " + toAbsolute(path.normalize()) + ", "
+                    + toAbsolute(Paths.get(path.toString().replaceFirst("^\\.\\./", ""))) + ", "
+                    + toAbsolute(Paths.get(path.toString().replaceFirst("^\\./", ""))) + ", "
+                    + toAbsolute(Paths.get("../" + path.toString())) + "]", e);
         }
+    }
+
+    private static Path resolveRulesPath(Path inputPath) {
+        Path firstTry = inputPath;
+        if (Files.isRegularFile(firstTry)) {
+            return firstTry.normalize();
+        }
+
+        Path normalized = inputPath.normalize();
+        if (Files.isRegularFile(normalized)) {
+            return normalized;
+        }
+
+        String raw = inputPath.toString();
+        Path withoutParentPrefix = Paths.get(raw.replaceFirst("^\\.\\./", ""));
+        if (Files.isRegularFile(withoutParentPrefix)) {
+            return withoutParentPrefix.normalize();
+        }
+
+        Path withoutDotPrefix = Paths.get(raw.replaceFirst("^\\./", ""));
+        if (Files.isRegularFile(withoutDotPrefix)) {
+            return withoutDotPrefix.normalize();
+        }
+
+        Path withParentPrefix = Paths.get("../" + raw);
+        if (Files.isRegularFile(withParentPrefix)) {
+            return withParentPrefix.normalize();
+        }
+
+        return inputPath.normalize();
+    }
+
+    private static Path toAbsolute(Path path) {
+        Path cwd = Paths.get("").toAbsolutePath().normalize();
+        return cwd.resolve(path).normalize();
     }
 
     public void applyProfile(String profileName) {

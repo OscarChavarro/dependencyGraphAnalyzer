@@ -109,3 +109,5 @@ libnspr4:amd64
 libsqlite3-0
 libsqlite3-0:amd64
 libc-l10n
+
+libcap2:i386
