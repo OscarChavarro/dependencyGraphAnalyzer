@@ -14,6 +14,7 @@ export interface GraphModelNode {
   s?: boolean;
   variant?: boolean;
   boldName?: boolean;
+  fillColorOverride?: string;
 }
 
 export interface GraphModelEdge {

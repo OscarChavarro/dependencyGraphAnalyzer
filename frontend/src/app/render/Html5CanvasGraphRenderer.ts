@@ -61,6 +61,7 @@ export class Html5CanvasGraphRenderer {
   private sceneBounds: BBoxRect | null = null;
   private hoveredNodeName: string | null = null;
   private selectedNodeNames = new Set<string>();
+  private nodeFillColorOverrides = new Map<string, string>();
   private cameraScale = 1;
   private cameraOffsetX = 0;
   private cameraOffsetY = 0;
@@ -145,6 +146,11 @@ export class Html5CanvasGraphRenderer {
 
   public setSelectedNodes(nodeNames: string[]): void {
     this.selectedNodeNames = new Set(nodeNames);
+    this.render();
+  }
+
+  public setNodeFillColorOverrides(overridesByNodeName: ReadonlyMap<string, string>): void {
+    this.nodeFillColorOverrides = new Map(overridesByNodeName);
     this.render();
   }
 
@@ -409,6 +415,7 @@ export class Html5CanvasGraphRenderer {
     }
 
     this.context.lineWidth = strokeWidth;
+    const fillColor = this.resolveFillColor(primitive);
 
     if (primitive.kind === 'polygon' && primitive.points && primitive.points.length >= 4) {
       this.context.beginPath();
@@ -417,8 +424,8 @@ export class Html5CanvasGraphRenderer {
         this.context.lineTo(primitive.points[i], primitive.points[i + 1]);
       }
       this.context.closePath();
-      if (primitive.fill && primitive.fill !== 'none') {
-        this.context.fillStyle = primitive.fill;
+      if (fillColor && fillColor !== 'none') {
+        this.context.fillStyle = fillColor;
         this.context.fill();
       }
       if (strokeColor && strokeColor !== 'none') {
@@ -431,8 +438,8 @@ export class Html5CanvasGraphRenderer {
     if (primitive.kind === 'ellipse' && primitive.cx != null && primitive.cy != null && primitive.rx != null && primitive.ry != null) {
       this.context.beginPath();
       this.context.ellipse(primitive.cx, primitive.cy, primitive.rx, primitive.ry, 0, 0, Math.PI * 2);
-      if (primitive.fill && primitive.fill !== 'none') {
-        this.context.fillStyle = primitive.fill;
+      if (fillColor && fillColor !== 'none') {
+        this.context.fillStyle = fillColor;
         this.context.fill();
       }
       if (strokeColor && strokeColor !== 'none') {
@@ -444,8 +451,8 @@ export class Html5CanvasGraphRenderer {
 
     if (primitive.kind === 'path' && primitive.d) {
       const path = new Path2D(primitive.d);
-      if (primitive.fill && primitive.fill !== 'none') {
-        this.context.fillStyle = primitive.fill;
+      if (fillColor && fillColor !== 'none') {
+        this.context.fillStyle = fillColor;
         this.context.fill(path);
       }
       if (strokeColor && strokeColor !== 'none') {
@@ -462,6 +469,11 @@ export class Html5CanvasGraphRenderer {
       this.context.textBaseline = 'alphabetic';
       this.context.fillText(primitive.text, primitive.x, primitive.y);
     }
+  }
+
+  private resolveFillColor(primitive: SvgPrimitive): string | null {
+    const overrideColor = primitive.nodeName ? this.nodeFillColorOverrides.get(primitive.nodeName) : null;
+    return overrideColor ?? primitive.fill;
   }
 
   private readNodeName(group: Element): string | undefined {

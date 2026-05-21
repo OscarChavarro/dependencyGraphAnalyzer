@@ -4,12 +4,15 @@ import { Html5CanvasGraphRenderer } from '../render/Html5CanvasGraphRenderer';
 export class SelectionInteractionTechnique {
   public constructor(
     private readonly graphModel: GraphModel,
-    private readonly renderer: Html5CanvasGraphRenderer
+    private readonly renderer: Html5CanvasGraphRenderer,
+    private readonly isStructureGraphProvider: () => boolean,
+    private readonly openGraphByFilename: (filename: string) => void
   ) {}
 
   public attach(canvas: HTMLCanvasElement): void {
     canvas.addEventListener('mousemove', this.onMouseMove);
     canvas.addEventListener('click', this.onMouseClick);
+    canvas.addEventListener('dblclick', this.onDoubleClick);
     canvas.addEventListener('mouseleave', this.onMouseLeave);
   }
 
@@ -43,7 +46,34 @@ export class SelectionInteractionTechnique {
     this.renderer.setHoveredNode(null);
   };
 
+  private readonly onDoubleClick = (event: MouseEvent): void => {
+    if (!this.isStructureGraphProvider()) {
+      return;
+    }
+    const hoveredNodeName = this.pickNodeFromEvent(event);
+    const filename = this.mapNodeNameToSvgFilename(hoveredNodeName);
+    if (!filename || filename === 'structure.svg') {
+      return;
+    }
+    this.openGraphByFilename(filename);
+  };
+
   private pickNodeFromEvent(event: MouseEvent): string | null {
     return this.renderer.pickNodeNameFromEvent(event);
+  }
+
+  private mapNodeNameToSvgFilename(nodeName: string | null): string | null {
+    if (!nodeName) {
+      return null;
+    }
+    const trimmed = nodeName.trim();
+    if (trimmed === '[STRUCTURE]' || trimmed === '_[STRUCTURE]') {
+      return 'structure.svg';
+    }
+    const match = trimmed.match(/^_\[(.+)\]$/);
+    if (!match?.[1]) {
+      return null;
+    }
+    return `${match[1].toLowerCase()}.svg`;
   }
 }

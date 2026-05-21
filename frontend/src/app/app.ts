@@ -25,6 +25,7 @@ import type { SupportedLanguage } from './i18n/types/supported-language.type';
 import type { TranslationKey } from './i18n/translations/translations-by-namespace.const';
 import { GroupRelationshipQuery } from './localProcessing/GroupRelationshipQuery';
 import { InvalidRelationshipDetector } from './localProcessing/InvalidRelationshipDetector';
+import { FloodingOperations } from './localProcessing/FloodingOperations';
 import {
   RelationDialogComponent,
   RelationEndpointClickEvent,
@@ -66,13 +67,19 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   private readonly graphRenderer = new Html5CanvasGraphRenderer();
   private readonly groupRelationshipQuery = new GroupRelationshipQuery();
   private readonly invalidRelationshipDetector = new InvalidRelationshipDetector();
+  private readonly floodingOperations = new FloodingOperations();
   private readonly graphSelectionModel = new GraphModel();
   private currentSvgFilename = 'structure.svg';
   private lastGraphGenerator: GraphModelGenerator = 'CACHE_LOADER';
   private cachedStructureGroupNames: string[] = [];
   private readonly keyboardInteractionTechniques = new KeyboardInteractionTechniques(this.graphSelectionModel);
   private readonly drawingAreaNavigationInteractionTechnique = new DrawingAreaNavigationInteractionTechnique(this.graphRenderer);
-  private readonly selectionInteractionTechnique = new SelectionInteractionTechnique(this.graphSelectionModel, this.graphRenderer);
+  private readonly selectionInteractionTechnique = new SelectionInteractionTechnique(
+    this.graphSelectionModel,
+    this.graphRenderer,
+    () => this.currentSvgFilename === 'structure.svg',
+    (filename) => this.loadAndRenderGraphSvg(filename)
+  );
   private selectedNodeActionMenuInteractionTechnique?: SelectedNodeActionMenuInteractionTechnique;
   private readonly onWindowResize = (): void => {
     this.syncCanvasResolutionWithDisplay();
@@ -296,11 +303,11 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private onInundateDependencies(selectedNodes: string[]): void {
-    console.log('SelectedNodeAction: inundar dependencias', selectedNodes);
+    this.applyFlooding(selectedNodes, 'dependencies');
   }
 
   private onInundateClients(selectedNodes: string[]): void {
-    console.log('SelectedNodeAction: inundar clientes', selectedNodes);
+    this.applyFlooding(selectedNodes, 'clients');
   }
 
   private onMoveTo(selectedNodes: string[], targetGroup: string, originGroupHint: string | null = null): void {
@@ -520,8 +527,9 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
 
   private setGraphModelSnapshot(snapshot: GraphModelSnapshot): void {
     this.graphModel = snapshot;
+    this.updateRendererFillOverrides();
     try {
-      sessionStorage.setItem(App.GRAPH_MODEL_SESSION_KEY, JSON.stringify(snapshot));
+      sessionStorage.setItem(App.GRAPH_MODEL_SESSION_KEY, JSON.stringify({ graphModel: snapshot }));
     } catch {
       // Ignore storage errors to keep UI functional.
     }
@@ -541,14 +549,24 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
         return null;
       }
       const parsed: unknown = JSON.parse(raw);
-      if (!this.isGraphModelSnapshot(parsed)) {
+      if (this.isGraphModelSnapshot(parsed)) {
+        return parsed;
+      }
+      if (!this.isGraphSessionPayload(parsed) || !this.isGraphModelSnapshot(parsed.graphModel)) {
         return null;
       }
-      return parsed;
+      return parsed.graphModel;
     } catch {
       // Ignore invalid session payloads.
       return null;
     }
+  }
+
+  private isGraphSessionPayload(value: unknown): value is { graphModel: unknown } {
+    if (!value || typeof value !== 'object') {
+      return false;
+    }
+    return 'graphModel' in value;
   }
 
   private isGraphModelSnapshot(value: unknown): value is GraphModelSnapshot {
@@ -570,5 +588,86 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     const doc = parser.parseFromString(payload, 'image/svg+xml');
     const root = doc.documentElement;
     return root?.tagName.toLowerCase() === 'svg' && root.hasAttribute('viewBox');
+  }
+
+  private applyFlooding(selectedNodes: string[], mode: 'dependencies' | 'clients'): void {
+    const snapshot = this.graphModel ?? this.getGraphModelFromSession();
+    if (!snapshot) {
+      return;
+    }
+    this.runFloodingWithSnapshot(snapshot, selectedNodes, mode);
+  }
+
+  private runFloodingWithSnapshot(
+    snapshot: GraphModelSnapshot,
+    selectedNodes: string[],
+    mode: 'dependencies' | 'clients'
+  ): void {
+    if (snapshot.enrichedEdges?.length) {
+      this.applyFloodingFromSnapshot(snapshot, selectedNodes, mode);
+      return;
+    }
+
+    const payload: UpdateGraphModelRequest = {
+      generator: this.lastGraphGenerator,
+      groupsDefinitionFolder: this.groupsDefinitionFolder
+    };
+    this.httpClient.post<EnrichedEdgesResponse>(`${this.backendBaseUrl}/v1/enrichedEdges`, payload).subscribe({
+      next: (response) => {
+        const enrichedSnapshot: GraphModelSnapshot = { ...snapshot, enrichedEdges: response.enrichedEdges };
+        this.setGraphModelSnapshot(enrichedSnapshot);
+        this.applyFloodingFromSnapshot(enrichedSnapshot, selectedNodes, mode);
+      },
+      error: () => {
+        // Fall back to local edges if enriched edges are unavailable.
+        this.applyFloodingFromSnapshot(snapshot, selectedNodes, mode);
+      }
+    });
+  }
+
+  private applyFloodingFromSnapshot(
+    snapshot: GraphModelSnapshot,
+    selectedNodes: string[],
+    mode: 'dependencies' | 'clients'
+  ): void {
+    const currentSvgNodeNames = this.graphRenderer.getInteractiveEllipses().map((ellipse) => ellipse.nodeName);
+    const currentGroupToken = this.extractCurrentGroupToken();
+    const result = mode === 'dependencies'
+      ? this.floodingOperations.inundateDependencies(snapshot, selectedNodes, currentSvgNodeNames, currentGroupToken)
+      : this.floodingOperations.inundateClients(snapshot, selectedNodes, currentSvgNodeNames, currentGroupToken);
+
+    this.setGraphModelSnapshot(result.floodedSnapshot);
+    this.graphSelectionModel.selectedNodes = [...new Set([
+      ...this.graphSelectionModel.selectedNodes,
+      ...result.additionalSelectedNodes
+    ])];
+    this.graphRenderer.setSelectedNodes(this.graphSelectionModel.selectedNodes);
+    this.selectedNodeActionMenuInteractionTechnique?.closeMenu();
+  }
+
+  private extractCurrentGroupToken(): string | null {
+    const groupName = this.extractGroupFromCurrentSvgFilename();
+    if (!groupName) {
+      return null;
+    }
+    return `[${groupName}]`;
+  }
+
+  private updateRendererFillOverrides(): void {
+    this.graphRenderer.setNodeFillColorOverrides(this.buildNodeFillOverridesMap(this.graphModel));
+  }
+
+  private buildNodeFillOverridesMap(snapshot: GraphModelSnapshot | null): Map<string, string> {
+    const overrides = new Map<string, string>();
+    if (!snapshot) {
+      return overrides;
+    }
+    for (const node of [...snapshot.nodes, ...snapshot.structure.nodes]) {
+      const fillColorOverride = node.fillColorOverride?.trim();
+      if (node.name && fillColorOverride) {
+        overrides.set(node.name, fillColorOverride);
+      }
+    }
+    return overrides;
   }
 }
