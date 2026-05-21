@@ -73,3 +73,13 @@ export class GraphModel {
     this.selectedNodes = [...this.selectedNodes, nodeName];
   }
 }
+
+
+export interface GroupRelationsRequest {
+  groupA: string;
+  groupB: string;
+}
+
+export interface GroupRelationsResponse {
+  relations: string[];
+}

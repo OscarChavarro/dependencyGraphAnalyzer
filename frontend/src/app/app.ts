@@ -8,6 +8,8 @@ import {
   GraphModelGenerator,
   GraphModelSnapshot,
   EnrichedEdgesResponse,
+  GroupRelationsRequest,
+  GroupRelationsResponse,
   MoveNodeRequest,
   MoveNodeResponse,
   UpdateGraphModelRequest,
@@ -61,6 +63,8 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   public relationBoxLines: RelationLineViewModel[] = [];
   public readonly selectedLanguage;
   public readonly i18nKeys = I18N_KEYS;
+  public nodeFilterPattern = '';
+  public currentSvgNodeNames: string[] = [];
 
   private readonly endpointUrl: string;
   private readonly backendBaseUrl: string;
@@ -87,7 +91,8 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     this.graphSelectionModel,
     this.graphRenderer,
     () => this.currentSvgFilename === 'structure.svg',
-    (filename) => this.loadAndRenderGraphSvg(filename)
+    (filename) => this.loadAndRenderGraphSvg(filename),
+    (selectedNodes) => this.applySelection(selectedNodes)
   );
   private selectedNodeActionMenuInteractionTechnique?: SelectedNodeActionMenuInteractionTechnique;
   private readonly onWindowResize = (): void => {
@@ -126,7 +131,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
         this.graphSelectionModel,
         this.menuRenderer,
         (event) => this.graphRenderer.pickNodeNameFromEvent(event),
-        (selectedNodes) => this.graphRenderer.setSelectedNodes(selectedNodes),
+        (selectedNodes) => this.applySelection(selectedNodes),
         () => this.currentSvgFilename === 'structure.svg',
         (filename) => this.loadAndRenderGraphSvg(filename),
         (selectedNodes) => this.onInundateDependencies(selectedNodes),
@@ -183,14 +188,39 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     if (this.currentSvgFilename === 'structure.svg') {
       return;
     }
-    this.graphSelectionModel.clearSelection();
-    this.graphRenderer.setSelectedNodes(this.graphSelectionModel.selectedNodes);
+    this.applySelection([]);
     this.selectedNodeActionMenuInteractionTechnique?.closeMenu();
     this.loadAndRenderGraphSvg('structure.svg', 0);
   }
 
   public setLanguage(language: SupportedLanguage): void {
     this.i18nStateService.setLanguage(language);
+  }
+
+  public get filteredCurrentSvgNodeNames(): string[] {
+    const pattern = this.nodeFilterPattern.trim().toLowerCase();
+    if (!pattern) {
+      return this.currentSvgNodeNames;
+    }
+    return this.currentSvgNodeNames.filter((name) => name.toLowerCase().includes(pattern));
+  }
+
+  public onNodeFilterInput(event: Event): void {
+    const target = event.target as HTMLInputElement | null;
+    this.nodeFilterPattern = target?.value ?? '';
+  }
+
+  public onNodeListSelectionChange(event: Event): void {
+    const target = event.target as HTMLSelectElement | null;
+    if (!target) {
+      return;
+    }
+    const selectedNodes = Array.from(target.selectedOptions).map((option) => option.value);
+    this.applySelection(selectedNodes);
+  }
+
+  public isNodeSelected(nodeName: string): boolean {
+    return this.graphSelectionModel.selectedNodes.includes(nodeName);
   }
 
   public onRelationEndpointClick(event: RelationEndpointClickEvent): void {
@@ -273,8 +303,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
       next: (response) => {
         try {
           this.setGraphModelSnapshot(response.graphModel);
-          this.graphSelectionModel.clearSelection();
-          this.graphRenderer.setSelectedNodes(this.graphSelectionModel.selectedNodes);
+          this.applySelection([]);
           this.selectedNodeActionMenuInteractionTechnique?.closeMenu();
           queueMicrotask(() => this.loadAndRenderGraphSvg('structure.svg', 0));
         } catch {
@@ -292,7 +321,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
 
   private loadAndRenderGraphSvg(filename: string, attempt = 0): void {
     this.currentSvgFilename = filename;
-    const svgUrl = `/output/svg/${filename}?ts=${Date.now()}`;
+    const svgUrl = `${this.backendBaseUrl}/output/svg/${filename}?ts=${Date.now()}`;
     this.httpClient
       .get(svgUrl, { responseType: 'text' })
       .subscribe({
@@ -307,7 +336,10 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
           }
           this.errorMessage = '';
           this.graphRenderer.loadFromSvgText(svgText);
-          this.graphRenderer.setSelectedNodes(this.graphSelectionModel.selectedNodes);
+          this.currentSvgNodeNames = this.listAndSortCurrentSvgNodeNames();
+          this.graphSelectionModel.selectedNodes = this.graphSelectionModel.selectedNodes
+            .filter((name) => this.currentSvgNodeNames.includes(name));
+          this.applySelection(this.graphSelectionModel.selectedNodes);
           if (filename === 'structure.svg') {
             this.cachedStructureGroupNames = this.graphRenderer
               .getInteractiveEllipses()
@@ -342,9 +374,9 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
       return;
     }
 
-    const originNode = selectedNodes[0]?.trim();
-    if (!originNode) {
-      this.errorMessage = 'Debes seleccionar un nodo para mover.';
+    const originNodes = [...new Set(selectedNodes.map((node) => node.trim()).filter((node) => node.length > 0))];
+    if (originNodes.length === 0) {
+      this.errorMessage = 'Debes seleccionar al menos un nodo para mover.';
       return;
     }
 
@@ -362,7 +394,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     const movePayload: MoveNodeRequest = {
       groupFolder: this.activeGroupsDefinitionFolder,
       originGroup,
-      originNodes: [originNode],
+      originNodes,
       destinationGroup
     };
 
@@ -387,8 +419,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
       next: (response) => {
         try {
           this.setGraphModelSnapshot(response.graphModel);
-          this.graphSelectionModel.clearSelection();
-          this.graphRenderer.setSelectedNodes(this.graphSelectionModel.selectedNodes);
+          this.applySelection([]);
           this.selectedNodeActionMenuInteractionTechnique?.closeMenu();
           this.menuRenderer?.close();
           queueMicrotask(() => this.loadAndRenderGraphSvg(svgToReload, 0));
@@ -412,17 +443,13 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
       return;
     }
 
-    const snapshot = this.graphModel ?? this.getGraphModelFromSession();
-    if (snapshot?.enrichedEdges?.length) {
-      this.setRelationBoxContent(this.groupRelationshipQuery.queryFromEnrichedEdges(
-        snapshot.enrichedEdges,
-        selectedNodes[0],
-        selectedNodes[1]
-      ));
+    if (!this.isInStructureMode()) {
+      this.setRelationBoxContent('Mostrar relaciones solo aplica en vista structure.');
       this.relationBoxVisible = true;
       return;
     }
 
+    const snapshot = this.graphModel ?? this.getGraphModelFromSession();
     if (!snapshot) {
       this.setRelationBoxContent(
         'No hay grafo en sesión. Primero ejecuta "Crear grafo desde cache.txt" o "Analizar sistema Debian".'
@@ -431,31 +458,41 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
       return;
     }
 
-    this.setRelationBoxContent('Cargando relaciones...');
-    this.relationBoxVisible = true;
-
-    const payload: UpdateGraphModelRequest = {
-      generator: this.lastGraphGenerator,
-      groupsDefinitionFolder: this.activeGroupsDefinitionFolder,
-      inputFolders: this.lastInputFolders
+    const relationPayload: GroupRelationsRequest = {
+      groupA: this.normalizeGroupForRelations(selectedNodes[0]),
+      groupB: this.normalizeGroupForRelations(selectedNodes[1])
     };
 
-    this.httpClient.post<EnrichedEdgesResponse>(`${this.backendBaseUrl}/v1/enrichedEdges`, payload).subscribe({
+    this.httpClient.post<GroupRelationsResponse>(`${this.backendBaseUrl}/v1/groupRelations`, relationPayload).subscribe({
       next: (response) => {
-        this.setRelationBoxContent(this.groupRelationshipQuery.queryFromEnrichedEdges(
-          response.enrichedEdges,
+        if (response.relations.length > 0) {
+          this.setRelationBoxContent(response.relations.join('\n'));
+        } else {
+          this.setRelationBoxContent(this.groupRelationshipQuery.query(
+            snapshot,
+            selectedNodes[0],
+            selectedNodes[1]
+          ));
+        }
+        this.relationBoxVisible = true;
+      },
+      error: () => {
+        this.setRelationBoxContent(this.groupRelationshipQuery.query(
+          snapshot,
           selectedNodes[0],
           selectedNodes[1]
         ));
         this.relationBoxVisible = true;
-      },
-      error: () => {
-        this.setRelationBoxContent(
-          'No se pudieron cargar las relaciones enriquecidas desde backend. Ejecuta "Crear grafo desde cache.txt" o "Analizar sistema Debian".'
-        );
-        this.relationBoxVisible = true;
       }
     });
+  }
+
+  private normalizeGroupForRelations(value: string): string {
+    const trimmed = (value ?? '').trim();
+    const structureMatch = trimmed.match(/^_?\[([^\]]+)\]$/);
+    let normalized = structureMatch?.[1] ?? trimmed;
+    normalized = normalized.replace(/\.txt$/i, '');
+    return normalized.toLowerCase();
   }
 
   private setRelationBoxContent(text: string): void {
@@ -544,7 +581,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     }
     const filename = `${groupName.toLowerCase()}.svg`;
     this.graphSelectionModel.selectSingle(packageName);
-    this.graphRenderer.setSelectedNodes(this.graphSelectionModel.selectedNodes);
+    this.applySelection(this.graphSelectionModel.selectedNodes);
     this.selectedNodeActionMenuInteractionTechnique?.closeMenu();
     this.loadAndRenderGraphSvg(filename, 0);
   }
@@ -700,11 +737,10 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
       : this.floodingOperations.inundateClients(snapshot, selectedNodes, currentSvgNodeNames, currentGroupToken);
 
     this.setGraphModelSnapshot(result.floodedSnapshot);
-    this.graphSelectionModel.selectedNodes = [...new Set([
+    this.applySelection([...new Set([
       ...this.graphSelectionModel.selectedNodes,
       ...result.additionalSelectedNodes
-    ])];
-    this.graphRenderer.setSelectedNodes(this.graphSelectionModel.selectedNodes);
+    ])]);
     this.selectedNodeActionMenuInteractionTechnique?.closeMenu();
   }
 
@@ -732,5 +768,20 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
       }
     }
     return overrides;
+  }
+
+  private listAndSortCurrentSvgNodeNames(): string[] {
+    const uniqueNames = new Set(
+      this.graphRenderer
+        .getInteractiveEllipses()
+        .map((ellipse) => ellipse.nodeName)
+        .filter((name) => name && !name.startsWith('[') && !name.startsWith('_['))
+    );
+    return [...uniqueNames].sort((a, b) => a.localeCompare(b));
+  }
+
+  private applySelection(selectedNodes: string[]): void {
+    this.graphSelectionModel.selectedNodes = [...new Set(selectedNodes)];
+    this.graphRenderer.setSelectedNodes(this.graphSelectionModel.selectedNodes);
   }
 }

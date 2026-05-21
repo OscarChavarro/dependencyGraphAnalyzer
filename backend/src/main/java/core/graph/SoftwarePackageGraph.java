@@ -5,9 +5,13 @@ import core.grouper.SoftwarePackageGroup;
 import core.exporters.DotWriter;
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.nio.file.Files;
+import java.nio.file.StandardOpenOption;
+import java.nio.file.Path;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -22,6 +26,7 @@ import core.graph.PackageEdge;
 import vsdk.toolkit.io.PersistenceElement;
 
 public class SoftwarePackageGraph {
+    private static final Path CLEAN_RELATIONS_GRAPH_PATH = Path.of("output", "cleanRelationsGraph.txt");
     private static final int MAX_PRACTICAL_GRAPH_SIZE = 500;
     private final ArrayList<SoftwarePackageNode> nodes;
     private final Hashtable<String, SoftwarePackageNode> nodeIndex;
@@ -748,7 +753,7 @@ public class SoftwarePackageGraph {
                 if (groupSet.contains(child)) {
                     toRemove.add(child);
                     if (n.getParentGroupNode() != null) {
-                        System.err.println(n.getParentGroupNode().getName() + "." + n.getName() + " -> " + groupParent.getName() + "." + child.getName());
+                        appendCleanRelationsGraphLine(n.getParentGroupNode().getName() + "." + n.getName() + " -> " + groupParent.getName() + "." + child.getName());
                         n.getParentGroupNode().addExternalGroupDependency(groupParent);
                     }
                 }
@@ -768,7 +773,21 @@ public class SoftwarePackageGraph {
         if (a != null && b != null) {
             addDependency(a, b);
         } else {
-            System.err.println("ERROR: broken links");
+            appendCleanRelationsGraphLine("ERROR: broken links");
+        }
+    }
+
+    private void appendCleanRelationsGraphLine(String line) {
+        try {
+            Files.createDirectories(CLEAN_RELATIONS_GRAPH_PATH.getParent());
+            Files.writeString(
+                    CLEAN_RELATIONS_GRAPH_PATH,
+                    line + System.lineSeparator(),
+                    StandardCharsets.UTF_8,
+                    StandardOpenOption.CREATE,
+                    StandardOpenOption.APPEND);
+        } catch (IOException ignored) {
+            // Keep graph processing resilient even if logging file cannot be written.
         }
     }
 

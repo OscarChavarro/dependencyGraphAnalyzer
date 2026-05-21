@@ -6,7 +6,8 @@ export class SelectionInteractionTechnique {
     private readonly graphModel: GraphModel,
     private readonly renderer: Html5CanvasGraphRenderer,
     private readonly isStructureGraphProvider: () => boolean,
-    private readonly openGraphByFilename: (filename: string) => void
+    private readonly openGraphByFilename: (filename: string) => void,
+    private readonly onSelectionChanged: (selectedNodes: string[]) => void
   ) {}
 
   public attach(canvas: HTMLCanvasElement): void {
@@ -28,6 +29,7 @@ export class SelectionInteractionTechnique {
       if (!event.ctrlKey && !event.metaKey) {
         this.graphModel.clearSelection();
         this.renderer.setSelectedNodes(this.graphModel.selectedNodes);
+        this.onSelectionChanged([...this.graphModel.selectedNodes]);
       }
       return;
     }
@@ -40,6 +42,7 @@ export class SelectionInteractionTechnique {
 
     this.renderer.setSelectedNodes(this.graphModel.selectedNodes);
     this.renderer.setHoveredNode(hoveredNodeName);
+    this.onSelectionChanged([...this.graphModel.selectedNodes]);
   };
 
   private readonly onMouseLeave = (): void => {

@@ -1,5 +1,10 @@
 import { GraphModelEdge, GraphModelNode, GraphModelSnapshot } from '../model/graph-model';
 
+type GroupMemberIndex = {
+  byExactLower: Map<string, string>;
+  byBaseLower: Map<string, string[]>;
+};
+
 export class GroupRelationshipQuery {
   public query(snapshot: GraphModelSnapshot, selectedGroupA: string, selectedGroupB: string): string {
     const groupA = this.extractGroupToken(selectedGroupA);
@@ -10,7 +15,10 @@ export class GroupRelationshipQuery {
 
     const enrichedEdges = snapshot.enrichedEdges ?? [];
     if (enrichedEdges.length > 0) {
-      return this.queryFromEnrichedEdges(enrichedEdges, groupA, groupB);
+      const enrichedRelations = this.findEnrichedRelations(enrichedEdges, groupA, groupB);
+      if (enrichedRelations.length > 0) {
+        return enrichedRelations.join('\n');
+      }
     }
 
     const membersA = this.listGroupMembers(snapshot, groupA);
@@ -19,19 +27,32 @@ export class GroupRelationshipQuery {
       return `No se encontraron nodos para ${groupA} o ${groupB}.`;
     }
 
-    const relations = this.findCrossRelations(snapshot, membersA, membersB);
-    if (relations.length === 0) {
-      return `Sin relaciones entre ${groupA} y ${groupB}.`;
+    const indexA = this.buildMemberIndex(membersA);
+    const indexB = this.buildMemberIndex(membersB);
+
+    const crossRelations = this.findCrossRelations(snapshot, indexA, indexB);
+    if (crossRelations.length > 0) {
+      return crossRelations
+        .map((edge) => {
+          const sourceInA = this.belongsToGroup(edge.s, indexA);
+          const sourceGroup = sourceInA ? groupA : groupB;
+          const targetGroup = sourceInA ? groupB : groupA;
+          const sourceIndex = sourceInA ? indexA : indexB;
+          const targetIndex = sourceInA ? indexB : indexA;
+          const sourcePackage = this.resolvePreferredMemberToken(edge.s, sourceIndex);
+          const targetPackage = this.resolvePreferredMemberToken(edge.t, targetIndex);
+          return `${sourceGroup}.${sourcePackage} -> ${targetGroup}.${targetPackage}`;
+        })
+        .sort((left, right) => left.localeCompare(right))
+        .join('\n');
     }
-    return relations
-      .map((edge) => {
-        const sourceInA = membersA.has(edge.s);
-        const sourceGroup = sourceInA ? groupA : groupB;
-        const targetGroup = sourceInA ? groupB : groupA;
-        return `${sourceGroup}.${edge.s} -> ${targetGroup}.${edge.t}`;
-      })
-      .sort((left, right) => left.localeCompare(right))
-      .join('\n');
+
+    const overlapRelations = this.findOverlapRelations(indexA, indexB, groupA, groupB);
+    if (overlapRelations.length > 0) {
+      return overlapRelations.join('\n');
+    }
+
+    return `Sin relaciones entre ${groupA} y ${groupB}.`;
   }
 
   public queryFromEnrichedEdges(edges: GraphModelEdge[], selectedGroupA: string, selectedGroupB: string): string {
@@ -41,51 +62,32 @@ export class GroupRelationshipQuery {
       return `No se pudo resolver grupo desde selección: ${selectedGroupA} | ${selectedGroupB}`;
     }
 
-    const prefixA = `${groupA}.`;
-    const prefixB = `${groupB}.`;
-    const relations = edges
-      .filter((edge) => {
-        const aToB = edge.s.startsWith(prefixA) && edge.t.startsWith(prefixB);
-        const bToA = edge.s.startsWith(prefixB) && edge.t.startsWith(prefixA);
-        return aToB || bToA;
-      })
-      .map((edge) => `${edge.s} -> ${edge.t}`)
-      .sort((left, right) => left.localeCompare(right));
-
+    const relations = this.findEnrichedRelations(edges, groupA, groupB);
     if (relations.length === 0) {
       return `Sin relaciones entre ${groupA} y ${groupB}.`;
     }
     return relations.join('\n');
   }
 
-  public queryFromEdgeLines(lines: string[], selectedGroupA: string, selectedGroupB: string): string {
-    const groupA = this.extractGroupToken(selectedGroupA);
-    const groupB = this.extractGroupToken(selectedGroupB);
-    if (!groupA || !groupB) {
-      return `No se pudo resolver grupo desde selección: ${selectedGroupA} | ${selectedGroupB}`;
-    }
+  private findEnrichedRelations(edges: GraphModelEdge[], groupA: string, groupB: string): string[] {
+    const canonicalA = this.canonicalizeGroupToken(groupA);
+    const canonicalB = this.canonicalizeGroupToken(groupB);
 
-    const edges = lines
-      .map((line) => this.parseEdgeLine(line))
-      .filter((edge): edge is GraphModelEdge => edge !== null);
-    if (edges.length === 0) {
-      return 'No se encontraron relaciones parseables en archivo e.';
-    }
-
-    const membersA = this.listGroupMembersFromEdges(edges, groupA);
-    const membersB = this.listGroupMembersFromEdges(edges, groupB);
-    if (membersA.size === 0 || membersB.size === 0) {
-      return `No se encontraron nodos para ${groupA} o ${groupB}.`;
-    }
-
-    const relations = this.findCrossRelationsFromEdges(edges, membersA, membersB);
-    if (relations.length === 0) {
-      return `Sin relaciones entre ${groupA} y ${groupB}.`;
-    }
-    return relations
+    return edges
+      .filter((edge) => {
+        const sourceGroup = this.extractGroupToken(edge.s);
+        const targetGroup = this.extractGroupToken(edge.t);
+        if (!sourceGroup || !targetGroup) {
+          return false;
+        }
+        const sourceCanonical = this.canonicalizeGroupToken(sourceGroup);
+        const targetCanonical = this.canonicalizeGroupToken(targetGroup);
+        const aToB = sourceCanonical === canonicalA && targetCanonical === canonicalB;
+        const bToA = sourceCanonical === canonicalB && targetCanonical === canonicalA;
+        return aToB || bToA;
+      })
       .map((edge) => `${edge.s} -> ${edge.t}`)
-      .sort((left, right) => left.localeCompare(right))
-      .join('\n');
+      .sort((left, right) => left.localeCompare(right));
   }
 
   private extractGroupToken(nodeName: string | undefined): string | null {
@@ -107,7 +109,6 @@ export class GroupRelationshipQuery {
     const underscoredGroupMarker = `_${groupToken}`.toLowerCase();
     const result = new Set<string>();
 
-    // Case 1: nodes already encoded like [GROUP].package
     for (const node of this.allNodes(snapshot)) {
       const name = node.name ?? '';
       if (name.toLowerCase().startsWith(lowerPrefix)) {
@@ -115,7 +116,6 @@ export class GroupRelationshipQuery {
       }
     }
 
-    // Case 2: structure edges encode membership as [GROUP] -> package
     for (const edge of this.allEdges(snapshot)) {
       const source = edge.s.toLowerCase();
       const target = edge.t.toLowerCase();
@@ -134,8 +134,93 @@ export class GroupRelationshipQuery {
     return result;
   }
 
-  private findCrossRelations(snapshot: GraphModelSnapshot, membersA: Set<string>, membersB: Set<string>): GraphModelEdge[] {
-    return this.findCrossRelationsFromEdges(this.allEdges(snapshot), membersA, membersB);
+  private buildMemberIndex(members: Set<string>): GroupMemberIndex {
+    const byExactLower = new Map<string, string>();
+    const byBaseLower = new Map<string, string[]>();
+
+    for (const member of members) {
+      const normalized = member.trim();
+      const exactKey = normalized.toLowerCase();
+      if (!byExactLower.has(exactKey)) {
+        byExactLower.set(exactKey, normalized);
+      }
+
+      const baseKey = this.extractBaseName(normalized).toLowerCase();
+      const list = byBaseLower.get(baseKey) ?? [];
+      if (!list.includes(normalized)) {
+        list.push(normalized);
+      }
+      byBaseLower.set(baseKey, list);
+    }
+
+    return { byExactLower, byBaseLower };
+  }
+
+  private findCrossRelations(snapshot: GraphModelSnapshot, indexA: GroupMemberIndex, indexB: GroupMemberIndex): GraphModelEdge[] {
+    const result = new Map<string, GraphModelEdge>();
+
+    for (const edge of this.allEdges(snapshot)) {
+      const sourceInA = this.belongsToGroup(edge.s, indexA);
+      const targetInA = this.belongsToGroup(edge.t, indexA);
+      const sourceInB = this.belongsToGroup(edge.s, indexB);
+      const targetInB = this.belongsToGroup(edge.t, indexB);
+      const aToB = sourceInA && targetInB;
+      const bToA = sourceInB && targetInA;
+      if (aToB || bToA) {
+        result.set(`${edge.s} -> ${edge.t}`, edge);
+      }
+    }
+
+    return [...result.values()];
+  }
+
+  private findOverlapRelations(indexA: GroupMemberIndex, indexB: GroupMemberIndex, groupA: string, groupB: string): string[] {
+    const relations = new Set<string>();
+
+    for (const [baseKey, membersInA] of indexA.byBaseLower) {
+      const membersInB = indexB.byBaseLower.get(baseKey);
+      if (!membersInB || membersInB.length === 0) {
+        continue;
+      }
+      for (const memberA of membersInA) {
+        for (const memberB of membersInB) {
+          relations.add(`${groupA}.${memberA} -> ${groupB}.${memberB}`);
+        }
+      }
+    }
+
+    return [...relations].sort((left, right) => left.localeCompare(right));
+  }
+
+  private belongsToGroup(endpoint: string, index: GroupMemberIndex): boolean {
+    const exactKey = endpoint.trim().toLowerCase();
+    if (index.byExactLower.has(exactKey)) {
+      return true;
+    }
+    const baseKey = this.extractBaseName(endpoint).toLowerCase();
+    return (index.byBaseLower.get(baseKey)?.length ?? 0) > 0;
+  }
+
+  private resolvePreferredMemberToken(endpoint: string, index: GroupMemberIndex): string {
+    const exactKey = endpoint.trim().toLowerCase();
+    const exact = index.byExactLower.get(exactKey);
+    if (exact) {
+      return exact;
+    }
+
+    const baseKey = this.extractBaseName(endpoint).toLowerCase();
+    const byBase = index.byBaseLower.get(baseKey);
+    if (byBase && byBase.length > 0) {
+      return byBase[0];
+    }
+
+    return endpoint.trim();
+  }
+
+  private extractBaseName(value: string): string {
+    const trimmed = value.trim();
+    const slash = trimmed.lastIndexOf('/');
+    return slash >= 0 ? trimmed.substring(slash + 1) : trimmed;
   }
 
   private allNodes(snapshot: GraphModelSnapshot): GraphModelNode[] {
@@ -146,47 +231,8 @@ export class GroupRelationshipQuery {
     return [...snapshot.edges, ...snapshot.structure.edges];
   }
 
-  private parseEdgeLine(line: string): GraphModelEdge | null {
-    const trimmed = line.trim();
-    if (!trimmed || trimmed.startsWith('#')) {
-      return null;
-    }
-    const parts = trimmed.split('->');
-    if (parts.length !== 2) {
-      return null;
-    }
-    const s = parts[0].trim();
-    const t = parts[1].trim();
-    if (!s || !t) {
-      return null;
-    }
-    return { s, t };
-  }
-
-  private listGroupMembersFromEdges(edges: GraphModelEdge[], groupToken: string): Set<string> {
-    const lowerPrefix = `${groupToken}.`.toLowerCase();
-    const result = new Set<string>();
-    for (const edge of edges) {
-      if (edge.s.toLowerCase().startsWith(lowerPrefix)) {
-        result.add(edge.s);
-      }
-      if (edge.t.toLowerCase().startsWith(lowerPrefix)) {
-        result.add(edge.t);
-      }
-    }
-    return result;
-  }
-
-  private findCrossRelationsFromEdges(edges: GraphModelEdge[], membersA: Set<string>, membersB: Set<string>): GraphModelEdge[] {
-    const result = new Map<string, GraphModelEdge>();
-    for (const edge of edges) {
-      const aToB = membersA.has(edge.s) && membersB.has(edge.t);
-      const bToA = membersB.has(edge.s) && membersA.has(edge.t);
-      if (aToB || bToA) {
-        result.set(`${edge.s} -> ${edge.t}`, edge);
-      }
-    }
-    return [...result.values()];
+  private canonicalizeGroupToken(groupToken: string): string {
+    return groupToken.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
   }
 
   private isGroupLikeName(value: string): boolean {

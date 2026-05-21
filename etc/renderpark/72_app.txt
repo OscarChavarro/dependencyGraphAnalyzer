@@ -1,1 +1,12 @@
 [72_APP]
+
+Adaptation.cpp
+Adaptation.h
+Batch.cpp
+Batch.h
+LuminanceArea.h
+Main.cpp
+Radiance.cpp
+Raytrace.cpp
+RpkApplication.cpp
+SceneBuilder.cpp

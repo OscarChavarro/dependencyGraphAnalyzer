@@ -8,9 +8,15 @@ import backend.infrastructure.http.dto.UpdateGraphModelRequest;
 import backend.infrastructure.http.dto.EnrichedEdgesResponse;
 import backend.infrastructure.http.dto.MoveNodeRequest;
 import backend.infrastructure.http.dto.MoveNodeResponse;
+import backend.infrastructure.http.dto.GroupRelationsRequest;
+import backend.infrastructure.http.dto.GroupRelationsResponse;
 import backend.infrastructure.http.dto.UpdateGraphModelResponse;
 import jakarta.validation.Valid;
 import java.util.Arrays;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.List;
 import java.util.LinkedHashSet;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -67,6 +73,47 @@ public class GraphModelController {
 
         return new EnrichedEdgesResponse(
                 buildEnrichedEdgesUseCase.execute(request.generator(), request.groupsDefinitionFolder()));
+    }
+
+
+    @PostMapping({"/groupRelations"})
+    public GroupRelationsResponse groupRelations(@Valid @RequestBody GroupRelationsRequest request) {
+        String groupA = normalizeGroupToken(request.groupA());
+        String groupB = normalizeGroupToken(request.groupB());
+        Path path = Path.of("output", "cleanRelationsGraph.txt");
+
+        if (!Files.isRegularFile(path)) {
+            return new GroupRelationsResponse(List.of());
+        }
+
+        try {
+            List<String> relations = Files.readAllLines(path).stream()
+                    .map(String::trim)
+                    .filter(line -> !line.isBlank())
+                    .filter(line -> {
+                        String normalizedLine = line.toLowerCase();
+                        return normalizedLine.contains("[" + groupA + "]") && normalizedLine.contains("[" + groupB + "]");
+                    })
+                    .distinct()
+                    .sorted()
+                    .toList();
+            return new GroupRelationsResponse(relations);
+        } catch (IOException e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "failed reading cleanRelationsGraph", e);
+        }
+    }
+
+    private String normalizeGroupToken(String value) {
+        String trimmed = value == null ? "" : value.trim();
+        if (trimmed.startsWith("_[") && trimmed.endsWith("]")) {
+            trimmed = trimmed.substring(2, trimmed.length() - 1);
+        } else if (trimmed.startsWith("[") && trimmed.endsWith("]")) {
+            trimmed = trimmed.substring(1, trimmed.length() - 1);
+        }
+        if (trimmed.endsWith(".txt")) {
+            trimmed = trimmed.substring(0, trimmed.length() - 4);
+        }
+        return trimmed.toLowerCase();
     }
 
     @PostMapping({"/moveNode"})

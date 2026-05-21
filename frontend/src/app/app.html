@@ -52,6 +52,34 @@
         {{ t(i18nKeys.shell.NODES) }}: {{ graphModel.nodes.length }} | {{ t(i18nKeys.shell.EDGES) }}:
         {{ graphModel.edges.length }}
       </p>
+
+      <section class="node-browser-panel">
+        <label class="node-browser-search" aria-label="Filtrar nodos del grupo">
+          <span class="node-browser-search-icon">🔍</span>
+          <input
+            type="text"
+            class="node-browser-search-input"
+            [value]="nodeFilterPattern"
+            (input)="onNodeFilterInput($event)"
+            placeholder="Buscar nodo..."
+          />
+        </label>
+        <select
+          class="node-browser-list"
+          multiple
+          size="14"
+          (change)="onNodeListSelectionChange($event)"
+          aria-label="Nodos del grupo actual"
+        >
+          <option
+            *ngFor="let nodeName of filteredCurrentSvgNodeNames"
+            [value]="nodeName"
+            [selected]="isNodeSelected(nodeName)"
+          >
+            {{ nodeName }}
+          </option>
+        </select>
+      </section>
     </div>
   </aside>
 
