@@ -29,6 +29,7 @@ import { FloodingOperations } from './localProcessing/FloodingOperations';
 import {
   RelationDialogComponent,
   RelationEndpointClickEvent,
+  RelationLineCheckboxToggleEvent,
   RelationLineViewModel
 } from './relation-dialog.component';
 import { Menu } from './model/menu';
@@ -152,6 +153,12 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     this.relationBoxLines = [];
   }
 
+  public onRelationLineCheckboxToggled(event: RelationLineCheckboxToggleEvent): void {
+    this.relationBoxLines = this.relationBoxLines.map((line) =>
+      line === event.line ? { ...line, checked: event.checked } : line
+    );
+  }
+
   public createGraphFromCache(): void {
     this.updateGraphModel('CACHE_LOADER', this.defaultGroupsDefinitionFolder, []);
   }
@@ -195,6 +202,8 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     if (!packageName) {
       return;
     }
+    const endpointGroup = this.extractGroupFromEndpoint(event.endpoint);
+    const originNodes = this.resolveMoveOriginNodesForRelationSelection(packageName, endpointGroup);
     const counterpartGroupName = this.extractGroupFromEndpoint(event.counterpartEndpoint ?? '');
     const counterpartGroupLower = counterpartGroupName?.toLowerCase() ?? null;
     const groups = this.listStructureGroupNames();
@@ -206,7 +215,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
             groupName,
             () => {
               this.closeRelationBox();
-              this.onMoveTo([packageName], groupName, this.extractGroupFromEndpoint(event.endpoint));
+              this.onMoveTo(originNodes, groupName, endpointGroup);
             },
             null,
             null
@@ -229,7 +238,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
           `${this.t(this.i18nKeys.shell.MOVE_VERB)} a ${counterpartGroupLower}`,
           () => {
             this.closeRelationBox();
-            this.onMoveTo([packageName], counterpartGroupLower, this.extractGroupFromEndpoint(event.endpoint));
+            this.onMoveTo(originNodes, counterpartGroupLower, endpointGroup);
           },
           null,
           null
@@ -465,8 +474,44 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     return lines.map((line) => ({
       text: line,
       invalid: this.invalidRelationshipDetector.isInvalid(line),
+      checked: false,
       ...this.parseRelationLine(line)
     }));
+  }
+
+  private resolveMoveOriginNodesForRelationSelection(fallbackNode: string, endpointGroup: string | null): string[] {
+    const selectedNodes = this.relationBoxLines
+      .filter((line) => line.checked === true)
+      .flatMap((line) => this.extractRelationNodesFromLineForGroup(line, endpointGroup))
+      .filter((name) => name.length > 0);
+    const uniqueSelectedNodes = [...new Set(selectedNodes)];
+    if (uniqueSelectedNodes.length === 0) {
+      return [fallbackNode];
+    }
+    return uniqueSelectedNodes;
+  }
+
+  private extractRelationNodesFromLineForGroup(line: RelationLineViewModel, endpointGroup: string | null): string[] {
+    if (!line.clickable || !line.sourceEndpoint || !line.targetEndpoint) {
+      return [];
+    }
+    if (!endpointGroup) {
+      return [];
+    }
+    const nodes: string[] = [];
+    if (this.extractGroupFromEndpoint(line.sourceEndpoint)?.toLowerCase() === endpointGroup.toLowerCase()) {
+      const packageName = this.extractPackageFromEndpoint(line.sourceEndpoint);
+      if (packageName) {
+        nodes.push(packageName);
+      }
+    }
+    if (this.extractGroupFromEndpoint(line.targetEndpoint)?.toLowerCase() === endpointGroup.toLowerCase()) {
+      const packageName = this.extractPackageFromEndpoint(line.targetEndpoint);
+      if (packageName) {
+        nodes.push(packageName);
+      }
+    }
+    return nodes;
   }
 
   private parseRelationLine(line: string): Omit<RelationLineViewModel, 'text' | 'invalid'> {

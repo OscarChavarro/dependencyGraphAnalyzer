@@ -7,6 +7,7 @@ export interface RelationLineViewModel {
   sourceEndpoint?: string;
   targetEndpoint?: string;
   clickable?: boolean;
+  checked?: boolean;
 }
 
 export interface RelationEndpointClickEvent {
@@ -14,6 +15,11 @@ export interface RelationEndpointClickEvent {
   counterpartEndpoint?: string;
   mouseX: number;
   mouseY: number;
+}
+
+export interface RelationLineCheckboxToggleEvent {
+  line: RelationLineViewModel;
+  checked: boolean;
 }
 
 @Component({
@@ -25,6 +31,12 @@ export interface RelationEndpointClickEvent {
       <button type="button" class="relation-box-close" (click)="onCloseClick()" [attr.aria-label]="closeAriaLabel">X</button>
       <div class="relation-box-content" *ngIf="lines.length > 0; else plainTextBlock">
         <div class="relation-box-line" *ngFor="let line of lines" [class.relation-box-line-invalid]="line.invalid">
+          <input
+            type="checkbox"
+            class="relation-box-line-checkbox"
+            [checked]="line.checked === true"
+            (change)="onLineCheckboxChange(line, $event)"
+          />
           <ng-container *ngIf="line.clickable && line.sourceEndpoint && line.targetEndpoint; else plainLineBlock">
             <span>{{ endpointGroupPrefix(line.sourceEndpoint) }}</span>
             <a
@@ -109,7 +121,15 @@ export interface RelationEndpointClickEvent {
       }
 
       .relation-box-line {
+        display: flex;
+        align-items: center;
+        gap: 0.35rem;
         color: #102a43;
+      }
+
+      .relation-box-line-checkbox {
+        margin: 0;
+        flex: 0 0 auto;
       }
 
       .relation-box-line-invalid {
@@ -138,6 +158,7 @@ export class RelationDialogComponent {
   @Output() public closeRequested = new EventEmitter<void>();
   @Output() public endpointClicked = new EventEmitter<RelationEndpointClickEvent>();
   @Output() public endpointContextMenuRequested = new EventEmitter<RelationEndpointClickEvent>();
+  @Output() public lineCheckboxToggled = new EventEmitter<RelationLineCheckboxToggleEvent>();
 
   public onCloseClick(): void {
     this.closeRequested.emit();
@@ -160,6 +181,11 @@ export class RelationDialogComponent {
       mouseX: event.clientX,
       mouseY: event.clientY
     });
+  }
+
+  public onLineCheckboxChange(line: RelationLineViewModel, event: Event): void {
+    const checked = (event.target as HTMLInputElement).checked;
+    this.lineCheckboxToggled.emit({ line, checked });
   }
 
   public endpointGroupPrefix(endpoint: string): string {
