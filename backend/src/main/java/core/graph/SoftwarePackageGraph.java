@@ -257,6 +257,7 @@ public class SoftwarePackageGraph {
 
     public void exportGroups(ArrayList<SoftwarePackageGroup> groups) {
         try {
+            ensureOutputDirectory("./output/txt");
             ungroupAllNodes();
             for (SoftwarePackageGroup group : groups) {
                 SoftwarePackageNode parent = group.header;
@@ -298,6 +299,7 @@ public class SoftwarePackageGraph {
 
     public void exportCleanScripts(ArrayList<SoftwarePackageGroup> groups) {
         try {
+            ensureOutputDirectory("./output/cleansh");
             ungroupAllNodes();
             for (SoftwarePackageGroup group : groups) {
                 SoftwarePackageNode parent = group.header;
@@ -338,6 +340,7 @@ public class SoftwarePackageGraph {
 
     public void exportTopNodesPerGroups(ArrayList<SoftwarePackageGroup> groups) {
         try {
+            ensureOutputDirectory("./output/tops");
             ungroupAllNodes();
             for (SoftwarePackageGroup group : groups) {
                 SoftwarePackageNode parent = group.header;
@@ -393,6 +396,7 @@ public class SoftwarePackageGraph {
 
     public void exportInstallScripts(ArrayList<SoftwarePackageGroup> groups) {
         try {
+            ensureOutputDirectory("./output/installsh");
             ungroupAllNodes();
             for (SoftwarePackageGroup group : groups) {
                 SoftwarePackageNode parent = group.header;
@@ -431,9 +435,11 @@ public class SoftwarePackageGraph {
         ArrayList<ArrayList<String[]>> egroups = new ArrayList<>();
         String graphvizType = outputFormat == OutputFormats.SVG ? "svg" : "png";
         String outputDir = "./output/" + graphvizType;
+        String dotDir = "./output/dot";
 
         try {
             Files.createDirectories(Paths.get(outputDir));
+            Files.createDirectories(Paths.get(dotDir));
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(9);
@@ -489,6 +495,14 @@ public class SoftwarePackageGraph {
     private void ungroupAllNodes() {
         for (SoftwarePackageNode node : nodes) {
             node.setGroup(false);
+        }
+    }
+
+    private void ensureOutputDirectory(String directory) {
+        try {
+            Files.createDirectories(Paths.get(directory));
+        } catch (Exception e) {
+            throw new IllegalStateException("Could not create output directory: " + directory, e);
         }
     }
 

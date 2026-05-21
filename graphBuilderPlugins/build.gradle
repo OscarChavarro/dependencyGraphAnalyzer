@@ -1,0 +1,19 @@
+plugins {
+    id 'java-library'
+}
+
+group 'co.cubestudio'
+version '0.666'
+
+repositories {
+    mavenCentral()
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+tasks.withType(JavaCompile) {
+    options.compilerArgs << '-Xlint:unchecked'
+}

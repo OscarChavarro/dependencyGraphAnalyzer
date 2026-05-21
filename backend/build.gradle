@@ -13,6 +13,7 @@ repositories {
 }
 
 dependencies {
+    implementation 'co.cubestudio:graph-builder-plugins:0.666'
     implementation 'ch.qos.logback:logback-classic:1.4.11'
     implementation 'ch.qos.logback:logback-core:1.4.11'
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.17.2'
