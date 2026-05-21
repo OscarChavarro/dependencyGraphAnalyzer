@@ -10,6 +10,8 @@ import backend.infrastructure.http.dto.MoveNodeRequest;
 import backend.infrastructure.http.dto.MoveNodeResponse;
 import backend.infrastructure.http.dto.UpdateGraphModelResponse;
 import jakarta.validation.Valid;
+import java.util.Arrays;
+import java.util.LinkedHashSet;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -72,7 +74,7 @@ public class GraphModelController {
         String message = moveNodeUseCase.execute(
                 request.groupFolder(),
                 request.originGroup(),
-                request.originNode(),
+                new LinkedHashSet<>(Arrays.asList(request.originNodes())),
                 request.destinationGroup());
         return new MoveNodeResponse(true, message);
     }

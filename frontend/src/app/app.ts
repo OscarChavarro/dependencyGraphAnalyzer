@@ -353,7 +353,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     const movePayload: MoveNodeRequest = {
       groupFolder: this.activeGroupsDefinitionFolder,
       originGroup,
-      originNode,
+      originNodes: [originNode],
       destinationGroup
     };
 

@@ -9,38 +9,64 @@ import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 import org.springframework.stereotype.Service;
 
 @Service
 public class MoveNodeService implements MoveNodeUseCase {
     @Override
-    public String execute(String groupFolder, String originGroup, String originNode, String destinationGroup) {
+    public String execute(String groupFolder, String originGroup, Set<String> originNodes, String destinationGroup) {
+        if (originNodes == null || originNodes.isEmpty()) {
+            throw new IllegalArgumentException("originNodes is required and must contain at least one node");
+        }
+        Set<String> sanitizedNodes = sanitizeNodes(originNodes);
+        if (sanitizedNodes.isEmpty()) {
+            throw new IllegalArgumentException("originNodes is required and must contain at least one non-blank node");
+        }
+
         Path rootFolder = resolveExistingFolder(groupFolder);
         Path originFile = resolveExistingGroupFile(rootFolder, originGroup);
         Path destinationFile = resolveExistingDestinationGroupFile(rootFolder, destinationGroup);
 
         List<String> originLines = readLines(originFile);
-        boolean removed = false;
+        Set<String> missingNodes = new LinkedHashSet<>(sanitizedNodes);
         List<String> updatedOriginLines = new ArrayList<>(originLines.size());
 
         for (String line : originLines) {
-            if (!removed && line.equals(originNode)) {
-                removed = true;
+            if (missingNodes.contains(line)) {
+                missingNodes.remove(line);
                 continue;
             }
             updatedOriginLines.add(line);
         }
 
-        if (!removed) {
+        if (!missingNodes.isEmpty()) {
             throw new IllegalArgumentException(
-                    "originNode not found. node='" + originNode + "', originFile='" + originFile + "'");
+                    "originNodes not found. nodes='" + missingNodes + "', originFile='" + originFile + "'");
         }
 
         writeLines(originFile, updatedOriginLines);
-        appendLine(destinationFile, originNode);
+        for (String node : sanitizedNodes) {
+            appendLine(destinationFile, node);
+        }
         return "moveNode completed. originFile='" + originFile + "', destinationFile='" + destinationFile
-                + "', movedNode='" + originNode + "'";
+                + "', movedNodes='" + sanitizedNodes + "'";
+    }
+
+    private Set<String> sanitizeNodes(Set<String> originNodes) {
+        LinkedHashSet<String> nodes = new LinkedHashSet<>();
+        for (String node : originNodes) {
+            if (node == null) {
+                continue;
+            }
+            String trimmed = node.trim();
+            if (!trimmed.isEmpty()) {
+                nodes.add(trimmed);
+            }
+        }
+        return nodes;
     }
 
     private List<String> readLines(Path path) {

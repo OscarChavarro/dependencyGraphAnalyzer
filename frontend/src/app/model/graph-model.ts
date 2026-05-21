@@ -46,7 +46,7 @@ export interface EnrichedEdgesResponse {
 export interface MoveNodeRequest {
   groupFolder: string;
   originGroup: string;
-  originNode: string;
+  originNodes: string[];
   destinationGroup: string;
 }
 
