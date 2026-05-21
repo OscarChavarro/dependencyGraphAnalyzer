@@ -1,8 +1,9 @@
-export type GraphModelGenerator = 'CACHE_LOADER' | 'DEBIAN_PACKAGE_GENERATOR';
+export type GraphModelGenerator = 'CACHE_LOADER' | 'DEBIAN_PACKAGE_GENERATOR' | 'CPP_SOURCES';
 
 export interface UpdateGraphModelRequest {
   generator: GraphModelGenerator;
   groupsDefinitionFolder: string;
+  inputFolders?: string[];
 }
 
 export interface GraphModelNode {

@@ -63,7 +63,13 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
 
   private readonly endpointUrl: string;
   private readonly backendBaseUrl: string;
-  private readonly groupsDefinitionFolder = '../u/';
+  private readonly defaultGroupsDefinitionFolder = '../u/';
+  private readonly renderparkGroupsDefinitionFolder = './etc/renderpark';
+  private readonly renderparkCppInputFolders = [
+    '/paradigmas/master/algoritmos_basicos_3d/renderpark/rpkCpp/cpp/base/src/',
+    '/paradigmas/master/algoritmos_basicos_3d/renderpark/rpkCpp/cpp/opengl/src/',
+    '/paradigmas/master/algoritmos_basicos_3d/renderpark/rpkCpp/cpp/testsuite/ApplicationCases/RenderparkApplication/src/'
+  ];
   private readonly graphRenderer = new Html5CanvasGraphRenderer();
   private readonly groupRelationshipQuery = new GroupRelationshipQuery();
   private readonly invalidRelationshipDetector = new InvalidRelationshipDetector();
@@ -71,6 +77,8 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   private readonly graphSelectionModel = new GraphModel();
   private currentSvgFilename = 'structure.svg';
   private lastGraphGenerator: GraphModelGenerator = 'CACHE_LOADER';
+  private lastInputFolders: string[] = [];
+  private activeGroupsDefinitionFolder = this.defaultGroupsDefinitionFolder;
   private cachedStructureGroupNames: string[] = [];
   private readonly keyboardInteractionTechniques = new KeyboardInteractionTechniques(this.graphSelectionModel);
   private readonly drawingAreaNavigationInteractionTechnique = new DrawingAreaNavigationInteractionTechnique(this.graphRenderer);
@@ -145,11 +153,15 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   }
 
   public createGraphFromCache(): void {
-    this.updateGraphModel('CACHE_LOADER');
+    this.updateGraphModel('CACHE_LOADER', this.defaultGroupsDefinitionFolder, []);
   }
 
   public analyzeDebianSystem(): void {
-    this.updateGraphModel('DEBIAN_PACKAGE_GENERATOR');
+    this.updateGraphModel('DEBIAN_PACKAGE_GENERATOR', this.defaultGroupsDefinitionFolder, []);
+  }
+
+  public analyzeRenderparkCppSources(): void {
+    this.updateGraphModel('CPP_SOURCES', this.renderparkGroupsDefinitionFolder, this.renderparkCppInputFolders);
   }
 
   public toggleSidePanel(): void {
@@ -232,17 +244,20 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     return this.i18nService.get(id, this.selectedLanguage());
   }
 
-  private updateGraphModel(generator: GraphModelGenerator): void {
+  private updateGraphModel(generator: GraphModelGenerator, groupsDefinitionFolder: string, inputFolders: string[]): void {
     if (this.isLoading) {
       return;
     }
     this.lastGraphGenerator = generator;
+    this.lastInputFolders = [...inputFolders];
+    this.activeGroupsDefinitionFolder = groupsDefinitionFolder;
     this.isLoading = true;
     this.errorMessage = '';
 
     const payload: UpdateGraphModelRequest = {
       generator,
-      groupsDefinitionFolder: this.groupsDefinitionFolder
+      groupsDefinitionFolder,
+      inputFolders
     };
 
     this.httpClient.post<UpdateGraphModelResponse>(this.endpointUrl, payload).subscribe({
@@ -336,7 +351,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     this.errorMessage = '';
 
     const movePayload: MoveNodeRequest = {
-      groupFolder: this.groupsDefinitionFolder,
+      groupFolder: this.activeGroupsDefinitionFolder,
       originGroup,
       originNode,
       destinationGroup
@@ -354,7 +369,8 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   private refreshGraphModelAndReloadCurrentSvg(): void {
     const payload: UpdateGraphModelRequest = {
       generator: this.lastGraphGenerator,
-      groupsDefinitionFolder: this.groupsDefinitionFolder
+      groupsDefinitionFolder: this.activeGroupsDefinitionFolder,
+      inputFolders: this.lastInputFolders
     };
     const svgToReload = this.currentSvgFilename;
 
@@ -411,7 +427,8 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
 
     const payload: UpdateGraphModelRequest = {
       generator: this.lastGraphGenerator,
-      groupsDefinitionFolder: this.groupsDefinitionFolder
+      groupsDefinitionFolder: this.activeGroupsDefinitionFolder,
+      inputFolders: this.lastInputFolders
     };
 
     this.httpClient.post<EnrichedEdgesResponse>(`${this.backendBaseUrl}/v1/enrichedEdges`, payload).subscribe({
@@ -610,7 +627,8 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
 
     const payload: UpdateGraphModelRequest = {
       generator: this.lastGraphGenerator,
-      groupsDefinitionFolder: this.groupsDefinitionFolder
+      groupsDefinitionFolder: this.activeGroupsDefinitionFolder,
+      inputFolders: this.lastInputFolders
     };
     this.httpClient.post<EnrichedEdgesResponse>(`${this.backendBaseUrl}/v1/enrichedEdges`, payload).subscribe({
       next: (response) => {

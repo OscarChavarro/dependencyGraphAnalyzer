@@ -37,6 +37,10 @@
         {{ t(i18nKeys.shell.ANALYZE_DEBIAN_SYSTEM) }}
       </button>
 
+      <button class="action-button" type="button" (click)="analyzeRenderparkCppSources()" [disabled]="isLoading">
+        {{ t(i18nKeys.shell.ANALYZE_CPP_SOURCES_RENDERPARK) }}
+      </button>
+
       <button class="action-button" type="button" (click)="backToStructure()" *ngIf="!isInStructureMode()">
         {{ t(i18nKeys.shell.BACK_TO_STRUCTURE) }}
       </button>

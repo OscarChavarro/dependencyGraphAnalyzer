@@ -3,6 +3,7 @@ package backend.infrastructure.http.controller;
 import backend.application.port.in.UpdateGraphModelUseCase;
 import backend.application.port.in.BuildEnrichedEdgesUseCase;
 import backend.application.port.in.MoveNodeUseCase;
+import backend.domain.model.GraphModelGenerator;
 import backend.infrastructure.http.dto.UpdateGraphModelRequest;
 import backend.infrastructure.http.dto.EnrichedEdgesResponse;
 import backend.infrastructure.http.dto.MoveNodeRequest;
@@ -40,9 +41,17 @@ public class GraphModelController {
         if (request.groupsDefinitionFolder() == null || request.groupsDefinitionFolder().isBlank()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "groupsDefinitionFolder is required");
         }
+        if (request.generator() == GraphModelGenerator.CPP_SOURCES) {
+            if (request.inputFolders() == null || request.inputFolders().length == 0) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "inputFolders is required for CPP_SOURCES");
+            }
+        }
 
         return new UpdateGraphModelResponse(
-                updateGraphModelUseCase.execute(request.generator(), request.groupsDefinitionFolder()));
+                updateGraphModelUseCase.execute(
+                        request.generator(),
+                        request.groupsDefinitionFolder(),
+                        request.inputFolders()));
     }
 
     @PostMapping({"/enrichedEdges"})

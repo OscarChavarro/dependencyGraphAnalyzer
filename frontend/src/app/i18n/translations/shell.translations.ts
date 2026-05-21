@@ -21,6 +21,10 @@ export const SHELL_TRANSLATIONS = {
     en: 'Analyze Debian system',
     es: 'Analizar sistema Debian'
   },
+  ANALYZE_CPP_SOURCES_RENDERPARK: {
+    en: 'Analyze C/C++ sources (Renderpark)',
+    es: 'Analizar fuentes C/C++ (Renderpark)'
+  },
   BACK_TO_STRUCTURE: {
     en: 'Back to structure',
     es: 'Volver a structure'

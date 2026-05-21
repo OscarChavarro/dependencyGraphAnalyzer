@@ -1,0 +1,27 @@
+meta {
+  name: POST /v1/updateGraphModel (CPP_SOURCES Renderpark)
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/v1/updateGraphModel
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "generator": "CPP_SOURCES",
+    "groupsDefinitionFolder": "./etc/renderpark",
+    "inputFolders": [
+      "/paradigmas/master/algoritmos_basicos_3d/renderpark/rpkCpp/cpp/base/src/",
+      "/paradigmas/master/algoritmos_basicos_3d/renderpark/rpkCpp/cpp/opengl/src/",
+      "/paradigmas/master/algoritmos_basicos_3d/renderpark/rpkCpp/cpp/testsuite/ApplicationCases/RenderparkApplication/src/"
+    ]
+  }
+}

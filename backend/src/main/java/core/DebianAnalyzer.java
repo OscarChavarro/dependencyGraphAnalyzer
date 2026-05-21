@@ -13,6 +13,8 @@ import core.highlight.Markers;
 import graphbuilderplugins.api.GraphBuilderPluginId;
 import graphbuilderplugins.api.GraphBuilderPluginRegistry;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import java.io.File;
 
@@ -30,11 +32,12 @@ public class DebianAnalyzer {
         outputFile = "./output/general.dot";
     }
 
-    private void exec(String args[], OutputFormats outputFormat, GraphBuilderPluginId pluginId) {
+    private void exec(String args[], OutputFormats outputFormat, GraphBuilderPluginId pluginId, String[] inputFolders) {
         GroupSubgraphGrouper groupSubgraphGrouper = new GroupSubgraphGrouper(graph);
         TransitiveRelationReducer transitiveRelationReducer = new TransitiveRelationReducer(graph);
 
-        pluginRegistry.require(pluginId).build(new SoftwarePackageGraphBuildTarget(graph));
+        List<String> pluginInputFolders = inputFolders == null ? List.of() : Arrays.asList(inputFolders);
+        pluginRegistry.require(pluginId).build(new SoftwarePackageGraphBuildTarget(graph), pluginInputFolders);
 
         //----------------------------------------------------------------
         int i;
@@ -96,15 +99,19 @@ public class DebianAnalyzer {
     }
 
     public void run(String[] args, OutputFormats outputFormat) {
-        exec(args, outputFormat, GraphBuilderPluginId.DEBIAN_PACKAGE_GENERATOR);
+        exec(args, outputFormat, GraphBuilderPluginId.DEBIAN_PACKAGE_GENERATOR, null);
     }
 
     public void runFromCache(String[] args, OutputFormats outputFormat) {
-        exec(args, outputFormat, GraphBuilderPluginId.CACHE_LOADER);
+        exec(args, outputFormat, GraphBuilderPluginId.CACHE_LOADER, null);
     }
 
     public void runFromDebian(String[] args, OutputFormats outputFormat) {
-        exec(args, outputFormat, GraphBuilderPluginId.DEBIAN_PACKAGE_GENERATOR);
+        exec(args, outputFormat, GraphBuilderPluginId.DEBIAN_PACKAGE_GENERATOR, null);
+    }
+
+    public void runFromCppSources(String[] args, OutputFormats outputFormat, String[] inputFolders) {
+        exec(args, outputFormat, GraphBuilderPluginId.CPP_SOURCES, inputFolders);
     }
 
     public SoftwarePackageGraph getGraph() {

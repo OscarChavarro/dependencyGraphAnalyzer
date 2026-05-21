@@ -24,13 +24,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class UpdateGraphModelService implements UpdateGraphModelUseCase {
     @Override
-    public GraphModelSnapshot execute(GraphModelGenerator generator, String groupsDefinitionFolder) {
+    public GraphModelSnapshot execute(GraphModelGenerator generator, String groupsDefinitionFolder, String[] inputFolders) {
         String[] groupsDefinitionFiles = resolveGroupDefinitionFiles(groupsDefinitionFolder);
         DebianAnalyzer analyzer = new DebianAnalyzer();
 
         switch (generator) {
             case CACHE_LOADER -> analyzer.runFromCache(groupsDefinitionFiles, OutputFormats.SVG);
             case DEBIAN_PACKAGE_GENERATOR -> analyzer.runFromDebian(groupsDefinitionFiles, OutputFormats.SVG);
+            case CPP_SOURCES -> analyzer.runFromCppSources(groupsDefinitionFiles, OutputFormats.SVG, inputFolders);
         }
 
         SoftwarePackageGraph graph = analyzer.getGraph();
