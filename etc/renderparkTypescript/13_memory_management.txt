@@ -1,0 +1,5 @@
+[13_MEMORY_MANAGEMENT]
+
+vsdk/toolkit/common/memoryManagement/CppReAlloc.ts
+vsdk/toolkit/common/memoryManagement/MemoryPool.ts
+vsdk/toolkit/common/memoryManagement/package-info.ts

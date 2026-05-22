@@ -28,5 +28,12 @@
     "name": "RPK java port",
     "groupsDefinitionFolder": "etc/renderparkJava",
     "cacheFile": "etc/caches/cache.txt.rpkJava"
+  },
+  {
+    "id": "rpkTypescript",
+    "name": "RPK typescript port",
+    "groupsDefinitionFolder": "etc/renderparkTypescript",
+    "cacheFile": "etc/caches/cache.txt.rpkTypescript"
   }
 ]
+

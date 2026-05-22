@@ -1,0 +1,9 @@
+[25_NUMERICAL_ANALYSIS]
+
+vsdk/toolkit/numericalAnalysis/CubatureDegree.ts
+vsdk/toolkit/numericalAnalysis/CubatureRule.ts
+vsdk/toolkit/numericalAnalysis/MeshSurfaceVisitor.ts
+vsdk/toolkit/numericalAnalysis/package-info.ts
+vsdk/toolkit/numericalAnalysis/PatchVisitor.ts
+vsdk/toolkit/numericalAnalysis/QuadCubatureRule.ts
+vsdk/toolkit/numericalAnalysis/TriangleCubatureRule.ts

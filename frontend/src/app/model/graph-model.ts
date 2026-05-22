@@ -1,4 +1,5 @@
-export type GraphModelGenerator = 'CACHE_LOADER' | 'DEBIAN_PACKAGE_GENERATOR' | 'CPP_SOURCES' | 'JAVA_SOURCES';
+export type GraphModelGenerator =
+  'CACHE_LOADER' | 'DEBIAN_PACKAGE_GENERATOR' | 'CPP_SOURCES' | 'JAVA_SOURCES' | 'TYPESCRIPT_SOURCES';
 
 export interface UpdateGraphModelRequest {
   generator: GraphModelGenerator;
@@ -68,6 +69,13 @@ export interface JavaProject {
   groupsDefinitionFolder: string;
   inputFolders: string[];
   classpath: string[];
+}
+
+export interface TypeScriptProject {
+  id: string;
+  name: string;
+  groupsDefinitionFolder: string;
+  inputFolders: string[];
 }
 
 export interface CachedProject {

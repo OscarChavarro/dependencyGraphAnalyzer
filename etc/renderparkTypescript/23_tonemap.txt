@@ -1,0 +1,12 @@
+[23_TONEMAP]
+
+vsdk/toolkit/tonemap/FerwerdaToneMap.ts
+vsdk/toolkit/tonemap/IdentityToneMap.ts
+vsdk/toolkit/tonemap/LightnessToneMap.ts
+vsdk/toolkit/tonemap/package-info.ts
+vsdk/toolkit/tonemap/RevisedTumblinRushmeierToneMap.ts
+vsdk/toolkit/tonemap/ToneMap.ts
+vsdk/toolkit/tonemap/ToneMapAdaptationMethod.ts
+vsdk/toolkit/tonemap/ToneMappingContext.ts
+vsdk/toolkit/tonemap/TumblinRushmeierToneMap.ts
+vsdk/toolkit/tonemap/WardToneMap.ts

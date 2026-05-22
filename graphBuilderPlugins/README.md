@@ -11,13 +11,14 @@ Package `graphbuilderplugins.api`:
 - `GraphBuilderPluginId`: supported identifiers.
 - `GraphBuilderPluginRegistry`: default registry used by the backend.
 
-The registry includes four builders:
+The registry includes five builders:
 
 ```java
 CACHE_LOADER
 DEBIAN_PACKAGE_GENERATOR
 CPP_SOURCES
 JAVA_SOURCES
+TYPESCRIPT_SOURCES
 ```
 
 ## Implementations
@@ -73,6 +74,22 @@ Builds a graph from Java sources:
 
 The pipeline is split into file discovery, compilation task creation, AST parsing, semantic analysis, and dependency scanning.
 
+### TypeScriptSourcesGraphBuilderPlugin
+
+Builds a graph from TypeScript source folders:
+
+- Requires non-empty `inputFolders`.
+- Uses a Node-based analyzer script with the TypeScript compiler API (AST + module resolver), not regex text parsing.
+- Creates nodes by module/file path (MVP), normalized relative to the best matching input root.
+- Scans `ImportDeclaration`, `ExportDeclaration` with `moduleSpecifier`, and `ImportEqualsDeclaration`.
+- Resolves imports using the TypeScript resolver (`ts.resolveModuleName`) with `tsconfig.json` support when available.
+- Excludes by default: `node_modules`, `dist`, `build`, `.git`, and `.d.ts`.
+- Supports `.ts`, `.tsx`, `.mts`, `.cts`.
+- For unresolved non-local imports, creates external package nodes (for example `react`).
+- Writes `cache.txt`.
+
+The current scope is module-level dependency mapping for an MVP. Fine-grained symbol/type dependency analysis with `TypeChecker` is intentionally left for a later phase.
+
 ## Internal Structure
 
 - `impl/`: cache, Debian, and C/C++ builders.
@@ -101,9 +118,14 @@ includeBuild('../graphBuilderPlugins')
 From `graphBuilderPlugins/`:
 
 ```bash
+./gradlew npmInstallTypeScriptAnalyzerDeps
 ./gradlew build
 ./gradlew test
 ```
+
+`npmInstallTypeScriptAnalyzerDeps` instala `typescript` para el analizador ubicado en
+`src/main/resources/typescript-analyzer/`. El build verifica esta dependencia y falla con
+mensaje claro si falta.
 
 From the repository root, `gradle build` compiles the backend and, through the composite dependency, this module.
 

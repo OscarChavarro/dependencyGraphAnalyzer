@@ -1,0 +1,16 @@
+[33_IO_BIN]
+
+vsdk/toolkit/io/bin/package-info.ts
+vsdk/toolkit/io/bin/reader/BinaryModelDeserializer.ts
+vsdk/toolkit/io/bin/reader/BinaryModelGeometryRecordData.ts
+vsdk/toolkit/io/bin/reader/BinaryModelIndexListRef.ts
+vsdk/toolkit/io/bin/reader/BinaryModelPatchRecordData.ts
+vsdk/toolkit/io/bin/reader/BinaryModelReadCleanup.ts
+vsdk/toolkit/io/bin/reader/BinaryModelReadPrimitives.ts
+vsdk/toolkit/io/bin/reader/BinaryModelSnapshotRecordData.ts
+vsdk/toolkit/io/bin/reader/BinaryModelVertexRecordData.ts
+vsdk/toolkit/io/bin/reader/package-info.ts
+vsdk/toolkit/io/bin/reader/ScopedArrayBuffer.ts
+vsdk/toolkit/io/bin/writer/BinaryModelSerializationGraph.ts
+vsdk/toolkit/io/bin/writer/BinaryModelSerializer.ts
+vsdk/toolkit/io/bin/writer/package-info.ts

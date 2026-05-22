@@ -1,0 +1,13 @@
+{
+  "name": "vsdk-typescript-analyzer",
+  "version": "0.1.0",
+  "private": true,
+  "description": "TypeScript dependency analyzer script used by graphBuilderPlugins",
+  "license": "UNLICENSED",
+  "scripts": {
+    "build": "node -e \"require('typescript'); console.log('TypeScript analyzer build OK')\""
+  },
+  "dependencies": {
+    "typescript": "^5.9.3"
+  }
+}

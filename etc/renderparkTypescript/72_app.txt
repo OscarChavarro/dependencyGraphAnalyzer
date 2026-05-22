@@ -1,0 +1,10 @@
+[72_APP]
+
+vsdk/toolkit/app/Adaptation.ts
+vsdk/toolkit/app/Batch.ts
+vsdk/toolkit/app/LuminanceArea.ts
+vsdk/toolkit/app/Main.ts
+vsdk/toolkit/app/Radiance.ts
+vsdk/toolkit/app/Raytrace.ts
+vsdk/toolkit/app/RpkApplication.ts
+vsdk/toolkit/app/SceneBuilder.ts

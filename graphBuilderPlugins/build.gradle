@@ -26,3 +26,45 @@ dependencies {
 tasks.named('test', Test) {
     useJUnitPlatform()
 }
+
+def typeScriptAnalyzerDir = file('src/main/resources/typescript-analyzer')
+def typeScriptModuleDir = file('src/main/resources/typescript-analyzer/node_modules/typescript')
+
+tasks.register('npmInstallTypeScriptAnalyzerDeps', Exec) {
+    group = 'build setup'
+    description = 'Instala dependencias Node del analizador TypeScript (typescript).'
+    workingDir = typeScriptAnalyzerDir
+    commandLine 'npm', 'install'
+}
+
+tasks.register('verifyTypeScriptAnalyzerDependencies') {
+    group = 'verification'
+    description = 'Verifica que el analizador TypeScript tenga instalado node_modules/typescript.'
+    doLast {
+        if (!typeScriptAnalyzerDir.exists()) {
+            throw new GradleException(
+                    "TypeScript analyzer folder not found: ${typeScriptAnalyzerDir}.")
+        }
+        if (!new File(typeScriptAnalyzerDir, 'package.json').isFile()) {
+            throw new GradleException(
+                    "Missing ${typeScriptAnalyzerDir}/package.json. Run setup for TypeScript analyzer.")
+        }
+        if (!typeScriptModuleDir.isDirectory()) {
+            throw new GradleException(
+                    "Missing Node dependency 'typescript' for TypeScript analyzer. " +
+                            "Run: gradle :graphBuilderPlugins:npmInstallTypeScriptAnalyzerDeps")
+        }
+    }
+}
+
+tasks.named('test') {
+    dependsOn(tasks.named('verifyTypeScriptAnalyzerDependencies'))
+}
+
+tasks.named('build') {
+    dependsOn(tasks.named('verifyTypeScriptAnalyzerDependencies'))
+}
+
+tasks.named('processResources') {
+    dependsOn(tasks.named('verifyTypeScriptAnalyzerDependencies'))
+}

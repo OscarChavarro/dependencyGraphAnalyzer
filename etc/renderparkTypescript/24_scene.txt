@@ -1,0 +1,15 @@
+[24_SCENE]
+
+vsdk/toolkit/scene/Background.ts
+vsdk/toolkit/scene/Camera.ts
+vsdk/toolkit/scene/ConstantColorBackground.ts
+vsdk/toolkit/scene/package-info.ts
+vsdk/toolkit/scene/PatchClusterOctreeNode.ts
+vsdk/toolkit/scene/Plane.ts
+vsdk/toolkit/scene/Polygon.ts
+vsdk/toolkit/scene/RadianceMethod.ts
+vsdk/toolkit/scene/RadianceMethodAlgorithm.ts
+vsdk/toolkit/scene/Scene.ts
+vsdk/toolkit/scene/VoxelData.ts
+vsdk/toolkit/scene/VoxelDataFlags.ts
+vsdk/toolkit/scene/VoxelGrid.ts

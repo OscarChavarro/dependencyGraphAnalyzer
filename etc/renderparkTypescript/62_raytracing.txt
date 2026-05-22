@@ -1,0 +1,15 @@
+[62_RAYTRACING]
+
+vsdk/toolkit/raycasting/raytracing/BsdfSampler.ts
+vsdk/toolkit/raycasting/raytracing/EyeSampler.ts
+vsdk/toolkit/raycasting/raytracing/NextEventSampler.ts
+vsdk/toolkit/raycasting/raytracing/package-info.ts
+vsdk/toolkit/raycasting/raytracing/PixelSampler.ts
+vsdk/toolkit/raycasting/raytracing/SampleConnectionFlags.ts
+vsdk/toolkit/raycasting/raytracing/Sampler.ts
+vsdk/toolkit/raycasting/raytracing/SamplerConfig.ts
+vsdk/toolkit/raycasting/raytracing/SCREEN_ITERATE_CALLBACK.ts
+vsdk/toolkit/raycasting/raytracing/ScreenIterate.ts
+vsdk/toolkit/raycasting/raytracing/ScreenIterateState.ts
+vsdk/toolkit/raycasting/raytracing/SpecularSampler.ts
+vsdk/toolkit/raycasting/raytracing/SurfaceSampler.ts

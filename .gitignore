@@ -12,3 +12,4 @@ AGENTS.md
 secrets.json
 backend/secrets.json
 etc/cppProjects/projects.json
+graphBuilderPlugins/src/main/resources/typescript-analyzer/node_modules/

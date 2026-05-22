@@ -1,0 +1,13 @@
+[41_SGL]
+
+vsdk/toolkit/render/sgl/package-info.ts
+vsdk/toolkit/render/sgl/Poly.ts
+vsdk/toolkit/render/sgl/Polygon.ts
+vsdk/toolkit/render/sgl/PolygonBox.ts
+vsdk/toolkit/render/sgl/PolygonClipResult.ts
+vsdk/toolkit/render/sgl/PolygonClipResultInfo.ts
+vsdk/toolkit/render/sgl/PolygonVertex.ts
+vsdk/toolkit/render/sgl/SglConstants.ts
+vsdk/toolkit/render/sgl/SglContext.ts
+vsdk/toolkit/render/sgl/SglPixelContent.ts
+vsdk/toolkit/render/sgl/Window.ts

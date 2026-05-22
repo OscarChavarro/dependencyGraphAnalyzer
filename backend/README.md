@@ -31,12 +31,14 @@ Java 17/Spring Boot service exposing the graph generation, query, and editing AP
 | --- | --- | --- |
 | `POST` | `/v1/updateGraph` | Generate a graph snapshot. Alias: `/v1/updateGraphModel`. |
 | `POST` | `/v1/updateGraphModel/javaSources` | Generate a snapshot with `JAVA_SOURCES`. |
+| `POST` | `/v1/updateGraphModel/typescriptSources` | Generate a snapshot with `TYPESCRIPT_SOURCES`. |
 | `POST` | `/v1/enrichedEdges` | Compute group.package edges from cache and group definitions. |
 | `POST` | `/v1/groupRelations` | Search relations between two groups in `output/cleanRelationsGraph.txt`. |
 | `POST` | `/v1/moveNode` | Move one or more nodes between existing group files. |
 | `GET` | `/v1/cachedProjects` | Read `etc/cachedProjects/projects.json`. |
 | `GET` | `/v1/cppProjects` | Read `etc/cppProjects/projects.json`. |
 | `GET` | `/v1/javaProjects` | Read `etc/javaProjects/projects.json` and optionally resolve classpath with Gradle. |
+| `GET` | `/v1/typescriptProjects` | Read `etc/typescriptProjects/projects.json`. |
 | `GET` | `/output/svg/{filename}` | Serve a generated `.svg`; rejects paths and non-SVG filenames. |
 
 ## Main Payloads
@@ -52,7 +54,7 @@ Java 17/Spring Boot service exposing the graph generation, query, and editing AP
 }
 ```
 
-`generator` accepts `CACHE_LOADER`, `DEBIAN_PACKAGE_GENERATOR`, `CPP_SOURCES`, and `JAVA_SOURCES`. `inputFolders` is required for `CPP_SOURCES` and `JAVA_SOURCES`. For Java, `classpath` is optional but needed when the compiler cannot resolve external types from the source folders alone.
+`generator` accepts `CACHE_LOADER`, `DEBIAN_PACKAGE_GENERATOR`, `CPP_SOURCES`, `JAVA_SOURCES`, and `TYPESCRIPT_SOURCES`. `inputFolders` is required for `CPP_SOURCES`, `JAVA_SOURCES`, and `TYPESCRIPT_SOURCES`. For Java, `classpath` is optional but needed when the compiler cannot resolve external types from the source folders alone.
 
 `POST /v1/moveNode`:
 

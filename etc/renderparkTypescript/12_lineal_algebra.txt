@@ -1,0 +1,15 @@
+[12_LINEAL_ALGEBRA]
+vsdk/toolkit/common/linealAlgebra/CoordinateAxis.ts
+vsdk/toolkit/common/linealAlgebra/CoordinateSystem.ts
+vsdk/toolkit/common/linealAlgebra/Jacobian.ts
+vsdk/toolkit/common/linealAlgebra/Matrix2x2.ts
+vsdk/toolkit/common/linealAlgebra/Matrix4x4.ts
+vsdk/toolkit/common/linealAlgebra/Matrix4x4d.ts
+vsdk/toolkit/common/linealAlgebra/Numeric.ts
+vsdk/toolkit/common/linealAlgebra/package-info.ts
+vsdk/toolkit/common/linealAlgebra/Ray.ts
+vsdk/toolkit/common/linealAlgebra/Vector2D.ts
+vsdk/toolkit/common/linealAlgebra/Vector2Dd.ts
+vsdk/toolkit/common/linealAlgebra/Vector3D.ts
+vsdk/toolkit/common/linealAlgebra/Vector3Dd.ts
+vsdk/toolkit/common/linealAlgebra/Vector4D.ts

@@ -41,6 +41,14 @@ export const SHELL_TRANSLATIONS = {
     en: 'Analyze Java sources',
     es: 'Analizar fuentes Java'
   },
+  TYPESCRIPT_PROJECT_SELECTOR_LABEL: {
+    en: 'TypeScript project',
+    es: 'Proyecto TypeScript'
+  },
+  ANALYZE_TYPESCRIPT_SOURCES: {
+    en: 'Analyze TypeScript sources',
+    es: 'Analizar fuentes TypeScript'
+  },
   CPP_PROJECT_REQUIRED: {
     en: 'You must select a C/C++ project.',
     es: 'Debes seleccionar un proyecto C/C++.'
@@ -48,6 +56,10 @@ export const SHELL_TRANSLATIONS = {
   JAVA_PROJECT_REQUIRED: {
     en: 'You must select a Java project.',
     es: 'Debes seleccionar un proyecto Java.'
+  },
+  TYPESCRIPT_PROJECT_REQUIRED: {
+    en: 'You must select a TypeScript project.',
+    es: 'Debes seleccionar un proyecto TypeScript.'
   },
   BACK_TO_STRUCTURE: {
     en: 'Back to structure',

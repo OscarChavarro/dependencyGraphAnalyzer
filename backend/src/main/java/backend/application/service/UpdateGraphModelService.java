@@ -41,6 +41,7 @@ public class UpdateGraphModelService implements UpdateGraphModelUseCase {
             case DEBIAN_PACKAGE_GENERATOR -> analyzer.runFromDebian(groupsDefinitionFiles, OutputFormats.SVG);
             case CPP_SOURCES -> analyzer.runFromCppSources(groupsDefinitionFiles, OutputFormats.SVG, inputFolders);
             case JAVA_SOURCES -> analyzer.runFromJavaSources(groupsDefinitionFiles, OutputFormats.SVG, inputFolders, classpath);
+            case TYPESCRIPT_SOURCES -> analyzer.runFromTypeScriptSources(groupsDefinitionFiles, OutputFormats.SVG, inputFolders);
         }
 
         SoftwarePackageGraph graph = analyzer.getGraph();

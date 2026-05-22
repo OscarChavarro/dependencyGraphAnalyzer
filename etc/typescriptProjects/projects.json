@@ -1,0 +1,11 @@
+[
+  {
+    "id": "renderpark-typescript",
+    "name": "Renderpark TypeScript",
+    "groupsDefinitionFolder": "etc/renderparkTypescript",
+    "inputFolders": [
+      "/paradigmas/master/algoritmos_basicos_3d/renderpark/rpkCpp/typescript/base/src/main/",
+      "/paradigmas/master/algoritmos_basicos_3d/renderpark/rpkCpp/typescript/testsuite/ApplicationCases/RenderparkApplication/src/main"
+    ]
+  }
+]

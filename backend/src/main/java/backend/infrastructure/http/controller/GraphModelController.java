@@ -7,9 +7,11 @@ import backend.domain.model.GraphModelGenerator;
 import backend.infrastructure.http.dto.CppProjectResponse;
 import backend.infrastructure.http.dto.CachedProjectResponse;
 import backend.infrastructure.http.dto.JavaProjectResponse;
+import backend.infrastructure.http.dto.TypeScriptProjectResponse;
 import backend.infrastructure.http.dto.UpdateGraphModelRequest;
 import backend.infrastructure.http.dto.EnrichedEdgesResponse;
 import backend.infrastructure.http.dto.JavaSourcesGraphRequest;
+import backend.infrastructure.http.dto.TypeScriptSourcesGraphRequest;
 import backend.infrastructure.http.dto.MoveNodeRequest;
 import backend.infrastructure.http.dto.MoveNodeResponse;
 import backend.infrastructure.http.dto.GroupRelationsRequest;
@@ -66,7 +68,8 @@ public class GraphModelController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "groupsDefinitionFolder is required");
         }
         if (request.generator() == GraphModelGenerator.CPP_SOURCES
-                || request.generator() == GraphModelGenerator.JAVA_SOURCES) {
+                || request.generator() == GraphModelGenerator.JAVA_SOURCES
+                || request.generator() == GraphModelGenerator.TYPESCRIPT_SOURCES) {
             if (request.inputFolders() == null || request.inputFolders().length == 0) {
                 throw new ResponseStatusException(
                         HttpStatus.BAD_REQUEST,
@@ -116,6 +119,27 @@ public class GraphModelController {
                         request.groupsDefinitionFolder(),
                         request.inputFolders(),
                         request.classpath()));
+    }
+
+    @PostMapping({"/updateGraphModel/typescriptSources"})
+    public UpdateGraphModelResponse updateGraphModelFromTypeScriptSources(
+            @RequestBody TypeScriptSourcesGraphRequest request) {
+        if (request == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "request is required");
+        }
+        if (request.groupsDefinitionFolder() == null || request.groupsDefinitionFolder().isBlank()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "groupsDefinitionFolder is required");
+        }
+        if (request.inputFolders() == null || request.inputFolders().length == 0) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "inputFolders is required");
+        }
+
+        return new UpdateGraphModelResponse(
+                updateGraphModelUseCase.execute(
+                        GraphModelGenerator.TYPESCRIPT_SOURCES,
+                        request.groupsDefinitionFolder(),
+                        request.inputFolders(),
+                        null));
     }
 
 
@@ -235,6 +259,27 @@ public class GraphModelController {
         }
     }
 
+    @GetMapping({"/typescriptProjects"})
+    public List<TypeScriptProjectResponse> typeScriptProjects() {
+        Path projectsPath = resolveTypeScriptProjectsPath();
+        if (projectsPath == null) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND,
+                    "typescript projects config not found: etc/typescriptProjects/projects.json");
+        }
+        try {
+            return objectMapper.readValue(
+                    projectsPath.toFile(),
+                    new TypeReference<List<TypeScriptProjectResponse>>() {
+                    });
+        } catch (IOException e) {
+            throw new ResponseStatusException(
+                    HttpStatus.INTERNAL_SERVER_ERROR,
+                    "failed reading typescript projects config",
+                    e);
+        }
+    }
+
     private Path resolveCppProjectsPath() {
         return Stream.of(
                         Path.of("etc", "cppProjects", "projects.json"),
@@ -257,6 +302,15 @@ public class GraphModelController {
         return Stream.of(
                         Path.of("etc", "javaProjects", "projects.json"),
                         Path.of("..", "etc", "javaProjects", "projects.json"))
+                .filter(Files::isRegularFile)
+                .findFirst()
+                .orElse(null);
+    }
+
+    private Path resolveTypeScriptProjectsPath() {
+        return Stream.of(
+                        Path.of("etc", "typescriptProjects", "projects.json"),
+                        Path.of("..", "etc", "typescriptProjects", "projects.json"))
                 .filter(Files::isRegularFile)
                 .findFirst()
                 .orElse(null);

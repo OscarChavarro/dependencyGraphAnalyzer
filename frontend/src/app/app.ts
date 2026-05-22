@@ -15,6 +15,7 @@ import {
   CachedProject,
   CppProject,
   JavaProject,
+  TypeScriptProject,
   UpdateGraphModelRequest,
   UpdateGraphModelResponse
 } from './model/graph-model';
@@ -75,6 +76,8 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   public selectedCppProjectId = '';
   public javaProjects: JavaProject[] = [];
   public selectedJavaProjectId = '';
+  public typeScriptProjects: TypeScriptProject[] = [];
+  public selectedTypeScriptProjectId = '';
 
   private readonly endpointUrl: string;
   private readonly backendBaseUrl: string;
@@ -138,6 +141,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     this.loadCachedProjects();
     this.loadCppProjects();
     this.loadJavaProjects();
+    this.loadTypeScriptProjects();
   }
 
   public ngAfterViewInit(): void {
@@ -245,6 +249,20 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
       selectedProject.inputFolders,
       selectedProject.classpath ?? []
     );
+  }
+
+  public onTypeScriptProjectSelectionChange(event: Event): void {
+    const target = event.target as HTMLSelectElement | null;
+    this.selectedTypeScriptProjectId = target?.value ?? '';
+  }
+
+  public analyzeTypeScriptSources(): void {
+    const selectedProject = this.typeScriptProjects.find((project) => project.id === this.selectedTypeScriptProjectId);
+    if (!selectedProject) {
+      this.errorMessage = this.t(this.i18nKeys.shell.TYPESCRIPT_PROJECT_REQUIRED);
+      return;
+    }
+    this.updateGraphModel('TYPESCRIPT_SOURCES', selectedProject.groupsDefinitionFolder, selectedProject.inputFolders);
   }
 
   public toggleSidePanel(): void {
@@ -401,6 +419,19 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
       error: () => {
         this.javaProjects = [];
         this.selectedJavaProjectId = '';
+      }
+    });
+  }
+
+  private loadTypeScriptProjects(): void {
+    this.httpClient.get<TypeScriptProject[]>(`${this.backendBaseUrl}/v1/typescriptProjects`).subscribe({
+      next: (projects) => {
+        this.typeScriptProjects = Array.isArray(projects) ? projects : [];
+        this.selectedTypeScriptProjectId = this.typeScriptProjects[0]?.id ?? '';
+      },
+      error: () => {
+        this.typeScriptProjects = [];
+        this.selectedTypeScriptProjectId = '';
       }
     });
   }

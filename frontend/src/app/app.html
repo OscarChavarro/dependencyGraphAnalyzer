@@ -119,6 +119,29 @@
             </button>
           </div>
 
+          <label class="project-selector-label">{{ t(i18nKeys.shell.TYPESCRIPT_PROJECT_SELECTOR_LABEL) }}</label>
+          <div class="project-action-row">
+            <select
+              class="project-selector project-selector-compact"
+              [value]="selectedTypeScriptProjectId"
+              (change)="onTypeScriptProjectSelectionChange($event)"
+              [disabled]="isLoading || typeScriptProjects.length === 0"
+            >
+              <option *ngFor="let project of typeScriptProjects" [value]="project.id">{{ project.name }}</option>
+            </select>
+
+            <button
+              class="action-button action-button-icon"
+              type="button"
+              (click)="analyzeTypeScriptSources()"
+              [disabled]="isLoading || typeScriptProjects.length === 0 || !selectedTypeScriptProjectId"
+              [attr.aria-label]="t(i18nKeys.shell.ANALYZE_TYPESCRIPT_SOURCES)"
+              title="Analizar fuentes TypeScript"
+            >
+              ↑
+            </button>
+          </div>
+
           <p class="status-line" *ngIf="isLoading">{{ t(i18nKeys.shell.PROCESSING) }}</p>
           <p class="status-line status-line-error" *ngIf="errorMessage">{{ errorMessage }}</p>
           <p class="status-line" *ngIf="graphModel">

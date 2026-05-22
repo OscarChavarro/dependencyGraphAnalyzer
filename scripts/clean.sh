@@ -26,6 +26,10 @@ remove_if_exists "frontend/dist"
 remove_if_exists "frontend/.angular"
 remove_if_exists "frontend/coverage"
 
+# TypeScript analyzer artifacts
+remove_if_exists "graphBuilderPlugins/src/main/resources/typescript-analyzer/node_modules"
+remove_if_exists "graphBuilderPlugins/src/main/resources/typescript-analyzer/dist"
+
 # Generated runtime/output artifacts
 remove_if_exists "output"
 remove_if_exists "e"

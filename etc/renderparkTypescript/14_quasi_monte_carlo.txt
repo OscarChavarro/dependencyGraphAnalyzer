@@ -1,0 +1,12 @@
+[14_QUASI_MONTE_CARLO]
+
+vsdk/toolkit/numericalAnalysis/quasiMonteCarlo/Faure.ts
+vsdk/toolkit/numericalAnalysis/quasiMonteCarlo/FaureSequenceLimits.ts
+vsdk/toolkit/numericalAnalysis/quasiMonteCarlo/Halton.ts
+vsdk/toolkit/numericalAnalysis/quasiMonteCarlo/Niederreiter.ts
+vsdk/toolkit/numericalAnalysis/quasiMonteCarlo/Niederreiter31.ts
+vsdk/toolkit/numericalAnalysis/quasiMonteCarlo/Niederreiter63.ts
+vsdk/toolkit/numericalAnalysis/quasiMonteCarlo/NiederreiterCore.ts
+vsdk/toolkit/numericalAnalysis/quasiMonteCarlo/package-info.ts
+vsdk/toolkit/numericalAnalysis/quasiMonteCarlo/ScrambledHalton.ts
+vsdk/toolkit/numericalAnalysis/quasiMonteCarlo/Sobol.ts

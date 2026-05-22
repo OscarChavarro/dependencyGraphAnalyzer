@@ -1,6 +1,6 @@
 # VSDK Dependency Graph Analyzer
 
-Monorepo for generating, grouping, and exploring dependency graphs. The project started as a Debian/Ubuntu package analyzer and now also builds graphs from cache files, C/C++ sources, and Java sources.
+Monorepo for generating, grouping, and exploring dependency graphs. The project started as a Debian/Ubuntu package analyzer and now also builds graphs from cache files, C/C++ sources, Java sources, and TypeScript sources.
 
 The main outputs are Graphviz artifacts (`.dot`, `.svg`, `.png`) plus a JSON graph model consumed by an Angular UI. The application lets users navigate from a structural overview into group-specific views, select nodes, inspect relations between groups, highlight transitive dependencies or clients, and move nodes between group definition files.
 
@@ -38,6 +38,7 @@ The root `settings.gradle` uses a Gradle composite build for `backend` and `grap
   - `etc/cachedProjects/projects.json`: cache projects exposed to the UI.
   - `etc/cppProjects/projects.json`: C/C++ projects exposed to the UI.
   - `etc/javaProjects/projects.json`: Java projects, with either fixed classpath entries or Gradle-based classpath resolution.
+  - `etc/typescriptProjects/projects.json`: TypeScript projects exposed to the UI.
   - `etc/highlightRules/`: highlighting rules used by the core engine.
 - `u` and `v`: symlinks to Ubuntu definition folders used by local defaults.
 - `cache.txt` and `cache_extra.txt*`: historical caches in the simple node/edge format.
@@ -80,10 +81,11 @@ The frontend reads `frontend/public/environment.json` at startup. If `backend.ur
 
 - `POST /v1/updateGraph` and `POST /v1/updateGraphModel`: generate or regenerate the graph model.
 - `POST /v1/updateGraphModel/javaSources`: shortcut for Java-source graph generation.
+- `POST /v1/updateGraphModel/typescriptSources`: shortcut for TypeScript-source graph generation.
 - `POST /v1/enrichedEdges`: compute enriched package-level edges from cache and group definitions.
 - `POST /v1/groupRelations`: return stored relations between two groups.
 - `POST /v1/moveNode`: move nodes between group files.
-- `GET /v1/cachedProjects`, `/v1/cppProjects`, `/v1/javaProjects`: project catalogs for the UI.
+- `GET /v1/cachedProjects`, `/v1/cppProjects`, `/v1/javaProjects`, `/v1/typescriptProjects`: project catalogs for the UI.
 - `GET /output/svg/{filename}`: serve generated SVGs from `output/svg`.
 
 ## Generators
@@ -92,6 +94,7 @@ The frontend reads `frontend/public/environment.json` at startup. If `backend.ur
 - `DEBIAN_PACKAGE_GENERATOR`: reads installed packages with `dpkg-query -l` and dependencies with `apt-cache depends`.
 - `CPP_SOURCES`: walks input folders, creates nodes for `.h` and `.cpp` files, and creates edges from `#include` directives.
 - `JAVA_SOURCES`: analyzes `.java` sources with the Java compiler API, resolving semantic dependencies with an optional classpath.
+- `TYPESCRIPT_SOURCES`: analyzes `.ts/.tsx/.mts/.cts` modules with the TypeScript compiler API, builds an MVP dependency graph by module/file from resolved imports/exports, and leaves symbol-level semantic analysis for a later phase.
 
 ## Data Formats
 
