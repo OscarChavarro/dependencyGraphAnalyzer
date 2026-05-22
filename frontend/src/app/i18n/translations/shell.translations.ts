@@ -21,9 +21,17 @@ export const SHELL_TRANSLATIONS = {
     en: 'Analyze Debian system',
     es: 'Analizar sistema Debian'
   },
-  ANALYZE_CPP_SOURCES_RENDERPARK: {
-    en: 'Analyze C/C++ sources (Renderpark)',
-    es: 'Analizar fuentes C/C++ (Renderpark)'
+  CPP_PROJECT_SELECTOR_LABEL: {
+    en: 'C/C++ project',
+    es: 'Proyecto C/C++'
+  },
+  ANALYZE_CPP_SOURCES: {
+    en: 'Analyze C/C++ sources',
+    es: 'Analizar fuentes C/C++'
+  },
+  CPP_PROJECT_REQUIRED: {
+    en: 'You must select a C/C++ project.',
+    es: 'Debes seleccionar un proyecto C/C++.'
   },
   BACK_TO_STRUCTURE: {
     en: 'Back to structure',

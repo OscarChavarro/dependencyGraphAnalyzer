@@ -11,3 +11,4 @@ cache.txt
 AGENTS.md
 secrets.json
 backend/secrets.json
+etc/cppProjects/projects.json

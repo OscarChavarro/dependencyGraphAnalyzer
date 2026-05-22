@@ -5,53 +5,80 @@
     </button>
 
     <div class="panel-content" *ngIf="!isPanelCollapsed">
-      <div class="panel-header-row">
-        <h1 class="panel-title">{{ t(i18nKeys.shell.GRAPH_GENERATOR_TITLE) }}</h1>
-        <div class="language-switch" [attr.aria-label]="t(i18nKeys.shell.LANGUAGE_SELECTOR_ARIA)">
-          <button
-            type="button"
-            class="language-flag-button"
-            [class.language-flag-button-active]="selectedLanguage() === 'es'"
-            (click)="setLanguage('es')"
-            aria-label="Spanish"
-          >
-            🇪🇸
+      <section class="generator-panel">
+        <button
+          class="generator-panel-bar"
+          type="button"
+          (click)="toggleGeneratorPanel()"
+          [attr.aria-expanded]="!isGeneratorPanelCollapsed"
+        >
+          <span class="generator-panel-arrow">{{ isGeneratorPanelCollapsed ? '▸' : '▾' }}</span>
+          <span class="generator-panel-title">{{ t(i18nKeys.shell.GRAPH_GENERATOR_TITLE) }}</span>
+        </button>
+
+        <div class="generator-panel-content" *ngIf="!isGeneratorPanelCollapsed">
+          <div class="panel-header-row">
+            <div class="language-switch" [attr.aria-label]="t(i18nKeys.shell.LANGUAGE_SELECTOR_ARIA)">
+              <button
+                type="button"
+                class="language-flag-button"
+                [class.language-flag-button-active]="selectedLanguage() === 'es'"
+                (click)="setLanguage('es')"
+                aria-label="Spanish"
+              >
+                🇪🇸
+              </button>
+              <button
+                type="button"
+                class="language-flag-button"
+                [class.language-flag-button-active]="selectedLanguage() === 'en'"
+                (click)="setLanguage('en')"
+                aria-label="English"
+              >
+                🇺🇸
+              </button>
+            </div>
+          </div>
+
+          <button class="action-button" type="button" (click)="createGraphFromCache()" [disabled]="isLoading">
+            {{ t(i18nKeys.shell.CREATE_GRAPH_FROM_CACHE) }}
           </button>
-          <button
-            type="button"
-            class="language-flag-button"
-            [class.language-flag-button-active]="selectedLanguage() === 'en'"
-            (click)="setLanguage('en')"
-            aria-label="English"
-          >
-            🇺🇸
+
+          <button class="action-button" type="button" (click)="analyzeDebianSystem()" [disabled]="isLoading">
+            {{ t(i18nKeys.shell.ANALYZE_DEBIAN_SYSTEM) }}
           </button>
+
+          <label class="project-selector-label">{{ t(i18nKeys.shell.CPP_PROJECT_SELECTOR_LABEL) }}</label>
+          <select
+            class="project-selector"
+            [value]="selectedCppProjectId"
+            (change)="onCppProjectSelectionChange($event)"
+            [disabled]="isLoading || cppProjects.length === 0"
+          >
+            <option *ngFor="let project of cppProjects" [value]="project.id">{{ project.name }}</option>
+          </select>
+
+          <button
+            class="action-button"
+            type="button"
+            (click)="analyzeCppSources()"
+            [disabled]="isLoading || cppProjects.length === 0 || !selectedCppProjectId"
+          >
+            {{ t(i18nKeys.shell.ANALYZE_CPP_SOURCES) }}
+          </button>
+
+          <button class="action-button" type="button" (click)="backToStructure()" *ngIf="!isInStructureMode()">
+            {{ t(i18nKeys.shell.BACK_TO_STRUCTURE) }}
+          </button>
+
+          <p class="status-line" *ngIf="isLoading">{{ t(i18nKeys.shell.PROCESSING) }}</p>
+          <p class="status-line status-line-error" *ngIf="errorMessage">{{ errorMessage }}</p>
+          <p class="status-line" *ngIf="graphModel">
+            {{ t(i18nKeys.shell.NODES) }}: {{ graphModel.nodes.length }} | {{ t(i18nKeys.shell.EDGES) }}:
+            {{ graphModel.edges.length }}
+          </p>
         </div>
-      </div>
-
-      <button class="action-button" type="button" (click)="createGraphFromCache()" [disabled]="isLoading">
-        {{ t(i18nKeys.shell.CREATE_GRAPH_FROM_CACHE) }}
-      </button>
-
-      <button class="action-button" type="button" (click)="analyzeDebianSystem()" [disabled]="isLoading">
-        {{ t(i18nKeys.shell.ANALYZE_DEBIAN_SYSTEM) }}
-      </button>
-
-      <button class="action-button" type="button" (click)="analyzeRenderparkCppSources()" [disabled]="isLoading">
-        {{ t(i18nKeys.shell.ANALYZE_CPP_SOURCES_RENDERPARK) }}
-      </button>
-
-      <button class="action-button" type="button" (click)="backToStructure()" *ngIf="!isInStructureMode()">
-        {{ t(i18nKeys.shell.BACK_TO_STRUCTURE) }}
-      </button>
-
-
-      <p class="status-line" *ngIf="isLoading">{{ t(i18nKeys.shell.PROCESSING) }}</p>
-      <p class="status-line status-line-error" *ngIf="errorMessage">{{ errorMessage }}</p>
-      <p class="status-line" *ngIf="graphModel">
-        {{ t(i18nKeys.shell.NODES) }}: {{ graphModel.nodes.length }} | {{ t(i18nKeys.shell.EDGES) }}:
-        {{ graphModel.edges.length }}
-      </p>
+      </section>
 
       <section class="node-browser-panel">
         <label class="node-browser-search" aria-label="Filtrar nodos del grupo">

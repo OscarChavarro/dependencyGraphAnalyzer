@@ -12,6 +12,7 @@ import {
   GroupRelationsResponse,
   MoveNodeRequest,
   MoveNodeResponse,
+  CppProject,
   UpdateGraphModelRequest,
   UpdateGraphModelResponse
 } from './model/graph-model';
@@ -58,6 +59,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   public isLoading = false;
   public errorMessage = '';
   public isPanelCollapsed = false;
+  public isGeneratorPanelCollapsed = false;
   public relationBoxVisible = false;
   public relationBoxText = '';
   public relationBoxLines: RelationLineViewModel[] = [];
@@ -65,16 +67,12 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   public readonly i18nKeys = I18N_KEYS;
   public nodeFilterPattern = '';
   public currentSvgNodeNames: string[] = [];
+  public cppProjects: CppProject[] = [];
+  public selectedCppProjectId = '';
 
   private readonly endpointUrl: string;
   private readonly backendBaseUrl: string;
   private readonly defaultGroupsDefinitionFolder = '../u/';
-  private readonly renderparkGroupsDefinitionFolder = './etc/renderpark';
-  private readonly renderparkCppInputFolders = [
-    '/paradigmas/master/algoritmos_basicos_3d/renderpark/rpkCpp/cpp/base/src/',
-    '/paradigmas/master/algoritmos_basicos_3d/renderpark/rpkCpp/cpp/opengl/src/',
-    '/paradigmas/master/algoritmos_basicos_3d/renderpark/rpkCpp/cpp/testsuite/ApplicationCases/RenderparkApplication/src/'
-  ];
   private readonly graphRenderer = new Html5CanvasGraphRenderer();
   private readonly groupRelationshipQuery = new GroupRelationshipQuery();
   private readonly invalidRelationshipDetector = new InvalidRelationshipDetector();
@@ -113,6 +111,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
 
   public ngOnInit(): void {
     this.restoreGraphModelFromSession();
+    this.loadCppProjects();
   }
 
   public ngAfterViewInit(): void {
@@ -173,12 +172,26 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     this.updateGraphModel('DEBIAN_PACKAGE_GENERATOR', this.defaultGroupsDefinitionFolder, []);
   }
 
-  public analyzeRenderparkCppSources(): void {
-    this.updateGraphModel('CPP_SOURCES', this.renderparkGroupsDefinitionFolder, this.renderparkCppInputFolders);
+  public onCppProjectSelectionChange(event: Event): void {
+    const target = event.target as HTMLSelectElement | null;
+    this.selectedCppProjectId = target?.value ?? '';
+  }
+
+  public analyzeCppSources(): void {
+    const selectedProject = this.cppProjects.find((project) => project.id === this.selectedCppProjectId);
+    if (!selectedProject) {
+      this.errorMessage = this.t(this.i18nKeys.shell.CPP_PROJECT_REQUIRED);
+      return;
+    }
+    this.updateGraphModel('CPP_SOURCES', selectedProject.groupsDefinitionFolder, selectedProject.inputFolders);
   }
 
   public toggleSidePanel(): void {
     this.isPanelCollapsed = !this.isPanelCollapsed;
+  }
+
+  public toggleGeneratorPanel(): void {
+    this.isGeneratorPanelCollapsed = !this.isGeneratorPanelCollapsed;
   }
 
   public isInStructureMode(): boolean {
@@ -290,6 +303,19 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
 
   public t(id: TranslationKey): string {
     return this.i18nService.get(id, this.selectedLanguage());
+  }
+
+  private loadCppProjects(): void {
+    this.httpClient.get<CppProject[]>(`${this.backendBaseUrl}/v1/cppProjects`).subscribe({
+      next: (projects) => {
+        this.cppProjects = Array.isArray(projects) ? projects : [];
+        this.selectedCppProjectId = this.cppProjects[0]?.id ?? '';
+      },
+      error: () => {
+        this.cppProjects = [];
+        this.selectedCppProjectId = '';
+      }
+    });
   }
 
   private updateGraphModel(generator: GraphModelGenerator, groupsDefinitionFolder: string, inputFolders: string[]): void {

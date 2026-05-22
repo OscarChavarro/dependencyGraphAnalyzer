@@ -54,6 +54,13 @@ export interface MoveNodeResponse {
   moved: boolean;
 }
 
+export interface CppProject {
+  id: string;
+  name: string;
+  groupsDefinitionFolder: string;
+  inputFolders: string[];
+}
+
 export class GraphModel {
   public selectedNodes: string[] = [];
 

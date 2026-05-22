@@ -4,6 +4,7 @@ import backend.application.port.in.UpdateGraphModelUseCase;
 import backend.application.port.in.BuildEnrichedEdgesUseCase;
 import backend.application.port.in.MoveNodeUseCase;
 import backend.domain.model.GraphModelGenerator;
+import backend.infrastructure.http.dto.CppProjectResponse;
 import backend.infrastructure.http.dto.UpdateGraphModelRequest;
 import backend.infrastructure.http.dto.EnrichedEdgesResponse;
 import backend.infrastructure.http.dto.MoveNodeRequest;
@@ -11,6 +12,8 @@ import backend.infrastructure.http.dto.MoveNodeResponse;
 import backend.infrastructure.http.dto.GroupRelationsRequest;
 import backend.infrastructure.http.dto.GroupRelationsResponse;
 import backend.infrastructure.http.dto.UpdateGraphModelResponse;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.validation.Valid;
 import java.util.Arrays;
 import java.io.IOException;
@@ -18,7 +21,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.LinkedHashSet;
+import java.util.stream.Stream;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,14 +36,17 @@ public class GraphModelController {
     private final UpdateGraphModelUseCase updateGraphModelUseCase;
     private final BuildEnrichedEdgesUseCase buildEnrichedEdgesUseCase;
     private final MoveNodeUseCase moveNodeUseCase;
+    private final ObjectMapper objectMapper;
 
     public GraphModelController(
             UpdateGraphModelUseCase updateGraphModelUseCase,
             BuildEnrichedEdgesUseCase buildEnrichedEdgesUseCase,
-            MoveNodeUseCase moveNodeUseCase) {
+            MoveNodeUseCase moveNodeUseCase,
+            ObjectMapper objectMapper) {
         this.updateGraphModelUseCase = updateGraphModelUseCase;
         this.buildEnrichedEdgesUseCase = buildEnrichedEdgesUseCase;
         this.moveNodeUseCase = moveNodeUseCase;
+        this.objectMapper = objectMapper;
     }
 
     @PostMapping({"/updateGraph", "/updateGraphModel"})
@@ -124,5 +132,35 @@ public class GraphModelController {
                 new LinkedHashSet<>(Arrays.asList(request.originNodes())),
                 request.destinationGroup());
         return new MoveNodeResponse(true, message);
+    }
+
+    @GetMapping({"/cppProjects"})
+    public List<CppProjectResponse> cppProjects() {
+        Path projectsPath = resolveCppProjectsPath();
+        if (projectsPath == null) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND,
+                    "cpp projects config not found: etc/cppProjects/projects.json");
+        }
+        try {
+            return objectMapper.readValue(
+                    projectsPath.toFile(),
+                    new TypeReference<List<CppProjectResponse>>() {
+                    });
+        } catch (IOException e) {
+            throw new ResponseStatusException(
+                    HttpStatus.INTERNAL_SERVER_ERROR,
+                    "failed reading cpp projects config",
+                    e);
+        }
+    }
+
+    private Path resolveCppProjectsPath() {
+        return Stream.of(
+                        Path.of("etc", "cppProjects", "projects.json"),
+                        Path.of("..", "etc", "cppProjects", "projects.json"))
+                .filter(Files::isRegularFile)
+                .findFirst()
+                .orElse(null);
     }
 }
