@@ -3,6 +3,7 @@ package graphbuilderplugins.api;
 import graphbuilderplugins.impl.CacheLoaderGraphBuilderPlugin;
 import graphbuilderplugins.impl.CppSourcesGraphBuilderPlugin;
 import graphbuilderplugins.impl.DebianPackageGraphBuilderPlugin;
+import graphbuilderplugins.javasources.JavaSourcesGraphBuilderPlugin;
 import java.util.EnumMap;
 import java.util.Map;
 
@@ -14,6 +15,7 @@ public class GraphBuilderPluginRegistry {
         register(new CacheLoaderGraphBuilderPlugin());
         register(new DebianPackageGraphBuilderPlugin());
         register(new CppSourcesGraphBuilderPlugin());
+        register(new JavaSourcesGraphBuilderPlugin());
     }
 
     public GraphBuilderPlugin require(GraphBuilderPluginId id) {

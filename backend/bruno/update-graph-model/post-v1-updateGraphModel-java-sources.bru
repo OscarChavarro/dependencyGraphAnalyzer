@@ -1,0 +1,25 @@
+meta {
+  name: POST /v1/updateGraphModel/javaSources
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{baseUrl}}/v1/updateGraphModel/javaSources
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "groupsDefinitionFolder": "./etc/renderpark",
+    "inputFolders": [
+      "/path/to/java/project/src/main/java",
+      "/path/to/java/project/src/test/java"
+    ]
+  }
+}

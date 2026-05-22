@@ -8,6 +8,7 @@ import backend.infrastructure.http.dto.CppProjectResponse;
 import backend.infrastructure.http.dto.CachedProjectResponse;
 import backend.infrastructure.http.dto.UpdateGraphModelRequest;
 import backend.infrastructure.http.dto.EnrichedEdgesResponse;
+import backend.infrastructure.http.dto.JavaSourcesGraphRequest;
 import backend.infrastructure.http.dto.MoveNodeRequest;
 import backend.infrastructure.http.dto.MoveNodeResponse;
 import backend.infrastructure.http.dto.GroupRelationsRequest;
@@ -58,9 +59,12 @@ public class GraphModelController {
         if (request.groupsDefinitionFolder() == null || request.groupsDefinitionFolder().isBlank()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "groupsDefinitionFolder is required");
         }
-        if (request.generator() == GraphModelGenerator.CPP_SOURCES) {
+        if (request.generator() == GraphModelGenerator.CPP_SOURCES
+                || request.generator() == GraphModelGenerator.JAVA_SOURCES) {
             if (request.inputFolders() == null || request.inputFolders().length == 0) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "inputFolders is required for CPP_SOURCES");
+                throw new ResponseStatusException(
+                        HttpStatus.BAD_REQUEST,
+                        "inputFolders is required for " + request.generator());
             }
         }
 
@@ -83,6 +87,25 @@ public class GraphModelController {
         return new EnrichedEdgesResponse(
                 buildEnrichedEdgesUseCase.execute(
                         request.generator(),
+                        request.groupsDefinitionFolder(),
+                        request.inputFolders()));
+    }
+
+    @PostMapping({"/updateGraphModel/javaSources"})
+    public UpdateGraphModelResponse updateGraphModelFromJavaSources(@RequestBody JavaSourcesGraphRequest request) {
+        if (request == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "request is required");
+        }
+        if (request.groupsDefinitionFolder() == null || request.groupsDefinitionFolder().isBlank()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "groupsDefinitionFolder is required");
+        }
+        if (request.inputFolders() == null || request.inputFolders().length == 0) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "inputFolders is required");
+        }
+
+        return new UpdateGraphModelResponse(
+                updateGraphModelUseCase.execute(
+                        GraphModelGenerator.JAVA_SOURCES,
                         request.groupsDefinitionFolder(),
                         request.inputFolders()));
     }

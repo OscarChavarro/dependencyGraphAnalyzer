@@ -125,6 +125,10 @@ public class DebianAnalyzer {
         exec(args, outputFormat, GraphBuilderPluginId.CPP_SOURCES, inputFolders);
     }
 
+    public void runFromJavaSources(String[] args, OutputFormats outputFormat, String[] inputFolders) {
+        exec(args, outputFormat, GraphBuilderPluginId.JAVA_SOURCES, inputFolders);
+    }
+
     public SoftwarePackageGraph getGraph() {
         return graph;
     }
