@@ -21,6 +21,10 @@ export const SHELL_TRANSLATIONS = {
     en: 'Analyze Debian system',
     es: 'Analizar sistema Debian'
   },
+  CACHE_PROJECT_SELECTOR_LABEL: {
+    en: 'Cached project',
+    es: 'Proyecto cacheado'
+  },
   CPP_PROJECT_SELECTOR_LABEL: {
     en: 'C/C++ project',
     es: 'Proyecto C/C++'
@@ -72,6 +76,14 @@ export const SHELL_TRANSLATIONS = {
   MENU_SEARCH_PLACEHOLDER: {
     en: 'Search...',
     es: 'Buscar...'
+  },
+  FILTER_NODE_PLACEHOLDER: {
+    en: 'Filter node...',
+    es: 'Filtrar nodo...'
+  },
+  FILTER_GROUP_PLACEHOLDER: {
+    en: 'Filter group...',
+    es: 'Filtrar grupo...'
   },
   MENU_OPEN_NEW_SVG: {
     en: 'Open group',

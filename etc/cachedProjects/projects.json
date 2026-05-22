@@ -1,0 +1,14 @@
+[
+  {
+    "id": "ubuntu2204custom",
+    "name": "Ubuntu 22.04 custom",
+    "groupsDefinitionFolder": "etc/_ubuntu_22.04",
+    "cacheFile": "etc/caches/cache.txt.ubuntu2204custom"
+  },
+  {
+    "id": "ubuntu2204minimalWithNet",
+    "name": "Ubuntu 22.04 minimal + net",
+    "groupsDefinitionFolder": "etc/_ubuntu_22.04",
+    "cacheFile": "etc/caches/cache.txt.ubuntu2204minimalWithNet"
+  }
+]

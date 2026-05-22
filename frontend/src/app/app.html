@@ -46,32 +46,55 @@
             </div>
           </div>
 
-          <button class="action-button" type="button" (click)="createGraphFromCache()" [disabled]="isLoading">
-            {{ t(i18nKeys.shell.CREATE_GRAPH_FROM_CACHE) }}
-          </button>
-
           <button class="action-button" type="button" (click)="analyzeDebianSystem()" [disabled]="isLoading">
             {{ t(i18nKeys.shell.ANALYZE_DEBIAN_SYSTEM) }}
           </button>
 
-          <label class="project-selector-label">{{ t(i18nKeys.shell.CPP_PROJECT_SELECTOR_LABEL) }}</label>
-          <select
-            class="project-selector"
-            [value]="selectedCppProjectId"
-            (change)="onCppProjectSelectionChange($event)"
-            [disabled]="isLoading || cppProjects.length === 0"
-          >
-            <option *ngFor="let project of cppProjects" [value]="project.id">{{ project.name }}</option>
-          </select>
+          <label class="project-selector-label">{{ t(i18nKeys.shell.CACHE_PROJECT_SELECTOR_LABEL) }}</label>
+          <div class="project-action-row">
+            <select
+              class="project-selector project-selector-compact"
+              [value]="selectedCachedProjectId"
+              (change)="onCachedProjectSelectionChange($event)"
+              [disabled]="isLoading || cachedProjects.length === 0"
+            >
+              <option *ngFor="let project of cachedProjects" [value]="project.id">{{ project.name }}</option>
+            </select>
 
-          <button
-            class="action-button"
-            type="button"
-            (click)="analyzeCppSources()"
-            [disabled]="isLoading || cppProjects.length === 0 || !selectedCppProjectId"
-          >
-            {{ t(i18nKeys.shell.ANALYZE_CPP_SOURCES) }}
-          </button>
+            <button
+              class="action-button action-button-icon"
+              type="button"
+              (click)="createGraphFromCache()"
+              [disabled]="isLoading"
+              [attr.aria-label]="t(i18nKeys.shell.CREATE_GRAPH_FROM_CACHE)"
+              title="Crear grafo desde cache.txt"
+            >
+              ↑
+            </button>
+          </div>
+
+          <label class="project-selector-label">{{ t(i18nKeys.shell.CPP_PROJECT_SELECTOR_LABEL) }}</label>
+          <div class="project-action-row">
+            <select
+              class="project-selector project-selector-compact"
+              [value]="selectedCppProjectId"
+              (change)="onCppProjectSelectionChange($event)"
+              [disabled]="isLoading || cppProjects.length === 0"
+            >
+              <option *ngFor="let project of cppProjects" [value]="project.id">{{ project.name }}</option>
+            </select>
+
+            <button
+              class="action-button action-button-icon"
+              type="button"
+              (click)="analyzeCppSources()"
+              [disabled]="isLoading || cppProjects.length === 0 || !selectedCppProjectId"
+              [attr.aria-label]="t(i18nKeys.shell.ANALYZE_CPP_SOURCES)"
+              title="Analizar fuentes C/C++"
+            >
+              ↑
+            </button>
+          </div>
 
           <p class="status-line" *ngIf="isLoading">{{ t(i18nKeys.shell.PROCESSING) }}</p>
           <p class="status-line status-line-error" *ngIf="errorMessage">{{ errorMessage }}</p>
@@ -90,7 +113,7 @@
             class="node-browser-search-input"
             [value]="nodeFilterPattern"
             (input)="onNodeFilterInput($event)"
-            placeholder="Buscar nodo..."
+            [placeholder]="isInStructureMode() ? t(i18nKeys.shell.FILTER_GROUP_PLACEHOLDER) : t(i18nKeys.shell.FILTER_NODE_PLACEHOLDER)"
           />
         </label>
         <select

@@ -61,6 +61,13 @@ export interface CppProject {
   inputFolders: string[];
 }
 
+export interface CachedProject {
+  id: string;
+  name: string;
+  groupsDefinitionFolder: string;
+  cacheFile: string;
+}
+
 export class GraphModel {
   public selectedNodes: string[] = [];
 

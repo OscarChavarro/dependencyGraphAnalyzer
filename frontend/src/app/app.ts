@@ -12,6 +12,7 @@ import {
   GroupRelationsResponse,
   MoveNodeRequest,
   MoveNodeResponse,
+  CachedProject,
   CppProject,
   UpdateGraphModelRequest,
   UpdateGraphModelResponse
@@ -67,6 +68,8 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   public readonly i18nKeys = I18N_KEYS;
   public nodeFilterPattern = '';
   public currentSvgNodeNames: string[] = [];
+  public cachedProjects: CachedProject[] = [];
+  public selectedCachedProjectId = '';
   public cppProjects: CppProject[] = [];
   public selectedCppProjectId = '';
 
@@ -111,6 +114,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
 
   public ngOnInit(): void {
     this.restoreGraphModelFromSession();
+    this.loadCachedProjects();
     this.loadCppProjects();
   }
 
@@ -165,7 +169,16 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   }
 
   public createGraphFromCache(): void {
-    this.updateGraphModel('CACHE_LOADER', this.defaultGroupsDefinitionFolder, []);
+    const selectedProject = this.cachedProjects.find((project) => project.id === this.selectedCachedProjectId);
+    if (!selectedProject) {
+      this.updateGraphModel('CACHE_LOADER', this.defaultGroupsDefinitionFolder, []);
+      return;
+    }
+    this.updateGraphModel(
+      'CACHE_LOADER',
+      selectedProject.groupsDefinitionFolder,
+      [selectedProject.cacheFile]
+    );
   }
 
   public analyzeDebianSystem(): void {
@@ -175,6 +188,11 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   public onCppProjectSelectionChange(event: Event): void {
     const target = event.target as HTMLSelectElement | null;
     this.selectedCppProjectId = target?.value ?? '';
+  }
+
+  public onCachedProjectSelectionChange(event: Event): void {
+    const target = event.target as HTMLSelectElement | null;
+    this.selectedCachedProjectId = target?.value ?? '';
   }
 
   public analyzeCppSources(): void {
@@ -314,6 +332,19 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
       error: () => {
         this.cppProjects = [];
         this.selectedCppProjectId = '';
+      }
+    });
+  }
+
+  private loadCachedProjects(): void {
+    this.httpClient.get<CachedProject[]>(`${this.backendBaseUrl}/v1/cachedProjects`).subscribe({
+      next: (projects) => {
+        this.cachedProjects = Array.isArray(projects) ? projects : [];
+        this.selectedCachedProjectId = this.cachedProjects[0]?.id ?? '';
+      },
+      error: () => {
+        this.cachedProjects = [];
+        this.selectedCachedProjectId = '';
       }
     });
   }
@@ -806,6 +837,16 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private listAndSortCurrentSvgNodeNames(): string[] {
+    if (this.isInStructureMode()) {
+      const uniqueGroupNames = new Set(
+        this.graphRenderer
+          .getInteractiveEllipses()
+          .map((ellipse) => ellipse.nodeName)
+          .filter((name) => name && name.startsWith('_[') && name !== '_[STRUCTURE]')
+      );
+      return [...uniqueGroupNames].sort((a, b) => a.localeCompare(b));
+    }
+
     const uniqueNames = new Set(
       this.graphRenderer
         .getInteractiveEllipses()

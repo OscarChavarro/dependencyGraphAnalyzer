@@ -19,13 +19,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class BuildEnrichedEdgesService implements BuildEnrichedEdgesUseCase {
     @Override
-    public List<GraphModelEdge> execute(GraphModelGenerator generator, String groupsDefinitionFolder) {
+    public List<GraphModelEdge> execute(GraphModelGenerator generator, String groupsDefinitionFolder, String[] inputFolders) {
         String[] groupsDefinitionFiles = resolveGroupDefinitionFiles(groupsDefinitionFolder);
-        return buildEnrichedEdgesFromCache(groupsDefinitionFiles);
+        return buildEnrichedEdgesFromCache(resolveCachePath(inputFolders), groupsDefinitionFiles);
     }
 
-    private List<GraphModelEdge> buildEnrichedEdgesFromCache(String[] groupsDefinitionFiles) {
-        Path cachePath = resolveExistingFile("cache.txt", "../cache.txt");
+    private List<GraphModelEdge> buildEnrichedEdgesFromCache(Path cachePath, String[] groupsDefinitionFiles) {
         if (cachePath == null) {
             return List.of();
         }
@@ -67,6 +66,16 @@ public class BuildEnrichedEdgesService implements BuildEnrichedEdgesUseCase {
             return List.of();
         }
         return new ArrayList<>(enriched);
+    }
+
+    private Path resolveCachePath(String[] inputFolders) {
+        if (inputFolders != null && inputFolders.length > 0) {
+            Path configured = resolveExistingFile(inputFolders[0]);
+            if (configured != null) {
+                return configured;
+            }
+        }
+        return resolveExistingFile("cache.txt", "../cache.txt");
     }
 
     private Map<String, Set<String>> readPackageGroups(String[] groupsDefinitionFiles) {

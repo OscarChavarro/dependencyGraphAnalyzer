@@ -113,8 +113,8 @@ public class DebianAnalyzer {
         exec(args, outputFormat, GraphBuilderPluginId.DEBIAN_PACKAGE_GENERATOR, null);
     }
 
-    public void runFromCache(String[] args, OutputFormats outputFormat) {
-        exec(args, outputFormat, GraphBuilderPluginId.CACHE_LOADER, null);
+    public void runFromCache(String[] args, OutputFormats outputFormat, String[] inputFolders) {
+        exec(args, outputFormat, GraphBuilderPluginId.CACHE_LOADER, inputFolders);
     }
 
     public void runFromDebian(String[] args, OutputFormats outputFormat) {

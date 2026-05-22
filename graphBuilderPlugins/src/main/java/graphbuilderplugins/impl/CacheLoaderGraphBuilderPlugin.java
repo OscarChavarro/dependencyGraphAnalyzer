@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.StringTokenizer;
 
 public class CacheLoaderGraphBuilderPlugin implements GraphBuilderPlugin {
@@ -20,6 +21,22 @@ public class CacheLoaderGraphBuilderPlugin implements GraphBuilderPlugin {
         System.out.print("Building graph from cache ...");
         loadIfExists(target, Path.of("cache.txt"));
         loadIfExists(target, Path.of("cache_extra.txt"));
+        System.out.println("Ok!");
+    }
+
+    @Override
+    public void build(GraphBuildTarget target, List<String> inputFolders) {
+        if (inputFolders == null || inputFolders.isEmpty()) {
+            build(target);
+            return;
+        }
+        System.out.print("Building graph from cache ...");
+        for (String configuredFile : inputFolders) {
+            if (configuredFile == null || configuredFile.isBlank()) {
+                continue;
+            }
+            loadIfExists(target, Path.of(configuredFile));
+        }
         System.out.println("Ok!");
     }
 

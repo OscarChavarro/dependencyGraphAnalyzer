@@ -33,7 +33,7 @@ public class UpdateGraphModelService implements UpdateGraphModelUseCase {
         DebianAnalyzer analyzer = new DebianAnalyzer();
 
         switch (generator) {
-            case CACHE_LOADER -> analyzer.runFromCache(groupsDefinitionFiles, OutputFormats.SVG);
+            case CACHE_LOADER -> analyzer.runFromCache(groupsDefinitionFiles, OutputFormats.SVG, inputFolders);
             case DEBIAN_PACKAGE_GENERATOR -> analyzer.runFromDebian(groupsDefinitionFiles, OutputFormats.SVG);
             case CPP_SOURCES -> analyzer.runFromCppSources(groupsDefinitionFiles, OutputFormats.SVG, inputFolders);
         }

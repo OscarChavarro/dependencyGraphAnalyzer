@@ -40,7 +40,7 @@ public class CommandLineApp {
 
         String[] expanded = expandedArgs.toArray(new String[0]);
         if (Files.exists(Paths.get("cache.txt"))) {
-            instance.runFromCache(expanded, OutputFormats.PNG);
+            instance.runFromCache(expanded, OutputFormats.PNG, null);
         } else {
             instance.runFromDebian(expanded, OutputFormats.PNG);
         }

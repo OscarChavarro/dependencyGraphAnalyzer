@@ -5,6 +5,7 @@ import backend.application.port.in.BuildEnrichedEdgesUseCase;
 import backend.application.port.in.MoveNodeUseCase;
 import backend.domain.model.GraphModelGenerator;
 import backend.infrastructure.http.dto.CppProjectResponse;
+import backend.infrastructure.http.dto.CachedProjectResponse;
 import backend.infrastructure.http.dto.UpdateGraphModelRequest;
 import backend.infrastructure.http.dto.EnrichedEdgesResponse;
 import backend.infrastructure.http.dto.MoveNodeRequest;
@@ -80,7 +81,10 @@ public class GraphModelController {
         }
 
         return new EnrichedEdgesResponse(
-                buildEnrichedEdgesUseCase.execute(request.generator(), request.groupsDefinitionFolder()));
+                buildEnrichedEdgesUseCase.execute(
+                        request.generator(),
+                        request.groupsDefinitionFolder(),
+                        request.inputFolders()));
     }
 
 
@@ -155,10 +159,40 @@ public class GraphModelController {
         }
     }
 
+    @GetMapping({"/cachedProjects"})
+    public List<CachedProjectResponse> cachedProjects() {
+        Path projectsPath = resolveCachedProjectsPath();
+        if (projectsPath == null) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND,
+                    "cached projects config not found: etc/cachedProjects/projects.json");
+        }
+        try {
+            return objectMapper.readValue(
+                    projectsPath.toFile(),
+                    new TypeReference<List<CachedProjectResponse>>() {
+                    });
+        } catch (IOException e) {
+            throw new ResponseStatusException(
+                    HttpStatus.INTERNAL_SERVER_ERROR,
+                    "failed reading cached projects config",
+                    e);
+        }
+    }
+
     private Path resolveCppProjectsPath() {
         return Stream.of(
                         Path.of("etc", "cppProjects", "projects.json"),
                         Path.of("..", "etc", "cppProjects", "projects.json"))
+                .filter(Files::isRegularFile)
+                .findFirst()
+                .orElse(null);
+    }
+
+    private Path resolveCachedProjectsPath() {
+        return Stream.of(
+                        Path.of("etc", "cachedProjects", "projects.json"),
+                        Path.of("..", "etc", "cachedProjects", "projects.json"))
                 .filter(Files::isRegularFile)
                 .findFirst()
                 .orElse(null);
