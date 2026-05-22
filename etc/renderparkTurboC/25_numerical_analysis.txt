@@ -1,5 +1,4 @@
 [25_NUMERICAL_ANALYSIS]
-
 numericalAnalysis/CubatureDegree.h
 numericalAnalysis/CubatureRule.h
 numericalAnalysis/MeshSurfaceVisitor.cpp

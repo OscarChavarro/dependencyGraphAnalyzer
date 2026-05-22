@@ -1,5 +1,4 @@
 [22_SKIN]
-
 skin/AxisAlignedBoundingBox.cpp
 skin/AxisAlignedBoundingBox.h
 skin/BoundingBoxCoordinateIndex.h
