@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
@@ -23,8 +24,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UpdateGraphModelService implements UpdateGraphModelUseCase {
+    private static final Path CLEAN_RELATIONS_GRAPH_PATH = Path.of("output", "cleanRelationsGraph.txt");
+
     @Override
     public GraphModelSnapshot execute(GraphModelGenerator generator, String groupsDefinitionFolder, String[] inputFolders) {
+        resetCleanRelationsGraph();
         String[] groupsDefinitionFiles = resolveGroupDefinitionFiles(groupsDefinitionFolder);
         DebianAnalyzer analyzer = new DebianAnalyzer();
 
@@ -45,6 +49,22 @@ public class UpdateGraphModelService implements UpdateGraphModelUseCase {
         GraphModelStructure structure = buildStructureGraph(graph.getNodes(), allEdges);
 
         return new GraphModelSnapshot(nodes, edges, structure);
+    }
+
+    private void resetCleanRelationsGraph() {
+        try {
+            Path parent = CLEAN_RELATIONS_GRAPH_PATH.getParent();
+            if (parent != null) {
+                Files.createDirectories(parent);
+            }
+            Files.writeString(
+                    CLEAN_RELATIONS_GRAPH_PATH,
+                    "",
+                    StandardOpenOption.CREATE,
+                    StandardOpenOption.TRUNCATE_EXISTING);
+        } catch (IOException e) {
+            throw new IllegalStateException("Failed to reset clean relations graph output file", e);
+        }
     }
 
     private GraphModelNode mapNode(SoftwarePackageNode node) {
