@@ -10,4 +10,8 @@ public interface GraphBuildTarget {
     void addDependency(String fromNodeName, String toNodeName);
 
     List<String> listNodeNames();
+
+    default void saveCache(String filename) {
+        // Optional capability: targets that support persistence can override.
+    }
 }

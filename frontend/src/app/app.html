@@ -1,8 +1,14 @@
 <main class="main-layout" [class.main-layout-collapsed]="isPanelCollapsed">
   <aside class="left-panel" [class.left-panel-collapsed]="isPanelCollapsed">
-    <button class="panel-toggle-button" type="button" (click)="toggleSidePanel()" [attr.aria-expanded]="!isPanelCollapsed">
-      {{ isPanelCollapsed ? '» ' + t(i18nKeys.shell.PANEL_LABEL) : '« ' + t(i18nKeys.shell.PANEL_COLLAPSE) }}
-    </button>
+    <div class="panel-controls-row">
+      <button class="panel-toggle-button" type="button" (click)="toggleSidePanel()" [attr.aria-expanded]="!isPanelCollapsed">
+        {{ isPanelCollapsed ? '» ' + t(i18nKeys.shell.PANEL_LABEL) : '« ' + t(i18nKeys.shell.PANEL_COLLAPSE) }}
+      </button>
+
+      <button class="panel-toggle-button panel-back-button" type="button" (click)="backToStructure()" *ngIf="!isPanelCollapsed && !isInStructureMode()">
+        {{ t(i18nKeys.shell.BACK_TO_STRUCTURE) }}
+      </button>
+    </div>
 
     <div class="panel-content" *ngIf="!isPanelCollapsed">
       <section class="generator-panel">
@@ -65,10 +71,6 @@
             [disabled]="isLoading || cppProjects.length === 0 || !selectedCppProjectId"
           >
             {{ t(i18nKeys.shell.ANALYZE_CPP_SOURCES) }}
-          </button>
-
-          <button class="action-button" type="button" (click)="backToStructure()" *ngIf="!isInStructureMode()">
-            {{ t(i18nKeys.shell.BACK_TO_STRUCTURE) }}
           </button>
 
           <p class="status-line" *ngIf="isLoading">{{ t(i18nKeys.shell.PROCESSING) }}</p>

@@ -51,6 +51,9 @@ public class CppSourcesGraphBuilderPlugin implements GraphBuilderPlugin {
         for (Relation relation : relations) {
             target.addDependency(relation.source(), relation.target());
         }
+
+        target.saveCache("cache.txt");
+        System.out.println("Cache graph written to cache.txt");
     }
 
     private List<Path> collectSourceFiles(List<String> inputFolders) {

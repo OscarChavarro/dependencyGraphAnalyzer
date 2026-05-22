@@ -60,6 +60,8 @@ public class DebianPackageGraphBuilderPlugin implements GraphBuilderPlugin {
             }
         }
 
+        target.saveCache("cache.txt");
+        System.out.println("Cache graph written to cache.txt");
         System.out.println(" Ok!");
     }
 

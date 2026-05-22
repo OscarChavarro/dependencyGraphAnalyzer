@@ -42,4 +42,9 @@ public class SoftwarePackageGraphBuildTarget implements GraphBuildTarget {
     public List<String> listNodeNames() {
         return graph.getNodes().stream().map(SoftwarePackageNode::getName).toList();
     }
+
+    @Override
+    public void saveCache(String filename) {
+        graph.save(filename);
+    }
 }
