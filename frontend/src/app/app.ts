@@ -100,6 +100,23 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   private readonly onWindowResize = (): void => {
     this.syncCanvasResolutionWithDisplay();
   };
+  private readonly onGlobalGraphCycleKeyDown = (event: KeyboardEvent): void => {
+    if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') {
+      return;
+    }
+    if (event.shiftKey || event.ctrlKey || event.metaKey || event.altKey) {
+      return;
+    }
+    if (this.isTypingContext(event.target)) {
+      return;
+    }
+
+    const direction: -1 | 1 = event.key === 'ArrowRight' ? 1 : -1;
+    if (!this.cycleGraphByDirection(direction)) {
+      return;
+    }
+    event.preventDefault();
+  };
 
   constructor(
     private readonly httpClient: HttpClient,
@@ -126,6 +143,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     }
     this.syncCanvasResolutionWithDisplay();
     window.addEventListener('resize', this.onWindowResize);
+    window.addEventListener('keydown', this.onGlobalGraphCycleKeyDown);
 
     this.keyboardInteractionTechniques.attach(document.body);
     this.drawingAreaNavigationInteractionTechnique.attach(canvas, this.workspaceAreaRef?.nativeElement);
@@ -154,6 +172,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
 
   public ngOnDestroy(): void {
     window.removeEventListener('resize', this.onWindowResize);
+    window.removeEventListener('keydown', this.onGlobalGraphCycleKeyDown);
   }
 
   public closeRelationBox(): void {
@@ -663,16 +682,119 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     return match[1];
   }
 
+  private cycleGraphByDirection(direction: -1 | 1): boolean {
+    const groups = this.listCyclableGroupNames();
+    if (groups.length === 0) {
+      return false;
+    }
+
+    if (this.isInStructureMode()) {
+      const targetGroup = direction > 0 ? groups[0] : groups[groups.length - 1];
+      this.openGroupGraphByName(targetGroup);
+      return true;
+    }
+
+    const currentGroup = this.extractGroupFromCurrentSvgFilename()?.toLowerCase() ?? null;
+    if (!currentGroup) {
+      this.loadAndRenderGraphSvg('structure.svg', 0);
+      return true;
+    }
+    const currentIndex = groups.indexOf(currentGroup);
+    if (currentIndex < 0) {
+      this.loadAndRenderGraphSvg('structure.svg', 0);
+      return true;
+    }
+
+    const nextIndex = currentIndex + direction;
+    if (nextIndex < 0 || nextIndex >= groups.length) {
+      this.loadAndRenderGraphSvg('structure.svg', 0);
+      return true;
+    }
+
+    this.openGroupGraphByName(groups[nextIndex]);
+    return true;
+  }
+
+  private openGroupGraphByName(groupName: string): void {
+    const normalizedGroupName = groupName.trim().toLowerCase();
+    if (!normalizedGroupName) {
+      return;
+    }
+    this.selectedNodeActionMenuInteractionTechnique?.closeMenu();
+    this.menuRenderer?.close();
+    this.loadAndRenderGraphSvg(`${normalizedGroupName}.svg`, 0);
+  }
+
+  private listCyclableGroupNames(): string[] {
+    const allGroups = this.listStructureGroupNames();
+    const groupNodeCount = this.buildGroupNodeCountIndex();
+    if (groupNodeCount.size === 0) {
+      return allGroups;
+    }
+    const filtered = allGroups.filter((group) => (groupNodeCount.get(group) ?? 0) > 0);
+    return filtered.length > 0 ? filtered : allGroups;
+  }
+
+  private buildGroupNodeCountIndex(): Map<string, number> {
+    const nodes = this.graphModel?.nodes ?? [];
+    const counts = new Map<string, number>();
+    for (const node of nodes) {
+      const groupName = this.extractGroupNameFromMemberNode(node.name);
+      if (groupName) {
+        counts.set(groupName, (counts.get(groupName) ?? 0) + 1);
+      }
+    }
+    return counts;
+  }
+
+  private extractGroupNameFromMemberNode(nodeName: string): string | null {
+    const normalizedName = nodeName.trim();
+    if (normalizedName.startsWith('_[')) {
+      return null;
+    }
+    if (normalizedName.startsWith('[')) {
+      const closingBracketIndex = normalizedName.indexOf(']');
+      if (closingBracketIndex > 1 && normalizedName.charAt(closingBracketIndex + 1) === '.') {
+        return normalizedName.substring(1, closingBracketIndex).toLowerCase();
+      }
+      return null;
+    }
+    const separatorIndex = normalizedName.indexOf('.');
+    if (separatorIndex > 0) {
+      return normalizedName.substring(0, separatorIndex).toLowerCase();
+    }
+    return null;
+  }
+
   private listStructureGroupNames(): string[] {
+    const fromCurrentStructureList = this.currentSvgNodeNames
+      .filter((name) => name.startsWith('_[') && name !== '_[STRUCTURE]')
+      .map((name) => this.extractGroupNameFromStructureLabel(name))
+      .filter((name): name is string => name !== null);
+    if (fromCurrentStructureList.length > 0) {
+      return [...fromCurrentStructureList].sort((a, b) => this.compareGroupNames(a, b));
+    }
+
     const nodes = this.graphModel?.structure.nodes ?? [];
     const fromSnapshot = nodes
       .map((node) => node.name)
       .filter((name) => name.startsWith('_[') && name !== '_[STRUCTURE]')
-      .map((name) => name.replace(/^_\[(.+)\]$/, '$1').toLowerCase());
+      .map((name) => this.extractGroupNameFromStructureLabel(name))
+      .filter((name): name is string => name !== null);
     if (fromSnapshot.length > 0) {
-      return fromSnapshot;
+      return [...fromSnapshot].sort((a, b) => this.compareGroupNames(a, b));
     }
-    return this.cachedStructureGroupNames;
+    return [...this.cachedStructureGroupNames].sort((a, b) => this.compareGroupNames(a, b));
+  }
+
+  private isTypingContext(target: EventTarget | null): boolean {
+    if (!(target instanceof HTMLElement)) {
+      return false;
+    }
+    if (target.isContentEditable) {
+      return true;
+    }
+    return target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement;
   }
 
   private syncCanvasResolutionWithDisplay(): void {
@@ -844,7 +966,12 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
           .map((ellipse) => ellipse.nodeName)
           .filter((name) => name && name.startsWith('_[') && name !== '_[STRUCTURE]')
       );
-      return [...uniqueGroupNames].sort((a, b) => a.localeCompare(b));
+      return [...uniqueGroupNames].sort((a, b) =>
+        this.compareGroupNames(
+          this.extractGroupNameFromStructureLabel(a) ?? a.toLowerCase(),
+          this.extractGroupNameFromStructureLabel(b) ?? b.toLowerCase()
+        )
+      );
     }
 
     const uniqueNames = new Set(
@@ -854,6 +981,35 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
         .filter((name) => name && !name.startsWith('[') && !name.startsWith('_['))
     );
     return [...uniqueNames].sort((a, b) => a.localeCompare(b));
+  }
+
+  private extractGroupNameFromStructureLabel(nodeName: string): string | null {
+    const normalizedName = nodeName.trim();
+    if (!normalizedName.startsWith('_[') || !normalizedName.endsWith(']')) {
+      return null;
+    }
+    if (normalizedName.length <= 3) {
+      return null;
+    }
+    return normalizedName.substring(2, normalizedName.length - 1).toLowerCase();
+  }
+
+  private compareGroupNames(groupA: string, groupB: string): number {
+    const leadingNumberA = this.extractLeadingNumber(groupA);
+    const leadingNumberB = this.extractLeadingNumber(groupB);
+    if (leadingNumberA !== null && leadingNumberB !== null && leadingNumberA !== leadingNumberB) {
+      return leadingNumberA - leadingNumberB;
+    }
+    return groupA.localeCompare(groupB);
+  }
+
+  private extractLeadingNumber(groupName: string): number | null {
+    const match = groupName.match(/^(\d+)_/);
+    if (!match || !match[1]) {
+      return null;
+    }
+    const parsed = Number.parseInt(match[1], 10);
+    return Number.isNaN(parsed) ? null : parsed;
   }
 
   private extractNodeNameFromListContextMenuEvent(event: MouseEvent): string | null {
