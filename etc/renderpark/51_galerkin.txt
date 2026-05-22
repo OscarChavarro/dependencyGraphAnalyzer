@@ -1,5 +1,4 @@
 [51_GALERKIN]
-
 vsdk/toolkit/galerkin/BasisQuadGalerkin.cpp
 vsdk/toolkit/galerkin/BasisQuadGalerkin.h
 vsdk/toolkit/galerkin/BasisTriGalerkin.cpp

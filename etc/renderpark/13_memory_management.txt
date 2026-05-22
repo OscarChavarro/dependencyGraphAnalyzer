@@ -1,5 +1,4 @@
 [13_MEMORY_MANAGEMENT]
-
 vsdk/toolkit/common/memoryManagement/CppReAlloc.cpp
 vsdk/toolkit/common/memoryManagement/CppReAlloc.h
 vsdk/toolkit/common/memoryManagement/MemoryPool.h

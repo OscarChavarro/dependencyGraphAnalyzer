@@ -1,5 +1,4 @@
 [65_STOCHASTIC_RAYTRACING]
-
 vsdk/toolkit/raycasting/stochasticRaytracing/ApproximationTypeDescription.h
 vsdk/toolkit/raycasting/stochasticRaytracing/Basismcrad.cpp
 vsdk/toolkit/raycasting/stochasticRaytracing/Basismcrad.h

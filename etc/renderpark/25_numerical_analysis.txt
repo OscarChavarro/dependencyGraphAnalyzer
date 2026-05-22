@@ -1,5 +1,4 @@
 [25_NUMERICAL_ANALYSIS]
-
 vsdk/toolkit/numericalAnalysis/CubatureDegree.h
 vsdk/toolkit/numericalAnalysis/CubatureRule.h
 vsdk/toolkit/numericalAnalysis/MeshSurfaceVisitor.cpp

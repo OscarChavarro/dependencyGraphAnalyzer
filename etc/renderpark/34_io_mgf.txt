@@ -1,5 +1,4 @@
 [34_IO_MGF]
-
 vsdk/toolkit/io/mgf/MgfColorEntitySupport.cpp
 vsdk/toolkit/io/mgf/MgfColorEntitySupport.h
 vsdk/toolkit/io/mgf/MgfConeEntityTessellator.cpp

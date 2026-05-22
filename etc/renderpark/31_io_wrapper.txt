@@ -1,5 +1,4 @@
 [31_IO_WRAPPER]
-
 vsdk/toolkit/io/wrapper/FileUncompressWrapper.cpp
 vsdk/toolkit/io/wrapper/FileUncompressWrapper.h
 vsdk/toolkit/io/wrapper/Matrix2x2Printer.cpp

@@ -1,5 +1,4 @@
 [64_PHOTONMAP]
-
 vsdk/toolkit/raycasting/photonMap/DiscreteSampling.cpp
 vsdk/toolkit/raycasting/photonMap/DiscreteSampling.h
 vsdk/toolkit/raycasting/photonMap/ImportanceMap.cpp

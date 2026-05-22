@@ -1,5 +1,4 @@
 [14_QUASI_MONTE_CARLO]
-
 vsdk/toolkit/numericalAnalysis/quasiMonteCarlo/Faure.cpp
 vsdk/toolkit/numericalAnalysis/quasiMonteCarlo/Faure.h
 vsdk/toolkit/numericalAnalysis/quasiMonteCarlo/FaureSequenceLimits.h

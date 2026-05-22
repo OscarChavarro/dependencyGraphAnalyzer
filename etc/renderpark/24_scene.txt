@@ -1,5 +1,4 @@
 [24_SCENE]
-
 vsdk/toolkit/scene/Background.cpp
 vsdk/toolkit/scene/Background.h
 vsdk/toolkit/scene/Camera.cpp

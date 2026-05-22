@@ -1,5 +1,4 @@
 [12_LINEAL_ALGEBRA]
-
 vsdk/toolkit/common/linealAlgebra/CoordinateAxis.h
 vsdk/toolkit/common/linealAlgebra/CoordinateSystem.cpp
 vsdk/toolkit/common/linealAlgebra/CoordinateSystem.h

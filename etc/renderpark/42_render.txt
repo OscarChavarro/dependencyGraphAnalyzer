@@ -1,5 +1,4 @@
 [42_RENDER]
-
 vsdk/toolkit/render/Canvas.cpp
 vsdk/toolkit/render/Canvas.h
 vsdk/toolkit/render/OctreeChild.h

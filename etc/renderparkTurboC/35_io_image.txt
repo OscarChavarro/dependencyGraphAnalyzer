@@ -1,0 +1,10 @@
+[35_IO_IMAGE]
+
+io/image/Dkcolor.cpp
+io/image/Dkcolor.h
+io/image/ImageOutputHandle.cpp
+io/image/ImageOutputHandle.h
+io/image/PicOutputHandle.cpp
+io/image/PicOutputHandle.h
+io/image/PPMOutputHandle.cpp
+io/image/PPMOutputHandle.h

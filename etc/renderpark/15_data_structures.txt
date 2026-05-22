@@ -1,5 +1,4 @@
 [15_DATA_STRUCTURES]
-
 vsdk/toolkit/common/dataStructures/BalancedKDTreeNode.h
 vsdk/toolkit/common/dataStructures/CircularList.h
 vsdk/toolkit/common/dataStructures/CircularListBase.cpp

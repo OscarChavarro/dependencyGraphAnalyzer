@@ -1,5 +1,4 @@
 [52_RENDER_OPENGL]
-
 vsdk/toolkit/render/opengl/GalerkinOpenGLRenderer.cpp
 vsdk/toolkit/render/opengl/GalerkinOpenGLRenderer.h
 vsdk/toolkit/render/opengl/Opengl.cpp

@@ -1,0 +1,14 @@
+[17_STATISTICS]
+
+common/statistics/PotentialStatistics.cpp
+common/statistics/PotentialStatistics.h
+common/statistics/RadianceStatistics.cpp
+common/statistics/RadianceStatistics.h
+common/statistics/RayTracerStatistics.cpp
+common/statistics/RayTracerStatistics.h
+common/statistics/ReaderStatistics.cpp
+common/statistics/ReaderStatistics.h
+common/statistics/ShadowStatistics.cpp
+common/statistics/ShadowStatistics.h
+common/statistics/Statistics.cpp
+common/statistics/Statistics.h

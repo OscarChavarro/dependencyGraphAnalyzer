@@ -1,5 +1,4 @@
 [21_MATERIAL]
-
 vsdk/toolkit/material/BsdfComponent.h
 vsdk/toolkit/material/BsdfComponentFlag.h
 vsdk/toolkit/material/Material.cpp
