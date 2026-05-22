@@ -1,0 +1,12 @@
+[41_SGL]
+
+vsdk.toolkit.render.sgl.Poly
+vsdk.toolkit.render.sgl.Polygon
+vsdk.toolkit.render.sgl.PolygonBox
+vsdk.toolkit.render.sgl.PolygonClipResult
+vsdk.toolkit.render.sgl.PolygonClipResultInfo
+vsdk.toolkit.render.sgl.PolygonVertex
+vsdk.toolkit.render.sgl.SglConstants
+vsdk.toolkit.render.sgl.SglContext
+vsdk.toolkit.render.sgl.SglPixelContent
+vsdk.toolkit.render.sgl.Window

@@ -1,0 +1,9 @@
+[31_IO_WRAPPER]
+
+vsdk.toolkit.io.wrapper.FileUncompressWrapper
+vsdk.toolkit.io.wrapper.Matrix2x2Printer
+vsdk.toolkit.io.wrapper.PipeInputStream
+vsdk.toolkit.io.wrapper.PipeOutputStream
+vsdk.toolkit.io.wrapper.StreamOpenMode
+vsdk.toolkit.io.wrapper.Vector3DPrinter
+vsdk.toolkit.io.PersistenceElement

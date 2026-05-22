@@ -17,6 +17,9 @@ public final class JavaSemanticAnalyzer {
             }
         } catch (IOException e) {
             throw new UncheckedIOException("Failed to perform semantic analysis", e);
+        } catch (RuntimeException e) {
+            // Keep the pipeline resilient in partial-analysis mode.
+            System.err.println("WARN java-deps: semantic analysis completed with recoverable issues: " + e.getMessage());
         }
 
         Trees trees = Trees.instance(parsedUnits.javacTask());

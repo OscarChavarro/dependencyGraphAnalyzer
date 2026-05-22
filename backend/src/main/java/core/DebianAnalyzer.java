@@ -42,12 +42,21 @@ public class DebianAnalyzer {
         outputFile = "./output/general.dot";
     }
 
-    private void exec(String args[], OutputFormats outputFormat, GraphBuilderPluginId pluginId, String[] inputFolders) {
+    private void exec(
+            String args[],
+            OutputFormats outputFormat,
+            GraphBuilderPluginId pluginId,
+            String[] inputFolders,
+            String[] classpathEntries) {
         GroupSubgraphGrouper groupSubgraphGrouper = new GroupSubgraphGrouper(graph);
         TransitiveRelationReducer transitiveRelationReducer = new TransitiveRelationReducer(graph);
 
         List<String> pluginInputFolders = inputFolders == null ? List.of() : Arrays.asList(inputFolders);
-        pluginRegistry.require(pluginId).build(new SoftwarePackageGraphBuildTarget(graph), pluginInputFolders);
+        List<String> pluginClasspathEntries = classpathEntries == null ? List.of() : Arrays.asList(classpathEntries);
+        pluginRegistry.require(pluginId).build(
+                new SoftwarePackageGraphBuildTarget(graph),
+                pluginInputFolders,
+                pluginClasspathEntries);
 
         //----------------------------------------------------------------
         int i;
@@ -110,23 +119,27 @@ public class DebianAnalyzer {
     }
 
     public void run(String[] args, OutputFormats outputFormat) {
-        exec(args, outputFormat, GraphBuilderPluginId.DEBIAN_PACKAGE_GENERATOR, null);
+        exec(args, outputFormat, GraphBuilderPluginId.DEBIAN_PACKAGE_GENERATOR, null, null);
     }
 
     public void runFromCache(String[] args, OutputFormats outputFormat, String[] inputFolders) {
-        exec(args, outputFormat, GraphBuilderPluginId.CACHE_LOADER, inputFolders);
+        exec(args, outputFormat, GraphBuilderPluginId.CACHE_LOADER, inputFolders, null);
     }
 
     public void runFromDebian(String[] args, OutputFormats outputFormat) {
-        exec(args, outputFormat, GraphBuilderPluginId.DEBIAN_PACKAGE_GENERATOR, null);
+        exec(args, outputFormat, GraphBuilderPluginId.DEBIAN_PACKAGE_GENERATOR, null, null);
     }
 
     public void runFromCppSources(String[] args, OutputFormats outputFormat, String[] inputFolders) {
-        exec(args, outputFormat, GraphBuilderPluginId.CPP_SOURCES, inputFolders);
+        exec(args, outputFormat, GraphBuilderPluginId.CPP_SOURCES, inputFolders, null);
     }
 
-    public void runFromJavaSources(String[] args, OutputFormats outputFormat, String[] inputFolders) {
-        exec(args, outputFormat, GraphBuilderPluginId.JAVA_SOURCES, inputFolders);
+    public void runFromJavaSources(
+            String[] args,
+            OutputFormats outputFormat,
+            String[] inputFolders,
+            String[] classpathEntries) {
+        exec(args, outputFormat, GraphBuilderPluginId.JAVA_SOURCES, inputFolders, classpathEntries);
     }
 
     public SoftwarePackageGraph getGraph() {

@@ -1,0 +1,8 @@
+[25_NUMERICAL_ANALYSIS]
+
+vsdk.toolkit.numericalAnalysis.CubatureDegree
+vsdk.toolkit.numericalAnalysis.CubatureRule
+vsdk.toolkit.numericalAnalysis.MeshSurfaceVisitor
+vsdk.toolkit.numericalAnalysis.PatchVisitor
+vsdk.toolkit.numericalAnalysis.QuadCubatureRule
+vsdk.toolkit.numericalAnalysis.TriangleCubatureRule

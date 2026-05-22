@@ -34,8 +34,9 @@ public final class DependencyGraphAnalysisPipeline {
         this.semanticAnalyzer = Objects.requireNonNull(semanticAnalyzer, "semanticAnalyzer must not be null");
     }
 
-    public DependencyGraph run(List<Path> sourceFolders) {
-        Objects.requireNonNull(sourceFolders, "sourceFolders must not be null");
+    public DependencyGraph run(DependencyGraphAnalysisRequest request) {
+        Objects.requireNonNull(request, "request must not be null");
+        List<Path> sourceFolders = request.sourceFolders();
 
         // 1) Discover source files
         List<Path> sourceFiles = discoveryService.discover(sourceFolders);
@@ -46,7 +47,7 @@ public final class DependencyGraphAnalysisPipeline {
         // 2) Initialize compiler infrastructure
         try (JavaCompilerSession session = JavaCompilerSession.createDefault()) {
             // 3) Build compilation task
-            JavaCompilationTask task = compilationTaskFactory.create(session, sourceFiles);
+            JavaCompilationTask task = compilationTaskFactory.create(session, sourceFiles, request.classpathEntries());
             // 4) Parse AST
             ParsedCompilationUnits parsed = astParser.parse(task);
             // 5) Run semantic analysis

@@ -1,0 +1,8 @@
+[17_STATISTICS]
+
+vsdk.toolkit.common.statistics.PotentialStatistics
+vsdk.toolkit.common.statistics.RadianceStatistics
+vsdk.toolkit.common.statistics.RayTracerStatistics
+vsdk.toolkit.common.statistics.ReaderStatistics
+vsdk.toolkit.common.statistics.ShadowStatistics
+vsdk.toolkit.common.statistics.Statistics

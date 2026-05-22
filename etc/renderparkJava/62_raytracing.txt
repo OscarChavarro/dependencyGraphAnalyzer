@@ -1,0 +1,14 @@
+[62_RAYTRACING]
+
+vsdk.toolkit.raycasting.raytracing.BsdfSampler
+vsdk.toolkit.raycasting.raytracing.EyeSampler
+vsdk.toolkit.raycasting.raytracing.NextEventSampler
+vsdk.toolkit.raycasting.raytracing.PixelSampler
+vsdk.toolkit.raycasting.raytracing.SampleConnectionFlags
+vsdk.toolkit.raycasting.raytracing.Sampler
+vsdk.toolkit.raycasting.raytracing.SamplerConfig
+vsdk.toolkit.raycasting.raytracing.SCREEN_ITERATE_CALLBACK
+vsdk.toolkit.raycasting.raytracing.ScreenIterate
+vsdk.toolkit.raycasting.raytracing.ScreenIterateState
+vsdk.toolkit.raycasting.raytracing.SpecularSampler
+vsdk.toolkit.raycasting.raytracing.SurfaceSampler

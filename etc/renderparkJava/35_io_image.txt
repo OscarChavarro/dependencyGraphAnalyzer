@@ -1,0 +1,6 @@
+[35_IO_IMAGE]
+
+vsdk.toolkit.io.image.DkColor
+vsdk.toolkit.io.image.ImageOutputHandle
+vsdk.toolkit.io.image.PicOutputHandle
+vsdk.toolkit.io.image.PPMOutputHandle

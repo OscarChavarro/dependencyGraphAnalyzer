@@ -1,0 +1,11 @@
+[23_TONEMAP]
+
+vsdk.toolkit.tonemap.FerwerdaToneMap
+vsdk.toolkit.tonemap.IdentityToneMap
+vsdk.toolkit.tonemap.LightnessToneMap
+vsdk.toolkit.tonemap.RevisedTumblinRushmeierToneMap
+vsdk.toolkit.tonemap.ToneMap
+vsdk.toolkit.tonemap.ToneMapAdaptationMethod
+vsdk.toolkit.tonemap.ToneMappingContext
+vsdk.toolkit.tonemap.TumblinRushmeierToneMap
+vsdk.toolkit.tonemap.WardToneMap

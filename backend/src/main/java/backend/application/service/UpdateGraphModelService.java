@@ -27,7 +27,11 @@ public class UpdateGraphModelService implements UpdateGraphModelUseCase {
     private static final Path CLEAN_RELATIONS_GRAPH_PATH = Path.of("output", "cleanRelationsGraph.txt");
 
     @Override
-    public GraphModelSnapshot execute(GraphModelGenerator generator, String groupsDefinitionFolder, String[] inputFolders) {
+    public GraphModelSnapshot execute(
+            GraphModelGenerator generator,
+            String groupsDefinitionFolder,
+            String[] inputFolders,
+            String[] classpath) {
         resetCleanRelationsGraph();
         String[] groupsDefinitionFiles = resolveGroupDefinitionFiles(groupsDefinitionFolder);
         DebianAnalyzer analyzer = new DebianAnalyzer();
@@ -36,7 +40,7 @@ public class UpdateGraphModelService implements UpdateGraphModelUseCase {
             case CACHE_LOADER -> analyzer.runFromCache(groupsDefinitionFiles, OutputFormats.SVG, inputFolders);
             case DEBIAN_PACKAGE_GENERATOR -> analyzer.runFromDebian(groupsDefinitionFiles, OutputFormats.SVG);
             case CPP_SOURCES -> analyzer.runFromCppSources(groupsDefinitionFiles, OutputFormats.SVG, inputFolders);
-            case JAVA_SOURCES -> analyzer.runFromJavaSources(groupsDefinitionFiles, OutputFormats.SVG, inputFolders);
+            case JAVA_SOURCES -> analyzer.runFromJavaSources(groupsDefinitionFiles, OutputFormats.SVG, inputFolders, classpath);
         }
 
         SoftwarePackageGraph graph = analyzer.getGraph();

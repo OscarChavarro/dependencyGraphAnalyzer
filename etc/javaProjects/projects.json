@@ -1,0 +1,19 @@
+[
+  {
+    "id": "rpk",
+    "name": "Rpk",
+    "groupsDefinitionFolder": "../etc/renderparkJava/",
+    "inputFolders": [
+      "/paradigmas/master/algoritmos_basicos_3d/renderpark/rpkCpp/java/base/src/main/java",
+      "/paradigmas/master/algoritmos_basicos_3d/renderpark/rpkCpp/java/testsuite/ApplicationCases/RenderparkApplication/src/main/java"
+    ],
+    "classpath": [
+      "/home/jedilink/.gradle/caches/modules-2/files-2.1/org.jogamp.jogl/jogl-all/2.5.0/68dc55e290bd5456e87f5d47834de47633dbe754/jogl-all-2.5.0.jar",
+      "/home/jedilink/.gradle/caches/modules-2/files-2.1/org.jogamp.gluegen/gluegen-rt/2.5.0/683e9d628c2ca32c4b56249034e164e593bf37b3/gluegen-rt-2.5.0.jar",
+      "/home/jedilink/.gradle/caches/modules-2/files-2.1/antlr/antlr/2.7.7/83cd2cd674a217ade95a4bb83a8a14f351f48bd0/antlr-2.7.7.jar"
+    ],
+    "gradleProjectDir": "/paradigmas/master/algoritmos_basicos_3d/renderpark/rpkCpp/java",
+    "gradleModule": "base",
+    "gradleUserHome": "/tmp/gradle-home"
+  }
+]

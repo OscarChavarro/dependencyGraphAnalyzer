@@ -483,3 +483,12 @@ vsdk.toolkit.app.options.OptionsGroupStochasticRaytracing.EnumBinding
 vsdk.toolkit.app.options.OptionsGroupStochasticRelaxationRadiosity
 vsdk.toolkit.app.options.OptionsGroupStochasticRelaxationRadiosity.EnumBinding
 vsdk.toolkit.app.options.OptionsGroupToneMapping
+com.jogamp.opengl.GL2
+com.jogamp.opengl.glu.GLU
+com.jogamp.opengl.GLEventListener
+com.jogamp.opengl.awt.GLJPanel
+com.jogamp.opengl.GLCapabilities
+com.jogamp.opengl.GLProfile
+com.jogamp.opengl.GLAutoDrawable
+com.jogamp.opengl.util.gl2.GLUT
+com.jogamp.opengl.GLContext

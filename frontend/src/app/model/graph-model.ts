@@ -1,9 +1,10 @@
-export type GraphModelGenerator = 'CACHE_LOADER' | 'DEBIAN_PACKAGE_GENERATOR' | 'CPP_SOURCES';
+export type GraphModelGenerator = 'CACHE_LOADER' | 'DEBIAN_PACKAGE_GENERATOR' | 'CPP_SOURCES' | 'JAVA_SOURCES';
 
 export interface UpdateGraphModelRequest {
   generator: GraphModelGenerator;
   groupsDefinitionFolder: string;
   inputFolders?: string[];
+  classpath?: string[];
 }
 
 export interface GraphModelNode {
@@ -59,6 +60,14 @@ export interface CppProject {
   name: string;
   groupsDefinitionFolder: string;
   inputFolders: string[];
+}
+
+export interface JavaProject {
+  id: string;
+  name: string;
+  groupsDefinitionFolder: string;
+  inputFolders: string[];
+  classpath: string[];
 }
 
 export interface CachedProject {

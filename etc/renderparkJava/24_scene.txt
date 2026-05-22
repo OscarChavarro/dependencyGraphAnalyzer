@@ -1,0 +1,14 @@
+[24_SCENE]
+
+vsdk.toolkit.scene.Background
+vsdk.toolkit.scene.Camera
+vsdk.toolkit.scene.ConstantColorBackground
+vsdk.toolkit.scene.PatchClusterOctreeNode
+vsdk.toolkit.scene.Plane
+vsdk.toolkit.scene.Polygon
+vsdk.toolkit.scene.RadianceMethod
+vsdk.toolkit.scene.RadianceMethodAlgorithm
+vsdk.toolkit.scene.Scene
+vsdk.toolkit.scene.VoxelData
+vsdk.toolkit.scene.VoxelDataFlags
+vsdk.toolkit.scene.VoxelGrid

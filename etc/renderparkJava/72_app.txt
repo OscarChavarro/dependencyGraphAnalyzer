@@ -1,0 +1,12 @@
+[72_APP]
+
+vsdk.toolkit.app.Adaptation
+vsdk.toolkit.app.Adaptation.PatchRadianceEstimateFn
+vsdk.toolkit.app.Batch
+vsdk.toolkit.app.Batch.ProcessFileCallback
+vsdk.toolkit.app.LuminanceArea
+vsdk.toolkit.app.Main
+vsdk.toolkit.app.Radiance
+vsdk.toolkit.app.Raytrace
+vsdk.toolkit.app.RpkApplication
+vsdk.toolkit.app.SceneBuilder

@@ -1,0 +1,2 @@
+[999_orphans]
+vsdk.toolkit.material.ShadingContextFlag

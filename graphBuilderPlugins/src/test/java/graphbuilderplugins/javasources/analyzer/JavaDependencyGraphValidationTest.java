@@ -84,7 +84,7 @@ class JavaDependencyGraphValidationTest {
 
         DependencyGraph graph = DependencyGraph.empty();
         try (JavaCompilerSession session = JavaCompilerSession.createDefault()) {
-            JavaCompilationTask task = new JavaCompilationTaskFactory().create(session, sourceFiles);
+            JavaCompilationTask task = new JavaCompilationTaskFactory().create(session, sourceFiles, List.of());
             ParsedCompilationUnits parsed = new JavaAstParser().parse(task);
             SemanticallyAnalyzedUnits analyzed = new JavaSemanticAnalyzer().analyze(parsed);
 

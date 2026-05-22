@@ -1,0 +1,17 @@
+[06_JAVA_AWT]
+java.awt.BorderLayout
+java.awt.Dimension
+java.awt.event.ComponentAdapter
+java.awt.event.ComponentEvent
+java.awt.event.KeyAdapter
+java.awt.event.KeyEvent
+java.awt.event.MouseAdapter
+java.awt.event.MouseEvent
+java.awt.event.MouseMotionAdapter
+java.awt.event.WindowAdapter
+java.awt.event.WindowEvent
+java.awt.GraphicsDevice
+java.awt.GraphicsEnvironment
+java.awt.Point
+java.awt.PointerInfo
+java.awt.Rectangle

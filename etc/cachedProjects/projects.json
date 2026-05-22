@@ -22,5 +22,11 @@
     "name": "Ubuntu 24.04 taciturna",
     "groupsDefinitionFolder": "etc/_ubuntu_24.04",
     "cacheFile": "etc/caches/cache.txt.ubuntu2404taciturna"
+  },
+  {
+    "id": "rpkJava",
+    "name": "RPK java port",
+    "groupsDefinitionFolder": "etc/renderparkJava",
+    "cacheFile": "etc/caches/cache.txt.rpkJava"
   }
 ]

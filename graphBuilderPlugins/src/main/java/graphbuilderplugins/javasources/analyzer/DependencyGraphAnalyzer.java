@@ -26,6 +26,10 @@ public final class DependencyGraphAnalyzer {
     }
 
     public DependencyGraph analyze(List<Path> sourceFolders) {
-        return pipeline.run(sourceFolders);
+        return analyze(sourceFolders, List.of());
+    }
+
+    public DependencyGraph analyze(List<Path> sourceFolders, List<Path> classpathEntries) {
+        return pipeline.run(DependencyGraphAnalysisRequest.of(sourceFolders, classpathEntries));
     }
 }

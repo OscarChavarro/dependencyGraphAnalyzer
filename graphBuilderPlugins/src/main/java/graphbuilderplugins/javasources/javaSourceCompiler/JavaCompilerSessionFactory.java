@@ -26,6 +26,6 @@ public final class JavaCompilerSessionFactory {
 
         DiagnosticCollector<JavaFileObject> diagnostics = new DiagnosticCollector<>();
         StandardJavaFileManager fileManager = compiler.getStandardFileManager(diagnostics, normalizedLocale, normalizedCharset);
-        return new JavaCompilerSession(compiler, fileManager);
+        return new JavaCompilerSession(compiler, fileManager, diagnostics);
     }
 }

@@ -5,5 +5,6 @@ import backend.domain.model.GraphModelGenerator;
 public record UpdateGraphModelRequest(
         GraphModelGenerator generator,
         String groupsDefinitionFolder,
-        String[] inputFolders) {
+        String[] inputFolders,
+        String[] classpath) {
 }

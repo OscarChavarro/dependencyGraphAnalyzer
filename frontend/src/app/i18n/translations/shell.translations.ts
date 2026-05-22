@@ -33,9 +33,21 @@ export const SHELL_TRANSLATIONS = {
     en: 'Analyze C/C++ sources',
     es: 'Analizar fuentes C/C++'
   },
+  JAVA_PROJECT_SELECTOR_LABEL: {
+    en: 'Java project',
+    es: 'Proyecto Java'
+  },
+  ANALYZE_JAVA_SOURCES: {
+    en: 'Analyze Java sources',
+    es: 'Analizar fuentes Java'
+  },
   CPP_PROJECT_REQUIRED: {
     en: 'You must select a C/C++ project.',
     es: 'Debes seleccionar un proyecto C/C++.'
+  },
+  JAVA_PROJECT_REQUIRED: {
+    en: 'You must select a Java project.',
+    es: 'Debes seleccionar un proyecto Java.'
   },
   BACK_TO_STRUCTURE: {
     en: 'Back to structure',

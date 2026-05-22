@@ -14,6 +14,7 @@ import {
   MoveNodeResponse,
   CachedProject,
   CppProject,
+  JavaProject,
   UpdateGraphModelRequest,
   UpdateGraphModelResponse
 } from './model/graph-model';
@@ -72,6 +73,8 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   public selectedCachedProjectId = '';
   public cppProjects: CppProject[] = [];
   public selectedCppProjectId = '';
+  public javaProjects: JavaProject[] = [];
+  public selectedJavaProjectId = '';
 
   private readonly endpointUrl: string;
   private readonly backendBaseUrl: string;
@@ -84,6 +87,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   private currentSvgFilename = 'structure.svg';
   private lastGraphGenerator: GraphModelGenerator = 'CACHE_LOADER';
   private lastInputFolders: string[] = [];
+  private lastClasspath: string[] = [];
   private activeGroupsDefinitionFolder = this.defaultGroupsDefinitionFolder;
   private cachedStructureGroupNames: string[] = [];
   private readonly keyboardInteractionTechniques = new KeyboardInteractionTechniques(this.graphSelectionModel);
@@ -133,6 +137,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     this.restoreGraphModelFromSession();
     this.loadCachedProjects();
     this.loadCppProjects();
+    this.loadJavaProjects();
   }
 
   public ngAfterViewInit(): void {
@@ -214,6 +219,11 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     this.selectedCachedProjectId = target?.value ?? '';
   }
 
+  public onJavaProjectSelectionChange(event: Event): void {
+    const target = event.target as HTMLSelectElement | null;
+    this.selectedJavaProjectId = target?.value ?? '';
+  }
+
   public analyzeCppSources(): void {
     const selectedProject = this.cppProjects.find((project) => project.id === this.selectedCppProjectId);
     if (!selectedProject) {
@@ -221,6 +231,20 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
       return;
     }
     this.updateGraphModel('CPP_SOURCES', selectedProject.groupsDefinitionFolder, selectedProject.inputFolders);
+  }
+
+  public analyzeJavaSources(): void {
+    const selectedProject = this.javaProjects.find((project) => project.id === this.selectedJavaProjectId);
+    if (!selectedProject) {
+      this.errorMessage = this.t(this.i18nKeys.shell.JAVA_PROJECT_REQUIRED);
+      return;
+    }
+    this.updateGraphModel(
+      'JAVA_SOURCES',
+      selectedProject.groupsDefinitionFolder,
+      selectedProject.inputFolders,
+      selectedProject.classpath ?? []
+    );
   }
 
   public toggleSidePanel(): void {
@@ -368,12 +392,31 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  private updateGraphModel(generator: GraphModelGenerator, groupsDefinitionFolder: string, inputFolders: string[]): void {
+  private loadJavaProjects(): void {
+    this.httpClient.get<JavaProject[]>(`${this.backendBaseUrl}/v1/javaProjects`).subscribe({
+      next: (projects) => {
+        this.javaProjects = Array.isArray(projects) ? projects : [];
+        this.selectedJavaProjectId = this.javaProjects[0]?.id ?? '';
+      },
+      error: () => {
+        this.javaProjects = [];
+        this.selectedJavaProjectId = '';
+      }
+    });
+  }
+
+  private updateGraphModel(
+    generator: GraphModelGenerator,
+    groupsDefinitionFolder: string,
+    inputFolders: string[],
+    classpath: string[] = []
+  ): void {
     if (this.isLoading) {
       return;
     }
     this.lastGraphGenerator = generator;
     this.lastInputFolders = [...inputFolders];
+    this.lastClasspath = [...classpath];
     this.activeGroupsDefinitionFolder = groupsDefinitionFolder;
     this.isLoading = true;
     this.errorMessage = '';
@@ -381,7 +424,8 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     const payload: UpdateGraphModelRequest = {
       generator,
       groupsDefinitionFolder,
-      inputFolders
+      inputFolders,
+      classpath
     };
 
     this.httpClient.post<UpdateGraphModelResponse>(this.endpointUrl, payload).subscribe({
@@ -496,7 +540,8 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     const payload: UpdateGraphModelRequest = {
       generator: this.lastGraphGenerator,
       groupsDefinitionFolder: this.activeGroupsDefinitionFolder,
-      inputFolders: this.lastInputFolders
+      inputFolders: this.lastInputFolders,
+      classpath: this.lastClasspath
     };
     const svgToReload = this.currentSvgFilename;
 
@@ -898,7 +943,8 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     const payload: UpdateGraphModelRequest = {
       generator: this.lastGraphGenerator,
       groupsDefinitionFolder: this.activeGroupsDefinitionFolder,
-      inputFolders: this.lastInputFolders
+      inputFolders: this.lastInputFolders,
+      classpath: this.lastClasspath
     };
     this.httpClient.post<EnrichedEdgesResponse>(`${this.backendBaseUrl}/v1/enrichedEdges`, payload).subscribe({
       next: (response) => {

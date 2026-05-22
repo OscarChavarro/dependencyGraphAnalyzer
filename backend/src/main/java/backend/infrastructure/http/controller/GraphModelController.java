@@ -6,6 +6,7 @@ import backend.application.port.in.MoveNodeUseCase;
 import backend.domain.model.GraphModelGenerator;
 import backend.infrastructure.http.dto.CppProjectResponse;
 import backend.infrastructure.http.dto.CachedProjectResponse;
+import backend.infrastructure.http.dto.JavaProjectResponse;
 import backend.infrastructure.http.dto.UpdateGraphModelRequest;
 import backend.infrastructure.http.dto.EnrichedEdgesResponse;
 import backend.infrastructure.http.dto.JavaSourcesGraphRequest;
@@ -19,8 +20,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.validation.Valid;
 import java.util.Arrays;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.BufferedReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.LinkedHashSet;
 import java.util.stream.Stream;
@@ -72,7 +78,8 @@ public class GraphModelController {
                 updateGraphModelUseCase.execute(
                         request.generator(),
                         request.groupsDefinitionFolder(),
-                        request.inputFolders()));
+                        request.inputFolders(),
+                        request.classpath()));
     }
 
     @PostMapping({"/enrichedEdges"})
@@ -107,7 +114,8 @@ public class GraphModelController {
                 updateGraphModelUseCase.execute(
                         GraphModelGenerator.JAVA_SOURCES,
                         request.groupsDefinitionFolder(),
-                        request.inputFolders()));
+                        request.inputFolders(),
+                        request.classpath()));
     }
 
 
@@ -203,6 +211,30 @@ public class GraphModelController {
         }
     }
 
+    @GetMapping({"/javaProjects"})
+    public List<JavaProjectResponse> javaProjects() {
+        Path projectsPath = resolveJavaProjectsPath();
+        if (projectsPath == null) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND,
+                    "java projects config not found: etc/javaProjects/projects.json");
+        }
+        try {
+            List<JavaProjectResponse> configuredProjects = objectMapper.readValue(
+                    projectsPath.toFile(),
+                    new TypeReference<List<JavaProjectResponse>>() {
+                    });
+            return configuredProjects.stream()
+                    .map(this::resolveJavaProjectClasspath)
+                    .toList();
+        } catch (IOException e) {
+            throw new ResponseStatusException(
+                    HttpStatus.INTERNAL_SERVER_ERROR,
+                    "failed reading java projects config",
+                    e);
+        }
+    }
+
     private Path resolveCppProjectsPath() {
         return Stream.of(
                         Path.of("etc", "cppProjects", "projects.json"),
@@ -219,5 +251,107 @@ public class GraphModelController {
                 .filter(Files::isRegularFile)
                 .findFirst()
                 .orElse(null);
+    }
+
+    private Path resolveJavaProjectsPath() {
+        return Stream.of(
+                        Path.of("etc", "javaProjects", "projects.json"),
+                        Path.of("..", "etc", "javaProjects", "projects.json"))
+                .filter(Files::isRegularFile)
+                .findFirst()
+                .orElse(null);
+    }
+
+    private JavaProjectResponse resolveJavaProjectClasspath(JavaProjectResponse project) {
+        String[] fallbackClasspath = project.classpath() == null ? new String[0] : project.classpath();
+        if (project.gradleProjectDir() == null || project.gradleProjectDir().isBlank()
+                || project.gradleModule() == null || project.gradleModule().isBlank()) {
+            return project;
+        }
+
+        try {
+            String[] resolvedClasspath = resolveGradleCompileClasspath(project);
+            if (resolvedClasspath.length == 0) {
+                return project;
+            }
+            return new JavaProjectResponse(
+                    project.id(),
+                    project.name(),
+                    project.groupsDefinitionFolder(),
+                    project.inputFolders(),
+                    resolvedClasspath,
+                    project.gradleProjectDir(),
+                    project.gradleModule(),
+                    project.gradleUserHome());
+        } catch (Exception e) {
+            System.err.println("WARN java-projects: failed to resolve Gradle classpath for project "
+                    + project.id() + ": " + e.getMessage());
+            return new JavaProjectResponse(
+                    project.id(),
+                    project.name(),
+                    project.groupsDefinitionFolder(),
+                    project.inputFolders(),
+                    fallbackClasspath,
+                    project.gradleProjectDir(),
+                    project.gradleModule(),
+                    project.gradleUserHome());
+        }
+    }
+
+    private String[] resolveGradleCompileClasspath(JavaProjectResponse project) throws IOException, InterruptedException {
+        Path initScript = writeGradleClasspathInitScript();
+        String taskName = ":" + project.gradleModule() + ":printCompileClasspathFiles";
+
+        ProcessBuilder processBuilder = new ProcessBuilder("gradle", "-q", "-I", initScript.toString(), taskName);
+        processBuilder.directory(Path.of(project.gradleProjectDir()).toFile());
+        processBuilder.redirectErrorStream(true);
+        if (project.gradleUserHome() != null && !project.gradleUserHome().isBlank()) {
+            processBuilder.environment().put("GRADLE_USER_HOME", project.gradleUserHome());
+        }
+
+        Process process = processBuilder.start();
+        ArrayList<String> lines = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(
+                new InputStreamReader(process.getInputStream(), StandardCharsets.UTF_8))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String trimmed = line.trim();
+                if (!trimmed.isBlank()) {
+                    lines.add(trimmed);
+                }
+            }
+        }
+
+        int exitCode = process.waitFor();
+        if (exitCode != 0) {
+            throw new IllegalStateException("gradle task failed with exit code " + exitCode);
+        }
+
+        return lines.stream()
+                .filter(line -> line.endsWith(".jar") && Path.of(line).isAbsolute())
+                .distinct()
+                .toArray(String[]::new);
+    }
+
+    private Path writeGradleClasspathInitScript() throws IOException {
+        String script = """
+                allprojects {
+                  tasks.register('printCompileClasspathFiles') {
+                    doLast {
+                      if (configurations.findByName('compileClasspath') != null) {
+                        configurations.compileClasspath.resolve().each { println it.absolutePath }
+                      }
+                    }
+                  }
+                }
+                """;
+        Path scriptFile = Files.createTempFile("rpk-classpath-", ".gradle");
+        Files.writeString(
+                scriptFile,
+                script,
+                StandardCharsets.UTF_8,
+                StandardOpenOption.TRUNCATE_EXISTING);
+        scriptFile.toFile().deleteOnExit();
+        return scriptFile;
     }
 }

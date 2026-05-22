@@ -1,0 +1,15 @@
+[12_LINEAL_ALGEBRA]
+
+vsdk.toolkit.common.linealAlgebra.CoordinateAxis
+vsdk.toolkit.common.linealAlgebra.CoordinateSystem
+vsdk.toolkit.common.linealAlgebra.Jacobian
+vsdk.toolkit.common.linealAlgebra.Matrix2x2
+vsdk.toolkit.common.linealAlgebra.Matrix4x4
+vsdk.toolkit.common.linealAlgebra.Matrix4x4d
+vsdk.toolkit.common.linealAlgebra.Numeric
+vsdk.toolkit.common.linealAlgebra.Ray
+vsdk.toolkit.common.linealAlgebra.Vector2D
+vsdk.toolkit.common.linealAlgebra.Vector2Dd
+vsdk.toolkit.common.linealAlgebra.Vector3D
+vsdk.toolkit.common.linealAlgebra.Vector3Dd
+vsdk.toolkit.common.linealAlgebra.Vector4D

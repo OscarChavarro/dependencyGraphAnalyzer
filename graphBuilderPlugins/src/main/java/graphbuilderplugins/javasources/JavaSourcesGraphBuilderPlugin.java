@@ -32,6 +32,11 @@ public final class JavaSourcesGraphBuilderPlugin implements GraphBuilderPlugin {
 
     @Override
     public void build(GraphBuildTarget target, List<String> inputFolders) {
+        build(target, inputFolders, List.of());
+    }
+
+    @Override
+    public void build(GraphBuildTarget target, List<String> inputFolders, List<String> classpathEntries) {
         if (inputFolders == null || inputFolders.isEmpty()) {
             throw new IllegalArgumentException("JAVA_SOURCES requires non-empty inputFolders");
         }
@@ -47,7 +52,16 @@ public final class JavaSourcesGraphBuilderPlugin implements GraphBuilderPlugin {
             throw new IllegalArgumentException("JAVA_SOURCES requires non-empty inputFolders");
         }
 
-        DependencyGraph graph = analyzer.analyze(sourceFolders);
+        List<Path> resolvedClasspathEntries = classpathEntries == null
+                ? List.of()
+                : classpathEntries.stream()
+                        .filter(value -> value != null && !value.isBlank())
+                        .map(String::trim)
+                        .map(Path::of)
+                        .map(Path::normalize)
+                        .toList();
+
+        DependencyGraph graph = analyzer.analyze(sourceFolders, resolvedClasspathEntries);
         for (SourceClassNode node : graph.nodes().values()) {
             target.addNode(node.fqcn());
         }
@@ -56,5 +70,8 @@ public final class JavaSourcesGraphBuilderPlugin implements GraphBuilderPlugin {
                 target.addDependency(node.fqcn(), dependency);
             }
         }
+
+        target.saveCache("cache.txt");
+        System.out.println("Cache graph written to cache.txt");
     }
 }

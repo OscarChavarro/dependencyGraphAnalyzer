@@ -10,4 +10,8 @@ public interface GraphBuilderPlugin {
     default void build(GraphBuildTarget target, List<String> inputFolders) {
         build(target);
     }
+
+    default void build(GraphBuildTarget target, List<String> inputFolders, List<String> classpathEntries) {
+        build(target, inputFolders);
+    }
 }

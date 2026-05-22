@@ -96,6 +96,29 @@
             </button>
           </div>
 
+          <label class="project-selector-label">{{ t(i18nKeys.shell.JAVA_PROJECT_SELECTOR_LABEL) }}</label>
+          <div class="project-action-row">
+            <select
+              class="project-selector project-selector-compact"
+              [value]="selectedJavaProjectId"
+              (change)="onJavaProjectSelectionChange($event)"
+              [disabled]="isLoading || javaProjects.length === 0"
+            >
+              <option *ngFor="let project of javaProjects" [value]="project.id">{{ project.name }}</option>
+            </select>
+
+            <button
+              class="action-button action-button-icon"
+              type="button"
+              (click)="analyzeJavaSources()"
+              [disabled]="isLoading || javaProjects.length === 0 || !selectedJavaProjectId"
+              [attr.aria-label]="t(i18nKeys.shell.ANALYZE_JAVA_SOURCES)"
+              title="Analizar fuentes Java"
+            >
+              ↑
+            </button>
+          </div>
+
           <p class="status-line" *ngIf="isLoading">{{ t(i18nKeys.shell.PROCESSING) }}</p>
           <p class="status-line status-line-error" *ngIf="errorMessage">{{ errorMessage }}</p>
           <p class="status-line" *ngIf="graphModel">

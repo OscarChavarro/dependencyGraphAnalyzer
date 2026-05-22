@@ -26,6 +26,10 @@ public final class DependencyGraphAnalysisRequest {
         return new DependencyGraphAnalysisRequest(sourceFolders, List.of(), List.of(), false);
     }
 
+    public static DependencyGraphAnalysisRequest of(List<Path> sourceFolders, List<Path> classpathEntries) {
+        return new DependencyGraphAnalysisRequest(sourceFolders, classpathEntries, List.of(), false);
+    }
+
     public List<Path> sourceFolders() {
         return sourceFolders;
     }

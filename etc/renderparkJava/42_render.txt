@@ -1,0 +1,12 @@
+[42_RENDER]
+
+vsdk.toolkit.render.Canvas
+vsdk.toolkit.render.OctreeChild
+vsdk.toolkit.render.Potential
+vsdk.toolkit.render.RadianceImageExporter
+vsdk.toolkit.render.RenderHook
+vsdk.toolkit.render.RenderHookFunction
+vsdk.toolkit.render.RenderHookList
+vsdk.toolkit.render.ScreenBuffer
+vsdk.toolkit.render.SoftIds
+vsdk.toolkit.render.SoftIdsWrapper

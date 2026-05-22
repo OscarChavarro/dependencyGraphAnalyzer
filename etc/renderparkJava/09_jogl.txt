@@ -1,0 +1,11 @@
+[09_JOGL]
+
+com.jogamp.opengl.awt.GLJPanel
+com.jogamp.opengl.GL2
+com.jogamp.opengl.GLAutoDrawable
+com.jogamp.opengl.GLCapabilities
+com.jogamp.opengl.GLContext
+com.jogamp.opengl.GLEventListener
+com.jogamp.opengl.GLProfile
+com.jogamp.opengl.glu.GLU
+com.jogamp.opengl.util.gl2.GLUT
