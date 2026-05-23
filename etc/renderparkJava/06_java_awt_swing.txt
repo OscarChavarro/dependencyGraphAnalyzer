@@ -1,4 +1,4 @@
-[06_JAVA_AWT]
+[06_JAVA_AWT_SWING]
 java.awt.BorderLayout
 java.awt.Dimension
 java.awt.event.ComponentAdapter
@@ -15,3 +15,4 @@ java.awt.GraphicsEnvironment
 java.awt.Point
 java.awt.PointerInfo
 java.awt.Rectangle
+javax.swing.JFrame

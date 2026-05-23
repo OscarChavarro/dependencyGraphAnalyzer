@@ -199,7 +199,7 @@ public class GraphModelController {
         if (projectsPath == null) {
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND,
-                    "cpp projects config not found: etc/cppProjects/projects.json");
+                    "cpp projects config not found: etc/projects/cppProjects.json");
         }
         try {
             return objectMapper.readValue(
@@ -220,7 +220,7 @@ public class GraphModelController {
         if (projectsPath == null) {
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND,
-                    "cached projects config not found: etc/cachedProjects/projects.json");
+                    "cached projects config not found: etc/projects/cachedProjects.json");
         }
         try {
             return objectMapper.readValue(
@@ -241,7 +241,7 @@ public class GraphModelController {
         if (projectsPath == null) {
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND,
-                    "java projects config not found: etc/javaProjects/projects.json");
+                    "java projects config not found: etc/projects/javaProjects.json");
         }
         try {
             List<JavaProjectResponse> configuredProjects = objectMapper.readValue(
@@ -265,7 +265,7 @@ public class GraphModelController {
         if (projectsPath == null) {
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND,
-                    "typescript projects config not found: etc/typescriptProjects/projects.json");
+                    "typescript projects config not found: etc/projects/typescriptProjects.json");
         }
         try {
             return objectMapper.readValue(
@@ -282,8 +282,8 @@ public class GraphModelController {
 
     private Path resolveCppProjectsPath() {
         return Stream.of(
-                        Path.of("etc", "cppProjects", "projects.json"),
-                        Path.of("..", "etc", "cppProjects", "projects.json"))
+                        Path.of("etc", "projects", "cppProjects.json"),
+                        Path.of("..", "etc", "projects", "cppProjects.json"))
                 .filter(Files::isRegularFile)
                 .findFirst()
                 .orElse(null);
@@ -291,8 +291,8 @@ public class GraphModelController {
 
     private Path resolveCachedProjectsPath() {
         return Stream.of(
-                        Path.of("etc", "cachedProjects", "projects.json"),
-                        Path.of("..", "etc", "cachedProjects", "projects.json"))
+                        Path.of("etc", "projects", "cachedProjects.json"),
+                        Path.of("..", "etc", "projects", "cachedProjects.json"))
                 .filter(Files::isRegularFile)
                 .findFirst()
                 .orElse(null);
@@ -300,8 +300,8 @@ public class GraphModelController {
 
     private Path resolveJavaProjectsPath() {
         return Stream.of(
-                        Path.of("etc", "javaProjects", "projects.json"),
-                        Path.of("..", "etc", "javaProjects", "projects.json"))
+                        Path.of("etc", "projects", "javaProjects.json"),
+                        Path.of("..", "etc", "projects", "javaProjects.json"))
                 .filter(Files::isRegularFile)
                 .findFirst()
                 .orElse(null);
@@ -309,8 +309,8 @@ public class GraphModelController {
 
     private Path resolveTypeScriptProjectsPath() {
         return Stream.of(
-                        Path.of("etc", "typescriptProjects", "projects.json"),
-                        Path.of("..", "etc", "typescriptProjects", "projects.json"))
+                        Path.of("etc", "projects", "typescriptProjects.json"),
+                        Path.of("..", "etc", "projects", "typescriptProjects.json"))
                 .filter(Files::isRegularFile)
                 .findFirst()
                 .orElse(null);

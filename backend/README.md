@@ -10,7 +10,7 @@ Java 17/Spring Boot service exposing the graph generation, query, and editing AP
 - Group nodes, capture orphan nodes in `999_orphans`, apply markers, reduce transitive relations, and export Graphviz artifacts.
 - Serve generated SVGs from `output/svg`.
 - Query relations between groups and move nodes between group definition files.
-- Read project catalogs from `etc/*Projects/projects.json`.
+- Read project catalogs from `etc/projects/<plugin>Projects.json`.
 - Configure CORS from `secrets.json` or `BACKEND_SECRETS_FILE`.
 
 ## Architecture
@@ -35,10 +35,10 @@ Java 17/Spring Boot service exposing the graph generation, query, and editing AP
 | `POST` | `/v1/enrichedEdges` | Compute group.package edges from cache and group definitions. |
 | `POST` | `/v1/groupRelations` | Search relations between two groups in `output/cleanRelationsGraph.txt`. |
 | `POST` | `/v1/moveNode` | Move one or more nodes between existing group files. |
-| `GET` | `/v1/cachedProjects` | Read `etc/cachedProjects/projects.json`. |
-| `GET` | `/v1/cppProjects` | Read `etc/cppProjects/projects.json`. |
-| `GET` | `/v1/javaProjects` | Read `etc/javaProjects/projects.json` and optionally resolve classpath with Gradle. |
-| `GET` | `/v1/typescriptProjects` | Read `etc/typescriptProjects/projects.json`. |
+| `GET` | `/v1/cachedProjects` | Read `etc/projects/cachedProjects.json`. |
+| `GET` | `/v1/cppProjects` | Read `etc/projects/cppProjects.json`. |
+| `GET` | `/v1/javaProjects` | Read `etc/projects/javaProjects.json` and optionally resolve classpath with Gradle. |
+| `GET` | `/v1/typescriptProjects` | Read `etc/projects/typescriptProjects.json`. |
 | `GET` | `/output/svg/{filename}` | Serve a generated `.svg`; rejects paths and non-SVG filenames. |
 
 ## Main Payloads

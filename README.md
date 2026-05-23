@@ -35,10 +35,10 @@ The root `settings.gradle` uses a Gradle composite build for `backend` and `grap
 ## Relevant Structure
 
 - `etc/`: group definitions and project catalogs.
-  - `etc/cachedProjects/projects.json`: cache projects exposed to the UI.
-  - `etc/cppProjects/projects.json`: C/C++ projects exposed to the UI.
-  - `etc/javaProjects/projects.json`: Java projects, with either fixed classpath entries or Gradle-based classpath resolution.
-  - `etc/typescriptProjects/projects.json`: TypeScript projects exposed to the UI.
+  - `etc/projects/cachedProjects.json`: cache projects exposed to the UI.
+  - `etc/projects/cppProjects.json`: C/C++ projects exposed to the UI.
+  - `etc/projects/javaProjects.json`: Java projects, with either fixed classpath entries or Gradle-based classpath resolution.
+  - `etc/projects/typescriptProjects.json`: TypeScript projects exposed to the UI.
   - `etc/highlightRules/`: highlighting rules used by the core engine.
 - `u` and `v`: symlinks to Ubuntu definition folders used by local defaults.
 - `cache.txt` and `cache_extra.txt*`: historical caches in the simple node/edge format.

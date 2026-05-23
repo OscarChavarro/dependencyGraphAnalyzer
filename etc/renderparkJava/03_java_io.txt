@@ -1,9 +1,0 @@
-[03_JAVA_IO]
-
-java.io.EOFException
-java.io.File
-java.io.FileInputStream
-java.io.FileOutputStream
-java.io.InputStream
-java.io.OutputStream
-java.io.PrintStream

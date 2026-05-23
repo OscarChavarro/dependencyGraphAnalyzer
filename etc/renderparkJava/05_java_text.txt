@@ -1,4 +1,0 @@
-[05_JAVA_TEXT]
-
-java.text.DecimalFormat
-java.text.FieldPosition

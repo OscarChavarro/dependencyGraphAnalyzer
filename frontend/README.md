@@ -82,6 +82,6 @@ npm test
 1. Start the backend on `http://localhost:8080`.
 2. Adjust `public/environment.json` if the backend runs on another host or port.
 3. Start the frontend with `npm start`.
-4. Use the generation panel selectors. Available data comes from `etc/cachedProjects`, `etc/cppProjects`, and `etc/javaProjects` on the backend side.
+4. Use the generation panel selectors. Available data comes from `etc/projects/cachedProjects.json`, `etc/projects/cppProjects.json`, and `etc/projects/javaProjects.json` on the backend side.
 
 The frontend does not generate graphs by itself: it always requires the backend to produce both the snapshot and the SVGs in `output/`.

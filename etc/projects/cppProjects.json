@@ -1,0 +1,21 @@
+[
+  {
+    "id": "renderpark",
+    "name": "Renderpark (C++-11)",
+    "groupsDefinitionFolder": "./etc/renderpark",
+    "inputFolders": [
+      "/paradigmas/master/algoritmos_basicos_3d/renderpark/rpkCpp/cpp/base/src/",
+      "/paradigmas/master/algoritmos_basicos_3d/renderpark/rpkCpp/cpp/opengl/src/",
+      "/paradigmas/master/algoritmos_basicos_3d/renderpark/rpkCpp/cpp/testsuite/ApplicationCases/RenderparkApplication/src/"
+    ]
+  },
+  {
+    "id": "renderparkTurboC",
+    "name": "Renderpark (TurboC)",
+    "groupsDefinitionFolder": "./etc/renderparkTurboC",
+    "inputFolders": [
+	"/paradigmas/master/algoritmos_basicos_3d/renderpark/rpkCpp/turboc/base/src/",
+	"/paradigmas/master/algoritmos_basicos_3d/renderpark/rpkCpp/turboc/testsuite/ApplicationCases/RenderparkApplication/src/"
+    ]
+  }
+]

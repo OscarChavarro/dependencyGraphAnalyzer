@@ -1,3 +1,0 @@
-[07_JAVAX_SWING]
-
-javax.swing.JFrame
