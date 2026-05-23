@@ -68,6 +68,9 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   public relationBoxVisible = false;
   public relationBoxText = '';
   public relationBoxLines: RelationLineViewModel[] = [];
+  public renameGroupDialogVisible = false;
+  public renameGroupCurrentName = '';
+  public renameGroupNextName = '';
   public readonly selectedLanguage;
   public readonly i18nKeys = I18N_KEYS;
   public nodeFilterPattern = '';
@@ -110,6 +113,11 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     this.syncCanvasResolutionWithDisplay();
   };
   private readonly onGlobalGraphCycleKeyDown = (event: KeyboardEvent): void => {
+    if (this.renameGroupDialogVisible && event.key === 'Escape') {
+      event.preventDefault();
+      this.closeRenameGroupDialog();
+      return;
+    }
     if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') {
       return;
     }
@@ -164,6 +172,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
         this.graphSelectionModel,
         this.menuRenderer,
         (event) => this.graphRenderer.pickNodeNameFromEvent(event),
+        (event) => this.graphRenderer.pickRectangularNodeNameFromEvent(event),
         (selectedNodes) => this.applySelection(selectedNodes),
         () => this.currentSvgFilename === 'structure.svg',
         (filename) => this.loadAndRenderGraphSvg(filename),
@@ -171,6 +180,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
         (selectedNodes) => this.onInundateClients(selectedNodes),
         (selectedNodes) => this.onShowRelation(selectedNodes),
         (selectedNodes, targetGroup) => this.onMoveTo(selectedNodes, targetGroup),
+        (groupToken) => this.onRenameGroupRequested(groupToken),
         () => this.listStructureGroupNames(),
         (id) => this.t(id)
       );
@@ -320,6 +330,53 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
       return;
     }
     this.selectedNodeActionMenuInteractionTechnique?.openContextMenuForNode(nodeName, event);
+  }
+
+  public onRenameGroupInput(event: Event): void {
+    const target = event.target as HTMLInputElement | null;
+    const normalized = (target?.value ?? '').replace(/ /g, '_');
+    this.renameGroupNextName = normalized;
+    if (target && target.value !== normalized) {
+      target.value = normalized;
+    }
+  }
+
+  public closeRenameGroupDialog(): void {
+    this.renameGroupDialogVisible = false;
+    this.renameGroupCurrentName = '';
+    this.renameGroupNextName = '';
+  }
+
+  public onRenameGroupKeyDown(event: KeyboardEvent): void {
+    if (event.key === ' ') {
+      event.preventDefault();
+      const input = event.target as HTMLInputElement | null;
+      if (!input) {
+        return;
+      }
+      const start = input.selectionStart ?? input.value.length;
+      const end = input.selectionEnd ?? input.value.length;
+      const nextValue = `${input.value.slice(0, start)}_${input.value.slice(end)}`;
+      input.value = nextValue;
+      input.setSelectionRange(start + 1, start + 1);
+      this.renameGroupNextName = nextValue;
+      return;
+    }
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      this.closeRenameGroupDialog();
+      return;
+    }
+    if (event.key !== 'Enter') {
+      return;
+    }
+    event.preventDefault();
+    const newName = this.renameGroupNextName.trim();
+    if (!/^\d+_[A-Za-z0-9_]+$/.test(newName)) {
+      return;
+    }
+    this.requestRenameGroupInBackend(this.renameGroupCurrentName, newName);
+    this.closeRenameGroupDialog();
   }
 
   public isNodeSelected(nodeName: string): boolean {
@@ -522,6 +579,36 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
 
   private onInundateDependencies(selectedNodes: string[]): void {
     this.applyFlooding(selectedNodes, 'dependencies');
+  }
+
+  private onRenameGroupRequested(groupToken: string): void {
+    this.selectedNodeActionMenuInteractionTechnique?.closeMenu();
+    this.menuRenderer?.close();
+    this.renameGroupCurrentName = groupToken.toLowerCase();
+    this.renameGroupNextName = '';
+    this.renameGroupDialogVisible = true;
+  }
+
+  private requestRenameGroupInBackend(groupToken: string, newGroupName: string): void {
+    if (this.isLoading) {
+      return;
+    }
+    this.isLoading = true;
+    this.errorMessage = '';
+    const payload = {
+      groupFolder: this.activeGroupsDefinitionFolder,
+      oldGroupName: groupToken,
+      newGroupName
+    };
+    this.httpClient.post(`${this.backendBaseUrl}/v1/renameNode`, payload).subscribe({
+      next: () => {
+        this.refreshGraphModelAndReloadCurrentSvg();
+      },
+      error: () => {
+        this.errorMessage = this.t(this.i18nKeys.shell.RENAME_GROUP_BACKEND_NOT_READY);
+        this.isLoading = false;
+      }
+    });
   }
 
   private onInundateClients(selectedNodes: string[]): void {

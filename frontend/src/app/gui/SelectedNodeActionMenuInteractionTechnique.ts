@@ -12,7 +12,8 @@ export class SelectedNodeActionMenuInteractionTechnique {
   public constructor(
     private readonly graphModel: GraphModel,
     private readonly menuRenderer: MenuRenderer,
-    private readonly pickNodeFromEvent: (event: MouseEvent) => string | null,
+    private readonly pickEllipseNodeFromEvent: (event: MouseEvent) => string | null,
+    private readonly pickRectangularNodeFromEvent: (event: MouseEvent) => string | null,
     private readonly onSelectionChanged: (selectedNodes: string[]) => void,
     private readonly isStructureGraphProvider: () => boolean,
     private readonly openGraphByFilename: (filename: string) => void,
@@ -20,6 +21,7 @@ export class SelectedNodeActionMenuInteractionTechnique {
     private readonly inundateClients: (selectedNodes: string[]) => void,
     private readonly showRelation: (selectedNodes: string[]) => void,
     private readonly moveTo: (selectedNodes: string[], targetGroup: string) => void,
+    private readonly requestRenameGroup: (groupToken: string) => void,
     private readonly listStructureGroups: () => string[],
     private readonly translate: (id: TranslationKey) => string
   ) {}
@@ -71,11 +73,18 @@ export class SelectedNodeActionMenuInteractionTechnique {
   };
 
   private readonly onContextMenu = (event: MouseEvent): void => {
-    const hoveredNodeName = this.pickNodeFromEvent(event);
-    this.openContextMenu(event, hoveredNodeName);
+    if (!(event.target instanceof HTMLCanvasElement)) {
+      return;
+    }
+    this.openContextMenu(event, null);
   };
 
-  private openContextMenu(event: MouseEvent, hoveredNodeName: string | null): void {
+  private openContextMenu(event: MouseEvent, explicitNodeName: string | null): void {
+    const allowRenameMenu = explicitNodeName === null && event.target instanceof HTMLCanvasElement;
+    const structureMode = this.isStructureGraphProvider();
+    const ellipseNodeName = explicitNodeName ?? this.pickEllipseNodeFromEvent(event);
+    const rectangularNodeName = explicitNodeName ? null : this.pickRectangularNodeFromEvent(event);
+    const hoveredNodeName = ellipseNodeName ?? rectangularNodeName;
     if (!hoveredNodeName) {
       return;
     }
@@ -91,11 +100,26 @@ export class SelectedNodeActionMenuInteractionTechnique {
     this.lastMouseX = event.clientX;
     this.lastMouseY = event.clientY;
 
-    const menu = this.buildMenuModel();
+    const groupNodeForRename = allowRenameMenu
+      ? this.resolveGroupNodeForRename(structureMode, ellipseNodeName, rectangularNodeName)
+      : null;
+    const menu = groupNodeForRename ? this.buildRenameMenuModel(groupNodeForRename) : this.buildMenuModel();
     if (menu.options.length === 0) {
       return;
     }
     this.menuRenderer.open(menu, this.lastMouseX, this.lastMouseY);
+  }
+
+  private buildRenameMenuModel(groupToken: string): Menu {
+    return new Menu([
+      new MenuOption(
+        'shell.MENU_RENAME_GROUP',
+        this.translate('shell.MENU_RENAME_GROUP'),
+        () => this.requestRenameGroup(groupToken),
+        null,
+        null
+      )
+    ]);
   }
 
   private buildMenuModel(): Menu {
@@ -173,5 +197,36 @@ export class SelectedNodeActionMenuInteractionTechnique {
     }
 
     return `${match[1].toLowerCase()}.svg`;
+  }
+
+  private resolveGroupNodeForRename(
+    structureMode: boolean,
+    ellipseNodeName: string | null,
+    rectangularNodeName: string | null
+  ): string | null {
+    if (this.graphModel.selectedNodes.length > 1) {
+      return null;
+    }
+
+    if (structureMode) {
+      return this.extractGroupTokenFromNodeName(ellipseNodeName);
+    }
+
+    return this.extractGroupTokenFromNodeName(rectangularNodeName);
+  }
+
+  private extractGroupTokenFromNodeName(nodeName: string | null): string | null {
+    if (!nodeName) {
+      return null;
+    }
+
+    const trimmed = nodeName.trim();
+    const bracketMatch = trimmed.match(/^_?\[(.+)\]$/);
+    if (bracketMatch?.[1]) {
+      const token = bracketMatch[1].trim().toLowerCase();
+      return token.length > 0 && token !== 'structure' ? token : null;
+    }
+
+    return /^\d+_[A-Za-z0-9_]+$/.test(trimmed) ? trimmed.toLowerCase() : null;
   }
 }

@@ -1,4 +1,4 @@
-[29_ENVIRONMENT]
+[29_SCENE]
 environment/camera/Viewpoint.cpp
 environment/camera/Viewpoint.h
 environment/scene/ObjectUtils.h
@@ -7,3 +7,10 @@ environment/scene/factory/ModelFactory.cpp
 environment/scene/factory/ModelFactory.h
 environment/scene/SceneObject.h
 environment/scene/SceneFrame.h
+
+environment/scene/factory/ModelBuilder.h
+environment/scene/factory/ModelBuilder.cpp
+environment/scene/SimpleBodyFactory.cpp
+environment/scene/SimpleBodyFactory.h
+environment/scene/ModelBuilder.cpp
+environment/scene/ModelBuilder.h

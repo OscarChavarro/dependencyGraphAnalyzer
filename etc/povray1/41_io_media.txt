@@ -1,0 +1,8 @@
+[41_IO_MEDIA]
+
+io/pov/mediaParser/ColorMapParser.cpp
+io/pov/mediaParser/ColorMapParser.h
+io/pov/mediaParser/DefaultTextureParser.cpp
+io/pov/mediaParser/DefaultTextureParser.h
+io/pov/mediaParser/TextureParser.cpp
+io/pov/mediaParser/TextureParser.h

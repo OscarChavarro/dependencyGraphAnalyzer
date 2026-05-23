@@ -1,0 +1,23 @@
+meta {
+  name: POST /v1/renameNode
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{baseUrl}}/v1/renameNode
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "groupFolder": "../u/",
+    "oldGroupName": "95_old_name",
+    "newGroupName": "95_new_name"
+  }
+}

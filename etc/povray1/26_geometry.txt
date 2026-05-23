@@ -35,3 +35,5 @@ environment/geometry/volume/polynomial/PolynomialShape.h
 environment/geometry/volume/polynomial/PolynomialConstants.h
 common/Polynomial.h
 environment/geometry/volume/polynomial/Polynomial.h
+
+environment/geometry/GeometryUtils.h

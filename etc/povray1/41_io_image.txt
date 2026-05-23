@@ -1,0 +1,16 @@
+[41_IO_IMAGE]
+
+io/image/ChunkHeader.h
+io/image/DumpFormat.cpp
+io/image/DumpFormat.h
+io/image/GifDecoder.cpp
+io/image/GifDecoder.h
+io/image/GifFormat.cpp
+io/image/GifFormat.h
+io/image/IffFormat.cpp
+io/image/IffFormat.h
+io/image/ImageOutput.h
+io/image/RawFormat.cpp
+io/image/RawFormat.h
+io/image/TargaFormat.cpp
+io/image/TargaFormat.h

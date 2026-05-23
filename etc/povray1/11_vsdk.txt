@@ -1,0 +1,4 @@
+[11_VSDK]
+
+io/PersistenceElement.cpp
+io/PersistenceElement.h

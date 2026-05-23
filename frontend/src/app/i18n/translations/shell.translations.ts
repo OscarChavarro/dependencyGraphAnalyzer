@@ -133,9 +133,21 @@ export const SHELL_TRANSLATIONS = {
     en: 'Move to...',
     es: 'Mover a...'
   },
+  MENU_RENAME_GROUP: {
+    en: 'Rename...',
+    es: 'Renombrar...'
+  },
   MOVE_VERB: {
     en: 'Move',
     es: 'Mover'
+  },
+  RENAME_GROUP_NEW_NAME_PLACEHOLDER: {
+    en: 'New name',
+    es: 'Nuevo nombre'
+  },
+  RENAME_GROUP_BACKEND_NOT_READY: {
+    en: 'Could not rename group.',
+    es: 'No se pudo renombrar el grupo.'
   },
   MENU_NO_GROUPS_AVAILABLE: {
     en: 'No groups available',
