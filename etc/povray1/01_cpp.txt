@@ -6,3 +6,7 @@ ctime
 cctype
 cstdlib
 cstring
+cstdarg
+vector
+string
+cerrno

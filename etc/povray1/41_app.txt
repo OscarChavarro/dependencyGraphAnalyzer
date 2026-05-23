@@ -1,2 +1,0 @@
-[41_APP]
-app/Povray.cpp

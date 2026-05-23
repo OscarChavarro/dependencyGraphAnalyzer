@@ -4,3 +4,16 @@ render/LightingEngine.h
 render/RenderEngine.cpp
 render/RenderEngine.h
 render/RenderFrame.h
+
+app/UnixPlatform.cpp
+app/UnixPlatform.h
+render/RenderingConfiguration.cpp
+render/RenderingConfiguration.h
+render/Statistics.cpp
+render/Statistics.h
+render/RenderFileHandleAdapter.cpp
+render/RenderFileHandleAdapter.h
+render/RenderFileInputStreamAdapter.h
+render/RenderOutput.h
+render/RayShaderPipeline.cpp
+render/RayShaderPipeline.h

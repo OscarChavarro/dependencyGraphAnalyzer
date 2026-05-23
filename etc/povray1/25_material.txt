@@ -1,0 +1,4 @@
+[25_MATERIAL]
+
+environment/material/RendererConfiguration.cpp
+environment/material/RendererConfiguration.h

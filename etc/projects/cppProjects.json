@@ -25,5 +25,14 @@
       "inputFolders": [
         "/paradigmas/master/algoritmos_basicos_3d/povray_1.0_1992/povCpp/src"
     ]
+  },
+  {
+    "id": "vulkanSimple",
+    "name": "Vulkan simple GPU raytracer",
+    "groupsDefinitionFolder": "./etc/vulkanSimple",
+      "inputFolders": [
+	  "/paradigmas/master/vulkan/simpleRaytracer/base/src/main/",
+	  "/paradigmas/master/vulkan/simpleRaytracer/testsuite/vulkan13/WhittedRaytracer/src/"
+    ]
   }
 ]

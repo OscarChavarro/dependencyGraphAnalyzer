@@ -1,5 +1,4 @@
 [13_COLOR]
-
 common/color/Color.cpp
 common/color/Color.h
 common/color/RGBAColor.h

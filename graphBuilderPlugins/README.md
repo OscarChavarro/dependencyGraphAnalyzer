@@ -52,7 +52,7 @@ Requires `dpkg-query` and `apt-cache` on `PATH`.
 Builds a graph from C/C++ source folders:
 
 - Requires non-empty `inputFolders`.
-- Walks `.h` and `.cpp` files.
+- Walks `.h`, `.cpp`, and `.txx` files.
 - Uses the path relative to the best matching input root as the node name.
 - Creates edges for every `#include "..."` or `#include <...>` directive.
 - Adds include targets as nodes even when they do not exist as local files.

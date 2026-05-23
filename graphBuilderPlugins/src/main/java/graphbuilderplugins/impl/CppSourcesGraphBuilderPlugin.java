@@ -165,7 +165,9 @@ public class CppSourcesGraphBuilderPlugin implements GraphBuilderPlugin {
 
     private boolean isSourceFile(Path path) {
         String normalized = path.toString().replace('\\', '/');
-        return normalized.endsWith(".h") || normalized.endsWith(".cpp");
+        return normalized.endsWith(".h")
+                || normalized.endsWith(".cpp")
+                || normalized.endsWith(".txx");
     }
 
     private String normalizePath(String value) {

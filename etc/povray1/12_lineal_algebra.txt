@@ -1,2 +1,0 @@
-[12_LINEAL_ALGEBRA]
-common/linealAlgebra/Vector3Dd.h

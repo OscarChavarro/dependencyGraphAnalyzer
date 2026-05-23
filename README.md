@@ -92,7 +92,7 @@ The frontend reads `frontend/public/environment.json` at startup. If `backend.ur
 
 - `CACHE_LOADER`: reads `cache.txt` and `cache_extra.txt` by default, or the files provided in `inputFolders`.
 - `DEBIAN_PACKAGE_GENERATOR`: reads installed packages with `dpkg-query -l` and dependencies with `apt-cache depends`.
-- `CPP_SOURCES`: walks input folders, creates nodes for `.h` and `.cpp` files, and creates edges from `#include` directives.
+- `CPP_SOURCES`: walks input folders, creates nodes for `.h`, `.cpp`, and `.txx` files, and creates edges from `#include` directives.
 - `JAVA_SOURCES`: analyzes `.java` sources with the Java compiler API, resolving semantic dependencies with an optional classpath.
 - `TYPESCRIPT_SOURCES`: analyzes `.ts/.tsx/.mts/.cts` modules with the TypeScript compiler API, builds an MVP dependency graph by module/file from resolved imports/exports, and leaves symbol-level semantic analysis for a later phase.
 

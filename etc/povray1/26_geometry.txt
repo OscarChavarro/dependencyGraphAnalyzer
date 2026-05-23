@@ -1,15 +1,4 @@
-[25_GEOMETRY]
-environment/geometry/Geometry.h
-environment/geometry/GeometryOperations.h
-environment/geometry/Intersection.h
-environment/geometry/Methods.h
-environment/geometry/elements/Ray.cpp
-environment/geometry/elements/Ray.h
-environment/geometry/elements/RayWithSegments.cpp
-environment/geometry/elements/RayWithSegments.h
-environment/geometry/elements/SmoothTriangle.h
-environment/geometry/elements/Triangle.cpp
-environment/geometry/elements/Triangle.h
+[26_GEOMETRY]
 environment/geometry/surface/InfinitePlane.cpp
 environment/geometry/surface/InfinitePlane.h
 environment/geometry/surface/parametric/ParametricBiCubicIntersection.cpp
@@ -42,3 +31,7 @@ environment/geometry/volume/compound/Composite.cpp
 environment/geometry/volume/compound/Composite.h
 environment/geometry/volume/polynomial/PolynomialShape.cpp
 environment/geometry/volume/polynomial/PolynomialShape.h
+
+environment/geometry/volume/polynomial/PolynomialConstants.h
+common/Polynomial.h
+environment/geometry/volume/polynomial/Polynomial.h

@@ -1,0 +1,6 @@
+[14_LINEAL_ALGEBRA]
+common/linealAlgebra/Vector3Dd.h
+common/Transformation.cpp
+common/Transformation.h
+common/linealAlgebra/Transformation.cpp
+common/linealAlgebra/Transformation.h
