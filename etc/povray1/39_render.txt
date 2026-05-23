@@ -1,0 +1,6 @@
+[39_RENDER]
+render/LightingEngine.cpp
+render/LightingEngine.h
+render/RenderEngine.cpp
+render/RenderEngine.h
+render/RenderFrame.h

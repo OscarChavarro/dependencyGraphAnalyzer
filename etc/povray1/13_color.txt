@@ -1,0 +1,7 @@
+[13_COLOR]
+
+common/color/Color.cpp
+common/color/Color.h
+common/color/RGBAColor.h
+common/color/RGBAColorPalette.h
+common/color/RGBAColorPaletteSpan.h

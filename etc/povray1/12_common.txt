@@ -1,0 +1,10 @@
+[12_COMMON]
+common/Config.h
+common/FrameConfig.h
+common/Polynomial.h
+common/Transformation.cpp
+common/Transformation.h
+
+app/PovApp.h
+app/UnixPlatform.cpp
+app/UnixPlatform.h

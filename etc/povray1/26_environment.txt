@@ -1,0 +1,7 @@
+[26_ENVIRONMENT]
+environment/camera/Viewpoint.cpp
+environment/camera/Viewpoint.h
+environment/light/Light.cpp
+environment/light/Light.h
+environment/scene/ObjectUtils.h
+environment/scene/SimpleBody.h
