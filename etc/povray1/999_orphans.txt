@@ -2,3 +2,5 @@
 render/shaders/ShaderPipeline.cpp
 render/shaders/ShaderPipeline.h
 app/RenderOutput.h
+render/RenderState.cpp
+render/RenderState.h

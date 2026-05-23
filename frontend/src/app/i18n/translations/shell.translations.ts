@@ -101,6 +101,10 @@ export const SHELL_TRANSLATIONS = {
     en: 'Search...',
     es: 'Buscar...'
   },
+  MENU_ADD_NEW_GROUP_PLACEHOLDER: {
+    en: 'Add to new group...',
+    es: 'Agregar a nuevo grupo...'
+  },
   FILTER_NODE_PLACEHOLDER: {
     en: 'Filter node...',
     es: 'Filtrar nodo...'

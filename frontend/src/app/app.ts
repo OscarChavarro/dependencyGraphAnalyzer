@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { BACKEND_BASE_URL } from './config-tokens';
 import { Html5CanvasGraphRenderer } from './render/Html5CanvasGraphRenderer';
@@ -12,6 +12,8 @@ import {
   GroupRelationsResponse,
   MoveNodeRequest,
   MoveNodeResponse,
+  CreateNewGroupRequest,
+  CreateNewGroupResponse,
   CachedProject,
   CppProject,
   JavaProject,
@@ -548,23 +550,83 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
       return;
     }
 
+    this.performMoveTo(originNodes, originGroup, destinationGroup);
+  }
+
+  public onCreateNewGroupRequested(newGroupName: string): void {
+    this.selectedNodeActionMenuInteractionTechnique?.closeMenu();
+    this.menuRenderer?.close();
+    if (this.isLoading) {
+      return;
+    }
+
+    const originNodes = [...new Set(this.graphSelectionModel.selectedNodes.map((node) => node.trim()).filter((node) => node.length > 0))];
+    if (originNodes.length === 0) {
+      this.errorMessage = 'Debes seleccionar al menos un nodo para mover.';
+      return;
+    }
+
+    const originGroup = this.extractGroupFromCurrentSvgFilename()?.toLowerCase() ?? null;
+    if (!originGroup) {
+      this.errorMessage = 'No se pudo determinar el grupo origen para mover el nodo.';
+      return;
+    }
+
+    const createPayload: CreateNewGroupRequest = {
+      groupFolder: this.activeGroupsDefinitionFolder,
+      newGroupName
+    };
+
     this.isLoading = true;
     this.errorMessage = '';
+    this.httpClient.put<CreateNewGroupResponse>(`${this.backendBaseUrl}/v1/createNewGroup`, createPayload).subscribe({
+      next: () => this.performMoveTo(originNodes, originGroup, newGroupName, false),
+      error: (error) => {
+        this.errorMessage = this.extractApiErrorMessage(error, 'Could not create the new group.');
+        this.isLoading = false;
+      }
+    });
+  }
+
+  private performMoveTo(
+    originNodes: string[],
+    originGroup: string,
+    destinationGroup: string,
+    startLoading = true
+  ): void {
+    if (startLoading) {
+      this.isLoading = true;
+      this.errorMessage = '';
+    }
 
     const movePayload: MoveNodeRequest = {
       groupFolder: this.activeGroupsDefinitionFolder,
       originGroup,
       originNodes,
-      destinationGroup
+      destinationGroup: destinationGroup.toLowerCase()
     };
 
     this.httpClient.post<MoveNodeResponse>(`${this.backendBaseUrl}/v1/moveNode`, movePayload).subscribe({
       next: () => this.refreshGraphModelAndReloadCurrentSvg(),
-      error: () => {
-        this.errorMessage = 'No se pudo mover el nodo al grupo destino.';
+      error: (error) => {
+        this.errorMessage = this.extractApiErrorMessage(error, 'No se pudo mover el nodo al grupo destino.');
         this.isLoading = false;
       }
     });
+  }
+
+  private extractApiErrorMessage(error: unknown, fallback: string): string {
+    if (!(error instanceof HttpErrorResponse) || !error.error) {
+      return fallback;
+    }
+    const payload = error.error as { details?: string[]; message?: string };
+    if (Array.isArray(payload.details) && payload.details.length > 0) {
+      return payload.details.join(' | ');
+    }
+    if (typeof payload.message === 'string' && payload.message.trim().length > 0) {
+      return payload.message;
+    }
+    return fallback;
   }
 
   private refreshGraphModelAndReloadCurrentSvg(): void {

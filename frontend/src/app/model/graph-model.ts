@@ -56,6 +56,15 @@ export interface MoveNodeResponse {
   moved: boolean;
 }
 
+export interface CreateNewGroupRequest {
+  groupFolder: string;
+  newGroupName: string;
+}
+
+export interface CreateNewGroupResponse {
+  created: boolean;
+}
+
 export interface CppProject {
   id: string;
   name: string;

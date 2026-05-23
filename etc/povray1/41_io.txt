@@ -132,3 +132,5 @@ io/image/ImageFileHandle.h
 io/PersistenceElement.cpp
 io/PersistenceElement.h
 io/image/ImageOutput.h
+io/pov/ParserContext.cpp
+io/pov/ParserContext.h

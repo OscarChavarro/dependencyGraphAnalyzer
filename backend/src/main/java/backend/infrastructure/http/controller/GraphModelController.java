@@ -3,6 +3,7 @@ package backend.infrastructure.http.controller;
 import backend.application.port.in.UpdateGraphModelUseCase;
 import backend.application.port.in.BuildEnrichedEdgesUseCase;
 import backend.application.port.in.MoveNodeUseCase;
+import backend.application.port.in.CreateNewGroupUseCase;
 import backend.domain.model.GraphModelGenerator;
 import backend.infrastructure.http.dto.CppProjectResponse;
 import backend.infrastructure.http.dto.CachedProjectResponse;
@@ -14,6 +15,8 @@ import backend.infrastructure.http.dto.JavaSourcesGraphRequest;
 import backend.infrastructure.http.dto.TypeScriptSourcesGraphRequest;
 import backend.infrastructure.http.dto.MoveNodeRequest;
 import backend.infrastructure.http.dto.MoveNodeResponse;
+import backend.infrastructure.http.dto.CreateNewGroupRequest;
+import backend.infrastructure.http.dto.CreateNewGroupResponse;
 import backend.infrastructure.http.dto.GroupRelationsRequest;
 import backend.infrastructure.http.dto.GroupRelationsResponse;
 import backend.infrastructure.http.dto.UpdateGraphModelResponse;
@@ -35,6 +38,7 @@ import java.util.stream.Stream;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -46,16 +50,19 @@ public class GraphModelController {
     private final UpdateGraphModelUseCase updateGraphModelUseCase;
     private final BuildEnrichedEdgesUseCase buildEnrichedEdgesUseCase;
     private final MoveNodeUseCase moveNodeUseCase;
+    private final CreateNewGroupUseCase createNewGroupUseCase;
     private final ObjectMapper objectMapper;
 
     public GraphModelController(
             UpdateGraphModelUseCase updateGraphModelUseCase,
             BuildEnrichedEdgesUseCase buildEnrichedEdgesUseCase,
             MoveNodeUseCase moveNodeUseCase,
+            CreateNewGroupUseCase createNewGroupUseCase,
             ObjectMapper objectMapper) {
         this.updateGraphModelUseCase = updateGraphModelUseCase;
         this.buildEnrichedEdgesUseCase = buildEnrichedEdgesUseCase;
         this.moveNodeUseCase = moveNodeUseCase;
+        this.createNewGroupUseCase = createNewGroupUseCase;
         this.objectMapper = objectMapper;
     }
 
@@ -191,6 +198,12 @@ public class GraphModelController {
                 new LinkedHashSet<>(Arrays.asList(request.originNodes())),
                 request.destinationGroup());
         return new MoveNodeResponse(true, message);
+    }
+
+    @PutMapping({"/createNewGroup"})
+    public CreateNewGroupResponse createNewGroup(@Valid @RequestBody CreateNewGroupRequest request) {
+        String message = createNewGroupUseCase.execute(request.groupFolder(), request.newGroupName());
+        return new CreateNewGroupResponse(true, message);
     }
 
     @GetMapping({"/cppProjects"})

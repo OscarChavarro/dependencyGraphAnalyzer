@@ -1,0 +1,22 @@
+meta {
+  name: PUT /v1/createNewGroup
+  type: http
+  seq: 2
+}
+
+put {
+  url: {{baseUrl}}/v1/createNewGroup
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "groupFolder": "../u/",
+    "newGroupName": "95_new_things"
+  }
+}

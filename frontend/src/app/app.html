@@ -186,7 +186,11 @@
     <canvas #workspaceCanvas class="workspace-canvas" width="2400" height="1600"></canvas>
   </section>
 
-  <app-menu-renderer [searchPlaceholder]="t(i18nKeys.shell.MENU_SEARCH_PLACEHOLDER)"></app-menu-renderer>
+  <app-menu-renderer
+    [searchPlaceholder]="t(i18nKeys.shell.MENU_SEARCH_PLACEHOLDER)"
+    [addNewGroupPlaceholder]="t(i18nKeys.shell.MENU_ADD_NEW_GROUP_PLACEHOLDER)"
+    (createNewGroupRequested)="onCreateNewGroupRequested($event)"
+  ></app-menu-renderer>
 </main>
 
 <app-relation-dialog

@@ -35,6 +35,7 @@ Java 17/Spring Boot service exposing the graph generation, query, and editing AP
 | `POST` | `/v1/enrichedEdges` | Compute group.package edges from cache and group definitions. |
 | `POST` | `/v1/groupRelations` | Search relations between two groups in `output/cleanRelationsGraph.txt`. |
 | `POST` | `/v1/moveNode` | Move one or more nodes between existing group files. |
+| `PUT` | `/v1/createNewGroup` | Create a new group file `<number_name>.txt` inside an existing group folder. |
 | `GET` | `/v1/cachedProjects` | Read `etc/projects/cachedProjects.json`. |
 | `GET` | `/v1/cppProjects` | Read `etc/projects/cppProjects.json`. |
 | `GET` | `/v1/javaProjects` | Read `etc/projects/javaProjects.json` and optionally resolve classpath with Gradle. |
@@ -68,6 +69,18 @@ Java 17/Spring Boot service exposing the graph generation, query, and editing AP
 ```
 
 `destinationGroup` must exist as `<destinationGroup>.txt`. The service removes nodes from the origin file and appends them to the destination file.
+
+`PUT /v1/createNewGroup`:
+
+```json
+{
+  "groupFolder": "etc/_ubuntu_24.04",
+  "newGroupName": "95_new_things"
+}
+```
+
+If the group does not exist, the backend creates `95_new_things.txt` with the first line `[95_NEW_THINGS]`.
+If the file already exists, the endpoint returns `400 Bad Request`.
 
 ## Generated Artifacts
 
