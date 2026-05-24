@@ -1,5 +1,4 @@
 [34_IO_MGF]
-
 vsdk.toolkit.io.mgf.MgfColorEntitySupport
 vsdk.toolkit.io.mgf.MgfConeEntityTessellator
 vsdk.toolkit.io.mgf.MgfCylinderEntityExpander

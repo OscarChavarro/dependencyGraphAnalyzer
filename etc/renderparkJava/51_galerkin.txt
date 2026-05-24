@@ -1,5 +1,4 @@
 [51_GALERKIN]
-
 vsdk.toolkit.galerkin.BasisQuadGalerkin
 vsdk.toolkit.galerkin.BasisTriGalerkin
 vsdk.toolkit.galerkin.GalerkinBasis

@@ -1,5 +1,4 @@
 [22_SKIN]
-
 vsdk/toolkit/skin/AxisAlignedBoundingBox.ts
 vsdk/toolkit/skin/BoundingBoxCoordinateIndex.ts
 vsdk/toolkit/skin/Compound.ts

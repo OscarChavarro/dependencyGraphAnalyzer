@@ -1,5 +1,4 @@
 [42_RENDER]
-
 vsdk/toolkit/render/Canvas.ts
 vsdk/toolkit/render/jogl/RenderOpenGL.ts
 vsdk/toolkit/render/OctreeChild.ts

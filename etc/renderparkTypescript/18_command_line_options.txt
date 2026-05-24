@@ -1,5 +1,4 @@
 [18_COMMAND_LINE_OPTIONS]
-
 vsdk/toolkit/common/commandLineOptions/DefaultParser.ts
 vsdk/toolkit/common/commandLineOptions/OptionBase.ts
 vsdk/toolkit/common/commandLineOptions/OptionGroup.ts

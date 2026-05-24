@@ -1,5 +1,4 @@
 [35_IO_IMAGE]
-
 io/image/Dkcolor.cpp
 io/image/Dkcolor.h
 io/image/ImageOutputHandle.cpp

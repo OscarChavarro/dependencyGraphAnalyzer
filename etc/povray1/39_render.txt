@@ -4,7 +4,6 @@ render/LightingEngine.h
 render/RenderEngine.cpp
 render/RenderEngine.h
 render/RenderFrame.h
-
 app/UnixPlatform.cpp
 app/UnixPlatform.h
 render/RenderingConfiguration.cpp

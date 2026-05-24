@@ -1,5 +1,4 @@
 [13_COLOR]
-
 vsdk.toolkit.common.color.Cie
 vsdk.toolkit.common.color.ColorRgb
 vsdk.toolkit.common.color.ColorRgbMutable

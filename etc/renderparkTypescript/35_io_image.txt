@@ -1,5 +1,4 @@
 [35_IO_IMAGE]
-
 vsdk/toolkit/io/image/DkColor.ts
 vsdk/toolkit/io/image/ImageOutputHandle.ts
 vsdk/toolkit/io/image/package-info.ts

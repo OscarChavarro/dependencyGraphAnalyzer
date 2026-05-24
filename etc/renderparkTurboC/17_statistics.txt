@@ -1,5 +1,4 @@
 [17_STATISTICS]
-
 common/statistics/PotentialStatistics.cpp
 common/statistics/PotentialStatistics.h
 common/statistics/RadianceStatistics.cpp

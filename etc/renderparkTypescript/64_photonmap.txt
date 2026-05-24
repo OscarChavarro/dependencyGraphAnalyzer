@@ -1,5 +1,4 @@
 [64_PHOTONMAP]
-
 vsdk/toolkit/raycasting/photonMap/DiscreteSampling.ts
 vsdk/toolkit/raycasting/photonMap/ImportanceMap.ts
 vsdk/toolkit/raycasting/photonMap/Importon.ts

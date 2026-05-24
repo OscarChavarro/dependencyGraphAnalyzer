@@ -1,5 +1,4 @@
 [62_RAYTRACING]
-
 vsdk/toolkit/raycasting/raytracing/BsdfSampler.ts
 vsdk/toolkit/raycasting/raytracing/EyeSampler.ts
 vsdk/toolkit/raycasting/raytracing/NextEventSampler.ts

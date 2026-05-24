@@ -1,5 +1,4 @@
 [41_IO_IMAGE]
-
 io/image/ChunkHeader.h
 io/image/DumpFormat.cpp
 io/image/DumpFormat.h

@@ -1,5 +1,4 @@
 [23_TONEMAP]
-
 tonemap/FerwerdaToneMap.cpp
 tonemap/FerwerdaToneMap.h
 tonemap/IdentityToneMap.cpp

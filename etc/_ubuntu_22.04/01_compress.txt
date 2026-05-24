@@ -75,5 +75,4 @@ libb2-1:amd64
 libb2-1
 lzop
 arj
-
 liblz4-1:i386

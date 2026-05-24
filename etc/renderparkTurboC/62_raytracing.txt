@@ -1,5 +1,4 @@
 [62_RAYTRACING]
-
 raycasting/raytracing/BsdfSampler.cpp
 raycasting/raytracing/BsdfSampler.h
 raycasting/raytracing/EyeSampler.cpp

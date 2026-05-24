@@ -1,4 +1,3 @@
 [36_IO_VRML]
-
 vsdk/toolkit/io/wrl/VrmlWriter.ts
 vsdk/toolkit/io/wrl/package-info.ts

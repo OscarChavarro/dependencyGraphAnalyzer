@@ -1,5 +1,4 @@
 [72_APP]
-
 vsdk/toolkit/app/Adaptation.ts
 vsdk/toolkit/app/Batch.ts
 vsdk/toolkit/app/LuminanceArea.ts

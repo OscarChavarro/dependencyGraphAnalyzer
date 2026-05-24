@@ -1,5 +1,4 @@
 [32_IO_CONTEXT]
-
 vsdk.toolkit.io.context.ColorContext
 vsdk.toolkit.io.context.ColorRegistryContext
 vsdk.toolkit.io.context.EntityDispatchContext

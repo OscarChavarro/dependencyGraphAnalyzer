@@ -1,4 +1,3 @@
 [13_COLOR]
-
 vsdk/toolkit/common/color/Cie.ts
 vsdk/toolkit/common/color/ColorRgb.ts

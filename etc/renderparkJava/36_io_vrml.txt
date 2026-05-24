@@ -1,3 +1,2 @@
 [36_IO_VRML]
-
 vsdk.toolkit.io.wrl.VrmlWriter

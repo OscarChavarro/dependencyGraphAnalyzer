@@ -7,7 +7,6 @@ environment/scene/factory/ModelFactory.cpp
 environment/scene/factory/ModelFactory.h
 environment/scene/SceneObject.h
 environment/scene/SceneFrame.h
-
 environment/scene/factory/ModelBuilder.h
 environment/scene/factory/ModelBuilder.cpp
 environment/scene/SimpleBodyFactory.cpp

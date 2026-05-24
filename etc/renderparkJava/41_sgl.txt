@@ -1,5 +1,4 @@
 [41_SGL]
-
 vsdk.toolkit.render.sgl.Poly
 vsdk.toolkit.render.sgl.Polygon
 vsdk.toolkit.render.sgl.PolygonBox

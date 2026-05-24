@@ -1,5 +1,4 @@
 [24_ELEMENTS]
-
 environment/geometry/elements/Ray.cpp
 environment/geometry/elements/Ray.h
 environment/geometry/elements/RayWithSegments.cpp

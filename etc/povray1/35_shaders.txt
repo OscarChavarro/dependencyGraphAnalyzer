@@ -1,5 +1,4 @@
 [35_SHADERS]
-
 render/shaders/AmbientLightShader.cpp
 render/shaders/AmbientLightShader.h
 render/shaders/BlinnPhongSpecularShader.cpp

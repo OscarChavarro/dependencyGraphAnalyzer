@@ -1,5 +1,4 @@
 [33_IO_BIN]
-
 vsdk/toolkit/io/bin/package-info.ts
 vsdk/toolkit/io/bin/reader/BinaryModelDeserializer.ts
 vsdk/toolkit/io/bin/reader/BinaryModelGeometryRecordData.ts

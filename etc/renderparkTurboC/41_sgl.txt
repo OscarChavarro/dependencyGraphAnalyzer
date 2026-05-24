@@ -1,5 +1,4 @@
 [41_SGL]
-
 render/sgl/Poly.h
 render/sgl/PolyClip.cpp
 render/sgl/Polygon.h

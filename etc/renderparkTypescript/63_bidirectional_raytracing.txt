@@ -1,5 +1,4 @@
 [63_BIDIRECTIONAL_RAYTRACING]
-
 vsdk/toolkit/raycasting/bidirectionalRaytracing/BidirectionalPathRaytracer.ts
 vsdk/toolkit/raycasting/bidirectionalRaytracing/BidirectionalPathRaytracerConfig.ts
 vsdk/toolkit/raycasting/bidirectionalRaytracing/BidirectionalPathTracingConfiguration.ts

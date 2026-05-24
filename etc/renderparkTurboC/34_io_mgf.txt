@@ -1,5 +1,4 @@
 [34_IO_MGF]
-
 io/mgf/MgfColorEntitySupport.cpp
 io/mgf/MgfColorEntitySupport.h
 io/mgf/MgfConeEntityTessellator.cpp

@@ -1,5 +1,4 @@
 [24_SCENE]
-
 scene/Background.cpp
 scene/Background.h
 scene/Camera.cpp

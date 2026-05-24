@@ -1,5 +1,4 @@
 [64_PHOTONMAP]
-
 vsdk.toolkit.raycasting.photonMap.DiscreteSampling
 vsdk.toolkit.raycasting.photonMap.ImportanceMap
 vsdk.toolkit.raycasting.photonMap.Importon

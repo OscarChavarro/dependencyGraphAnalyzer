@@ -1,5 +1,4 @@
 [51_GALERKIN]
-
 vsdk/toolkit/galerkin/BasisQuadGalerkin.ts
 vsdk/toolkit/galerkin/BasisTriGalerkin.ts
 vsdk/toolkit/galerkin/GalerkinBasis.ts

@@ -1,5 +1,4 @@
 [42_RENDER]
-
 render/Canvas.cpp
 render/Canvas.h
 render/OctreeChild.h

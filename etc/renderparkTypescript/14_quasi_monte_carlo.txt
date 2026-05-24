@@ -1,5 +1,4 @@
 [14_QUASI_MONTE_CARLO]
-
 vsdk/toolkit/numericalAnalysis/quasiMonteCarlo/Faure.ts
 vsdk/toolkit/numericalAnalysis/quasiMonteCarlo/FaureSequenceLimits.ts
 vsdk/toolkit/numericalAnalysis/quasiMonteCarlo/Halton.ts

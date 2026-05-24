@@ -1,5 +1,4 @@
 [65_STOCHASTIC_RAYTRACING]
-
 vsdk.toolkit.raycasting.stochasticRaytracing.ApproximationTypeDescription
 vsdk.toolkit.raycasting.stochasticRaytracing.Basismcrad
 vsdk.toolkit.raycasting.stochasticRaytracing.Basismcrad.Basisquadmcrad

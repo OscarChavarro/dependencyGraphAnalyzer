@@ -1,5 +1,4 @@
 [63_BIDIRECTIONAL_RAYTRACING]
-
 raycasting/bidirectionalRaytracing/BidirectionalPathRaytracer.cpp
 raycasting/bidirectionalRaytracing/BidirectionalPathRaytracer.h
 raycasting/bidirectionalRaytracing/BidirectionalPathRaytracerConfig.h

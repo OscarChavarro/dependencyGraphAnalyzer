@@ -42,7 +42,6 @@ java/util/StringTokenizer.cpp
 java/util/StringTokenizer.h
 java/util/ArrayList.txx
 java/util/HashMap.txx
-
 vsdk/toolkit/java/io/BufferedInputStream.cpp
 vsdk/toolkit/java/io/BufferedInputStream.h
 vsdk/toolkit/java/io/File.cpp

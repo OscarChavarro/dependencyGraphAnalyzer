@@ -1,4 +1,3 @@
 [36_IO_VRML]
-
 io/wrl/VrmlWriter.cpp
 io/wrl/VrmlWriter.h

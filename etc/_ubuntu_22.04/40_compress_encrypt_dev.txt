@@ -5,5 +5,4 @@ liblzma-dev
 liblzma-dev:amd64
 libdeflate-dev
 libdeflate-dev:amd64
-
 liblzma-dev:i386

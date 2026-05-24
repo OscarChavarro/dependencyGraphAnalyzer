@@ -1,5 +1,4 @@
 [33_IO_BIN]
-
 io/bin/reader/BinaryModelDeserializer.cpp
 io/bin/reader/BinaryModelDeserializer.h
 io/bin/reader/BinaryModelGeometryRecordData.cpp

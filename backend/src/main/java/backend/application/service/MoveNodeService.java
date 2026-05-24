@@ -8,6 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -30,7 +31,7 @@ public class MoveNodeService implements MoveNodeUseCase {
         Path originFile = resolveExistingGroupFile(rootFolder, originGroup);
         Path destinationFile = resolveExistingDestinationGroupFile(rootFolder, destinationGroup);
 
-        List<String> originLines = readLines(originFile);
+        List<String> originLines = normalizeNonBlankLines(readLines(originFile));
         Set<String> missingNodes = new LinkedHashSet<>(sanitizedNodes);
         List<String> updatedOriginLines = new ArrayList<>(originLines.size());
 
@@ -83,7 +84,15 @@ public class MoveNodeService implements MoveNodeUseCase {
 
     private void writeLines(Path path, List<String> lines) {
         try {
-            Files.write(path, lines, StandardCharsets.UTF_8);
+            List<String> sanitizedLines = normalizeNonBlankLines(lines);
+            String lineSeparator = System.lineSeparator();
+            String content = sanitizedLines.isEmpty() ? "" : String.join(lineSeparator, sanitizedLines) + lineSeparator;
+            Files.writeString(
+                    path,
+                    content,
+                    StandardCharsets.UTF_8,
+                    StandardOpenOption.TRUNCATE_EXISTING,
+                    StandardOpenOption.WRITE);
         } catch (AccessDeniedException e) {
             throw new IllegalArgumentException("Permission denied while writing file: '" + path + "'", e);
         } catch (NoSuchFileException e) {
@@ -94,17 +103,22 @@ public class MoveNodeService implements MoveNodeUseCase {
     }
 
     private void appendLine(Path path, String line) {
-        try {
-            String prefix = Files.size(path) > 0 ? System.lineSeparator() : "";
-            Files.writeString(path, prefix + line, StandardCharsets.UTF_8, java.nio.file.StandardOpenOption.APPEND);
-        } catch (AccessDeniedException e) {
-            throw new IllegalArgumentException("Permission denied while appending destination file: '" + path + "'", e);
-        } catch (NoSuchFileException e) {
-            throw new IllegalArgumentException("Destination file not found while appending: '" + path + "'", e);
-        } catch (IOException e) {
-            throw new IllegalArgumentException(
-                    "I/O error while appending destination file: '" + path + "'. cause=" + e.getMessage(), e);
+        List<String> lines = normalizeNonBlankLines(readLines(path));
+        if (!line.isBlank()) {
+            lines.add(line);
         }
+        writeLines(path, lines);
+    }
+
+    private List<String> normalizeNonBlankLines(List<String> lines) {
+        List<String> normalized = new ArrayList<>(lines.size());
+        for (String line : lines) {
+            if (line == null || line.isBlank()) {
+                continue;
+            }
+            normalized.add(line);
+        }
+        return normalized;
     }
 
     private Path resolveExistingGroupFile(Path folder, String groupName) {

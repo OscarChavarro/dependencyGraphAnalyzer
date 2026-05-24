@@ -1,5 +1,4 @@
 [23_TONEMAP]
-
 vsdk/toolkit/tonemap/FerwerdaToneMap.ts
 vsdk/toolkit/tonemap/IdentityToneMap.ts
 vsdk/toolkit/tonemap/LightnessToneMap.ts

@@ -139,5 +139,4 @@ libnftables1:amd64
 nftables
 ftpd
 tcpd
-
 libpcap0.8:i386

@@ -1,5 +1,4 @@
 [24_SCENE]
-
 vsdk/toolkit/scene/Background.ts
 vsdk/toolkit/scene/Camera.ts
 vsdk/toolkit/scene/ConstantColorBackground.ts

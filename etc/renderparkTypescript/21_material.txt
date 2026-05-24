@@ -1,5 +1,4 @@
 [21_MATERIAL]
-
 vsdk/toolkit/material/BsdfComponent.ts
 vsdk/toolkit/material/BsdfComponentFlag.ts
 vsdk/toolkit/material/Material.ts

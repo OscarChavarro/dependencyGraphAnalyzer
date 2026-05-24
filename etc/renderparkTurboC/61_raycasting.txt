@@ -1,5 +1,4 @@
 [61_RAYCASTING]
-
 raycasting/common/BoxFilter.cpp
 raycasting/common/BoxFilter.h
 raycasting/common/BsdfComp.h

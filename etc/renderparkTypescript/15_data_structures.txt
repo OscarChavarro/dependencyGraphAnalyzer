@@ -1,5 +1,4 @@
 [15_DATA_STRUCTURES]
-
 vsdk/toolkit/common/dataStructures/BalancedKDTreeNode.ts
 vsdk/toolkit/common/dataStructures/CircularList.ts
 vsdk/toolkit/common/dataStructures/CircularListBase.ts

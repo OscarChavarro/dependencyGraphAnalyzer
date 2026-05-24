@@ -92,5 +92,4 @@ libxres1:amd64
 libxpresent1
 libxpresent1:amd64
 x11-common
-
 libxcursor1:i386

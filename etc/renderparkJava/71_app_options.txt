@@ -1,5 +1,4 @@
 [71_APP_OPTIONS]
-
 vsdk.toolkit.app.options.BatchOptions
 vsdk.toolkit.app.options.EnumAppOptions
 vsdk.toolkit.app.options.EnumBackgroundMode

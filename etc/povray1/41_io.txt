@@ -78,7 +78,6 @@ io/pov/factory/SceneFactory.cpp
 io/pov/factory/SceneFactory.h
 io/pov/CameraParser.cpp
 io/pov/CameraParser.h
-
 io/FileConstants.h
 io/FileLocator.cpp
 io/FileLocator.h
@@ -86,7 +85,6 @@ io/pov/ParserConstants.h
 io/image/ImageFileHandle.h
 io/pov/ParserContext.cpp
 io/pov/ParserContext.h
-
 io/pov/ast/AstNodes.h
 io/pov/ast/AstObjectParser.cpp
 io/pov/ast/AstObjectParser.h

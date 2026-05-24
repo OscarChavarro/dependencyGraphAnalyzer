@@ -1,5 +1,4 @@
 [72_APP]
-
 app/Adaptation.cpp
 app/Adaptation.h
 app/Batch.cpp

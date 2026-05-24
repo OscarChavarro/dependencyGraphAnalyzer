@@ -102,7 +102,6 @@ x11proto-video-dev
 libxxf86vm-dev:amd64
 libxxf86vm-dev
 x11proto-xf86vidmode-dev
-
 libxrender-dev:i386
 libxfixes-dev:i386
 libxcursor-dev:i386

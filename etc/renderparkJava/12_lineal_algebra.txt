@@ -1,5 +1,4 @@
 [12_LINEAL_ALGEBRA]
-
 vsdk.toolkit.common.linealAlgebra.CoordinateAxis
 vsdk.toolkit.common.linealAlgebra.CoordinateSystem
 vsdk.toolkit.common.linealAlgebra.Jacobian

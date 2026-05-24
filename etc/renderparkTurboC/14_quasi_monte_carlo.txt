@@ -1,5 +1,4 @@
 [14_QUASI_MONTE_CARLO]
-
 numericalAnalysis/quasiMonteCarlo/Faure.cpp
 numericalAnalysis/quasiMonteCarlo/Faure.h
 numericalAnalysis/quasiMonteCarlo/FaureSequenceLimits.h

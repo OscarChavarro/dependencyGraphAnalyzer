@@ -1,5 +1,4 @@
 [22_SKIN]
-
 vsdk.toolkit.environment.geometry.elements.Element
 vsdk.toolkit.environment.geometry.elements.Element.ElementRenderTraversalCallback
 vsdk.toolkit.environment.geometry.elements.Element.ElementTraversalCallback

@@ -1,5 +1,4 @@
 [09_JOGL]
-
 com.jogamp.opengl.awt.GLJPanel
 com.jogamp.opengl.GL2
 com.jogamp.opengl.GLAutoDrawable

@@ -1,5 +1,4 @@
 [65_STOCHASTIC_RAYTRACING]
-
 raycasting/stochasticRaytracing/ApproximationTypeDescription.h
 raycasting/stochasticRaytracing/Basismcrad.cpp
 raycasting/stochasticRaytracing/Basismcrad.h

@@ -1,5 +1,4 @@
 [52_RENDER_JOGL]
-
 vsdk.toolkit.render.jogl.GalerkinOpenGLRenderer
 vsdk.toolkit.render.jogl.Opengl
 vsdk.toolkit.render.jogl.OpenGlRenderPatchCallback

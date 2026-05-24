@@ -1,5 +1,4 @@
 [21_MATERIAL]
-
 material/BsdfComponent.h
 material/BsdfComponentFlag.h
 material/Material.cpp

@@ -1,5 +1,4 @@
 [64_PHOTONMAP]
-
 raycasting/photonMap/DiscreteSampling.cpp
 raycasting/photonMap/DiscreteSampling.h
 raycasting/photonMap/ImportanceMap.cpp

@@ -1,5 +1,4 @@
 [41_IO_MEDIA]
-
 io/pov/mediaParser/ColorMapParser.cpp
 io/pov/mediaParser/ColorMapParser.h
 io/pov/mediaParser/DefaultTextureParser.cpp

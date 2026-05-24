@@ -1,5 +1,4 @@
 [41_IO_GEOMETRY]
-
 io/pov/geometryParser/BicubicPatchParser.cpp
 io/pov/geometryParser/BicubicPatchParser.h
 io/pov/geometryParser/BlobParser.cpp

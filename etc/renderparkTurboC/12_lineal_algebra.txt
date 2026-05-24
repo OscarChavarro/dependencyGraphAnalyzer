@@ -1,5 +1,4 @@
 [12_LINEAL_ALGEBRA]
-
 common/linealAlgebra/CoordinateAxis.h
 common/linealAlgebra/CoordinateSystem.cpp
 common/linealAlgebra/CoordinateSystem.h

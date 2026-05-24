@@ -1,5 +1,4 @@
 [18_COMMAND_LINE_OPTIONS]
-
 common/commandLineOptions/DefaultParser.h
 common/commandLineOptions/OptionGroup.h
 common/commandLineOptions/OptionGroup.txx

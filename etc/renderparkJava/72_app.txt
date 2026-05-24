@@ -1,5 +1,4 @@
 [72_APP]
-
 vsdk.toolkit.app.Adaptation
 vsdk.toolkit.app.Adaptation.PatchRadianceEstimateFn
 vsdk.toolkit.app.Batch

@@ -1,5 +1,4 @@
 [61_RAYCASTING]
-
 vsdk/toolkit/raycasting/common/BoxFilter.ts
 vsdk/toolkit/raycasting/common/BsdfComp.ts
 vsdk/toolkit/raycasting/common/NormalFilter.ts

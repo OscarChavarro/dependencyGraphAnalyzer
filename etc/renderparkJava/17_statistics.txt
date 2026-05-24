@@ -1,5 +1,4 @@
 [17_STATISTICS]
-
 vsdk.toolkit.common.statistics.PotentialStatistics
 vsdk.toolkit.common.statistics.RadianceStatistics
 vsdk.toolkit.common.statistics.RayTracerStatistics

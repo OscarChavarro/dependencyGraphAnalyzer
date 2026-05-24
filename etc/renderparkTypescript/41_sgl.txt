@@ -1,5 +1,4 @@
 [41_SGL]
-
 vsdk/toolkit/render/sgl/package-info.ts
 vsdk/toolkit/render/sgl/Poly.ts
 vsdk/toolkit/render/sgl/Polygon.ts

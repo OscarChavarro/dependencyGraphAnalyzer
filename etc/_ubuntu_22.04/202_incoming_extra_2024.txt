@@ -30,7 +30,6 @@ rsh-client
 rsh-server
 liblam4
 liblam4:amd64
-
 qemu-system-misc
 qemu-block-extra
 qemu-system-gui

@@ -1,5 +1,4 @@
 [15_DATA_STRUCTURES]
-
 common/dataStructures/BalancedKDTreeNode.h
 common/dataStructures/CircularList.h
 common/dataStructures/CircularListBase.cpp

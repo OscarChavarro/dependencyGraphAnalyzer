@@ -1,5 +1,4 @@
 [17_STATISTICS]
-
 vsdk/toolkit/common/statistics/package-info.ts
 vsdk/toolkit/common/statistics/PotentialStatistics.ts
 vsdk/toolkit/common/statistics/RadianceStatistics.ts

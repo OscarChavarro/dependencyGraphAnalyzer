@@ -1,5 +1,4 @@
 [21_MATERIAL]
-
 vsdk.toolkit.material.BsdfComponent
 vsdk.toolkit.material.BsdfComponentFlag
 vsdk.toolkit.material.BsdfComponentInfo

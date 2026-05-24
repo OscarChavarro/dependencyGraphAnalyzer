@@ -1,5 +1,4 @@
 [71_APP_OPTIONS]
-
 app/options/BatchOptions.cpp
 app/options/BatchOptions.h
 app/options/EnumAppOptions.h

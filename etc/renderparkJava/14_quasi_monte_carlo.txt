@@ -1,5 +1,4 @@
 [14_QUASI_MONTE_CARLO]
-
 vsdk.toolkit.numericalAnalysis.quasiMonteCarlo.Faure
 vsdk.toolkit.numericalAnalysis.quasiMonteCarlo.FaureSequenceLimits
 vsdk.toolkit.numericalAnalysis.quasiMonteCarlo.Halton

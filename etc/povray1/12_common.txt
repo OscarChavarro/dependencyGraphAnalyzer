@@ -2,8 +2,6 @@
 common/Config.h
 common/FrameConfig.h
 app/PovApp.h
-
 common/LegacyBoolean.h
-
 common/Statistics.h
 common/Statistics.cpp

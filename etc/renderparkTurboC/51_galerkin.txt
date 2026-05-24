@@ -1,5 +1,4 @@
 [51_GALERKIN]
-
 galerkin/BasisQuadGalerkin.cpp
 galerkin/BasisQuadGalerkin.h
 galerkin/BasisTriGalerkin.cpp

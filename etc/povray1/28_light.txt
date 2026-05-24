@@ -1,4 +1,3 @@
 [28_LIGHT]
-
 environment/light/Light.cpp
 environment/light/Light.h

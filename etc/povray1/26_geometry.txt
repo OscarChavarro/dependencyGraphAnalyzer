@@ -31,9 +31,7 @@ environment/geometry/volume/compound/Composite.cpp
 environment/geometry/volume/compound/Composite.h
 environment/geometry/volume/polynomial/PolynomialShape.cpp
 environment/geometry/volume/polynomial/PolynomialShape.h
-
 environment/geometry/volume/polynomial/PolynomialConstants.h
 common/Polynomial.h
 environment/geometry/volume/polynomial/Polynomial.h
-
 environment/geometry/GeometryUtils.h

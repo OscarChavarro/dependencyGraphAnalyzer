@@ -1,5 +1,4 @@
 [62_RAYTRACING]
-
 vsdk.toolkit.raycasting.raytracing.BsdfSampler
 vsdk.toolkit.raycasting.raytracing.EyeSampler
 vsdk.toolkit.raycasting.raytracing.NextEventSampler
