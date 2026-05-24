@@ -15,6 +15,15 @@ export interface BBoxRect {
   maxY: number;
 }
 
+export interface RendererViewportSnapshot {
+  canvasWidth: number;
+  canvasHeight: number;
+  cameraScale: number;
+  cameraOffsetX: number;
+  cameraOffsetY: number;
+  sceneBounds: BBoxRect | null;
+}
+
 export interface SvgPrimitive {
   kind: SvgPrimitiveKind;
   layer: SvgLayer;
@@ -71,6 +80,7 @@ export class Html5CanvasGraphRenderer {
   private readonly zoomOutFactor = 0.89;
   private readonly minZoomOutDamping = 0.15;
   private readonly minVisibleSceneAreaRatio = 0.05;
+  private readonly renderListeners = new Set<() => void>();
 
   public attach(canvas: HTMLCanvasElement): boolean {
     this.canvas = canvas;
@@ -176,11 +186,13 @@ export class Html5CanvasGraphRenderer {
 
   public render(): void {
     if (!this.canvas || !this.context) {
+      this.notifyRenderListeners();
       return;
     }
 
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     if (this.svgPrimitives.length === 0 || !this.svgViewBox) {
+      this.notifyRenderListeners();
       return;
     }
 
@@ -218,6 +230,28 @@ export class Html5CanvasGraphRenderer {
     }
 
     this.context.restore();
+    this.notifyRenderListeners();
+  }
+
+  public onRender(listener: () => void): () => void {
+    this.renderListeners.add(listener);
+    return () => {
+      this.renderListeners.delete(listener);
+    };
+  }
+
+  public getViewportSnapshot(): RendererViewportSnapshot | null {
+    if (!this.canvas) {
+      return null;
+    }
+    return {
+      canvasWidth: this.canvas.width,
+      canvasHeight: this.canvas.height,
+      cameraScale: this.cameraScale,
+      cameraOffsetX: this.cameraOffsetX,
+      cameraOffsetY: this.cameraOffsetY,
+      sceneBounds: this.sceneBounds ? { ...this.sceneBounds } : null
+    };
   }
 
   public zoomAt(screenX: number, screenY: number, wheelDeltaY: number): void {
@@ -905,5 +939,11 @@ export class Html5CanvasGraphRenderer {
       width: Math.min(this.canvas.width, scrollContainer.clientWidth * scaleX),
       height: Math.min(this.canvas.height, scrollContainer.clientHeight * scaleY)
     };
+  }
+
+  private notifyRenderListeners(): void {
+    for (const listener of this.renderListeners) {
+      listener();
+    }
   }
 }

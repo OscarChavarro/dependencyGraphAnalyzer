@@ -25,6 +25,7 @@ import { KeyboardInteractionTechniques } from './gui/KeyboardInteractionTechniqu
 import { DrawingAreaNavigationInteractionTechnique } from './gui/DrawingAreaNavigationInteractionTechnique';
 import { SelectionInteractionTechnique } from './gui/SelectionInteractionTechnique';
 import { SelectedNodeActionMenuInteractionTechnique } from './gui/SelectedNodeActionMenuInteractionTechnique';
+import { WorkingAreaScrollsControl } from './gui/WorkingAreaScrollsControl';
 import { MenuRenderer } from './gui/menu-renderer';
 import { I18nStateService } from './i18n/services/i18n-state.service';
 import { I18nService } from './i18n/services/i18n.service';
@@ -83,6 +84,10 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   public selectedJavaProjectId = '';
   public typeScriptProjects: TypeScriptProject[] = [];
   public selectedTypeScriptProjectId = '';
+  public horizontalScrollbarThumbLeftPercent = 0;
+  public horizontalScrollbarThumbWidthPercent = 24;
+  public verticalScrollbarThumbTopPercent = 0;
+  public verticalScrollbarThumbHeightPercent = 24;
 
   private readonly endpointUrl: string;
   private readonly backendBaseUrl: string;
@@ -100,6 +105,12 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   private cachedStructureGroupNames: string[] = [];
   private readonly keyboardInteractionTechniques = new KeyboardInteractionTechniques(this.graphSelectionModel);
   private readonly drawingAreaNavigationInteractionTechnique = new DrawingAreaNavigationInteractionTechnique(this.graphRenderer);
+  private readonly workingAreaScrollsControl = new WorkingAreaScrollsControl(this.graphRenderer, (state) => {
+    this.horizontalScrollbarThumbLeftPercent = state.horizontalThumbLeftPercent;
+    this.horizontalScrollbarThumbWidthPercent = state.horizontalThumbWidthPercent;
+    this.verticalScrollbarThumbTopPercent = state.verticalThumbTopPercent;
+    this.verticalScrollbarThumbHeightPercent = state.verticalThumbHeightPercent;
+  });
   private readonly selectionInteractionTechnique = new SelectionInteractionTechnique(
     this.graphSelectionModel,
     this.graphRenderer,
@@ -165,6 +176,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     window.addEventListener('keydown', this.onGlobalGraphCycleKeyDown);
 
     this.keyboardInteractionTechniques.attach(document.body);
+    this.workingAreaScrollsControl.attach();
     this.drawingAreaNavigationInteractionTechnique.attach(canvas, this.workspaceAreaRef?.nativeElement);
     this.selectionInteractionTechnique.attach(canvas);
     if (this.menuRenderer) {
@@ -194,6 +206,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   public ngOnDestroy(): void {
     window.removeEventListener('resize', this.onWindowResize);
     window.removeEventListener('keydown', this.onGlobalGraphCycleKeyDown);
+    this.workingAreaScrollsControl.detach();
   }
 
   public closeRelationBox(): void {
