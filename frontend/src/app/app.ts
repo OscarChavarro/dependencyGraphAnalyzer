@@ -58,6 +58,18 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('workspaceCanvas')
   private workspaceCanvasRef?: ElementRef<HTMLCanvasElement>;
 
+  @ViewChild('horizontalScrollbarTrack')
+  private horizontalScrollbarTrackRef?: ElementRef<HTMLElement>;
+
+  @ViewChild('horizontalScrollbarThumb')
+  private horizontalScrollbarThumbRef?: ElementRef<HTMLElement>;
+
+  @ViewChild('verticalScrollbarTrack')
+  private verticalScrollbarTrackRef?: ElementRef<HTMLElement>;
+
+  @ViewChild('verticalScrollbarThumb')
+  private verticalScrollbarThumbRef?: ElementRef<HTMLElement>;
+
   @ViewChild(MenuRenderer)
   private menuRenderer?: MenuRenderer;
 
@@ -176,7 +188,12 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     window.addEventListener('keydown', this.onGlobalGraphCycleKeyDown);
 
     this.keyboardInteractionTechniques.attach(document.body);
-    this.workingAreaScrollsControl.attach();
+    this.workingAreaScrollsControl.attach(
+      this.horizontalScrollbarTrackRef?.nativeElement ?? null,
+      this.horizontalScrollbarThumbRef?.nativeElement ?? null,
+      this.verticalScrollbarTrackRef?.nativeElement ?? null,
+      this.verticalScrollbarThumbRef?.nativeElement ?? null
+    );
     this.drawingAreaNavigationInteractionTechnique.attach(canvas, this.workspaceAreaRef?.nativeElement);
     this.selectionInteractionTechnique.attach(canvas);
     if (this.menuRenderer) {

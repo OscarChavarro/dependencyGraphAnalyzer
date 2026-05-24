@@ -186,15 +186,17 @@
     <div class="workspace-canvas-region">
       <canvas #workspaceCanvas class="workspace-canvas" width="2400" height="1600"></canvas>
     </div>
-    <div class="workspace-scrollbar workspace-scrollbar-horizontal" aria-hidden="true">
+    <div #horizontalScrollbarTrack class="workspace-scrollbar workspace-scrollbar-horizontal" aria-hidden="true">
       <div
+        #horizontalScrollbarThumb
         class="workspace-scrollbar-thumb workspace-scrollbar-thumb-horizontal"
         [style.left.%]="horizontalScrollbarThumbLeftPercent"
         [style.width.%]="horizontalScrollbarThumbWidthPercent"
       ></div>
     </div>
-    <div class="workspace-scrollbar workspace-scrollbar-vertical" aria-hidden="true">
+    <div #verticalScrollbarTrack class="workspace-scrollbar workspace-scrollbar-vertical" aria-hidden="true">
       <div
+        #verticalScrollbarThumb
         class="workspace-scrollbar-thumb workspace-scrollbar-thumb-vertical"
         [style.top.%]="verticalScrollbarThumbTopPercent"
         [style.height.%]="verticalScrollbarThumbHeightPercent"
