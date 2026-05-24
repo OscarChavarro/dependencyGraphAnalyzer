@@ -133,6 +133,10 @@ export const SHELL_TRANSLATIONS = {
     en: 'Move to...',
     es: 'Mover a...'
   },
+  MENU_SET_BACKGROUND_COLOR: {
+    en: 'Set background color...',
+    es: 'Fijar color de fondo...'
+  },
   MENU_RENAME_GROUP: {
     en: 'Rename...',
     es: 'Renombrar...'
@@ -156,5 +160,17 @@ export const SHELL_TRANSLATIONS = {
   CLOSE_RELATION_BOX_ARIA: {
     en: 'Close relation box',
     es: 'Cerrar cuadro de relación'
+  },
+  CLOSE_COLOR_DIALOG_ARIA: {
+    en: 'Close color dialog',
+    es: 'Cerrar dialogo de color'
+  },
+  COLOR_DIALOG_ACCEPT: {
+    en: 'Accept',
+    es: 'Aceptar'
+  },
+  COLOR_DIALOG_CANCEL: {
+    en: 'Cancel',
+    es: 'Cancelar'
   }
 } as const satisfies Record<string, TranslationValue>;

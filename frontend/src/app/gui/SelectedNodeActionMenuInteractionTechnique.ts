@@ -19,6 +19,7 @@ export class SelectedNodeActionMenuInteractionTechnique {
     private readonly openGraphByFilename: (filename: string) => void,
     private readonly inundateDependencies: (selectedNodes: string[]) => void,
     private readonly inundateClients: (selectedNodes: string[]) => void,
+    private readonly setBackgroundColor: (selectedNodes: string[]) => void,
     private readonly showRelation: (selectedNodes: string[]) => void,
     private readonly moveTo: (selectedNodes: string[], targetGroup: string) => void,
     private readonly requestRenameGroup: (groupToken: string) => void,
@@ -138,7 +139,8 @@ export class SelectedNodeActionMenuInteractionTechnique {
       },
       show_relation: () => this.showRelation([...this.graphModel.selectedNodes]),
       flood_dependencies: () => this.inundateDependencies([...this.graphModel.selectedNodes]),
-      flood_clients: () => this.inundateClients([...this.graphModel.selectedNodes])
+      flood_clients: () => this.inundateClients([...this.graphModel.selectedNodes]),
+      set_background_color: () => this.setBackgroundColor([...this.graphModel.selectedNodes])
     };
 
     const moveToSubmenu = this.buildMoveToSubmenu();

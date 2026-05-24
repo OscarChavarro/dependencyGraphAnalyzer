@@ -15,7 +15,8 @@ export class InlineMenuDefinition {
   public static readonly STRUCTURE_MENU_JSON: MenuJson = {
     options: [
       { id: 'shell.MENU_OPEN_NEW_SVG', actionKey: 'open_new_svg' },
-      { id: 'shell.MENU_SHOW_RELATION', actionKey: 'show_relation' }
+      { id: 'shell.MENU_SHOW_RELATION', actionKey: 'show_relation' },
+      { id: 'shell.MENU_SET_BACKGROUND_COLOR', actionKey: 'set_background_color' }
     ]
   };
 
@@ -23,6 +24,7 @@ export class InlineMenuDefinition {
     options: [
       { id: 'shell.MENU_FLOOD_DEPENDENCIES', actionKey: 'flood_dependencies' },
       { id: 'shell.MENU_FLOOD_CLIENTS', actionKey: 'flood_clients' },
+      { id: 'shell.MENU_SET_BACKGROUND_COLOR', actionKey: 'set_background_color' },
       { id: 'shell.MENU_MOVE_TO', submenu: [] }
     ]
   };

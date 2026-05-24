@@ -41,12 +41,13 @@ import {
   RelationLineCheckboxToggleEvent,
   RelationLineViewModel
 } from './relation-dialog.component';
+import { BackgroundColorDialogComponent } from './background-color-dialog.component';
 import { Menu } from './model/menu';
 import { MenuOption } from './model/menu-option';
 
 @Component({
   selector: 'app-root',
-  imports: [CommonModule, MenuRenderer, RelationDialogComponent],
+  imports: [CommonModule, MenuRenderer, RelationDialogComponent, BackgroundColorDialogComponent],
   templateUrl: './app.html',
   styleUrl: './app.sass'
 })
@@ -82,6 +83,8 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   public relationBoxText = '';
   public relationBoxLines: RelationLineViewModel[] = [];
   public renameGroupDialogVisible = false;
+  public backgroundColorDialogVisible = false;
+  public backgroundColorDialogInitialColor = '#ffffff';
   public renameGroupCurrentName = '';
   public renameGroupNextName = '';
   public readonly selectedLanguage;
@@ -109,6 +112,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   private readonly invalidRelationshipDetector = new InvalidRelationshipDetector();
   private readonly floodingOperations = new FloodingOperations();
   private readonly graphSelectionModel = new GraphModel();
+  private pendingBackgroundColorSelection: string[] = [];
   private currentSvgFilename = 'structure.svg';
   private lastGraphGenerator: GraphModelGenerator = 'CACHE_LOADER';
   private lastInputFolders: string[] = [];
@@ -139,6 +143,11 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     if (this.renameGroupDialogVisible && event.key === 'Escape') {
       event.preventDefault();
       this.closeRenameGroupDialog();
+      return;
+    }
+    if (this.backgroundColorDialogVisible && event.key === 'Escape') {
+      event.preventDefault();
+      this.onBackgroundColorDialogCanceled();
       return;
     }
     if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') {
@@ -207,6 +216,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
         (filename) => this.loadAndRenderGraphSvg(filename),
         (selectedNodes) => this.onInundateDependencies(selectedNodes),
         (selectedNodes) => this.onInundateClients(selectedNodes),
+        (selectedNodes) => this.onSetBackgroundColorRequested(selectedNodes),
         (selectedNodes) => this.onShowRelation(selectedNodes),
         (selectedNodes, targetGroup) => this.onMoveTo(selectedNodes, targetGroup),
         (groupToken) => this.onRenameGroupRequested(groupToken),
@@ -1138,6 +1148,61 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
       return;
     }
     this.runFloodingWithSnapshot(snapshot, selectedNodes, mode);
+  }
+
+  private onSetBackgroundColorRequested(selectedNodes: string[]): void {
+    const normalizedSelected = [...new Set(selectedNodes.map((name) => name.trim()).filter((name) => name.length > 0))];
+    if (normalizedSelected.length === 0) {
+      return;
+    }
+    this.pendingBackgroundColorSelection = normalizedSelected;
+    this.backgroundColorDialogInitialColor = this.resolveInitialBackgroundColor(normalizedSelected);
+    this.backgroundColorDialogVisible = true;
+  }
+
+  public onBackgroundColorDialogAccepted(color: string): void {
+    const selectedNodes = this.pendingBackgroundColorSelection;
+    this.backgroundColorDialogVisible = false;
+    this.pendingBackgroundColorSelection = [];
+
+    const snapshot = this.graphModel ?? this.getGraphModelFromSession();
+    if (!snapshot || selectedNodes.length === 0) {
+      return;
+    }
+
+    const selectedNameSet = new Set(selectedNodes.map((name) => name.trim().toLowerCase()));
+    const applyOverride = (node: (typeof snapshot.nodes)[number]) => {
+      if (!selectedNameSet.has(node.name.trim().toLowerCase())) {
+        return node;
+      }
+      return { ...node, fillColorOverride: color };
+    };
+
+    this.setGraphModelSnapshot({
+      ...snapshot,
+      nodes: snapshot.nodes.map(applyOverride),
+      structure: {
+        ...snapshot.structure,
+        nodes: snapshot.structure.nodes.map(applyOverride)
+      }
+    });
+    this.applySelection(this.graphSelectionModel.selectedNodes);
+  }
+
+  public onBackgroundColorDialogCanceled(): void {
+    this.backgroundColorDialogVisible = false;
+    this.pendingBackgroundColorSelection = [];
+  }
+
+  private resolveInitialBackgroundColor(selectedNodes: string[]): string {
+    const snapshot = this.graphModel ?? this.getGraphModelFromSession();
+    if (!snapshot) {
+      return '#ffffff';
+    }
+    const selectedNameSet = new Set(selectedNodes.map((name) => name.trim().toLowerCase()));
+    const selectedNode = [...snapshot.nodes, ...snapshot.structure.nodes]
+      .find((node) => selectedNameSet.has(node.name.trim().toLowerCase()) && !!node.fillColorOverride?.trim());
+    return selectedNode?.fillColorOverride?.trim() || '#ffffff';
   }
 
   private runFloodingWithSnapshot(
