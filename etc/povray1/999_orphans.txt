@@ -4,8 +4,4 @@ render/shaders/ShaderPipeline.h
 app/RenderOutput.h
 render/RenderState.cpp
 render/RenderState.h
-io/pov/SymbolTable.cpp
-io/pov/SymbolTable.h
-io/pov/ast/AstSceneBuilder.cpp
-io/pov/ast/AstSceneBuilder.h
 unordered_map

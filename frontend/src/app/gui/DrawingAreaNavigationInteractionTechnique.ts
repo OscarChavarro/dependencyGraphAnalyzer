@@ -71,7 +71,7 @@ export class DrawingAreaNavigationInteractionTechnique {
   };
 
   private readonly onKeyDown = (event: KeyboardEvent): void => {
-    if (event.key !== '1') {
+    if (event.key !== '1' && event.key !== '2' && event.key !== '3') {
       return;
     }
 
@@ -81,7 +81,15 @@ export class DrawingAreaNavigationInteractionTechnique {
     }
 
     event.preventDefault();
-    this.renderer.moveAndCenterToFit();
+    if (event.key === '1') {
+      this.renderer.moveAndCenterToFit();
+      return;
+    }
+    if (event.key === '2') {
+      this.renderer.moveAndFitVerticalToTop();
+      return;
+    }
+    this.renderer.moveAndFitHorizontalToLeft();
   };
 
   private moveScrollbarsTowardCenter(): void {

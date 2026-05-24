@@ -98,3 +98,8 @@ io/pov/ITokenStream.h
 io/pov/TokenizerTokenStream.cpp
 io/pov/TokenizerTokenStream.h
 memory
+io/pov/ast/AstNodes.cpp
+io/pov/ast/AstSceneBuilder.cpp
+io/pov/ast/AstSceneBuilder.h
+io/pov/SymbolTable.cpp
+io/pov/SymbolTable.h

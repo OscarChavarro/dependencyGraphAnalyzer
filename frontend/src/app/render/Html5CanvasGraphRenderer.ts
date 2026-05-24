@@ -265,6 +265,46 @@ export class Html5CanvasGraphRenderer {
     this.render();
   }
 
+  public moveAndFitVerticalToTop(): void {
+    if (!this.canvas) {
+      return;
+    }
+
+    const bounds = this.getSceneBoundsRect();
+    if (!bounds || bounds.width <= 0 || bounds.height <= 0) {
+      return;
+    }
+
+    const scaleY = this.canvas.height / bounds.height;
+    this.cameraScale = Math.max(this.minScale, Math.min(this.maxScale, scaleY));
+
+    this.cameraOffsetX = -bounds.x * this.cameraScale;
+    this.cameraOffsetY = -bounds.y * this.cameraScale;
+    this.clampCameraScale();
+    this.keepSceneAtLeastPartlyVisible();
+    this.render();
+  }
+
+  public moveAndFitHorizontalToLeft(): void {
+    if (!this.canvas) {
+      return;
+    }
+
+    const bounds = this.getSceneBoundsRect();
+    if (!bounds || bounds.width <= 0 || bounds.height <= 0) {
+      return;
+    }
+
+    const scaleX = this.canvas.width / bounds.width;
+    this.cameraScale = Math.max(this.minScale, Math.min(this.maxScale, scaleX));
+
+    this.cameraOffsetX = -bounds.x * this.cameraScale;
+    this.cameraOffsetY = -bounds.y * this.cameraScale;
+    this.clampCameraScale();
+    this.keepSceneAtLeastPartlyVisible();
+    this.render();
+  }
+
   private parseSvgScene(svgText: string): void {
     const parser = new DOMParser();
     const doc = parser.parseFromString(svgText, 'image/svg+xml');
