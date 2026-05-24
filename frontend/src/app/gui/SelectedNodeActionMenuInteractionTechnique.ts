@@ -51,6 +51,10 @@ export class SelectedNodeActionMenuInteractionTechnique {
       return;
     }
 
+    if (this.isEditableTarget(event.target)) {
+      return;
+    }
+
     if (this.menuRenderer.visible) {
       return;
     }
@@ -64,13 +68,27 @@ export class SelectedNodeActionMenuInteractionTechnique {
       return;
     }
 
-    const menu = this.buildMenuModel();
+    const selectedNodeName = this.graphModel.selectedNodes[0] ?? null;
+    const renameToken = this.resolveGroupNodeForRename(this.isStructureGraphProvider(), selectedNodeName, null);
+    const menu = this.buildMenuModel(renameToken);
     if (menu.options.length === 0) {
       return;
     }
 
     this.menuRenderer.open(menu, this.lastMouseX, this.lastMouseY);
   };
+
+  private isEditableTarget(target: EventTarget | null): boolean {
+    if (!(target instanceof HTMLElement)) {
+      return false;
+    }
+    return (
+      target.isContentEditable ||
+      target.tagName === 'INPUT' ||
+      target.tagName === 'TEXTAREA' ||
+      target.tagName === 'SELECT'
+    );
+  }
 
   private readonly onContextMenu = (event: MouseEvent): void => {
     if (!(event.target instanceof HTMLCanvasElement)) {
@@ -80,7 +98,6 @@ export class SelectedNodeActionMenuInteractionTechnique {
   };
 
   private openContextMenu(event: MouseEvent, explicitNodeName: string | null): void {
-    const allowRenameMenu = explicitNodeName === null && event.target instanceof HTMLCanvasElement;
     const structureMode = this.isStructureGraphProvider();
     const ellipseNodeName = explicitNodeName ?? this.pickEllipseNodeFromEvent(event);
     const rectangularNodeName = explicitNodeName ? null : this.pickRectangularNodeFromEvent(event);
@@ -100,29 +117,15 @@ export class SelectedNodeActionMenuInteractionTechnique {
     this.lastMouseX = event.clientX;
     this.lastMouseY = event.clientY;
 
-    const groupNodeForRename = allowRenameMenu
-      ? this.resolveGroupNodeForRename(structureMode, ellipseNodeName, rectangularNodeName)
-      : null;
-    const menu = groupNodeForRename ? this.buildRenameMenuModel(groupNodeForRename) : this.buildMenuModel();
+    const groupNodeForRename = this.resolveGroupNodeForRename(structureMode, ellipseNodeName, rectangularNodeName);
+    const menu = this.buildMenuModel(groupNodeForRename);
     if (menu.options.length === 0) {
       return;
     }
     this.menuRenderer.open(menu, this.lastMouseX, this.lastMouseY);
   }
 
-  private buildRenameMenuModel(groupToken: string): Menu {
-    return new Menu([
-      new MenuOption(
-        'shell.MENU_RENAME_GROUP',
-        this.translate('shell.MENU_RENAME_GROUP'),
-        () => this.requestRenameGroup(groupToken),
-        null,
-        null
-      )
-    ]);
-  }
-
-  private buildMenuModel(): Menu {
+  private buildMenuModel(groupTokenForRename: string | null = null): Menu {
     const structure = this.isStructureGraphProvider();
 
     const actionRegistry: Record<string, (() => void) | undefined> = {
@@ -149,10 +152,26 @@ export class SelectedNodeActionMenuInteractionTechnique {
       dynamicSubmenus,
       (id) => this.translate(id as TranslationKey)
     );
+
+    let options = menu.options;
     if (!structure || this.graphModel.selectedNodes.length !== 2) {
-      return new Menu(menu.options.filter((option) => option.id !== 'shell.MENU_SHOW_RELATION'));
+      options = options.filter((option) => option.id !== 'shell.MENU_SHOW_RELATION');
     }
-    return menu;
+
+    if (structure && this.graphModel.selectedNodes.length === 1 && groupTokenForRename) {
+      options = [
+        ...options,
+        new MenuOption(
+          'shell.MENU_RENAME_GROUP',
+          this.translate('shell.MENU_RENAME_GROUP'),
+          () => this.requestRenameGroup(groupTokenForRename),
+          null,
+          null
+        )
+      ];
+    }
+
+    return new Menu(options);
   }
 
   private buildMoveToSubmenu(): Menu {
