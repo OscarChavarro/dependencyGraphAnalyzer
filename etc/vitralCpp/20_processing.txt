@@ -1,0 +1,9 @@
+[20_PROCESSING]
+vsdk/toolkit/processing/ComputationalGeometry.cpp
+vsdk/toolkit/processing/ComputationalGeometry.h
+vsdk/toolkit/processing/linealAlgebra/LinearAlgebraEngine.cpp
+vsdk/toolkit/processing/linealAlgebra/LinearAlgebraEngine.h
+vsdk/toolkit/processing/linealAlgebra/Strategies.h
+vsdk/toolkit/processing/StopWatch.cpp
+vsdk/toolkit/processing/StopWatch.h
+vsdk/toolkit/processing/Containment.h

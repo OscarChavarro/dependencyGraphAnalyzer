@@ -1,0 +1,3 @@
+[04_IMAGE_LIBS]
+png.h
+jpeglib.h

@@ -1,0 +1,5 @@
+[31_VULKAN_DESCRIPTOR_SETS]
+
+render/vulkan13/descriptorSets/VulkanDescriptorSets.cpp
+render/vulkan13/descriptorSets/VulkanDescriptorSets.h
+vulkan13/descriptorSets/VulkanDescriptorSets.h

@@ -1,0 +1,4 @@
+[13_COLOR]
+
+vsdk/toolkit/common/color/ColorRgb.cpp
+vsdk/toolkit/common/color/ColorRgb.h

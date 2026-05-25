@@ -1,0 +1,3 @@
+[31_IO_WRAPPER]
+vsdk.toolkit.io.metadata.ShapeDescriptorPersistence
+vsdk.toolkit.io.PersistenceElement

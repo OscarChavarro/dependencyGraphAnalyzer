@@ -1,0 +1,3 @@
+[23_CAMERA]
+vsdk.toolkit.environment.camera.Camera
+vsdk.toolkit.environment.camera.CameraSnapshot

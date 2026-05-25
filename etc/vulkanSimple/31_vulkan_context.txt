@@ -1,0 +1,14 @@
+[31_VULKAN_CONTEXT]
+
+render/vulkan13/context/VulkanContext.cpp
+render/vulkan13/context/VulkanContext.h
+render/vulkan13/context/VulkanContextCore.h
+render/vulkan13/context/VulkanContextCreateInfoCore.h
+render/vulkan13/context/VulkanContextPhysicalDeviceInfo.h
+render/vulkan13/context/VulkanContextQueryHelper.h
+render/vulkan13/context/VulkanContextQueue.h
+vulkan13/context/VulkanContextCore.h
+vulkan13/context/VulkanContextCreateInfoCore.h
+vulkan13/context/VulkanContextPhysicalDeviceInfo.h
+vulkan13/context/VulkanContextQueryHelper.h
+vulkan13/context/VulkanContextQueue.h

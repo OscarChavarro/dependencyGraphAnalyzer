@@ -1,0 +1,5 @@
+[18_GUI_PROGRESS_MONITORS]
+vsdk.toolkit.gui.feedback.ProgressMonitor
+vsdk.toolkit.gui.feedback.ProgressMonitorConsole
+vsdk.toolkit.gui.feedback.ProgressMonitorConsoleLongFormat
+vsdk.toolkit.gui.feedback.ProgressMonitorInRam

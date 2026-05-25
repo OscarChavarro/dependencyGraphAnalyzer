@@ -1,0 +1,17 @@
+[72_RENDER_OPENGL]
+vsdk/toolkit/fixtures/OpenGL4SimpleCorridorSample.cpp
+vsdk/toolkit/fixtures/OpenGL4SimpleCorridorSample.h
+vsdk/toolkit/render/opengl4/OpenGL4ImageRenderer.cpp
+vsdk/toolkit/render/opengl4/OpenGL4ImageRenderer.h
+vsdk/toolkit/render/opengl4/OpenGL4LightRenderer.cpp
+vsdk/toolkit/render/opengl4/OpenGL4LightRenderer.h
+vsdk/toolkit/render/opengl4/OpenGL4MatrixRenderer.cpp
+vsdk/toolkit/render/opengl4/OpenGL4MatrixRenderer.h
+vsdk/toolkit/render/opengl4/OpenGL4RGBAImageCompressedRenderer.cpp
+vsdk/toolkit/render/opengl4/OpenGL4RGBAImageCompressedRenderer.h
+vsdk/toolkit/render/opengl4/OpenGL4RGBAImageUncompressedRenderer.cpp
+vsdk/toolkit/render/opengl4/OpenGL4RGBAImageUncompressedRenderer.h
+vsdk/toolkit/render/opengl4/OpenGL4RGBImageUncompressedRenderer.cpp
+vsdk/toolkit/render/opengl4/OpenGL4RGBImageUncompressedRenderer.h
+vsdk/toolkit/render/opengl4/OpenGL4SphereRenderer.cpp
+vsdk/toolkit/render/opengl4/OpenGL4SphereRenderer.h

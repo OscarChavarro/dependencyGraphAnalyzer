@@ -1,0 +1,4 @@
+[16_LOGGER]
+
+vsdk/toolkit/common/logging/Logger.cpp
+vsdk/toolkit/common/logging/Logger.h

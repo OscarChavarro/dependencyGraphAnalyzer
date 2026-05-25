@@ -1,0 +1,5 @@
+[24_SCENE]
+vsdk.toolkit.environment.scene.SimpleBody
+vsdk.toolkit.environment.scene.SimpleBodyGroup
+vsdk.toolkit.environment.scene.SimpleScene
+vsdk.toolkit.environment.scene.SimpleSceneSnapshot

@@ -1,0 +1,5 @@
+[75_ANIMATION]
+vsdk.toolkit.animation.AnimationEvent
+vsdk.toolkit.animation.AnimationEventGenerator
+vsdk.toolkit.animation.AnimationListener
+vsdk.toolkit.animation.Md2AnimationListener

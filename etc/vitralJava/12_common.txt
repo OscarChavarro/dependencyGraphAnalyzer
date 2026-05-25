@@ -1,0 +1,9 @@
+[12_COMMON]
+vsdk.toolkit.common.Entity
+vsdk.toolkit.common.FundamentalEntity
+vsdk.toolkit.common.ModelElement
+vsdk.toolkit.common.VSDK
+vsdk.toolkit.common.VSDKException
+vsdk.toolkit.common.VSDKFatalException
+vsdk.toolkit.common.VSDKJ2ME
+vsdk.toolkit.gui.PresentationElement

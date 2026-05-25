@@ -1,0 +1,9 @@
+[24_SCENE]
+vsdk/toolkit/environment/scene/SimpleBody.cpp
+vsdk/toolkit/environment/scene/SimpleBody.h
+vsdk/toolkit/environment/scene/SimpleBodyGroup.cpp
+vsdk/toolkit/environment/scene/SimpleBodyGroup.h
+vsdk/toolkit/environment/scene/SimpleScene.cpp
+vsdk/toolkit/environment/scene/SimpleScene.h
+vsdk/toolkit/environment/scene/SimpleSceneSnapshot.cpp
+vsdk/toolkit/environment/scene/SimpleSceneSnapshot.h

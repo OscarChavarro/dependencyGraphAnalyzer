@@ -1,0 +1,3 @@
+[23_LIGHT]
+vsdk.toolkit.environment.light.Light
+vsdk.toolkit.environment.light.LightType

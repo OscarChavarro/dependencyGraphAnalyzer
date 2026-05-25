@@ -9,3 +9,7 @@ cstdarg
 vector
 string
 cerrno
+
+stdexcept
+exception
+cstddef

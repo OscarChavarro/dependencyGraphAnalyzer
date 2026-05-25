@@ -15,3 +15,10 @@ string
 string.h
 unistd.h
 vector
+
+cstdarg
+cstddef
+cstdint
+cstdio
+cstdlib
+cstring

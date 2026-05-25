@@ -1,0 +1,4 @@
+[81_FRAMEWORK]
+vsdk.framework.Component
+vsdk.framework.shapeMatching.plugins.ShapeDescriptor2DGeneratorFourier
+vsdk.framework.shapeMatching.ShapeDescriptor2DGenerator

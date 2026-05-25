@@ -1,0 +1,8 @@
+[12_SYMBOLIC_ALGEBRA]
+vsdk.toolkit.common.symbolicAlgebra._AlgebraicExpressionBinaryOperatorNode
+vsdk.toolkit.common.symbolicAlgebra._AlgebraicExpressionConstantNode
+vsdk.toolkit.common.symbolicAlgebra._AlgebraicExpressionNode
+vsdk.toolkit.common.symbolicAlgebra._AlgebraicExpressionUnaryOperatorNode
+vsdk.toolkit.common.symbolicAlgebra._AlgebraicExpressionVariableNode
+vsdk.toolkit.common.symbolicAlgebra.AlgebraicExpression
+vsdk.toolkit.common.symbolicAlgebra.AlgebraicExpressionException

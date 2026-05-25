@@ -1,0 +1,5 @@
+[23_BACKGROUND]
+vsdk.toolkit.environment.background.Background
+vsdk.toolkit.environment.background.CubemapBackground
+vsdk.toolkit.environment.background.FixedBackground
+vsdk.toolkit.environment.background.SimpleBackground

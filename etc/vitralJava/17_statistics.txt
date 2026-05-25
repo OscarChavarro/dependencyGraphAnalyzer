@@ -1,0 +1,4 @@
+[17_STATISTICS]
+vsdk.toolkit.common.statistics.PolyhedralBoundedSolidStatistics
+vsdk.toolkit.common.statistics.RaytraceStatistics
+vsdk.toolkit.common.statistics.RenderingStatistics

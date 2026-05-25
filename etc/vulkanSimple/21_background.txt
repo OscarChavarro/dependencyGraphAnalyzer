@@ -1,0 +1,5 @@
+[21_BACKGROUND]
+
+vsdk/toolkit/environment/background/Background.h
+vsdk/toolkit/environment/background/SimpleBackground.cpp
+vsdk/toolkit/environment/background/SimpleBackground.h

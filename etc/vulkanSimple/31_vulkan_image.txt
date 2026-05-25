@@ -1,0 +1,9 @@
+[31_VULKAN_IMAGE]
+
+render/vulkan13/image/VulkanImageResource.h
+render/vulkan13/image/VulkanImages.cpp
+render/vulkan13/image/VulkanImages.h
+render/vulkan13/image/VulkanTextureResource.h
+vulkan13/image/VulkanImageResource.h
+vulkan13/image/VulkanImages.h
+vulkan13/image/VulkanTextureResource.h

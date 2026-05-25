@@ -1,0 +1,17 @@
+[12_LINEAL_ALGEBRA]
+vsdk.toolkit.common.linealAlgebra.Complex
+vsdk.toolkit.common.linealAlgebra.exceptions.MatrixDimensionMismatchException
+vsdk.toolkit.common.linealAlgebra.exceptions.MatrixIndexOutOfBoundsException
+vsdk.toolkit.common.linealAlgebra.exceptions.MatrixNotSquareException
+vsdk.toolkit.common.linealAlgebra.exceptions.MatrixSingularException
+vsdk.toolkit.common.linealAlgebra.Matrix4x4d
+vsdk.toolkit.common.linealAlgebra.Matrix4x4f
+vsdk.toolkit.common.linealAlgebra.MatrixNxM
+vsdk.toolkit.common.linealAlgebra.Quaterniond
+vsdk.toolkit.common.linealAlgebra.Quaternionf
+vsdk.toolkit.common.linealAlgebra.Vector2Dd
+vsdk.toolkit.common.linealAlgebra.Vector2Df
+vsdk.toolkit.common.linealAlgebra.Vector3Dd
+vsdk.toolkit.common.linealAlgebra.Vector3Df
+vsdk.toolkit.common.linealAlgebra.Vector4Dd
+vsdk.toolkit.common.linealAlgebra.Vector4Df

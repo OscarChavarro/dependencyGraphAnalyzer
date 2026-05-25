@@ -101,3 +101,8 @@ io/pov/ast/AstSceneBuilder.cpp
 io/pov/ast/AstSceneBuilder.h
 io/pov/SymbolTable.cpp
 io/pov/SymbolTable.h
+
+io/pov/ast/AstParsedSceneProgram.cpp
+io/pov/ast/AstParsedSceneProgram.h
+io/pov/RewindableTokenStream.h
+io/pov/RewindableTokenStream.cpp

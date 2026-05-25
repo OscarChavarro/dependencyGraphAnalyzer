@@ -1,0 +1,8 @@
+[31_VULKAN_PIPELINE]
+
+render/vulkan13/pipeline/VulkanGraphicsPipelineGenerator.h
+render/vulkan13/pipeline/VulkanGraphicsPipelineGeneratorCombined.h
+render/vulkan13/pipeline/VulkanGraphicsPipelineState.h
+vulkan13/pipeline/VulkanGraphicsPipelineGenerator.h
+vulkan13/pipeline/VulkanGraphicsPipelineGeneratorCombined.h
+vulkan13/pipeline/VulkanGraphicsPipelineState.h

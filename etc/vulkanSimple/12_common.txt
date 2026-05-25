@@ -1,2 +1,5 @@
 [12_COMMON]
 vsdk/toolkit/common/VSDK.h
+
+vsdk/toolkit/common/VSDK.cpp
+vsdk/toolkit/common/VSDKFatalException.h

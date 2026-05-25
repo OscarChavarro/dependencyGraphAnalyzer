@@ -1,0 +1,5 @@
+[22_CAMERA]
+
+vsdk/toolkit/environment/camera/Camera.cpp
+vsdk/toolkit/environment/camera/Camera.h
+vsdk/toolkit/environment/camera/CameraSnapshot.h

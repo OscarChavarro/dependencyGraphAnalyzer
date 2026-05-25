@@ -1,0 +1,6 @@
+[21_MATERIAL]
+vsdk.toolkit.environment.material.MicroFacetedMaterial
+vsdk.toolkit.environment.material.MicroFacetedMaterial.MicrofacetConfig
+vsdk.toolkit.environment.material.RendererConfiguration
+vsdk.toolkit.environment.material.ShadingType
+vsdk.toolkit.environment.material.SimpleMaterial

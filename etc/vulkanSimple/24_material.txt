@@ -1,0 +1,5 @@
+[24_MATERIAL]
+
+vsdk/toolkit/environment/light/Light.cpp
+vsdk/toolkit/environment/light/Light.h
+vsdk/toolkit/environment/light/LightType.h

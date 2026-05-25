@@ -34,6 +34,11 @@
     "name": "RPK typescript port",
     "groupsDefinitionFolder": "etc/renderparkTypescript",
     "cacheFile": "etc/caches/cache.txt.rpkTypescript"
+  },
+  {
+    "id": "vitralJava",
+    "name": "Vitral Java port",
+    "groupsDefinitionFolder": "etc/vitralJava",
+    "cacheFile": "etc/caches/cache.txt.vitralJava"
   }
 ]
-
