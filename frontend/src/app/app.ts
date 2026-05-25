@@ -71,6 +71,9 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('verticalScrollbarThumb')
   private verticalScrollbarThumbRef?: ElementRef<HTMLElement>;
 
+  @ViewChild('renameGroupInput')
+  private renameGroupInputRef?: ElementRef<HTMLInputElement>;
+
   @ViewChild(MenuRenderer)
   private menuRenderer?: MenuRenderer;
 
@@ -627,6 +630,16 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     this.renameGroupCurrentName = groupToken.toLowerCase();
     this.renameGroupNextName = '';
     this.renameGroupDialogVisible = true;
+    setTimeout(() => this.focusRenameGroupInput(), 0);
+  }
+
+  private focusRenameGroupInput(): void {
+    const input = this.renameGroupInputRef?.nativeElement;
+    if (!input) {
+      return;
+    }
+    input.focus();
+    input.select();
   }
 
   private requestRenameGroupInBackend(groupToken: string, newGroupName: string): void {

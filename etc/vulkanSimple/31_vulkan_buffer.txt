@@ -1,7 +1,0 @@
-[31_VULKAN_BUFFER]
-
-vulkan13/buffer/VulkanBufferResource.h
-vulkan13/buffer/VulkanBuffers.h
-vulkan13/buffer/VulkanBufferSubAllocator.h
-vulkan13/buffer/VulkanBufferSubAllocatorBinding.h
-vulkan13/buffer/VulkanBufferSubAllocatorBlock.h

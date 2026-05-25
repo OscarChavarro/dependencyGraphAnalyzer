@@ -1,0 +1,3 @@
+[96_APP_IO_IMAGE]
+io/PpmWriter.cpp
+io/PpmWriter.h

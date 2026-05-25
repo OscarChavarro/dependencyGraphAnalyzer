@@ -1,0 +1,7 @@
+[37_IO_GEOMETRY]
+vsdk/toolkit/io/geometry/EnvironmentPersistence.cpp
+vsdk/toolkit/io/geometry/EnvironmentPersistence.h
+vsdk/toolkit/io/geometry/ReaderMitScene.cpp
+vsdk/toolkit/io/geometry/ReaderMitScene.h
+vsdk/toolkit/io/geometry/ReaderObj.cpp
+vsdk/toolkit/io/geometry/ReaderObj.h

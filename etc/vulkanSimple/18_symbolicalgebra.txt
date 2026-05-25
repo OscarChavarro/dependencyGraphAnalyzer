@@ -1,5 +1,0 @@
-[18_SYMBOLICALGEBRA]
-
-vsdk/toolkit/common/symbolicAlgebra/AlgebraicExpression.cpp
-vsdk/toolkit/common/symbolicAlgebra/AlgebraicExpression.h
-vsdk/toolkit/common/symbolicAlgebra/AlgebraicExpressionException.h

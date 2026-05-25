@@ -1,0 +1,13 @@
+[72_VULKAN_MEMORY_LOW_LEVEL]
+render/vulkan13/memory/memoryLowLevelAllocator/VulkanAllocation.h
+render/vulkan13/memory/memoryLowLevelAllocator/VulkanBakedAllocateInfo.h
+render/vulkan13/memory/memoryLowLevelAllocator/VulkanDeviceMemoryAllocationInfo.h
+render/vulkan13/memory/memoryLowLevelAllocator/VulkanDeviceMemoryAllocatorBlock.h
+render/vulkan13/memory/memoryLowLevelAllocator/VulkanDeviceMemoryAllocatorState.h
+render/vulkan13/memory/memoryLowLevelAllocator/VulkanMemAllocateInfo.h
+render/vulkan13/memory/memoryLowLevelAllocator/VulkanMemAllocator.cpp
+render/vulkan13/memory/memoryLowLevelAllocator/VulkanMemAllocatorDma.h
+render/vulkan13/memory/memoryLowLevelAllocator/VulkanMemAllocatorInterface.h
+render/vulkan13/memory/memoryLowLevelAllocator/VulkanMemInfo.h
+render/vulkan13/memory/memoryLowLevelAllocator/VulkanMemoryManagement.cpp
+render/vulkan13/memory/memoryLowLevelAllocator/VulkanMemoryManagement.h

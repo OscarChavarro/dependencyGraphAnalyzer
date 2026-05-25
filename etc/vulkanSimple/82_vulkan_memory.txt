@@ -1,0 +1,8 @@
+[82_VULKAN_MEMORY]
+render/vulkan13/memory/memoryCopy/VulkanStagingMemoryEntry.h
+render/vulkan13/memory/memoryCopy/VulkanStagingMemoryManager.cpp
+render/vulkan13/memory/memoryCopy/VulkanStagingMemoryManager.h
+render/vulkan13/memory/memoryCopy/VulkanStagingSet.h
+render/vulkan13/memory/VulkanResourceAllocator.cpp
+render/vulkan13/memory/VulkanResourceAllocatorCore.h
+render/vulkan13/memory/VulkanResourceAllocatorDmaCore.h

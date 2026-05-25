@@ -1,0 +1,6 @@
+[74_VULKAN_SAMPLERS]
+render/vulkan13/samplers/VulkanSamplerPoolEntry.h
+render/vulkan13/samplers/VulkanSamplers.cpp
+render/vulkan13/samplers/VulkanSamplers.h
+render/vulkan13/samplers/VulkanSamplerState.h
+render/vulkan13/samplers/VulkanSamplerStateHashFn.h

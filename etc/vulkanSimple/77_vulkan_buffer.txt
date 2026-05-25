@@ -1,0 +1,7 @@
+[77_VULKAN_BUFFER]
+render/vulkan13/buffer/VulkanBufferResource.h
+render/vulkan13/buffer/VulkanBuffers.h
+render/vulkan13/buffer/VulkanBufferSubAllocator.cpp
+render/vulkan13/buffer/VulkanBufferSubAllocator.h
+render/vulkan13/buffer/VulkanBufferSubAllocatorBinding.h
+render/vulkan13/buffer/VulkanBufferSubAllocatorBlock.h

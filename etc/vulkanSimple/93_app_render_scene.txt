@@ -1,0 +1,6 @@
+[93_APP_RENDER_SCENE]
+render/scene/VulkanObjectBuffers.cpp
+render/scene/VulkanObjectBuffers.h
+render/scene/VulkanObjectInstanceRenderer.cpp
+render/scene/VulkanObjectInstanceRenderer.h
+render/scene/VulkanSceneRenderer.h

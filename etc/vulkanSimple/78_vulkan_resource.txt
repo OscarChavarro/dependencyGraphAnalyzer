@@ -1,0 +1,5 @@
+[78_VULKAN_RESOURCE]
+render/vulkan13/resource/VulkanAccelKHRResource.h
+render/vulkan13/resource/VulkanBufferResource.h
+render/vulkan13/resource/VulkanImageResource.h
+render/vulkan13/resource/VulkanTextureResource.h

@@ -1,0 +1,2 @@
+[84_VULKAN_DYNAMIC_RENDERING]
+render/vulkan13/dynamicRendering/VulkanRenderingAttachments.h

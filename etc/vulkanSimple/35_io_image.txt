@@ -1,0 +1,3 @@
+[35_IO_IMAGE]
+vsdk/toolkit/io/image/ImagePersistence.cpp
+vsdk/toolkit/io/image/ImagePersistence.h

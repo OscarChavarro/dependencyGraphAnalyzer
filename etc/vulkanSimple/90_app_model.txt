@@ -1,0 +1,13 @@
+[90_APP_MODEL]
+model/AppVertex.cpp
+model/AppVertex.h
+model/GlobalUniforms.h
+model/ObjDesc.h
+model/ObjectInstance.h
+model/ObjModel.h
+model/PushConstantRaster.h
+model/PushConstantRay.h
+model/Scene.h
+model/Vertex3D.h
+model/WaveFrontMaterial.h
+model/ObjSceneData.h

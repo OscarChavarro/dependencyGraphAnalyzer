@@ -1,0 +1,5 @@
+[75_VULKAN_SWAP_CHAIN]
+render/vulkan13/swapChain/VulkanSwapChain.cpp
+render/vulkan13/swapChain/VulkanSwapChain.h
+render/vulkan13/swapChain/VulkanSwapChainEntry.h
+render/vulkan13/swapChain/VulkanSwapChainSemaphoreEntry.h

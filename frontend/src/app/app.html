@@ -225,12 +225,12 @@
 <div class="rename-group-dialog-backdrop" *ngIf="renameGroupDialogVisible" (click)="closeRenameGroupDialog()">
   <div class="rename-group-dialog" (click)="$event.stopPropagation()">
     <input
+      #renameGroupInput
       type="text"
       [value]="renameGroupNextName"
       (input)="onRenameGroupInput($event)"
       (keydown)="onRenameGroupKeyDown($event)"
       [placeholder]="t(i18nKeys.shell.RENAME_GROUP_NEW_NAME_PLACEHOLDER)"
-      autofocus
     />
   </div>
 </div>

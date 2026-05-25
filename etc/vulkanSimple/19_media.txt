@@ -1,5 +1,4 @@
 [19_MEDIA]
-
 vsdk/toolkit/media/Calligraphic2DBuffer.cpp
 vsdk/toolkit/media/Calligraphic2DBuffer.h
 vsdk/toolkit/media/FourierShapeDescriptor.cpp

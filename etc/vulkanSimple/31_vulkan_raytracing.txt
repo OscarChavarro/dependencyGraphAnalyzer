@@ -1,8 +1,0 @@
-[31_VULKAN_RAYTRACING]
-
-render/vulkan13/rayTracing/VulkanRaytraceKhr.cpp
-render/vulkan13/rayTracing/VulkanRaytraceKhr.h
-render/vulkan13/rayTracing/VulkanRayTracingExtensions.cpp
-render/vulkan13/rayTracing/VulkanRayTracingExtensions.h
-vulkan13/rayTracing/VulkanRaytraceKhr.h
-vulkan13/rayTracing/VulkanRayTracingExtensions.h

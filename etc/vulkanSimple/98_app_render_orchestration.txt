@@ -1,0 +1,11 @@
+[98_APP_RENDER_ORCHESTRATION]
+render/orchestration/VulkanPostProcessor.cpp
+render/orchestration/VulkanPostProcessor.h
+render/orchestration/VulkanRaytracingRenderer.cpp
+render/orchestration/VulkanRaytracingRenderer.h
+render/orchestration/VulkanRenderer.cpp
+render/orchestration/VulkanRenderer.h
+render/orchestration/VulkanSceneLoader.cpp
+render/orchestration/VulkanSceneLoader.h
+render/orchestration/VulkanScreenshotRenderer.cpp
+render/orchestration/VulkanScreenshotRenderer.h
