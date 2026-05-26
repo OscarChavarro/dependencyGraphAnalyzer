@@ -1,0 +1,5 @@
+[22_GEOMETRY_CURVE]
+vsdk/toolkit/environment/geometry/curve/Curve.cpp
+vsdk/toolkit/environment/geometry/curve/Curve.h
+vsdk/toolkit/environment/geometry/curve/ParametricCurve.cpp
+vsdk/toolkit/environment/geometry/curve/ParametricCurve.h

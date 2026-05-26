@@ -1,0 +1,13 @@
+[22_GEOMETRY_ELEMENT]
+vsdk/toolkit/environment/geometry/element/Intersection.cpp
+vsdk/toolkit/environment/geometry/element/Intersection.h
+vsdk/toolkit/environment/geometry/element/Ray.cpp
+vsdk/toolkit/environment/geometry/element/Ray.h
+vsdk/toolkit/environment/geometry/element/RayHit.cpp
+vsdk/toolkit/environment/geometry/element/RayHit.h
+vsdk/toolkit/environment/geometry/element/Triangle.cpp
+vsdk/toolkit/environment/geometry/element/Triangle.h
+vsdk/toolkit/environment/geometry/element/Vertex.cpp
+vsdk/toolkit/environment/geometry/element/Vertex.h
+vsdk/toolkit/environment/geometry/element/Vertex2D.cpp
+vsdk/toolkit/environment/geometry/element/Vertex2D.h

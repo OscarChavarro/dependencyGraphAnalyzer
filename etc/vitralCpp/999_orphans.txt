@@ -1,9 +1,1 @@
 [999_orphans]
-OpenGL4SimpleCorridorSample.h
-OpenGL4ImageRenderer.h
-OpenGL4RGBImageUncompressedRenderer.h
-OpenGL4RGBAImageUncompressedRenderer.h
-OpenGL4RGBAImageCompressedRenderer.h
-OpenGL4LightRenderer.h
-OpenGL4MatrixRenderer.h
-OpenGL4SphereRenderer.h

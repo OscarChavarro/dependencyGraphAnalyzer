@@ -1,0 +1,13 @@
+[23_GEOMETRIC_PROCESSING]
+vsdk/toolkit/environment/geometry/geometricProcessing/FunctionalExplicitSurfaceVoxelization.cpp
+vsdk/toolkit/environment/geometry/geometricProcessing/FunctionalExplicitSurfaceVoxelization.h
+vsdk/toolkit/environment/geometry/geometricProcessing/GeometryTriangulator.cpp
+vsdk/toolkit/environment/geometry/geometricProcessing/GeometryTriangulator.h
+vsdk/toolkit/environment/geometry/geometricProcessing/SurfaceRayIntersection.cpp
+vsdk/toolkit/environment/geometry/geometricProcessing/SurfaceRayIntersection.h
+vsdk/toolkit/environment/geometry/geometricProcessing/TriangleMeshGroupVoxelization.cpp
+vsdk/toolkit/environment/geometry/geometricProcessing/TriangleMeshGroupVoxelization.h
+vsdk/toolkit/environment/geometry/geometricProcessing/TriangleMeshVoxelization.cpp
+vsdk/toolkit/environment/geometry/geometricProcessing/TriangleMeshVoxelization.h
+vsdk/toolkit/environment/geometry/geometricProcessing/Voxelization.cpp
+vsdk/toolkit/environment/geometry/geometricProcessing/Voxelization.h

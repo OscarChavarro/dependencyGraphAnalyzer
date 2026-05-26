@@ -1,0 +1,14 @@
+[18_GUI_PROGRESS_MONITORS]
+vsdk/toolkit/gui/feedback/parallel/ParallelProgressMonitorCommand.h
+vsdk/toolkit/gui/feedback/parallel/ParallelProgressMonitorConsumer.cpp
+vsdk/toolkit/gui/feedback/parallel/ParallelProgressMonitorConsumer.h
+vsdk/toolkit/gui/feedback/parallel/ParallelProgressMonitorEvent.h
+vsdk/toolkit/gui/feedback/parallel/ParallelProgressMonitorProducer.cpp
+vsdk/toolkit/gui/feedback/parallel/ParallelProgressMonitorProducer.h
+vsdk/toolkit/gui/feedback/ProgressMonitor.h
+vsdk/toolkit/gui/feedback/ProgressMonitorConsole.cpp
+vsdk/toolkit/gui/feedback/ProgressMonitorConsole.h
+vsdk/toolkit/gui/feedback/ProgressMonitorConsoleLongFormat.cpp
+vsdk/toolkit/gui/feedback/ProgressMonitorConsoleLongFormat.h
+vsdk/toolkit/gui/feedback/ProgressMonitorInRam.cpp
+vsdk/toolkit/gui/feedback/ProgressMonitorInRam.h

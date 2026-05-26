@@ -1,0 +1,3 @@
+[22_GEOMETRY_CURVE]
+vsdk.toolkit.environment.geometry.curve.Curve
+vsdk.toolkit.environment.geometry.curve.ParametricCurve

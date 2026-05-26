@@ -1,0 +1,7 @@
+[22_GEOMETRY_ELEMENT]
+vsdk.toolkit.environment.geometry.element.Intersection
+vsdk.toolkit.environment.geometry.element.Ray
+vsdk.toolkit.environment.geometry.element.RayHit
+vsdk.toolkit.environment.geometry.element.Triangle
+vsdk.toolkit.environment.geometry.element.Vertex
+vsdk.toolkit.environment.geometry.element.Vertex2D

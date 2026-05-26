@@ -53,3 +53,5 @@ java/util/HashMap.txx
 java/util/HashMapEntry.h
 java/util/StringTokenizer.cpp
 java/util/StringTokenizer.h
+java/util/ArrayDeque.h
+java/util/ArrayDeque.txx

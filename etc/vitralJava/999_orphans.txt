@@ -1,1 +1,7 @@
 [999_orphans]
+vsdk.toolkit.environment.geometry.geometricProcessing.FunctionalExplicitSurfaceVoxelization
+vsdk.toolkit.environment.geometry.geometricProcessing.TriangleMeshGroupVoxelization
+vsdk.toolkit.environment.geometry.geometricProcessing.TriangleMeshVoxelization
+vsdk.toolkit.environment.geometry.geometricProcessing.Voxelization
+vsdk.toolkit.environment.geometry.geometricProcessing.SurfaceRayIntersection
+vsdk.toolkit.environment.geometry.geometricProcessing.GeometryTriangulator

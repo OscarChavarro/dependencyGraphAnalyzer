@@ -1,0 +1,14 @@
+[22_GEOMETRY_SURFACE]
+vsdk.toolkit.environment.geometry.surface._AnimationInfo
+vsdk.toolkit.environment.geometry.surface.FunctionalExplicitSurface
+vsdk.toolkit.environment.geometry.surface.HalfSpace
+vsdk.toolkit.environment.geometry.surface.InfinitePlane
+vsdk.toolkit.environment.geometry.surface.Md2Mesh
+vsdk.toolkit.environment.geometry.surface.ParametricBiCubicPatch
+vsdk.toolkit.environment.geometry.surface.polygon._Polygon2DContour
+vsdk.toolkit.environment.geometry.surface.polygon.Polygon2D
+vsdk.toolkit.environment.geometry.surface.QuadMesh
+vsdk.toolkit.environment.geometry.surface.Surface
+vsdk.toolkit.environment.geometry.surface.TriangleMesh
+vsdk.toolkit.environment.geometry.surface.TriangleMeshGroup
+vsdk.toolkit.environment.geometry.surface.TriangleStripMesh

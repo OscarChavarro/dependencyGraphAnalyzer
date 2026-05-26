@@ -16,3 +16,4 @@ render/common/RtxBindings.h
 render/common/SceneBindings.h
 render/common/ShaderBindings.h
 render/common/StagingMemorySetID.h
+render/common/CompatibleDeviceCandidate.h
