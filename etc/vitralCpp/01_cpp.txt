@@ -12,3 +12,4 @@ cstring
 exception
 limits
 stdexcept
+cstdint

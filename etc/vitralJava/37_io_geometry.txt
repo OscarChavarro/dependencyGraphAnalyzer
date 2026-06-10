@@ -43,3 +43,10 @@ vsdk.toolkit.io.geometry.ViewpointBinaryPersistence
 vsdk.toolkit.io.geometry.WriterGts
 vsdk.toolkit.io.geometry.WriterObj
 vsdk.toolkit.io.geometry.WriterVtk
+vsdk.toolkit.io.geometry.stl._StlFacetEmitter
+vsdk.toolkit.io.geometry.stl._StlFacetEmitter.Facet
+vsdk.toolkit.io.geometry.stl._StlFaceTriangulator
+vsdk.toolkit.io.geometry.stl._StlFaceTriangulator.FaceBasis
+vsdk.toolkit.io.geometry.stl._StlFaceTriangulator.ProjectedVertex
+vsdk.toolkit.io.geometry.stl._StlSolidValidator
+vsdk.toolkit.io.geometry.stl.StlWriter

@@ -1,3 +1,6 @@
 [03_UNIX]
 unistd.h
 sys/stat.h
+arpa/inet.h
+netinet/in.h
+sys/socket.h

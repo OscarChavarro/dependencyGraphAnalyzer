@@ -1,0 +1,9 @@
+[61_APP]
+app/ImageOutputAdapter.cpp
+app/ImageOutputAdapter.h
+app/Povray.cpp
+app/PovrayApplication.cpp
+app/PovrayApplication.h
+app/main.cpp
+app/options/CommandLineOptions.cpp
+app/options/CommandLineOptions.h

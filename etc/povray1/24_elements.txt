@@ -1,11 +1,4 @@
 [24_ELEMENTS]
-environment/geometry/elements/Ray.cpp
-environment/geometry/elements/Ray.h
-environment/geometry/elements/RayWithSegments.cpp
-environment/geometry/elements/RayWithSegments.h
-environment/geometry/elements/SmoothTriangle.h
-environment/geometry/elements/Triangle.cpp
-environment/geometry/elements/Triangle.h
 environment/geometry/Geometry.h
 environment/geometry/GeometryConstants.h
 environment/geometry/GeometryOperations.h
@@ -13,3 +6,10 @@ environment/geometry/Intersection.h
 environment/geometry/Methods.h
 environment/geometry/ObjectUtils.h
 environment/geometry/SimpleBody.h
+environment/geometry/elements/Ray.cpp
+environment/geometry/elements/Ray.h
+environment/geometry/elements/RayWithSegments.cpp
+environment/geometry/elements/RayWithSegments.h
+environment/geometry/elements/SmoothTriangle.h
+environment/geometry/elements/Triangle.cpp
+environment/geometry/elements/Triangle.h

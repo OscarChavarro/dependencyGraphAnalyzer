@@ -23,7 +23,8 @@
     "name": "Povray 1.0",
     "groupsDefinitionFolder": "./etc/povray1",
     "inputFolders": [
-        "/paradigmas/master/algoritmos_basicos_3d/povray_1.0_1992/povCpp/src"
+        "/paradigmas/master/algoritmos_basicos_3d/povray_1.0_1992/povCpp/src",
+        "/paradigmas/master/algoritmos_basicos_3d/povray_1.0_1992/povCpp/base/src/main"
     ]
   },
   {

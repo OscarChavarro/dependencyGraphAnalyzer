@@ -1,4 +1,6 @@
 [26_GEOMETRY]
+common/Polynomial.h
+environment/geometry/GeometryUtils.h
 environment/geometry/surface/InfinitePlane.cpp
 environment/geometry/surface/InfinitePlane.h
 environment/geometry/surface/parametric/ParametricBiCubicIntersection.cpp
@@ -29,9 +31,7 @@ environment/geometry/volume/compound/CSG.cpp
 environment/geometry/volume/compound/CSG.h
 environment/geometry/volume/compound/Composite.cpp
 environment/geometry/volume/compound/Composite.h
+environment/geometry/volume/polynomial/Polynomial.h
+environment/geometry/volume/polynomial/PolynomialConstants.h
 environment/geometry/volume/polynomial/PolynomialShape.cpp
 environment/geometry/volume/polynomial/PolynomialShape.h
-environment/geometry/volume/polynomial/PolynomialConstants.h
-common/Polynomial.h
-environment/geometry/volume/polynomial/Polynomial.h
-environment/geometry/GeometryUtils.h

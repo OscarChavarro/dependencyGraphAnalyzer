@@ -1,5 +1,3 @@
 [25_MATERIAL]
 environment/material/RendererConfiguration.cpp
 environment/material/RendererConfiguration.h
-environment/material/RenderRuntimeState.cpp
-environment/material/RenderRuntimeState.h

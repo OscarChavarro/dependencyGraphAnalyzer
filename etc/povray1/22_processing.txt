@@ -1,5 +1,0 @@
-[22_PROCESSING]
-processing/PolynomialSolver.cpp
-processing/PolynomialSolver.h
-processing/Polynomial.h
-processing/PolynomialConstants.h

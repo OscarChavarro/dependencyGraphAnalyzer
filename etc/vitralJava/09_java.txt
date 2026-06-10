@@ -73,3 +73,6 @@ org.w3c.dom.NamedNodeMap
 org.w3c.dom.Node
 org.w3c.dom.NodeList
 java.lang.FunctionalInterface
+java.util.Comparator
+java.util.LinkedHashMap
+java.util.Set

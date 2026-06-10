@@ -1,0 +1,9 @@
+[48_IO_TEXTURE]
+io/pov/texture/ColorMapParser.cpp
+io/pov/texture/ColorMapParser.h
+io/pov/texture/DefaultTextureParser.cpp
+io/pov/texture/DefaultTextureParser.h
+io/pov/texture/PovColorMap.cpp
+io/pov/texture/PovColorMap.h
+io/pov/texture/TextureParser.cpp
+io/pov/texture/TextureParser.h

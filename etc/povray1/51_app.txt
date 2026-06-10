@@ -1,5 +1,0 @@
-[51_APP]
-app/Povray.cpp
-app/PovrayApplication.h
-app/PovrayApplication.cpp
-app/main.cpp

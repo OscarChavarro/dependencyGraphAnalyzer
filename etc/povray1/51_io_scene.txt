@@ -1,0 +1,11 @@
+[51_IO_SCENE]
+io/pov/scene/DeclarationParser.cpp
+io/pov/scene/DeclarationParser.h
+io/pov/scene/FogParser.cpp
+io/pov/scene/FogParser.h
+io/pov/scene/RenderSettingsParser.cpp
+io/pov/scene/RenderSettingsParser.h
+io/pov/scene/SceneFrameParser.cpp
+io/pov/scene/SceneFrameParser.h
+io/pov/scene/SceneParser.cpp
+io/pov/scene/SceneParser.h

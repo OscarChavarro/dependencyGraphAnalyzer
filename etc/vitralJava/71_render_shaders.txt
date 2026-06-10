@@ -1,12 +1,4 @@
-[71_RENDER]
-vsdk.toolkit.render._AppelEdgeCache
-vsdk.toolkit.render._AppelEdgeSegment
-vsdk.toolkit.render.AutoStereogramGenerator
-vsdk.toolkit.render.HiddenLineRenderer
-vsdk.toolkit.render.PolyhedralBoundedSolidDebugger
-vsdk.toolkit.render.Rasterizer2D
-vsdk.toolkit.render.RenderContext
-vsdk.toolkit.render.RenderingElement
+[71_RENDER_SHADERS]
 vsdk.toolkit.render.shaders.ConstantShader
 vsdk.toolkit.render.shaders.ConstantTextureShader
 vsdk.toolkit.render.shaders.CookTorranceShader
@@ -24,11 +16,4 @@ vsdk.toolkit.render.shaders.PhongTextureShader
 vsdk.toolkit.render.shaders.Shader
 vsdk.toolkit.render.shaders.Shader.LocalShadingResult
 vsdk.toolkit.render.shaders.ShaderSelector
-vsdk.toolkit.render.SimpleRaytracer
-vsdk.toolkit.render.SimpleRaytracer.SceneObjectRenderData
-vsdk.toolkit.render.SimpleRaytracer.SceneRenderCache
-vsdk.toolkit.render.Tile
-vsdk.toolkit.render.TileGenerationStrategy
-vsdk.toolkit.render.TileGenerator
 vsdk.toolkit.render.TraceWorkspace
-vsdk.toolkit.render.WireframeRenderer

@@ -1,6 +1,9 @@
-[13_COLOR]
+[14_COLOR]
 common/color/Color.cpp
 common/color/Color.h
+common/color/ColorOperations.cpp
+common/color/ColorOperations.h
+common/color/ColorRgba.h
 common/color/RGBAColor.h
 common/color/RGBAColorPalette.h
 common/color/RGBAColorPaletteSpan.h

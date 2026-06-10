@@ -1,0 +1,17 @@
+[21_SOLID_TEXTURE]
+media/solidTexture/BumpTextureFixture.cpp
+media/solidTexture/BumpTextureFixture.h
+media/solidTexture/ColorTextureFixture.cpp
+media/solidTexture/ColorTextureFixture.h
+media/solidTexture/MapTextureFixture.cpp
+media/solidTexture/MapTextureFixture.h
+media/solidTexture/SolidTextureBitmapInterpolationTypes.h
+media/solidTexture/SolidTextureBumpyTextures.h
+media/solidTexture/SolidTextureColorTextures.h
+media/solidTexture/SolidTextureProjectionMethods.h
+media/solidTexture/Texture.cpp
+media/solidTexture/Texture.h
+media/solidTexture/TextureFixture.cpp
+media/solidTexture/TextureFixture.h
+media/solidTexture/TextureImage.h
+media/solidTexture/TextureUtils.h

@@ -1,0 +1,7 @@
+[19_PROCESSING]
+processing/polynomial/Polynomial.h
+processing/polynomial/PolynomialConstants.h
+processing/polynomial/PolynomialSolver.cpp
+processing/polynomial/PolynomialSolver.h
+processing/polynomial/PolynomialTermCounts.cpp
+processing/polynomial/PolynomialTermCounts.h

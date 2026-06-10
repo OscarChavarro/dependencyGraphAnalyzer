@@ -23,6 +23,6 @@ render/shaders/RayShaderPipeline.cpp
 render/shaders/RayShaderPipeline.h
 render/shaders/ShadowShader.cpp
 render/shaders/ShadowShader.h
+render/shaders/TraceService.h
 render/shaders/TransmissionRefractionShader.cpp
 render/shaders/TransmissionRefractionShader.h
-render/shaders/TraceService.h

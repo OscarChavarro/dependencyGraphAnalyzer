@@ -15,3 +15,7 @@ vsdk/toolkit/render/opengl4/OpenGL4RGBImageUncompressedRenderer.cpp
 vsdk/toolkit/render/opengl4/OpenGL4RGBImageUncompressedRenderer.h
 vsdk/toolkit/render/opengl4/OpenGL4SphereRenderer.cpp
 vsdk/toolkit/render/opengl4/OpenGL4SphereRenderer.h
+vsdk/toolkit/render/opengl4/OpenGL4LineRenderer.cpp
+vsdk/toolkit/render/opengl4/OpenGL4LineRenderer.h
+vsdk/toolkit/render/opengl4/OpenGL4Polygon2DRenderer.cpp
+vsdk/toolkit/render/opengl4/OpenGL4Polygon2DRenderer.h

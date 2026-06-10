@@ -1,0 +1,3 @@
+[46_IO_LIGHT]
+io/pov/light/LightSourceParser.cpp
+io/pov/light/LightSourceParser.h

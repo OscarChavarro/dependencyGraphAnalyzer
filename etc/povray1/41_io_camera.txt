@@ -1,3 +1,0 @@
-[41_IO_CAMERA]
-io/pov/cameraParser/CameraParser.cpp
-io/pov/cameraParser/CameraParser.h

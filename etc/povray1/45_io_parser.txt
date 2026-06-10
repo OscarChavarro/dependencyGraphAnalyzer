@@ -1,0 +1,7 @@
+[45_IO_PARSER]
+io/pov/parser/ParseErrorReporter.cpp
+io/pov/parser/ParseErrorReporter.h
+io/pov/parser/ParseHelpers.cpp
+io/pov/parser/ParseHelpers.h
+io/pov/parser/PrimitiveParser.cpp
+io/pov/parser/PrimitiveParser.h
