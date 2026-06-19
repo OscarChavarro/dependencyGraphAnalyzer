@@ -1,0 +1,7 @@
+[23_MATERIAL]
+environment/material/Material.h
+environment/material/RendererConfiguration.cpp
+environment/material/RendererConfiguration.h
+environment/material/RenderOutput.h
+environment/material/SolidTextureBumpyNames.h
+environment/material/SolidTextureColorNames.h

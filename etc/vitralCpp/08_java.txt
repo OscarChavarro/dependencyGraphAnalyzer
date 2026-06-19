@@ -1,4 +1,4 @@
-[08_JAVVA]
+[08_JAVA]
 java/io/BufferedInputStream.cpp
 java/io/BufferedInputStream.h
 java/io/BufferedOutputStream.cpp

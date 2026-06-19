@@ -1,3 +1,7 @@
 [28_LIGHT]
 environment/light/Light.cpp
 environment/light/Light.h
+environment/light/PointLight.cpp
+environment/light/PointLight.h
+environment/light/SpotLight.cpp
+environment/light/SpotLight.h

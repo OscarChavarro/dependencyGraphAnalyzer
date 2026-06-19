@@ -1,0 +1,5 @@
+[14_NUMERICAL_ANALYSIS]
+vsdk/toolkit/numericalAnalysis/lookUpTables/LookUpTableChecksum16.cpp
+vsdk/toolkit/numericalAnalysis/lookUpTables/LookUpTableChecksum16.h
+vsdk/toolkit/numericalAnalysis/lookUpTables/LookUpTableSine.cpp
+vsdk/toolkit/numericalAnalysis/lookUpTables/LookUpTableSine.h

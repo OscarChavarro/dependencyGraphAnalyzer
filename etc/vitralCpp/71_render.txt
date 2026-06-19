@@ -40,3 +40,16 @@ vsdk/toolkit/render/TraceWorkspace.cpp
 vsdk/toolkit/render/TraceWorkspace.h
 vsdk/toolkit/render/WireframeRenderer.cpp
 vsdk/toolkit/render/WireframeRenderer.h
+vsdk/toolkit/render/hiddenLine/HiddenLineRenderer.cpp
+vsdk/toolkit/render/hiddenLine/HiddenLineRenderer.h
+vsdk/toolkit/render/hiddenLine/WireframeRenderer.cpp
+vsdk/toolkit/render/hiddenLine/WireframeRenderer.h
+vsdk/toolkit/render/raster/Rasterizer2D.cpp
+vsdk/toolkit/render/raster/Rasterizer2D.h
+vsdk/toolkit/render/raytracing/RasterTileArea.cpp
+vsdk/toolkit/render/raytracing/RasterTileArea.h
+vsdk/toolkit/render/raytracing/RasterTileGenerationStrategy.h
+vsdk/toolkit/render/raytracing/RasterTileGenerator.cpp
+vsdk/toolkit/render/raytracing/RasterTileGenerator.h
+vsdk/toolkit/render/raytracing/SimpleRaytracer.cpp
+vsdk/toolkit/render/raytracing/SimpleRaytracer.h

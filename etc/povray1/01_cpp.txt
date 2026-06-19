@@ -9,4 +9,5 @@ cstdlib
 cstring
 ctime
 exception
+new
 stdexcept

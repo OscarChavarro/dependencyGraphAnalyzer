@@ -1,0 +1,16 @@
+[25_ELEMENTS]
+environment/geometry/element/GeometryTypes.h
+environment/geometry/element/RayWithSegments.cpp
+environment/geometry/element/RayWithSegments.h
+environment/geometry/element/SmoothTriangle.cpp
+environment/geometry/element/SmoothTriangle.h
+environment/geometry/element/TransformableElement.cpp
+environment/geometry/element/TransformableElement.h
+environment/geometry/element/Triangle.cpp
+environment/geometry/element/Triangle.h
+environment/geometry/BoundedGeometry.h
+environment/geometry/element/IntersectionPriorityQueuePool.cpp
+environment/geometry/element/IntersectionPriorityQueuePool.h
+environment/geometry/Geometry.h
+environment/geometry/GeometryConstants.h
+environment/geometry/Intersection.h

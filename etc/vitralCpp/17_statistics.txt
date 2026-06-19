@@ -1,3 +1,4 @@
 [17_STATISTICS]
 vsdk/toolkit/common/statistics/RaytraceStatistics.cpp
 vsdk/toolkit/common/statistics/RaytraceStatistics.h
+vsdk/toolkit/common/statistics/SolidTextureStatistics.h

@@ -1,0 +1,17 @@
+[19_MEDIA_SOLID_TEXTURES]
+vsdk/toolkit/media/solidTexture/from2d/ControlledRGBAImageHDRUncompressed.cpp
+vsdk/toolkit/media/solidTexture/from2d/ControlledRGBAImageHDRUncompressed.h
+vsdk/toolkit/media/solidTexture/from2d/ImageTexture.cpp
+vsdk/toolkit/media/solidTexture/from2d/ImageTexture.h
+vsdk/toolkit/media/solidTexture/from2d/ImageToSolidTextureInterpolationTypes.h
+vsdk/toolkit/media/solidTexture/from2d/ImageToSolidTextureProjectionMethods.h
+vsdk/toolkit/media/solidTexture/from2d/SolidTextureCoordinateMapper.cpp
+vsdk/toolkit/media/solidTexture/from2d/SolidTextureCoordinateMapper.h
+vsdk/toolkit/media/solidTexture/procedural/BumpTextureFixture.cpp
+vsdk/toolkit/media/solidTexture/procedural/BumpTextureFixture.h
+vsdk/toolkit/media/solidTexture/procedural/ColorTextureFixture.cpp
+vsdk/toolkit/media/solidTexture/procedural/ColorTextureFixture.h
+vsdk/toolkit/media/solidTexture/procedural/ProceduralNoise.cpp
+vsdk/toolkit/media/solidTexture/procedural/ProceduralNoise.h
+vsdk/toolkit/media/solidTexture/TextureUtils.cpp
+vsdk/toolkit/media/solidTexture/TextureUtils.h

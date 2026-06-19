@@ -19,8 +19,6 @@ render/shaders/MirrorReflectionShader.cpp
 render/shaders/MirrorReflectionShader.h
 render/shaders/PhongSpecularShader.cpp
 render/shaders/PhongSpecularShader.h
-render/shaders/RayShaderPipeline.cpp
-render/shaders/RayShaderPipeline.h
 render/shaders/ShadowShader.cpp
 render/shaders/ShadowShader.h
 render/shaders/TraceService.h

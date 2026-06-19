@@ -23,3 +23,5 @@ _MonotoneChainNode.h
 _VertexChain.h
 _SegmentTableBuilder.h
 deque
+vsdk/toolkit/common/numericalAnalysis/lookUpTables/LookUpTableSine.h
+vsdk/toolkit/common/numericalAnalysis/lookUpTables/LookUpTableChecksum16.h

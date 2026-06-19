@@ -22,3 +22,6 @@ vsdk/toolkit/common/linealAlgebra/Vector4Df.h
 vsdk/toolkit/linealAlgebra/processing/LinearAlgebraEngine.cpp
 vsdk/toolkit/linealAlgebra/processing/LinearAlgebraEngine.h
 vsdk/toolkit/linealAlgebra/processing/Strategies.h
+vsdk/toolkit/common/linealAlgebra/processing/LinearAlgebraEngine.cpp
+vsdk/toolkit/common/linealAlgebra/processing/LinearAlgebraEngine.h
+vsdk/toolkit/common/linealAlgebra/processing/Strategies.h

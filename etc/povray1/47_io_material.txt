@@ -1,0 +1,13 @@
+[47_IO_MATERIAL]
+io/pov/material/ColorMapParser.cpp
+io/pov/material/ColorMapParser.h
+io/pov/material/DefaultTextureParser.cpp
+io/pov/material/DefaultTextureParser.h
+io/pov/material/PovColorMap.cpp
+io/pov/material/PovColorMap.h
+io/pov/material/PovColorMapSpan.cpp
+io/pov/material/PovColorMapSpan.h
+io/pov/material/TextureParser.cpp
+io/pov/material/TextureParser.h
+io/pov/material/ParseReportingConfiguration.cpp
+io/pov/material/ParseReportingConfiguration.h

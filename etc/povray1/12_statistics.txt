@@ -1,4 +1,3 @@
 [12_STATISTICS]
-common/statistics/SolidTextureStatistics.h
 common/statistics/Statistics.cpp
 common/statistics/Statistics.h

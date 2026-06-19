@@ -34,3 +34,10 @@ vsdk/toolkit/media/ShapeDescriptor.cpp
 vsdk/toolkit/media/ShapeDescriptor.h
 vsdk/toolkit/media/ZBuffer.cpp
 vsdk/toolkit/media/ZBuffer.h
+vsdk/toolkit/media/IndexedColorImageHDRUncompressed.cpp
+vsdk/toolkit/media/IndexedColorImageHDRUncompressed.h
+vsdk/toolkit/media/RGBAColorPalette.cpp
+vsdk/toolkit/media/RGBAColorPalette.h
+vsdk/toolkit/media/RGBAImageHDRUncompressed.cpp
+vsdk/toolkit/media/RGBAImageHDRUncompressed.h
+vsdk/toolkit/media/RGBAPixelHDR.h

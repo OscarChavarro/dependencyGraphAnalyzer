@@ -1,0 +1,5 @@
+[24_MATERIAL_POVRAY]
+environment/material/PovrayMaterial.cpp
+environment/material/PovrayMaterial.h
+environment/material/PovrayMaterialUtils.cpp
+environment/material/PovrayMaterialUtils.h
