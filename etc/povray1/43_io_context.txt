@@ -6,3 +6,5 @@ io/pov/context/SymbolTable.cpp
 io/pov/context/SymbolTable.h
 io/pov/context/TokenizerStream.cpp
 io/pov/context/TokenizerStream.h
+io/context/RenderRuntimeState.cpp
+io/context/RenderRuntimeState.h

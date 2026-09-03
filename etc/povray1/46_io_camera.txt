@@ -1,3 +1,5 @@
 [46_IO_CAMERA]
 io/pov/camera/CameraParser.cpp
 io/pov/camera/CameraParser.h
+io/pov/camera/PovCameraSpec.cpp
+io/pov/camera/PovCameraSpec.h

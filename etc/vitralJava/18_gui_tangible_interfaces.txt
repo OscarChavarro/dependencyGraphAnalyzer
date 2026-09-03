@@ -1,0 +1,5 @@
+[18_GUI_TANGIBLE_INTERFACES]
+vsdk.toolkit.gui.tangibleInterfaces.TangibleInterfaceEvent
+vsdk.toolkit.gui.tangibleInterfaces.TangibleInterfaceListener
+vsdk.toolkit.gui.tangibleInterfaces.TangibleInterfaceNetworkClient
+vsdk.toolkit.gui.tangibleInterfaces.TangibleInterfaceNetworkClient.FrameListener

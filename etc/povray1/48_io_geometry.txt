@@ -21,3 +21,11 @@ io/pov/geometry/SphereParser.cpp
 io/pov/geometry/SphereParser.h
 io/pov/geometry/TriangleParser.cpp
 io/pov/geometry/TriangleParser.h
+io/pov/geometry/CsgParser.cpp
+io/pov/geometry/CsgParser.h
+io/pov/geometry/GeometryBuilder.cpp
+io/pov/geometry/GeometryBuilder.h
+io/pov/geometry/SceneBuilder.cpp
+io/pov/geometry/SceneBuilder.h
+io/pov/geometry/SimpleBodyBuilder.h
+io/pov/geometry/SimpleBodyBuilder.cpp

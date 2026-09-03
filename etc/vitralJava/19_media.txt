@@ -17,3 +17,5 @@ vsdk.toolkit.media.RGBPixel
 vsdk.toolkit.media.RGBProceduralColorPalette
 vsdk.toolkit.media.ShapeDescriptor
 vsdk.toolkit.media.ZBuffer
+vsdk.toolkit.media.RGBAImageHDRUncompressed
+vsdk.toolkit.media.RGBAPixelHDR

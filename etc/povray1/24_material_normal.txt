@@ -1,0 +1,17 @@
+[24_MATERIAL_NORMAL]
+environment/material/normal/BumpMapNormal.cpp
+environment/material/normal/BumpMapNormal.h
+environment/material/normal/BumpsNormal.cpp
+environment/material/normal/BumpsNormal.h
+environment/material/normal/DentsNormal.cpp
+environment/material/normal/DentsNormal.h
+environment/material/normal/RipplesNormal.cpp
+environment/material/normal/RipplesNormal.h
+environment/material/normal/SolidTextureNormal.h
+environment/material/normal/UnsupportedBumpNormal.cpp
+environment/material/normal/UnsupportedBumpNormal.h
+environment/material/normal/WavesNormal.cpp
+environment/material/normal/WavesNormal.h
+environment/material/normal/WrinklesNormal.cpp
+environment/material/normal/WrinklesNormal.h
+environment/material/normal/MaterialConfig.h

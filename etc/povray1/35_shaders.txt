@@ -24,3 +24,7 @@ render/shaders/ShadowShader.h
 render/shaders/TraceService.h
 render/shaders/TransmissionRefractionShader.cpp
 render/shaders/TransmissionRefractionShader.h
+render/shaders/PovRayRenderStatistics.cpp
+render/shaders/PovRayRenderStatistics.h
+render/PovRayRendererConfiguration.cpp
+render/PovRayRendererConfiguration.h

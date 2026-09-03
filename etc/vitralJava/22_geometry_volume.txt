@@ -28,3 +28,4 @@ vsdk.toolkit.environment.geometry.volume.Sphere
 vsdk.toolkit.environment.geometry.volume.Torus
 vsdk.toolkit.environment.geometry.volume.VoxelVolume
 vsdk.toolkit.environment.geometry.volume.Volume
+vsdk.toolkit.environment.geometry.volume.polyhedralBoundedSolid.PolyhedralBoundedSolidPredicates

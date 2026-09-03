@@ -13,3 +13,6 @@ io/image/RawFormat.cpp
 io/image/RawFormat.h
 io/image/TargaFormat.cpp
 io/image/TargaFormat.h
+io/image/GifDecoderState.h
+io/image/GifReadContext.h
+io/image/GifInputContext.h

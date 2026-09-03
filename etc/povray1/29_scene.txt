@@ -5,3 +5,12 @@ environment/scene/ModelBuilder.cpp
 environment/scene/ModelBuilder.h
 environment/scene/Scene.cpp
 environment/scene/Scene.h
+environment/scene/SceneBuilder.h
+environment/scene/SceneBuilder.cpp
+environment/scene/SimpleBody.cpp
+environment/scene/SimpleBody.h
+environment/scene/Composite.cpp
+environment/scene/Composite.h
+environment/scene/Bvh.cpp
+environment/scene/Bvh.h
+environment/scene/TransformStepArrayList.cpp

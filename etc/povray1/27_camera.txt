@@ -1,3 +1,5 @@
 [27_CAMERA]
 environment/camera/Camera.cpp
 environment/camera/Camera.h
+environment/camera/CameraBuilder.cpp
+environment/camera/CameraBuilder.h

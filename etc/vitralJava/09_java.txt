@@ -76,3 +76,12 @@ java.lang.FunctionalInterface
 java.util.Comparator
 java.util.LinkedHashMap
 java.util.Set
+java.lang.CharSequence
+java.lang.Thread
+java.net.http.HttpClient
+java.net.http.WebSocket
+java.net.http.WebSocket.Listener
+java.util.concurrent.CompletionStage
+java.util.LinkedHashSet
+java.util.regex.Matcher
+java.util.regex.Pattern

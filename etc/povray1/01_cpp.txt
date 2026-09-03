@@ -11,3 +11,9 @@ ctime
 exception
 new
 stdexcept
+cstddef
+atomic
+memory
+strings.h
+mutex
+functional
