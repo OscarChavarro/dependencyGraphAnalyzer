@@ -31,6 +31,7 @@ public class SoftwarePackageGraph {
     private final ArrayList<SoftwarePackageNode> nodes;
     private final Hashtable<String, SoftwarePackageNode> nodeIndex;
     private final DirectedPackageGraphOperations graph;
+    private boolean singleGroupStructure;
 
     public SoftwarePackageGraph() {
         nodes = new ArrayList<>();
@@ -136,7 +137,10 @@ public class SoftwarePackageGraph {
     }
 
     public void exportDotNode(OutputStream os, SoftwarePackageNode node, boolean indent) throws Exception {
-        if (node.getName().startsWith("_[") && !node.getName().startsWith("_[00") && graph.outDegreeOf(node) <= 0) {
+        if (node.getName().startsWith("_[")
+                && !node.getName().startsWith("_[00")
+                && !singleGroupStructure
+                && graph.outDegreeOf(node) <= 0) {
             return;
         }
 
@@ -289,22 +293,22 @@ public class SoftwarePackageGraph {
 
             PersistenceElement.writeAsciiLine(fos, "\n    //= ARCS ===============================================================");
 
-            boolean skipArcsForPracticalGroup = id != -1 && groups.get(id).list.size() > MAX_PRACTICAL_GRAPH_SIZE;
-            if (!skipArcsForPracticalGroup) {
-                for (PackageEdge edge : graph.edges()) {
-                    SoftwarePackageNode aNode = edge.from();
-                    SoftwarePackageNode bNode = edge.to();
-                    String a = aNode.getName();
-                    String b = bNode.getName();
+            boolean practicalGridGroup = id != -1 && groups.get(id).list.size() > MAX_PRACTICAL_GRAPH_SIZE;
+            String gridArcAttributes = practicalGridGroup ? "constraint=false" : "";
+            for (PackageEdge edge : graph.edges()) {
+                SoftwarePackageNode aNode = edge.from();
+                SoftwarePackageNode bNode = edge.to();
+                String a = aNode.getName();
+                String b = bNode.getName();
 
-                    String r = "    \"" + a + "\" -> \"" + b + "\";";
-                    if (namesAreGroupsAndFirstGreater(a, b)) {
-                        r = "    \"" + a + "\" -> \"" + b + "\" [color=\"red\"];";
-                    }
+                String attributes = gridArcAttributes;
+                if (namesAreGroupsAndFirstGreater(a, b)) {
+                    attributes = attributes.isEmpty() ? "color=\"red\"" : attributes + ",color=\"red\"";
+                }
+                String r = "    \"" + a + "\" -> \"" + b + "\"" + (attributes.isEmpty() ? "" : " [" + attributes + "]") + ";";
 
-                    if ((id == -1) || groups.get(id).contains(bNode)) {
-                        PersistenceElement.writeAsciiLine(fos, r);
-                    }
+                if ((id == -1) || groups.get(id).contains(bNode)) {
+                    PersistenceElement.writeAsciiLine(fos, r);
                 }
             }
 
@@ -793,6 +797,7 @@ public class SoftwarePackageGraph {
 
     public void addGroupNodes(ArrayList<SoftwarePackageGroup> groups) {
         SoftwarePackageGroup ng = new SoftwarePackageGroup("[STRUCTURE]");
+        singleGroupStructure = groups.size() == 1;
 
         for (SoftwarePackageGroup group : groups) {
             SoftwarePackageNode n = addNode("_" + group.header.getName());

@@ -12,6 +12,7 @@ openssl
 libssl1.0.0
 libssl1.0.0:i386
 ca-certificates
+linux-image-4.9.337-squirter
 linux-image-4.10.0-19-generic
 linux-image-extra-4.10.0-19-generic
 linux-image-4.10.0-42-generic

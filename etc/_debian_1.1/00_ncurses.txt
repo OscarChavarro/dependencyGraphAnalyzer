@@ -1,0 +1,5 @@
+[00_NCURSES]
+ncurses-base
+ncurses3.0
+libreadline2
+ncurses-bin

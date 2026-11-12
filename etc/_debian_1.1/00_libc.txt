@@ -1,0 +1,6 @@
+[00_LIBC]
+# C library and dynamic loader (libc5 era, a.out/ELF transition)
+ldso
+libc5
+libdb1
+libgdbm1

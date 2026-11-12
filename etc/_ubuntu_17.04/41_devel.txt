@@ -4,6 +4,7 @@ linux-headers-4.10.0-19
 linux-headers-4.10.0-19-generic
 linux-headers-4.10.0-42
 linux-headers-4.10.0-42-generic
+linux-headers-4.9.337-squirter
 linux-headers-generic
 autopoint
 yasm

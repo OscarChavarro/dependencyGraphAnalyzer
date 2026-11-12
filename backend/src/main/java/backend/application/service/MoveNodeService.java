@@ -29,7 +29,7 @@ public class MoveNodeService implements MoveNodeUseCase {
 
         Path rootFolder = resolveExistingFolder(groupFolder);
         Path originFile = resolveExistingGroupFile(rootFolder, originGroup);
-        Path destinationFile = resolveExistingDestinationGroupFile(rootFolder, destinationGroup);
+        Path destinationFile = resolveOrCreateDestinationGroupFile(rootFolder, destinationGroup);
 
         List<String> originLines = normalizeNonBlankLines(readLines(originFile));
         Set<String> missingNodes = new LinkedHashSet<>(sanitizedNodes);
@@ -137,14 +137,36 @@ public class MoveNodeService implements MoveNodeUseCase {
                 + toAbsoluteFromCwd(candidates.get(1), cwd) + "]");
     }
 
-    private Path resolveExistingDestinationGroupFile(Path folder, String destinationGroup) {
-        Path cwd = getCwd();
-        Path candidate = folder.resolve(destinationGroup + ".txt").normalize();
+    private Path resolveOrCreateDestinationGroupFile(Path folder, String destinationGroup) {
+        String sanitizedGroup = sanitizeDestinationGroupName(destinationGroup);
+        Path candidate = folder.resolve(sanitizedGroup.toLowerCase() + ".txt").normalize();
         if (Files.isRegularFile(candidate)) {
             return candidate;
         }
-        throw new IllegalArgumentException("Destination group file not found for group='" + destinationGroup
-                + "'. tried=[" + toAbsoluteFromCwd(candidate, cwd) + "]");
+        if (Files.exists(candidate)) {
+            throw new IllegalArgumentException("Destination group path exists but is not a regular file: '"
+                    + toAbsoluteFromCwd(candidate, getCwd()) + "'");
+        }
+        String header = "[" + sanitizedGroup.toUpperCase() + "]" + System.lineSeparator();
+        try {
+            Files.writeString(candidate, header, StandardCharsets.UTF_8, StandardOpenOption.CREATE_NEW);
+        } catch (AccessDeniedException e) {
+            throw new IllegalArgumentException("Permission denied while creating destination group file: '"
+                    + candidate + "'", e);
+        } catch (IOException e) {
+            throw new IllegalArgumentException("I/O error while creating destination group file: '"
+                    + candidate + "'. cause=" + e.getMessage(), e);
+        }
+        return candidate;
+    }
+
+    private String sanitizeDestinationGroupName(String destinationGroup) {
+        String trimmed = destinationGroup == null ? "" : destinationGroup.trim();
+        if (!trimmed.matches("^\\d+_[A-Za-z0-9_]+$")) {
+            throw new IllegalArgumentException("destinationGroup must match pattern 'number_name', for example "
+                    + "'01_lib'. received='" + destinationGroup + "'");
+        }
+        return trimmed;
     }
 
     private Path resolveExistingFolder(String groupFolder) {

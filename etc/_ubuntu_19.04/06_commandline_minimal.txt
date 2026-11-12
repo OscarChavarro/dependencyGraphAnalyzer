@@ -1,0 +1,15 @@
+[06_COMMANDLINE_MINIMAL]
+bash
+sudo
+diffutils
+findutils
+grep
+hostname
+htop
+mawk
+less
+dash
+nano
+base-files
+libbsd0
+libbsd0:i386

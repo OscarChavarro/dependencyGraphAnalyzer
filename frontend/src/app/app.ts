@@ -12,8 +12,6 @@ import {
   GroupRelationsResponse,
   MoveNodeRequest,
   MoveNodeResponse,
-  CreateNewGroupRequest,
-  CreateNewGroupResponse,
   CachedProject,
   CppProject,
   JavaProject,
@@ -120,8 +118,9 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   private lastGraphGenerator: GraphModelGenerator = 'CACHE_LOADER';
   private lastInputFolders: string[] = [];
   private lastClasspath: string[] = [];
-  private activeGroupsDefinitionFolder = this.defaultGroupsDefinitionFolder;
+  private activeGroupsDefinitionFolder: string | null = null;
   private cachedStructureGroupNames: string[] = [];
+  private readonly groupsWithoutSvg = new Set<string>();
   private readonly keyboardInteractionTechniques = new KeyboardInteractionTechniques(this.graphSelectionModel);
   private readonly drawingAreaNavigationInteractionTechnique = new DrawingAreaNavigationInteractionTechnique(this.graphRenderer);
   private readonly workingAreaScrollsControl = new WorkingAreaScrollsControl(this.graphRenderer, (state) => {
@@ -581,7 +580,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  private loadAndRenderGraphSvg(filename: string, attempt = 0): void {
+  private loadAndRenderGraphSvg(filename: string, attempt = 0, onSvgNotFound?: () => void): void {
     this.currentSvgFilename = filename;
     const svgUrl = `${this.backendBaseUrl}/output/svg/${filename}?ts=${Date.now()}`;
     this.httpClient
@@ -590,7 +589,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
         next: (svgText) => {
           if (!this.isValidSvgPayload(svgText)) {
             if (attempt < 12) {
-              setTimeout(() => this.loadAndRenderGraphSvg(filename, attempt + 1), 250);
+              setTimeout(() => this.loadAndRenderGraphSvg(filename, attempt + 1, onSvgNotFound), 250);
               return;
             }
             this.errorMessage = `${this.t(this.i18nKeys.shell.LOAD_SVG_ERROR_PREFIX)} output/svg/${filename}`;
@@ -610,9 +609,13 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
               .map((name) => name.replace(/^_\[(.+)\]$/, '$1').toLowerCase());
           }
         },
-        error: () => {
+        error: (error: unknown) => {
+          if (onSvgNotFound && error instanceof HttpErrorResponse && error.status === 404) {
+            onSvgNotFound();
+            return;
+          }
           if (attempt < 12) {
-            setTimeout(() => this.loadAndRenderGraphSvg(filename, attempt + 1), 250);
+            setTimeout(() => this.loadAndRenderGraphSvg(filename, attempt + 1, onSvgNotFound), 250);
             return;
           }
           this.errorMessage = `${this.t(this.i18nKeys.shell.LOAD_SVG_ERROR_PREFIX)} output/svg/${filename}`;
@@ -646,10 +649,14 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     if (this.isLoading) {
       return;
     }
+    const groupFolder = this.requireActiveGroupsDefinitionFolder();
+    if (!groupFolder) {
+      return;
+    }
     this.isLoading = true;
     this.errorMessage = '';
     const payload = {
-      groupFolder: this.activeGroupsDefinitionFolder,
+      groupFolder,
       oldGroupName: groupToken,
       newGroupName
     };
@@ -712,20 +719,8 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
       return;
     }
 
-    const createPayload: CreateNewGroupRequest = {
-      groupFolder: this.activeGroupsDefinitionFolder,
-      newGroupName
-    };
-
-    this.isLoading = true;
-    this.errorMessage = '';
-    this.httpClient.put<CreateNewGroupResponse>(`${this.backendBaseUrl}/v1/createNewGroup`, createPayload).subscribe({
-      next: () => this.performMoveTo(originNodes, originGroup, newGroupName, false),
-      error: (error) => {
-        this.errorMessage = this.extractApiErrorMessage(error, 'Could not create the new group.');
-        this.isLoading = false;
-      }
-    });
+    // moveNode creates the destination group file when it does not exist yet.
+    this.performMoveTo(originNodes, originGroup, newGroupName);
   }
 
   private performMoveTo(
@@ -734,13 +729,17 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     destinationGroup: string,
     startLoading = true
   ): void {
+    const groupFolder = this.requireActiveGroupsDefinitionFolder();
+    if (!groupFolder) {
+      return;
+    }
     if (startLoading) {
       this.isLoading = true;
       this.errorMessage = '';
     }
 
     const movePayload: MoveNodeRequest = {
-      groupFolder: this.activeGroupsDefinitionFolder,
+      groupFolder,
       originGroup,
       originNodes,
       destinationGroup: destinationGroup.toLowerCase()
@@ -772,7 +771,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   private refreshGraphModelAndReloadCurrentSvg(): void {
     const payload: UpdateGraphModelRequest = {
       generator: this.lastGraphGenerator,
-      groupsDefinitionFolder: this.activeGroupsDefinitionFolder,
+      groupsDefinitionFolder: this.activeGroupsDefinitionFolder ?? this.defaultGroupsDefinitionFolder,
       inputFolders: this.lastInputFolders,
       classpath: this.lastClasspath
     };
@@ -967,40 +966,52 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     }
 
     if (this.isInStructureMode()) {
-      const targetGroup = direction > 0 ? groups[0] : groups[groups.length - 1];
-      this.openGroupGraphByName(targetGroup);
+      const startIndex = direction > 0 ? 0 : groups.length - 1;
+      this.openFirstAvailableGroupGraph(groups, startIndex, direction);
       return true;
     }
 
     const currentGroup = this.extractGroupFromCurrentSvgFilename()?.toLowerCase() ?? null;
-    if (!currentGroup) {
-      this.loadAndRenderGraphSvg('structure.svg', 0);
-      return true;
-    }
-    const currentIndex = groups.indexOf(currentGroup);
+    const currentIndex = currentGroup ? groups.indexOf(currentGroup) : -1;
     if (currentIndex < 0) {
       this.loadAndRenderGraphSvg('structure.svg', 0);
       return true;
     }
 
-    const nextIndex = currentIndex + direction;
-    if (nextIndex < 0 || nextIndex >= groups.length) {
-      this.loadAndRenderGraphSvg('structure.svg', 0);
-      return true;
-    }
-
-    this.openGroupGraphByName(groups[nextIndex]);
+    this.openFirstAvailableGroupGraph(groups, currentIndex + direction, direction);
     return true;
   }
 
-  private openGroupGraphByName(groupName: string): void {
+  /**
+   * Opens the first group graph, walking from startIndex in the given direction, whose SVG
+   * exists in the backend. Groups without packages in the cache have no SVG (backend answers
+   * 404); those are remembered and skipped. Walking past either end returns to structure.svg.
+   */
+  private openFirstAvailableGroupGraph(groups: string[], startIndex: number, direction: -1 | 1): void {
+    let index = startIndex;
+    while (index >= 0 && index < groups.length && this.groupsWithoutSvg.has(groups[index])) {
+      index += direction;
+    }
+    if (index < 0 || index >= groups.length) {
+      this.loadAndRenderGraphSvg('structure.svg', 0);
+      return;
+    }
+
+    const groupName = groups[index];
+    this.openGroupGraphByName(groupName, () => {
+      this.groupsWithoutSvg.add(groupName);
+      this.openFirstAvailableGroupGraph(groups, index + direction, direction);
+    });
+  }
+
+  private openGroupGraphByName(groupName: string, onSvgNotFound?: () => void): void {
     const normalizedGroupName = groupName.trim().toLowerCase();
     if (!normalizedGroupName) {
       return;
     }
     this.selectedNodeActionMenuInteractionTechnique?.closeMenu();
     this.menuRenderer?.close();
-    this.loadAndRenderGraphSvg(`${normalizedGroupName}.svg`, 0);
+    this.loadAndRenderGraphSvg(`${normalizedGroupName}.svg`, 0, onSvgNotFound);
   }
 
   private listCyclableGroupNames(): string[] {
@@ -1092,9 +1103,18 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
 
   private setGraphModelSnapshot(snapshot: GraphModelSnapshot): void {
     this.graphModel = snapshot;
+    this.groupsWithoutSvg.clear();
     this.updateRendererFillOverrides();
     try {
-      sessionStorage.setItem(App.GRAPH_MODEL_SESSION_KEY, JSON.stringify({ graphModel: snapshot }));
+      const request: UpdateGraphModelRequest | null = this.activeGroupsDefinitionFolder
+        ? {
+            generator: this.lastGraphGenerator,
+            groupsDefinitionFolder: this.activeGroupsDefinitionFolder,
+            inputFolders: this.lastInputFolders,
+            classpath: this.lastClasspath
+          }
+        : null;
+      sessionStorage.setItem(App.GRAPH_MODEL_SESSION_KEY, JSON.stringify({ graphModel: snapshot, request }));
     } catch {
       // Ignore storage errors to keep UI functional.
     }
@@ -1105,6 +1125,56 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     if (snapshot) {
       this.graphModel = snapshot;
     }
+    const request = this.getGraphRequestFromSession();
+    if (request) {
+      this.lastGraphGenerator = request.generator;
+      this.activeGroupsDefinitionFolder = request.groupsDefinitionFolder;
+      this.lastInputFolders = [...(request.inputFolders ?? [])];
+      this.lastClasspath = [...(request.classpath ?? [])];
+    }
+  }
+
+  private requireActiveGroupsDefinitionFolder(): string | null {
+    if (this.activeGroupsDefinitionFolder) {
+      return this.activeGroupsDefinitionFolder;
+    }
+    this.errorMessage =
+      'No se conoce la carpeta de grupos del grafo actual. Vuelve a cargar el proyecto antes de modificar grupos.';
+    return null;
+  }
+
+  private getGraphRequestFromSession(): UpdateGraphModelRequest | null {
+    try {
+      const raw = sessionStorage.getItem(App.GRAPH_MODEL_SESSION_KEY);
+      if (!raw) {
+        return null;
+      }
+      const parsed: unknown = JSON.parse(raw);
+      if (!parsed || typeof parsed !== 'object' || !('request' in parsed)) {
+        return null;
+      }
+      const request = (parsed as { request: unknown }).request;
+      return this.isUpdateGraphModelRequest(request) ? request : null;
+    } catch {
+      // Ignore invalid session payloads.
+      return null;
+    }
+  }
+
+  private isUpdateGraphModelRequest(value: unknown): value is UpdateGraphModelRequest {
+    if (!value || typeof value !== 'object') {
+      return false;
+    }
+    const candidate = value as Partial<UpdateGraphModelRequest>;
+    const isStringArray = (items: unknown): boolean =>
+      Array.isArray(items) && items.every((item) => typeof item === 'string');
+    return (
+      typeof candidate.generator === 'string' &&
+      typeof candidate.groupsDefinitionFolder === 'string' &&
+      candidate.groupsDefinitionFolder.length > 0 &&
+      isStringArray(candidate.inputFolders) &&
+      isStringArray(candidate.classpath)
+    );
   }
 
   private getGraphModelFromSession(): GraphModelSnapshot | null {
@@ -1230,7 +1300,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
 
     const payload: UpdateGraphModelRequest = {
       generator: this.lastGraphGenerator,
-      groupsDefinitionFolder: this.activeGroupsDefinitionFolder,
+      groupsDefinitionFolder: this.activeGroupsDefinitionFolder ?? this.defaultGroupsDefinitionFolder,
       inputFolders: this.lastInputFolders,
       classpath: this.lastClasspath
     };

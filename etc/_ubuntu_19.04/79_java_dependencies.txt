@@ -1,0 +1,11 @@
+[79_JAVA_DEPENDENCIES]
+libavahi-client3
+libavahi-client3:i386
+libavahi-common-data
+libavahi-common-data:i386
+libavahi-common3
+libavahi-common3:i386
+libcups2
+libcups2:i386
+libpcsclite1
+libpcsclite1:i386

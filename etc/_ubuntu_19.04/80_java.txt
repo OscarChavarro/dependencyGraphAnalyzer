@@ -1,0 +1,16 @@
+[80_JAVA]
+default-jre-headless
+ca-certificates-java
+openjdk-11-jre-headless:i386
+openjdk-11-jre:i386
+openjdk-11-jdk:i386
+openjdk-11-jdk
+openjdk-11-jre
+default-jre
+default-jdk
+default-jdk-headless
+openjdk-11-jdk-headless
+openjdk-11-jre-headless
+openjdk-11-jdk-headless:i386
+ca-certificates
+java-common

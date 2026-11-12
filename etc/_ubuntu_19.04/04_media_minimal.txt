@@ -1,0 +1,15 @@
+[04_MEDIA_MINIMAL]
+libjpeg-turbo8
+libjpeg-turbo8:i386
+libjpeg8
+libjpeg8:i386
+liblcms2-2
+liblcms2-2:i386
+libexpat1
+libexpat1:i386
+libpng16-16
+libpng16-16:i386
+libfreetype6
+libfreetype6:i386
+libgif7
+libgif7:i386

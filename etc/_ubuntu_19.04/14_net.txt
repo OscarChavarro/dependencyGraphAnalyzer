@@ -1,0 +1,14 @@
+[14_NET]
+openssh-server
+wget
+openssh-sftp-server
+libwrap0
+openssh-client
+libwrap0:i386
+iputils-ping
+iproute2
+libmnl0
+libxtables12
+libmnl0:i386
+libxtables12:i386
+ucf

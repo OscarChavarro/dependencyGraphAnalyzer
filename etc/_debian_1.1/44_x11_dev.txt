@@ -1,0 +1,4 @@
+[44_X11_DEV]
+xlib6-dev
+lesstif-dev
+svgalib1-dev

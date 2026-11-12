@@ -42,3 +42,12 @@ ubuntu-cloudimage-keyring
 vlan
 xfsprogs
 zerofree
+libiw30:i386
+libpcsclite1:i386
+rfkill
+smartmontools
+wireless-tools
+wpasupplicant
+xli
+libiw30
+libpcsclite1

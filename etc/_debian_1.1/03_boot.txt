@@ -1,0 +1,7 @@
+[03_BOOT]
+lilo
+mbr
+syslinux
+sysvinit
+getty
+bdflush

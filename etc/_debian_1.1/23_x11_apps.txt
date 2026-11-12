@@ -1,0 +1,8 @@
+[23_X11_APPS]
+xcontrib
+xosview
+oneko
+xfishtank
+emacs
+lesstif
+lesstif-bin

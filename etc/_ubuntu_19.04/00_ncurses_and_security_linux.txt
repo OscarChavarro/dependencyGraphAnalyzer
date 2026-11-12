@@ -1,0 +1,15 @@
+[00_NCURSES_AND_SECURITY_LINUX]
+libncurses6
+libncurses6:i386
+libncursesw6
+libncursesw6:i386
+ncurses-base
+ncurses-bin
+libtinfo6
+libtinfo6:i386
+libpcre2-8-0
+libpcre2-8-0:i386
+libpcre3
+libpcre3:i386
+libselinux1
+libselinux1:i386

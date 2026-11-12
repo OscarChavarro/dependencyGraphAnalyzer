@@ -8,6 +8,7 @@ import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,7 +21,7 @@ public class CreateNewGroupService implements CreateNewGroupUseCase {
 
         String firstLine = "[" + sanitizedGroup.toUpperCase() + "]" + System.lineSeparator();
         try {
-            Files.writeString(groupFile, firstLine, StandardCharsets.UTF_8);
+            Files.writeString(groupFile, firstLine, StandardCharsets.UTF_8, StandardOpenOption.CREATE_NEW);
         } catch (FileAlreadyExistsException e) {
             throw new IllegalArgumentException(
                     "Group file was not created because it already exists: '" + groupFile + "'", e);

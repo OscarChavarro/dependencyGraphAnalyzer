@@ -1,0 +1,10 @@
+[01_DEBIAN]
+# Debian packaging and base metapackage
+base
+dpkg
+dpkg-ftp
+dialog
+adduser
+debianutils
+perl
+findutils

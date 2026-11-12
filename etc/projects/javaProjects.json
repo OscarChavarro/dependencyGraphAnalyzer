@@ -28,7 +28,7 @@
             "/home/jedilink/.gradle/caches/modules-2/files-2.1/org.jogamp.gluegen/gluegen-rt/2.5.0/683e9d628c2ca32c4b56249034e164e593bf37b3/gluegen-rt-2.5.0.jar",
             "/home/jedilink/.gradle/caches/modules-2/files-2.1/antlr/antlr/2.7.7/83cd2cd674a217ade95a4bb83a8a14f351f48bd0/antlr-2.7.7.jar"
         ],
-	"gradleProjectDir": "/home/jedilink/VITRAL/java",
+	"gradleProjectDir": "/home/jedilink/VITRAL/vitral/java",
         "gradleModule": "base",
         "gradleUserHome": "/tmp/gradle-home"
     }

@@ -24,6 +24,24 @@
     "cacheFile": "etc/caches/cache.txt.ubuntu2404taciturna"
   },
   {
+    "id": "ubuntu1704squirter",
+    "name": "Ubuntu 17.04 squirter",
+    "groupsDefinitionFolder": "etc/_ubuntu_17.04",
+    "cacheFile": "etc/caches/cache.txt.ubuntu1704jedCurrent"
+  },
+  {
+    "id": "ubuntu1904squirter",
+    "name": "Ubuntu 19.04 squirter",
+    "groupsDefinitionFolder": "etc/_ubuntu_19.04",
+    "cacheFile": "etc/caches/cache.txt.ubuntu1904custom"
+  },
+  {
+    "id": "debian11",
+    "name": "Debian 1.1 (1996 VM)",
+    "groupsDefinitionFolder": "etc/_debian_1.1",
+    "cacheFile": "etc/caches/cache.txt.debian11"
+  },
+  {
     "id": "rpkJava",
     "name": "RPK java port",
     "groupsDefinitionFolder": "etc/renderparkJava",

@@ -1,0 +1,9 @@
+[20_X11_MINIMAL]
+# XFree86 3.x: shared libraries, fonts and VGA16 server
+xlib6
+xpm4.7
+xfntbase
+xfnt75
+xbase
+xserver-vga16
+svgalib1

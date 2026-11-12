@@ -1,0 +1,11 @@
+[07_X11_SUPPORT]
+man-db
+bsdmainutils
+groff-base
+libgdbm6
+libpipeline1
+bsdutils
+libuchardet0
+libgdbm6:i386
+libpipeline1:i386
+libuchardet0:i386

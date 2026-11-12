@@ -1,0 +1,17 @@
+[08_NET_SIMPLE]
+libsigc++-2.0-0v5:i386
+libxapian30:i386
+libxapian30
+librtmp1
+librtmp1:i386
+libnspr4:i386
+libnspr4
+libnghttp2-14:i386
+libnghttp2-14
+libsigc++-2.0-0v5
+libcwidget3v5:i386
+libcwidget3v5
+libboost-iostreams1.67.0
+libboost-iostreams1.67.0:i386
+libpsl5:i386
+libpsl5

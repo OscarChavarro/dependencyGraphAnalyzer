@@ -1,0 +1,4 @@
+[11_NET_SIMPLE]
+netbase
+netstd
+dhcpcd

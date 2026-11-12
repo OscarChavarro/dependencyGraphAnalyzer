@@ -1,0 +1,9 @@
+[10_CPP_FORTRAN_LUA]
+cpp
+cpp-8
+libisl19
+libisl19:i386
+libmpc3
+libmpc3:i386
+libmpfr6
+libmpfr6:i386

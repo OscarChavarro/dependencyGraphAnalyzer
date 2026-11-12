@@ -1,0 +1,12 @@
+[40_DEV]
+# toolchain
+binutils
+gcc
+gdb
+make
+m4
+autoconf
+automake
+libelf0
+libc5-dev
+libg++27-dev

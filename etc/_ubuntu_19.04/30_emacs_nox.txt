@@ -1,0 +1,14 @@
+[30_EMACS_NOX]
+emacs-nox
+emacs-bin-common
+libasound2
+libgpm2
+libxml2
+emacs-common
+libasound2:i386
+libasound2-data
+libgpm2:i386
+libxml2:i386
+libicu63
+emacsen-common
+libicu63:i386

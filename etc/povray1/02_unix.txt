@@ -2,3 +2,5 @@
 sys/stat.h
 pthread.h
 unistd.h
+dirent.h
+limits

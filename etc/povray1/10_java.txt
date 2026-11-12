@@ -39,3 +39,10 @@ java/util/HashMap.h
 java/util/Collections.txx
 java/util/HashMapEntry.h
 java/util/Collections.h
+java/lang/Double.h
+java/lang/Exception.h
+java/lang/IllegalArgumentException.h
+java/lang/RuntimeException.h
+java/util/Comparator.h
+java/util/concurrent/locks/ReentrantLock.h
+java/util/TreeMap.txx

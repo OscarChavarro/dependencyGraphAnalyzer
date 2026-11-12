@@ -1,4 +1,4 @@
-[24_X11_MULTIMEDIA_GL]
+[25_X11_MULTIMEDIA_GL]
 libmupen64plus2
 libmupen64plus2:i386
 mupen64plus-video-glide64mk2
@@ -49,3 +49,5 @@ vdpau-va-driver
 vdpauinfo
 libzbar0
 libzbar0:i386
+va-driver-all
+va-driver-all:i386

@@ -1,0 +1,4 @@
+[03_KERNEL]
+modules
+modconf
+kbd

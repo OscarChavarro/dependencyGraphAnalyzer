@@ -1,0 +1,3 @@
+[40_DEV]
+libpthread-stubs0-dev
+libpthread-stubs0-dev:i386

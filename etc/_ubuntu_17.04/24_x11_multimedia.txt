@@ -41,8 +41,6 @@ libaudio2
 libaudio2:i386
 libfluidsynth1
 libfluidsynth1:i386
-va-driver-all
-va-driver-all:i386
 libpulse-mainloop-glib0
 libpulse-mainloop-glib0:i386
 pulseaudio
