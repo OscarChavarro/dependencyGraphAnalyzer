@@ -105,3 +105,4 @@ libicu72:amd64
 libntfs-3g89:amd64
 db-util
 db5.3-util
+hfsprogs

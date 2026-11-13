@@ -69,8 +69,6 @@ libgexiv2-2:amd64
 libexiv2-27
 libexiv2-27:amd64
 gnome-icon-theme
-libgl1-mesa-glx
-libgl1-mesa-glx:amd64
 # PerlPython
 fontforge
 fontforge-common

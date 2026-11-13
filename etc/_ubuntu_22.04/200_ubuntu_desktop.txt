@@ -105,8 +105,6 @@ libatm1
 libatm1:amd64
 libavahi-core7
 libavahi-core7:amd64
-libbrlapi0.8
-libbrlapi0.8:amd64
 libc-devtools
 libcephfs2
 libclucene-contribs1v5
@@ -153,16 +151,8 @@ libgamemode0
 libgamemode0:amd64
 libgamemodeauto0
 libgamemodeauto0:amd64
-libgfapi0
-libgfapi0:amd64
-libgfrpc0
-libgfrpc0:amd64
-libgfxdr0
-libgfxdr0:amd64
 libgl1-amber-dri
 libgl1-amber-dri:amd64
-libglusterfs0
-libglusterfs0:amd64
 libgnome-bg-4-1
 libgnome-bg-4-1:amd64
 libgnome-desktop-4-1
@@ -245,7 +235,6 @@ libproxy1-plugin-gsettings
 libproxy1-plugin-gsettings:amd64
 libproxy1-plugin-networkmanager
 libproxy1-plugin-networkmanager:amd64
-librados2
 libraptor2-0
 libraptor2-0:amd64
 librasqal3
@@ -393,7 +382,6 @@ python3-fontpens
 python3-html5lib
 python3-louis
 python3-magic
-python3-markdown
 python3-monotonic
 python3-olefile
 python3-pexpect
@@ -509,8 +497,6 @@ libqt5webengine5:amd64
 libqt5webenginecore5:amd64
 libqt5webenginewidgets5
 libqt5webenginewidgets5:amd64
-librbd1
-qemu-system-common
 qtdeclarative5-dev
 qtwebengine5-dev:amd64
 libqt5webchannel5-dev

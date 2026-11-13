@@ -3,6 +3,9 @@ package backend.application.service;
 import backend.application.port.in.BuildEnrichedEdgesUseCase;
 import backend.domain.model.GraphModelEdge;
 import backend.domain.model.GraphModelGenerator;
+import graphbuilderplugins.cache.CacheFileContentModel;
+import graphbuilderplugins.cache.CacheGraphComposer;
+import graphbuilderplugins.cache.CacheRelationEntryModel;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -21,11 +24,11 @@ public class BuildEnrichedEdgesService implements BuildEnrichedEdgesUseCase {
     @Override
     public List<GraphModelEdge> execute(GraphModelGenerator generator, String groupsDefinitionFolder, String[] inputFolders) {
         String[] groupsDefinitionFiles = resolveGroupDefinitionFiles(groupsDefinitionFolder);
-        return buildEnrichedEdgesFromCache(resolveCachePath(inputFolders), groupsDefinitionFiles);
+        return buildEnrichedEdgesFromCache(resolveCachePaths(inputFolders), groupsDefinitionFiles);
     }
 
-    private List<GraphModelEdge> buildEnrichedEdgesFromCache(Path cachePath, String[] groupsDefinitionFiles) {
-        if (cachePath == null) {
+    private List<GraphModelEdge> buildEnrichedEdgesFromCache(List<Path> cachePaths, String[] groupsDefinitionFiles) {
+        if (cachePaths.isEmpty()) {
             return List.of();
         }
 
@@ -34,48 +37,61 @@ public class BuildEnrichedEdgesService implements BuildEnrichedEdgesUseCase {
             return List.of();
         }
 
-        Set<GraphModelEdge> enriched = new LinkedHashSet<>();
+        CacheFileContentModel content;
         try {
-            for (String line : Files.readAllLines(cachePath)) {
-                String trimmed = line.trim();
-                if (!trimmed.startsWith("r ")) {
-                    continue;
-                }
-                String[] parts = trimmed.split("\\s+");
-                if (parts.length < 3) {
-                    continue;
-                }
-                String sourcePackage = parts[1];
-                String targetPackage = parts[2];
+            content = CacheGraphComposer.compose(cachePaths.get(0), cachePaths.subList(1, cachePaths.size()));
+        } catch (IllegalStateException e) {
+            return List.of();
+        }
 
-                Set<String> sourceGroups = packageGroups.get(sourcePackage);
-                Set<String> targetGroups = packageGroups.get(targetPackage);
-                if (sourceGroups == null || targetGroups == null) {
-                    continue;
-                }
-
-                for (String sourceGroup : sourceGroups) {
-                    for (String targetGroup : targetGroups) {
-                        enriched.add(new GraphModelEdge(
-                                sourceGroup + "." + sourcePackage,
-                                targetGroup + "." + targetPackage));
-                    }
+        Set<GraphModelEdge> enriched = new LinkedHashSet<>();
+        for (CacheRelationEntryModel relation : content.relations()) {
+            Set<String> sourceGroups = packageGroups.get(relation.source());
+            Set<String> targetGroups = packageGroups.get(relation.destination());
+            if (sourceGroups == null || targetGroups == null) {
+                continue;
+            }
+            for (String sourceGroup : sourceGroups) {
+                for (String targetGroup : targetGroups) {
+                    enriched.add(new GraphModelEdge(
+                            sourceGroup + "." + relation.source(),
+                            targetGroup + "." + relation.destination()));
                 }
             }
-        } catch (IOException e) {
-            return List.of();
         }
         return new ArrayList<>(enriched);
     }
 
-    private Path resolveCachePath(String[] inputFolders) {
+    /**
+     * First path is the base cache; the remaining ones are extra caches.
+     * Extra entries that cannot be resolved are skipped.
+     */
+    private List<Path> resolveCachePaths(String[] inputFolders) {
+        Path base = null;
         if (inputFolders != null && inputFolders.length > 0) {
-            Path configured = resolveExistingFile(inputFolders[0]);
-            if (configured != null) {
-                return configured;
+            base = resolveExistingFile(inputFolders[0]);
+        }
+        if (base == null) {
+            base = resolveExistingFile("cache.txt", "../cache.txt");
+        }
+        if (base == null) {
+            return List.of();
+        }
+
+        List<Path> paths = new ArrayList<>();
+        paths.add(base);
+        if (inputFolders != null) {
+            for (int i = 1; i < inputFolders.length; i++) {
+                if (inputFolders[i] == null || inputFolders[i].isBlank()) {
+                    continue;
+                }
+                Path extra = resolveExistingFile(inputFolders[i]);
+                if (extra != null) {
+                    paths.add(extra);
+                }
             }
         }
-        return resolveExistingFile("cache.txt", "../cache.txt");
+        return paths;
     }
 
     private Map<String, Set<String>> readPackageGroups(String[] groupsDefinitionFiles) {

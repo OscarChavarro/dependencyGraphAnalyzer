@@ -92,6 +92,10 @@ export interface CachedProject {
   name: string;
   groupsDefinitionFolder: string;
   cacheFile: string;
+  /** Optional extra cache whose nodes are appended only if all their dependencies exist. */
+  extra?: string | null;
+  /** Folder where "Calcular LFS" downloads package sources with apt-get source. */
+  linuxFromScratch?: string | null;
 }
 
 export class GraphModel {

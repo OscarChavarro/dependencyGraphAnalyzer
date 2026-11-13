@@ -76,3 +76,6 @@ libb2-1
 lzop
 arj
 liblz4-1:i386
+libc6-x32
+libgomp1
+libgomp1:amd64

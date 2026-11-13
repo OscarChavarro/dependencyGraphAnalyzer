@@ -33,6 +33,10 @@ import type { TranslationKey } from './i18n/translations/translations-by-namespa
 import { GroupRelationshipQuery } from './localProcessing/GroupRelationshipQuery';
 import { InvalidRelationshipDetector } from './localProcessing/InvalidRelationshipDetector';
 import { FloodingOperations } from './localProcessing/FloodingOperations';
+import { PackageGroupLookup, type PackageGroupLookupResult } from './packageSearch/PackageGroupLookup';
+import { LfsSourcesApi } from './lfs/LfsSourcesApi';
+import { LfsSourceDownloadCoordinator, type LfsDownloadProgressState } from './lfs/LfsSourceDownloadCoordinator';
+import { LfsProgressDialogComponent } from './lfs/lfs-progress-dialog.component';
 import {
   RelationDialogComponent,
   RelationEndpointClickEvent,
@@ -45,7 +49,7 @@ import { MenuOption } from './model/menu-option';
 
 @Component({
   selector: 'app-root',
-  imports: [CommonModule, MenuRenderer, RelationDialogComponent, BackgroundColorDialogComponent],
+  imports: [CommonModule, MenuRenderer, RelationDialogComponent, BackgroundColorDialogComponent, LfsProgressDialogComponent],
   templateUrl: './app.html',
   styleUrl: './app.sass'
 })
@@ -91,6 +95,12 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   public readonly selectedLanguage;
   public readonly i18nKeys = I18N_KEYS;
   public nodeFilterPattern = '';
+  public packageSearchPattern = '';
+  public packageSearchMessage = '';
+  public packageSearchIsError = false;
+  public isSearchingPackage = false;
+  /** Progress of "Calcular LFS"; null while the dialog is closed. */
+  public lfsProgressState: LfsDownloadProgressState | null = null;
   public currentSvgNodeNames: string[] = [];
   public cachedProjects: CachedProject[] = [];
   public selectedCachedProjectId = '';
@@ -112,6 +122,8 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   private readonly groupRelationshipQuery = new GroupRelationshipQuery();
   private readonly invalidRelationshipDetector = new InvalidRelationshipDetector();
   private readonly floodingOperations = new FloodingOperations();
+  private readonly packageGroupLookup: PackageGroupLookup;
+  private readonly lfsSourceDownloadCoordinator: LfsSourceDownloadCoordinator;
   private readonly graphSelectionModel = new GraphModel();
   private pendingBackgroundColorSelection: string[] = [];
   private currentSvgFilename = 'structure.svg';
@@ -141,6 +153,22 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   private readonly onWindowResize = (): void => {
     this.syncCanvasResolutionWithDisplay();
   };
+  /** Ctrl+A (Cmd+A on macOS): select every node of the graph currently shown. */
+  private readonly onGlobalSelectAllKeyDown = (event: KeyboardEvent): void => {
+    if (event.key.toLowerCase() !== 'a' || !(event.ctrlKey || event.metaKey) || event.shiftKey || event.altKey) {
+      return;
+    }
+    if (
+      this.renameGroupDialogVisible ||
+      this.backgroundColorDialogVisible ||
+      this.lfsProgressState ||
+      this.isTypingContext(event.target)
+    ) {
+      return;
+    }
+    event.preventDefault();
+    this.selectAllNodesInCurrentGraph();
+  };
   private readonly onGlobalGraphCycleKeyDown = (event: KeyboardEvent): void => {
     if (this.renameGroupDialogVisible && event.key === 'Escape') {
       event.preventDefault();
@@ -153,6 +181,9 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
       return;
     }
     if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') {
+      return;
+    }
+    if (this.lfsProgressState) {
       return;
     }
     if (event.shiftKey || event.ctrlKey || event.metaKey || event.altKey) {
@@ -177,6 +208,12 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   ) {
     this.backendBaseUrl = backendBaseUrl;
     this.endpointUrl = `${backendBaseUrl}/v1/updateGraph`;
+    this.packageGroupLookup = new PackageGroupLookup(httpClient, backendBaseUrl);
+    this.lfsSourceDownloadCoordinator = new LfsSourceDownloadCoordinator(
+      new LfsSourcesApi(httpClient, backendBaseUrl),
+      (state) => (this.lfsProgressState = state),
+      (error) => this.extractApiErrorMessage(error, String((error as { message?: unknown })?.message ?? error))
+    );
     this.selectedLanguage = this.i18nStateService.selectedLanguage;
   }
 
@@ -197,6 +234,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     this.syncCanvasResolutionWithDisplay();
     window.addEventListener('resize', this.onWindowResize);
     window.addEventListener('keydown', this.onGlobalGraphCycleKeyDown);
+    window.addEventListener('keydown', this.onGlobalSelectAllKeyDown);
 
     this.keyboardInteractionTechniques.attach(document.body);
     this.workingAreaScrollsControl.attach(
@@ -233,8 +271,10 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
+    this.lfsSourceDownloadCoordinator.dispose();
     window.removeEventListener('resize', this.onWindowResize);
     window.removeEventListener('keydown', this.onGlobalGraphCycleKeyDown);
+    window.removeEventListener('keydown', this.onGlobalSelectAllKeyDown);
     this.workingAreaScrollsControl.detach();
   }
 
@@ -256,11 +296,10 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
       this.updateGraphModel('CACHE_LOADER', this.defaultGroupsDefinitionFolder, []);
       return;
     }
-    this.updateGraphModel(
-      'CACHE_LOADER',
-      selectedProject.groupsDefinitionFolder,
-      [selectedProject.cacheFile]
-    );
+    const cacheFiles = selectedProject.extra
+      ? [selectedProject.cacheFile, selectedProject.extra]
+      : [selectedProject.cacheFile];
+    this.updateGraphModel('CACHE_LOADER', selectedProject.groupsDefinitionFolder, cacheFiles);
   }
 
   public analyzeDebianSystem(): void {
@@ -355,6 +394,127 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   public onNodeFilterInput(event: Event): void {
     const target = event.target as HTMLInputElement | null;
     this.nodeFilterPattern = target?.value ?? '';
+  }
+
+  /**
+   * Cached project whose graph is currently loaded, when it defines a linuxFromScratch folder.
+   * Derived from the last request, so it also works after restoring the session.
+   */
+  public get activeLfsProject(): CachedProject | null {
+    if (this.lastGraphGenerator !== 'CACHE_LOADER' || this.lastInputFolders.length === 0) {
+      return null;
+    }
+    const project = this.cachedProjects.find((candidate) => candidate.cacheFile === this.lastInputFolders[0]);
+    return project?.linuxFromScratch?.trim() ? project : null;
+  }
+
+  public get hasSelectedNodes(): boolean {
+    return this.graphSelectionModel.selectedNodes.length > 0;
+  }
+
+  public computeLfs(): void {
+    const project = this.activeLfsProject;
+    if (!project || !this.hasSelectedNodes || this.lfsSourceDownloadCoordinator.isRunning()) {
+      return;
+    }
+    this.selectedNodeActionMenuInteractionTechnique?.closeMenu();
+    this.menuRenderer?.close();
+    this.lfsSourceDownloadCoordinator.start(project.id, [...this.graphSelectionModel.selectedNodes]);
+  }
+
+  public onLfsCancelRequested(): void {
+    this.lfsSourceDownloadCoordinator.cancel();
+  }
+
+  public onLfsCloseRequested(): void {
+    if (!this.lfsSourceDownloadCoordinator.isRunning()) {
+      this.lfsProgressState = null;
+    }
+  }
+
+  public onPackageSearchInput(event: Event): void {
+    const target = event.target as HTMLInputElement | null;
+    this.packageSearchPattern = target?.value ?? '';
+    if (!this.packageSearchPattern.trim()) {
+      this.setPackageSearchMessage('', false);
+    }
+  }
+
+  public onPackageSearchKeyDown(event: KeyboardEvent): void {
+    event.stopPropagation();
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      this.searchPackage();
+    } else if (event.key === 'Escape') {
+      this.packageSearchPattern = '';
+      this.setPackageSearchMessage('', false);
+    }
+  }
+
+  /** Asks the backend which group lists the package, opens that group and selects the package. */
+  public searchPackage(): void {
+    const query = this.packageSearchPattern.trim();
+    if (!query || this.isSearchingPackage) {
+      return;
+    }
+    const groupFolder = this.activeGroupsDefinitionFolder;
+    if (!groupFolder) {
+      this.setPackageSearchMessage(this.t(this.i18nKeys.shell.SEARCH_PACKAGE_REQUIRES_GRAPH), true);
+      return;
+    }
+
+    this.isSearchingPackage = true;
+    this.setPackageSearchMessage('', false);
+    this.packageGroupLookup.find(groupFolder, query).subscribe({
+      next: (result) => {
+        this.isSearchingPackage = false;
+        if (result.groups.length === 0) {
+          this.setPackageSearchMessage(`${this.t(this.i18nKeys.shell.SEARCH_PACKAGE_NOT_FOUND)}: ${query}`, true);
+          return;
+        }
+        this.openGroupAndSelectPackage(result);
+      },
+      error: (error: unknown) => {
+        this.isSearchingPackage = false;
+        this.setPackageSearchMessage(
+          this.extractApiErrorMessage(error, this.t(this.i18nKeys.shell.SEARCH_PACKAGE_ERROR)),
+          true
+        );
+      }
+    });
+  }
+
+  private openGroupAndSelectPackage(result: PackageGroupLookupResult): void {
+    const groupName = result.groups[0];
+    const packageName = result.packageName;
+
+    this.nodeFilterPattern = '';
+    this.graphSelectionModel.selectSingle(packageName);
+    this.applySelection(this.graphSelectionModel.selectedNodes);
+    this.setPackageSearchMessage('', false);
+    this.openGroupGraphByName(
+      groupName,
+      () => {
+        this.groupsWithoutSvg.add(groupName.toLowerCase());
+        this.setPackageSearchMessage(
+          `[${groupName}]: ${this.t(this.i18nKeys.shell.SEARCH_PACKAGE_GROUP_WITHOUT_GRAPH)}`,
+          true
+        );
+      },
+      () => {
+        if (!this.currentSvgNodeNames.includes(packageName)) {
+          this.setPackageSearchMessage(
+            `[${groupName}]: ${this.t(this.i18nKeys.shell.SEARCH_PACKAGE_NOT_IN_GRAPH)}`,
+            true
+          );
+        }
+      }
+    );
+  }
+
+  private setPackageSearchMessage(message: string, isError: boolean): void {
+    this.packageSearchMessage = message;
+    this.packageSearchIsError = isError && message.length > 0;
   }
 
   public onNodeListSelectionChange(event: Event): void {
@@ -580,7 +740,12 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  private loadAndRenderGraphSvg(filename: string, attempt = 0, onSvgNotFound?: () => void): void {
+  private loadAndRenderGraphSvg(
+    filename: string,
+    attempt = 0,
+    onSvgNotFound?: () => void,
+    onSvgLoaded?: () => void
+  ): void {
     this.currentSvgFilename = filename;
     const svgUrl = `${this.backendBaseUrl}/output/svg/${filename}?ts=${Date.now()}`;
     this.httpClient
@@ -589,7 +754,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
         next: (svgText) => {
           if (!this.isValidSvgPayload(svgText)) {
             if (attempt < 12) {
-              setTimeout(() => this.loadAndRenderGraphSvg(filename, attempt + 1, onSvgNotFound), 250);
+              setTimeout(() => this.loadAndRenderGraphSvg(filename, attempt + 1, onSvgNotFound, onSvgLoaded), 250);
               return;
             }
             this.errorMessage = `${this.t(this.i18nKeys.shell.LOAD_SVG_ERROR_PREFIX)} output/svg/${filename}`;
@@ -608,6 +773,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
               .filter((name) => name.startsWith('_[') && name !== '_[STRUCTURE]')
               .map((name) => name.replace(/^_\[(.+)\]$/, '$1').toLowerCase());
           }
+          onSvgLoaded?.();
         },
         error: (error: unknown) => {
           if (onSvgNotFound && error instanceof HttpErrorResponse && error.status === 404) {
@@ -615,7 +781,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
             return;
           }
           if (attempt < 12) {
-            setTimeout(() => this.loadAndRenderGraphSvg(filename, attempt + 1, onSvgNotFound), 250);
+            setTimeout(() => this.loadAndRenderGraphSvg(filename, attempt + 1, onSvgNotFound, onSvgLoaded), 250);
             return;
           }
           this.errorMessage = `${this.t(this.i18nKeys.shell.LOAD_SVG_ERROR_PREFIX)} output/svg/${filename}`;
@@ -1004,14 +1170,14 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  private openGroupGraphByName(groupName: string, onSvgNotFound?: () => void): void {
+  private openGroupGraphByName(groupName: string, onSvgNotFound?: () => void, onSvgLoaded?: () => void): void {
     const normalizedGroupName = groupName.trim().toLowerCase();
     if (!normalizedGroupName) {
       return;
     }
     this.selectedNodeActionMenuInteractionTechnique?.closeMenu();
     this.menuRenderer?.close();
-    this.loadAndRenderGraphSvg(`${normalizedGroupName}.svg`, 0, onSvgNotFound);
+    this.loadAndRenderGraphSvg(`${normalizedGroupName}.svg`, 0, onSvgNotFound, onSvgLoaded);
   }
 
   private listCyclableGroupNames(): string[] {
@@ -1074,6 +1240,29 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
       return [...fromSnapshot].sort((a, b) => this.compareGroupNames(a, b));
     }
     return [...this.cachedStructureGroupNames].sort((a, b) => this.compareGroupNames(a, b));
+  }
+
+  /**
+   * In the groups overview (structure.svg) selects the packages inside every group (not the
+   * group nodes themselves); inside a group selects only that group's packages.
+   */
+  private selectAllNodesInCurrentGraph(): void {
+    const nodesToSelect = this.isInStructureMode()
+      ? this.listAllPackageNodeNames()
+      : this.currentSvgNodeNames;
+    if (nodesToSelect.length === 0) {
+      return;
+    }
+    this.selectedNodeActionMenuInteractionTechnique?.closeMenu();
+    this.menuRenderer?.close();
+    this.applySelection(nodesToSelect);
+  }
+
+  /** Every package node of the loaded graph, excluding group header ("[G]") and structure ("_[G]") nodes. */
+  private listAllPackageNodeNames(): string[] {
+    return (this.graphModel?.nodes ?? [])
+      .map((node) => node.name)
+      .filter((name) => !!name && !name.startsWith('[') && !name.startsWith('_['));
   }
 
   private isTypingContext(target: EventTarget | null): boolean {

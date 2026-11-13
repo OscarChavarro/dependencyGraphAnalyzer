@@ -3,14 +3,21 @@ package graphbuilderplugins.impl;
 import graphbuilderplugins.api.GraphBuildTarget;
 import graphbuilderplugins.api.GraphBuilderPlugin;
 import graphbuilderplugins.api.GraphBuilderPluginId;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.nio.file.Files;
+import graphbuilderplugins.cache.CacheFileContentModel;
+import graphbuilderplugins.cache.CacheGraphComposer;
 import java.nio.file.Path;
 import java.util.List;
-import java.util.StringTokenizer;
+import java.util.Objects;
 
+/**
+ * Loads a graph from cache files. The first input is the base cache, loaded as is.
+ * Any further inputs are extra caches: their nodes are appended only when all of
+ * their dependencies already exist (see {@link graphbuilderplugins.cache.ExtraCacheSelector}).
+ */
 public class CacheLoaderGraphBuilderPlugin implements GraphBuilderPlugin {
+    private static final String DEFAULT_BASE_CACHE = "cache.txt";
+    private static final String DEFAULT_EXTRA_CACHE = "cache_extra.txt";
+
     @Override
     public GraphBuilderPluginId id() {
         return GraphBuilderPluginId.CACHE_LOADER;
@@ -18,64 +25,31 @@ public class CacheLoaderGraphBuilderPlugin implements GraphBuilderPlugin {
 
     @Override
     public void build(GraphBuildTarget target) {
-        System.out.print("Building graph from cache ...");
-        loadIfExists(target, Path.of("cache.txt"));
-        loadIfExists(target, Path.of("cache_extra.txt"));
-        System.out.println("Ok!");
+        build(target, List.of(DEFAULT_BASE_CACHE, DEFAULT_EXTRA_CACHE));
     }
 
     @Override
-    public void build(GraphBuildTarget target, List<String> inputFolders) {
-        if (inputFolders == null || inputFolders.isEmpty()) {
+    public void build(GraphBuildTarget target, List<String> inputFiles) {
+        List<Path> files = inputFiles == null ? List.of() : inputFiles.stream()
+                .filter(Objects::nonNull)
+                .filter(file -> !file.isBlank())
+                .map(Path::of)
+                .toList();
+        if (files.isEmpty()) {
             build(target);
             return;
         }
+
         System.out.print("Building graph from cache ...");
-        for (String configuredFile : inputFolders) {
-            if (configuredFile == null || configuredFile.isBlank()) {
-                continue;
-            }
-            loadIfExists(target, Path.of(configuredFile));
-        }
-        System.out.println("Ok!");
-    }
-
-    private void loadIfExists(GraphBuildTarget target, Path file) {
-        if (!Files.isRegularFile(file)) {
-            return;
-        }
-        try (BufferedReader reader = Files.newBufferedReader(file)) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                parseLine(target, line);
-            }
-        } catch (IOException e) {
-            throw new IllegalStateException("Failed to read cache file: " + file, e);
-        }
-    }
-
-    private void parseLine(GraphBuildTarget target, String line) {
-        StringTokenizer parser = new StringTokenizer(line, " \n");
-        if (!parser.hasMoreTokens()) {
-            return;
-        }
-
-        String token = parser.nextToken();
-        if ("n".equals(token) && parser.countTokens() >= 2) {
-            String name = parser.nextToken();
-            String state = parser.nextToken();
-            if ("good".equals(state)) {
-                target.addNode(name);
+        CacheFileContentModel content = CacheGraphComposer.compose(files.get(0), files.subList(1, files.size()));
+        content.nodes().forEach(node -> {
+            if (node.good()) {
+                target.addNode(node.name());
             } else {
-                target.addBadNode(name);
+                target.addBadNode(node.name());
             }
-            return;
-        }
-
-        if ("r".equals(token) && parser.countTokens() >= 2) {
-            String source = parser.nextToken();
-            String destination = parser.nextToken();
-            target.addDependency(source, destination);
-        }
+        });
+        content.relations().forEach(relation -> target.addDependency(relation.source(), relation.destination()));
+        System.out.println("Ok!");
     }
 }

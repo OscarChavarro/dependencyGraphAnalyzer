@@ -1,6 +1,70 @@
 import type { TranslationValue } from '../types/translation-value.type';
 
 export const SHELL_TRANSLATIONS = {
+  LFS_BUTTON: {
+    en: 'Compute\nLFS',
+    es: 'Calcular\nLFS'
+  },
+  LFS_BUTTON_TITLE: {
+    en: 'Download with apt-get source the selected packages, from sinks to sources',
+    es: 'Descargar con apt-get source los paquetes seleccionados, de sumideros a fuentes'
+  },
+  LFS_DIALOG_TITLE: {
+    en: 'Linux From Scratch: package sources',
+    es: 'Linux From Scratch: fuentes de paquetes'
+  },
+  LFS_PLANNING: {
+    en: 'Computing download order...',
+    es: 'Calculando el orden de descarga...'
+  },
+  LFS_PACKAGES: {
+    en: 'packages',
+    es: 'paquetes'
+  },
+  LFS_DOWNLOADING: {
+    en: 'Downloading',
+    es: 'Descargando'
+  },
+  LFS_FINISHED: {
+    en: 'Finished.',
+    es: 'Terminado.'
+  },
+  LFS_CANCELED: {
+    en: 'Canceled.',
+    es: 'Cancelado.'
+  },
+  LFS_FAILED_PACKAGES: {
+    en: 'Failed packages',
+    es: 'Paquetes con error'
+  },
+  LFS_SKIPPED_NODES: {
+    en: 'Skipped (not apt packages)',
+    es: 'Omitidos (no son paquetes apt)'
+  },
+  LFS_ALREADY_PRESENT: {
+    en: 'Skipped, already downloaded',
+    es: 'Omitidos, ya descargados'
+  },
+  LFS_WRITING_GUIDE: {
+    en: 'Writing AGENTS.md build guide...',
+    es: 'Escribiendo la guía de build AGENTS.md...'
+  },
+  LFS_GUIDE_WRITTEN: {
+    en: 'Build guide',
+    es: 'Guía de build'
+  },
+  LFS_GUIDE_FAILED: {
+    en: 'Could not write AGENTS.md',
+    es: 'No se pudo escribir AGENTS.md'
+  },
+  LFS_CANCEL: {
+    en: 'Cancel',
+    es: 'Cancelar'
+  },
+  LFS_CLOSE: {
+    en: 'Close',
+    es: 'Cerrar'
+  },
   PANEL_COLLAPSE: {
     en: 'Collapse',
     es: 'Colapsar'
@@ -112,6 +176,38 @@ export const SHELL_TRANSLATIONS = {
   FILTER_GROUP_PLACEHOLDER: {
     en: 'Filter group...',
     es: 'Filtrar grupo...'
+  },
+  SEARCH_PACKAGE_PLACEHOLDER: {
+    en: 'Search package...',
+    es: 'Buscar paquete...'
+  },
+  SEARCH_PACKAGE_ARIA: {
+    en: 'Search package in groups',
+    es: 'Buscar paquete en los grupos'
+  },
+  SEARCH_PACKAGE_SEARCHING: {
+    en: 'Searching...',
+    es: 'Buscando...'
+  },
+  SEARCH_PACKAGE_REQUIRES_GRAPH: {
+    en: 'Load a graph before searching packages',
+    es: 'Carga un grafo antes de buscar paquetes'
+  },
+  SEARCH_PACKAGE_NOT_FOUND: {
+    en: 'Package not found in any group',
+    es: 'Paquete no encontrado en ningún grupo'
+  },
+  SEARCH_PACKAGE_GROUP_WITHOUT_GRAPH: {
+    en: 'The group has no graph generated',
+    es: 'El grupo no tiene grafo generado'
+  },
+  SEARCH_PACKAGE_NOT_IN_GRAPH: {
+    en: 'The package is listed in the group but is not in the current graph',
+    es: 'El paquete está listado en el grupo pero no está en el grafo actual'
+  },
+  SEARCH_PACKAGE_ERROR: {
+    en: 'Error searching package',
+    es: 'Error buscando el paquete'
   },
   MENU_OPEN_NEW_SVG: {
     en: 'Open group',

@@ -5,6 +5,17 @@
         {{ isPanelCollapsed ? '» ' + t(i18nKeys.shell.PANEL_LABEL) : '« ' + t(i18nKeys.shell.PANEL_COLLAPSE) }}
       </button>
 
+      <button
+        class="panel-toggle-button panel-lfs-button"
+        type="button"
+        *ngIf="!isPanelCollapsed && activeLfsProject"
+        (click)="computeLfs()"
+        [disabled]="!hasSelectedNodes || !!lfsProgressState"
+        [title]="t(i18nKeys.shell.LFS_BUTTON_TITLE)"
+      >
+        {{ t(i18nKeys.shell.LFS_BUTTON) }}
+      </button>
+
       <button class="panel-toggle-button panel-back-button" type="button" (click)="backToStructure()" *ngIf="!isPanelCollapsed && !isInStructureMode()">
         {{ t(i18nKeys.shell.BACK_TO_STRUCTURE) }}
       </button>
@@ -178,6 +189,26 @@
             {{ nodeName }}
           </option>
         </select>
+        <label class="node-browser-search" [attr.aria-label]="t(i18nKeys.shell.SEARCH_PACKAGE_ARIA)">
+          <span class="node-browser-search-icon">📦</span>
+          <input
+            type="search"
+            class="node-browser-search-input"
+            [value]="packageSearchPattern"
+            (input)="onPackageSearchInput($event)"
+            (keydown)="onPackageSearchKeyDown($event)"
+            [disabled]="isSearchingPackage"
+            [placeholder]="t(i18nKeys.shell.SEARCH_PACKAGE_PLACEHOLDER)"
+          />
+        </label>
+        <p
+          class="status-line package-search-status"
+          [class.status-line-error]="packageSearchIsError"
+          *ngIf="isSearchingPackage || packageSearchMessage"
+          aria-live="polite"
+        >
+          {{ isSearchingPackage ? t(i18nKeys.shell.SEARCH_PACKAGE_SEARCHING) : packageSearchMessage }}
+        </p>
       </section>
     </div>
   </aside>
@@ -245,3 +276,9 @@
   (accepted)="onBackgroundColorDialogAccepted($event)"
   (canceled)="onBackgroundColorDialogCanceled()"
 ></app-background-color-dialog>
+
+<app-lfs-progress-dialog
+  [state]="lfsProgressState"
+  (cancelRequested)="onLfsCancelRequested()"
+  (closeRequested)="onLfsCloseRequested()"
+></app-lfs-progress-dialog>

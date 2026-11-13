@@ -4,8 +4,10 @@ import backend.application.port.in.UpdateGraphModelUseCase;
 import backend.application.port.in.BuildEnrichedEdgesUseCase;
 import backend.application.port.in.MoveNodeUseCase;
 import backend.application.port.in.CreateNewGroupUseCase;
+import backend.application.port.in.FindPackageGroupsUseCase;
 import backend.application.port.in.RenameNodeUseCase;
 import backend.domain.model.GraphModelGenerator;
+import backend.domain.model.PackageGroupsLookupModel;
 import backend.infrastructure.http.dto.CppProjectResponse;
 import backend.infrastructure.http.dto.CachedProjectResponse;
 import backend.infrastructure.http.dto.JavaProjectResponse;
@@ -18,6 +20,8 @@ import backend.infrastructure.http.dto.MoveNodeRequest;
 import backend.infrastructure.http.dto.MoveNodeResponse;
 import backend.infrastructure.http.dto.CreateNewGroupRequest;
 import backend.infrastructure.http.dto.CreateNewGroupResponse;
+import backend.infrastructure.http.dto.FindPackageGroupRequest;
+import backend.infrastructure.http.dto.FindPackageGroupResponse;
 import backend.infrastructure.http.dto.RenameNodeRequest;
 import backend.infrastructure.http.dto.RenameNodeResponse;
 import backend.infrastructure.http.dto.GroupRelationsRequest;
@@ -55,6 +59,7 @@ public class GraphModelController {
     private final MoveNodeUseCase moveNodeUseCase;
     private final CreateNewGroupUseCase createNewGroupUseCase;
     private final RenameNodeUseCase renameNodeUseCase;
+    private final FindPackageGroupsUseCase findPackageGroupsUseCase;
     private final ObjectMapper objectMapper;
 
     public GraphModelController(
@@ -63,12 +68,14 @@ public class GraphModelController {
             MoveNodeUseCase moveNodeUseCase,
             CreateNewGroupUseCase createNewGroupUseCase,
             RenameNodeUseCase renameNodeUseCase,
+            FindPackageGroupsUseCase findPackageGroupsUseCase,
             ObjectMapper objectMapper) {
         this.updateGraphModelUseCase = updateGraphModelUseCase;
         this.buildEnrichedEdgesUseCase = buildEnrichedEdgesUseCase;
         this.moveNodeUseCase = moveNodeUseCase;
         this.createNewGroupUseCase = createNewGroupUseCase;
         this.renameNodeUseCase = renameNodeUseCase;
+        this.findPackageGroupsUseCase = findPackageGroupsUseCase;
         this.objectMapper = objectMapper;
     }
 
@@ -219,6 +226,14 @@ public class GraphModelController {
                 request.oldGroupName(),
                 request.newGroupName());
         return new RenameNodeResponse(true, message);
+    }
+
+    @PostMapping({"/findPackageGroup"})
+    public FindPackageGroupResponse findPackageGroup(@Valid @RequestBody FindPackageGroupRequest request) {
+        PackageGroupsLookupModel lookup = findPackageGroupsUseCase.execute(
+                request.groupFolder(),
+                request.packageName());
+        return new FindPackageGroupResponse(!lookup.groups().isEmpty(), lookup.packageName(), lookup.groups());
     }
 
     @GetMapping({"/cppProjects"})

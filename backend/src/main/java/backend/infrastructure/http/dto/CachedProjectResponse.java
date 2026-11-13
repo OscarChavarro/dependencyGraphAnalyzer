@@ -4,5 +4,7 @@ public record CachedProjectResponse(
         String id,
         String name,
         String groupsDefinitionFolder,
-        String cacheFile) {
+        String cacheFile,
+        String extra,
+        String linuxFromScratch) {
 }

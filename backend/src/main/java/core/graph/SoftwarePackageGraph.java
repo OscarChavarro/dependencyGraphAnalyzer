@@ -162,29 +162,33 @@ public class SoftwarePackageGraph {
 
         if (!node.getIsBad()) {
             if (node.getSource()) {
-                n = n + " [style=filled,color=black,fillcolor=green" + shape + "];";
+                n = n + nodeStyle(DotColorPalette.TOP_LEVEL_NODE_FILL, shape);
                 if (!indent) {
                     System.out.println("TOP LEVEL NODE: " + node.getName());
                 }
             } else if (node.getSink()) {
-                n = n + " [style=filled,color=black,fillcolor=lightblue" + shape + "];";
+                n = n + nodeStyle(DotColorPalette.SINK_NODE_FILL, shape);
             } else {
-                String color = "yellow";
+                String color = DotColorPalette.INTERMEDIATE_NODE_FILL;
                 if (node.getName().startsWith("_[") && node.getVariant()) {
-                    color = "lightblue";
+                    color = DotColorPalette.VARIANT_NODE_FILL;
                 }
-                n = n + " [style=filled,color=black,fillcolor=" + color + shape + "];";
+                n = n + nodeStyle(color, shape);
             }
         } else {
-            n = n + " [style=filled,color=black,fillcolor=red" + shape + "];";
+            n = n + nodeStyle(DotColorPalette.BAD_NODE_FILL, shape);
         }
         PersistenceElement.writeAsciiLine(os, n);
     }
 
+    private static String nodeStyle(String fillColor, String shape) {
+        return " [style=filled,color=" + DotColorPalette.OUTLINE + ",fillcolor=" + fillColor + shape + "];";
+    }
+
     private void exportDotNodes(OutputStream os, SoftwarePackageGroup g, int i) throws Exception {
         PersistenceElement.writeAsciiLine(os, "    subgraph cluster" + i + " {");
-        PersistenceElement.writeAsciiLine(os, "        color=black;");
-        PersistenceElement.writeAsciiLine(os, "        fillcolor=lightgray;");
+        PersistenceElement.writeAsciiLine(os, "        color=" + DotColorPalette.OUTLINE + ";");
+        PersistenceElement.writeAsciiLine(os, "        fillcolor=" + DotColorPalette.GROUP_CLUSTER_FILL + ";");
         PersistenceElement.writeAsciiLine(os, "        style=\"filled,bold\";");
         exportDotNode(os, g.header, true);
         g.header.setGroup(true);
@@ -199,8 +203,8 @@ public class SoftwarePackageGraph {
 
     private void exportDotNodesPracticalGrid(OutputStream os, SoftwarePackageGroup group, int groupId) throws Exception {
         PersistenceElement.writeAsciiLine(os, "    subgraph cluster" + groupId + " {");
-        PersistenceElement.writeAsciiLine(os, "        color=black;");
-        PersistenceElement.writeAsciiLine(os, "        fillcolor=lightgray;");
+        PersistenceElement.writeAsciiLine(os, "        color=" + DotColorPalette.OUTLINE + ";");
+        PersistenceElement.writeAsciiLine(os, "        fillcolor=" + DotColorPalette.GROUP_CLUSTER_FILL + ";");
         PersistenceElement.writeAsciiLine(os, "        style=\"filled,bold\";");
         exportDotNode(os, group.header, true);
         group.header.setGroup(true);
@@ -303,7 +307,8 @@ public class SoftwarePackageGraph {
 
                 String attributes = gridArcAttributes;
                 if (namesAreGroupsAndFirstGreater(a, b)) {
-                    attributes = attributes.isEmpty() ? "color=\"red\"" : attributes + ",color=\"red\"";
+                    attributes = attributes.isEmpty() ? "color=" + DotColorPalette.BACKWARD_GROUP_EDGE
+                            : attributes + ",color=" + DotColorPalette.BACKWARD_GROUP_EDGE;
                 }
                 String r = "    \"" + a + "\" -> \"" + b + "\"" + (attributes.isEmpty() ? "" : " [" + attributes + "]") + ";";
 

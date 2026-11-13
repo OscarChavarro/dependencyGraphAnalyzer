@@ -8,10 +8,8 @@ expect
 fp-compiler-3.2.2:amd64
 fpc-source-3.2.2
 genext2fs
-libfdt1:amd64
 tcl-expect:amd64
 fp-compiler-3.2.2
-libfdt1
 tcl-expect
 slib
 parallel
@@ -22,14 +20,9 @@ fp-units-rtl-3.2.2
 fp-units-rtl-3.2.2:amd64
 fp-utils-3.2.2
 vsftpd
-libgd-perl
 lam-runtime
 lam4-dev
-lcov
 rsh-client
 rsh-server
 liblam4
 liblam4:amd64
-qemu-system-misc
-qemu-block-extra
-qemu-system-gui

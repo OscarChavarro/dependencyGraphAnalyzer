@@ -74,3 +74,5 @@ libglfw3:amd64
 libglfw3
 libepoxy0
 libepoxy0:amd64
+libgl1-mesa-glx:amd64
+libgl1-mesa-glx
