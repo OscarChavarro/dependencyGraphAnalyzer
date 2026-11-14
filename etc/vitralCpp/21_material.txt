@@ -7,3 +7,4 @@ vsdk/toolkit/environment/material/ShadingType.cpp
 vsdk/toolkit/environment/material/ShadingType.h
 vsdk/toolkit/environment/material/SimpleMaterial.cpp
 vsdk/toolkit/environment/material/SimpleMaterial.h
+vsdk/toolkit/environment/material/Material.h

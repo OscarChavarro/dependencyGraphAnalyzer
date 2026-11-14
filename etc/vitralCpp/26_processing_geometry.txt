@@ -1,0 +1,9 @@
+[26_PROCESSING_GEOMETRY]
+vsdk/toolkit/processing/BezierPatchTessellator.cpp
+vsdk/toolkit/processing/BezierPatchTessellator.h
+vsdk/toolkit/processing/CurveModeler.cpp
+vsdk/toolkit/processing/CurveModeler.h
+vsdk/toolkit/processing/SolidBoundaryTessellationReport.cpp
+vsdk/toolkit/processing/SolidBoundaryTessellationReport.h
+vsdk/toolkit/processing/SolidBoundaryTessellator.cpp
+vsdk/toolkit/processing/SolidBoundaryTessellator.h

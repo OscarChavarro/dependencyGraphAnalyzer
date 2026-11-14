@@ -10,3 +10,4 @@ OpenGL/glu.h
 GLUT/glut.h
 GL/glew.h
 OpenGL/gl3.h
+glad/gl.h

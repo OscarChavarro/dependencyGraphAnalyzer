@@ -23,3 +23,11 @@ vsdk/toolkit/environment/geometry/surface/TriangleMeshGroup.cpp
 vsdk/toolkit/environment/geometry/surface/TriangleMeshGroup.h
 vsdk/toolkit/environment/geometry/surface/TriangleStripMesh.cpp
 vsdk/toolkit/environment/geometry/surface/TriangleStripMesh.h
+vsdk/toolkit/environment/geometry/surface/BezierPatchSubdivision.h
+vsdk/toolkit/environment/geometry/surface/SubdividedBezierPatch.cpp
+vsdk/toolkit/environment/geometry/surface/SubdividedBezierPatch.h
+vsdk/toolkit/environment/geometry/surface/SubdividedBezierPatchNode.h
+vsdk/toolkit/environment/geometry/surface/TriangleMeshIntersectionIndex.cpp
+vsdk/toolkit/environment/geometry/surface/TriangleMeshIntersectionIndex.h
+vsdk/toolkit/environment/geometry/surface/_ParametricBiCubicPatchIntersector.cpp
+vsdk/toolkit/environment/geometry/surface/_ParametricBiCubicPatchIntersector.h

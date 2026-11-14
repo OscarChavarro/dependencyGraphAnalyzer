@@ -1,0 +1,3 @@
+[66_IO_GUI]
+vsdk/toolkit/io/gui/DialogPersistence.cpp
+vsdk/toolkit/io/gui/DialogPersistence.h

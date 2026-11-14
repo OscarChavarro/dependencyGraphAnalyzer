@@ -1,0 +1,13 @@
+[64_GUI_VIEWPORT]
+vsdk/toolkit/gui/viewport/Viewport.cpp
+vsdk/toolkit/gui/viewport/Viewport.h
+vsdk/toolkit/gui/viewport/ViewportElementScaler.cpp
+vsdk/toolkit/gui/viewport/ViewportElementScaler.h
+vsdk/toolkit/gui/viewport/ViewportInteractionTechniques.cpp
+vsdk/toolkit/gui/viewport/ViewportInteractionTechniques.h
+vsdk/toolkit/gui/viewport/ViewportSet.cpp
+vsdk/toolkit/gui/viewport/ViewportSet.h
+vsdk/toolkit/gui/viewport/ViewportSetCommands.h
+vsdk/toolkit/gui/viewport/ViewportSetInteractionListener.h
+vsdk/toolkit/gui/viewport/ViewportSetInteractionTechniques.cpp
+vsdk/toolkit/gui/viewport/ViewportSetInteractionTechniques.h

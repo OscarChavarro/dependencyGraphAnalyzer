@@ -1,4 +1,11 @@
 [23_LIGHT]
 vsdk/toolkit/environment/light/Light.cpp
 vsdk/toolkit/environment/light/Light.h
-vsdk/toolkit/environment/light/LightType.h
+vsdk/toolkit/environment/light/AmbientLight.cpp
+vsdk/toolkit/environment/light/AmbientLight.h
+vsdk/toolkit/environment/light/DirectionalLight.cpp
+vsdk/toolkit/environment/light/DirectionalLight.h
+vsdk/toolkit/environment/light/PointLight.cpp
+vsdk/toolkit/environment/light/PointLight.h
+vsdk/toolkit/environment/light/SpotLight.cpp
+vsdk/toolkit/environment/light/SpotLight.h

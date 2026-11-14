@@ -3,3 +3,10 @@ vsdk/toolkit/common/VSDK.cpp
 vsdk/toolkit/common/VSDK.h
 vsdk/toolkit/common/VSDKFatalException.h
 vsdk/toolkit/gui/PresentationElement.h
+vsdk/toolkit/common/Entity.cpp
+vsdk/toolkit/common/Entity.h
+vsdk/toolkit/common/EntityControlAccessor.cpp
+vsdk/toolkit/common/EntityControlAccessor.h
+vsdk/toolkit/common/EntityEvent.h
+vsdk/toolkit/common/EntityListener.h
+vsdk/toolkit/common/VSDKException.h

@@ -41,3 +41,4 @@ vsdk/toolkit/media/RGBAColorPalette.h
 vsdk/toolkit/media/RGBAImageHDRUncompressed.cpp
 vsdk/toolkit/media/RGBAImageHDRUncompressed.h
 vsdk/toolkit/media/RGBAPixelHDR.h
+vsdk/toolkit/media/NormalMapTexture.h

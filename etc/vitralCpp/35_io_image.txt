@@ -1,3 +1,5 @@
 [35_IO_IMAGE]
 vsdk/toolkit/io/image/ImagePersistence.cpp
 vsdk/toolkit/io/image/ImagePersistence.h
+vsdk/toolkit/io/image/RGBColorPalettePersistence.cpp
+vsdk/toolkit/io/image/RGBColorPalettePersistence.h

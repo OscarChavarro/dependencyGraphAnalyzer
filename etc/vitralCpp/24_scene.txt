@@ -7,3 +7,12 @@ vsdk/toolkit/environment/scene/SimpleScene.cpp
 vsdk/toolkit/environment/scene/SimpleScene.h
 vsdk/toolkit/environment/scene/SimpleSceneSnapshot.cpp
 vsdk/toolkit/environment/scene/SimpleSceneSnapshot.h
+vsdk/toolkit/environment/scene/AffinePlacement.cpp
+vsdk/toolkit/environment/scene/AffinePlacement.h
+vsdk/toolkit/environment/scene/AffinePlacementStatus.h
+vsdk/toolkit/environment/scene/AffineToleranceMap.cpp
+vsdk/toolkit/environment/scene/AffineToleranceMap.h
+vsdk/toolkit/environment/scene/InstanceRayCrossingBuffer.cpp
+vsdk/toolkit/environment/scene/InstanceRayCrossingBuffer.h
+vsdk/toolkit/environment/scene/SceneSolid.cpp
+vsdk/toolkit/environment/scene/SceneSolid.h

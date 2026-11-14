@@ -1,0 +1,10 @@
+[65_GUI_TANGIBLE_INTERFACES]
+vsdk/toolkit/gui/tangibleInterfaces/TangibleInterfaceEvent.cpp
+vsdk/toolkit/gui/tangibleInterfaces/TangibleInterfaceEvent.h
+vsdk/toolkit/gui/tangibleInterfaces/TangibleInterfaceEvent2InfinitePlaneGizmoMapper.cpp
+vsdk/toolkit/gui/tangibleInterfaces/TangibleInterfaceEvent2InfinitePlaneGizmoMapper.h
+vsdk/toolkit/gui/tangibleInterfaces/TangibleInterfaceEvent2RayGizmoMapper.cpp
+vsdk/toolkit/gui/tangibleInterfaces/TangibleInterfaceEvent2RayGizmoMapper.h
+vsdk/toolkit/gui/tangibleInterfaces/TangibleInterfaceListener.h
+vsdk/toolkit/gui/tangibleInterfaces/TangibleInterfaceNetworkClient.cpp
+vsdk/toolkit/gui/tangibleInterfaces/TangibleInterfaceNetworkClient.h

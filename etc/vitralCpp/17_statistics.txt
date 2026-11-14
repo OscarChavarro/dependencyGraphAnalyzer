@@ -2,3 +2,8 @@
 vsdk/toolkit/common/statistics/RaytraceStatistics.cpp
 vsdk/toolkit/common/statistics/RaytraceStatistics.h
 vsdk/toolkit/common/statistics/SolidTextureStatistics.h
+vsdk/toolkit/common/statistics/GeometryStatistics.cpp
+vsdk/toolkit/common/statistics/GeometryStatistics.h
+vsdk/toolkit/common/statistics/PolyhedralBoundedSolidStatistics.cpp
+vsdk/toolkit/common/statistics/PolyhedralBoundedSolidStatistics.h
+vsdk/toolkit/common/statistics/SolidTextureStatistics.cpp

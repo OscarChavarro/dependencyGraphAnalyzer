@@ -13,3 +13,16 @@ exception
 limits
 stdexcept
 cstdint
+climits
+ctime
+ctype.h
+cxxabi.h
+fenv.h
+new
+stddef.h
+stdint.h
+stdlib.h
+string.h
+strings.h
+typeinfo
+vector

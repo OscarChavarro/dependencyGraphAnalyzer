@@ -3,3 +3,13 @@ vsdk/toolkit/numericalAnalysis/lookUpTables/LookUpTableChecksum16.cpp
 vsdk/toolkit/numericalAnalysis/lookUpTables/LookUpTableChecksum16.h
 vsdk/toolkit/numericalAnalysis/lookUpTables/LookUpTableSine.cpp
 vsdk/toolkit/numericalAnalysis/lookUpTables/LookUpTableSine.h
+vsdk/toolkit/common/numerics/FloatingInterval.cpp
+vsdk/toolkit/common/numerics/FloatingInterval.h
+vsdk/toolkit/numericalAnalysis/polynomial/CubicSolver.cpp
+vsdk/toolkit/numericalAnalysis/polynomial/CubicSolver.h
+vsdk/toolkit/numericalAnalysis/polynomial/PolynomialSolver.cpp
+vsdk/toolkit/numericalAnalysis/polynomial/PolynomialSolver.h
+vsdk/toolkit/numericalAnalysis/polynomial/QuadraticSolver.cpp
+vsdk/toolkit/numericalAnalysis/polynomial/QuadraticSolver.h
+vsdk/toolkit/numericalAnalysis/polynomial/QuarticSolver.cpp
+vsdk/toolkit/numericalAnalysis/polynomial/QuarticSolver.h

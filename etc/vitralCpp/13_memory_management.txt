@@ -1,1 +1,4 @@
 [13_MEMORY_MANAGEMENT]
+vsdk/toolkit/common/memoryManagement/MemoryPool.h
+vsdk/toolkit/common/memoryManagement/MemoryPool.txx
+vsdk/toolkit/common/memoryManagement/SharedPointer.h

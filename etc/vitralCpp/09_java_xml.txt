@@ -1,0 +1,11 @@
+[09_JAVA_XML]
+javax/xml/parsers/DocumentBuilder.cpp
+javax/xml/parsers/DocumentBuilder.h
+javax/xml/transform/Transformer.cpp
+javax/xml/transform/Transformer.h
+org/w3c/dom/Document.h
+org/w3c/dom/Element.h
+org/w3c/dom/NamedNodeMap.h
+org/w3c/dom/Node.cpp
+org/w3c/dom/Node.h
+org/w3c/dom/NodeList.h

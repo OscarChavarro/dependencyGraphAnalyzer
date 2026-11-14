@@ -2,3 +2,7 @@
 vsdk/toolkit/environment/background/Background.h
 vsdk/toolkit/environment/background/SimpleBackground.cpp
 vsdk/toolkit/environment/background/SimpleBackground.h
+vsdk/toolkit/environment/background/CubemapBackground.cpp
+vsdk/toolkit/environment/background/CubemapBackground.h
+vsdk/toolkit/environment/background/FixedBackground.cpp
+vsdk/toolkit/environment/background/FixedBackground.h

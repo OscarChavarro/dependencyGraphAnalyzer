@@ -41,6 +41,17 @@ Java 17/Spring Boot service exposing the graph generation, query, and editing AP
 | `GET` | `/v1/javaProjects` | Read `etc/projects/javaProjects.json` and optionally resolve classpath with Gradle. |
 | `GET` | `/v1/typescriptProjects` | Read `etc/projects/typescriptProjects.json`. |
 | `GET` | `/output/svg/{filename}` | Serve a generated `.svg`; rejects paths and non-SVG filenames. |
+| `POST` | `/mcp` | Model Context Protocol endpoint for agents (see below). |
+
+## MCP Server
+
+`POST /mcp` implements the Model Context Protocol over Streamable HTTP with plain JSON responses (`initialize`, `ping`, `tools/list`, `tools/call`). It is stateless and has no authentication, like the rest of the API. The root `.mcp.json` registers it for MCP clients as `dependency-graph-analyzer`.
+
+The tools help an agent classify nodes into layered groups: `list_projects`, `analyze_grouping`, `summarize_dependencies`, `describe_nodes`, and `assign_nodes`. The read tools build the graph in memory from the project catalog entry and never write `cache.txt` or `output/`; `assign_nodes` writes group files only. Their use is described in the "Group Definition Maintenance" section of the root `AGENTS.md`.
+
+- `backend/infrastructure/mcp`: `McpController` (JSON-RPC dispatch) and the `McpTool` contract.
+- `backend/infrastructure/mcp/tool`: one class per tool, delegating to a use case.
+- `backend/application/service/GroupedGraphLoader`: builds the raw graph of a catalog project and pairs it with its group files.
 
 ## Main Payloads
 

@@ -2,3 +2,8 @@
 vsdk/toolkit/common/symbolicAlgebra/AlgebraicExpression.cpp
 vsdk/toolkit/common/symbolicAlgebra/AlgebraicExpression.h
 vsdk/toolkit/common/symbolicAlgebra/AlgebraicExpressionException.h
+vsdk/toolkit/common/symbolicAlgebra/_AlgebraicExpressionBinaryOperatorNode.h
+vsdk/toolkit/common/symbolicAlgebra/_AlgebraicExpressionConstantNode.h
+vsdk/toolkit/common/symbolicAlgebra/_AlgebraicExpressionNode.h
+vsdk/toolkit/common/symbolicAlgebra/_AlgebraicExpressionUnaryOperatorNode.h
+vsdk/toolkit/common/symbolicAlgebra/_AlgebraicExpressionVariableNode.h
