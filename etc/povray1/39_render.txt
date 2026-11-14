@@ -27,3 +27,4 @@ render/RenderTargetImage.h
 render/RenderTask.h
 render/RenderTileCallable.h
 render/RenderOutput.h
+render/PovRenderContext.h

@@ -46,3 +46,6 @@ java/lang/RuntimeException.h
 java/util/Comparator.h
 java/util/concurrent/locks/ReentrantLock.h
 java/util/TreeMap.txx
+java/lang/IllegalStateException.h
+java/lang/Integer.h
+java/lang/UnsupportedOperationException.h

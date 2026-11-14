@@ -52,3 +52,4 @@ render/bakedScene/CsgProgram.h
 render/bakedScene/OperandCullBins.h
 render/bakedScene/TraceableObject.h
 render/bakedScene/CullSafeEntry.h
+render/bakedScene/BakedSurfaceTrace.h

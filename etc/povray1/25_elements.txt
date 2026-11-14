@@ -35,3 +35,8 @@ environment/geometry/element/GeometryIntersectionEmissionContext.h
 environment/geometry/element/RayCastingHitElement.h
 environment/geometry/element/PostRayHitElement.h
 environment/geometry/element/PreRayHitElement.h
+environment/geometry/element/RayCastingHit.h
+environment/geometry/element/SurfaceDetailFamily.h
+environment/geometry/element/RayCastingQueryAdapter.h
+environment/geometry/element/SphereTrace.cpp
+environment/geometry/element/SphereTrace.h
