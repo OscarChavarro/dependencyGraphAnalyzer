@@ -28,3 +28,4 @@ libgtop-2.0-10:i386
 libgtop2-common
 libwmf0.2-7:amd64
 libxvmc1:amd64
+libimlib2:amd64

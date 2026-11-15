@@ -66,3 +66,4 @@ libboost-system1.61.0:amd64
 libisl15:amd64
 libmpc3:amd64
 libubsan0:amd64
+libjsoncpp1:amd64

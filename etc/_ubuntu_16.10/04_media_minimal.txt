@@ -56,3 +56,5 @@ libpng16-16:amd64
 libpopt0:amd64
 libtiff5:amd64
 libwebp6:amd64
+libexif12:amd64
+libjpeg9:amd64

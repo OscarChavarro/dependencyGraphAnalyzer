@@ -38,3 +38,4 @@ libisc160:amd64
 libisccc140:amd64
 libisccfg140:amd64
 librtmp1:amd64
+libcurl3:amd64

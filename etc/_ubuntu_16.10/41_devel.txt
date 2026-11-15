@@ -32,3 +32,4 @@ linux-headers-4.8.0-22
 linux-headers-4.8.0-22-generic
 linux-headers-4.8.0-59
 linux-headers-4.8.0-59-generic
+libfakeroot:amd64
