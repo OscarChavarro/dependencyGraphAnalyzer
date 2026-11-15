@@ -1,2 +1,4 @@
 [101_LOCAL]
 *vitral
+*dependencyGraphAnalyzer
+*nvidiaDriver

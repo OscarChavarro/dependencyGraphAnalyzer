@@ -98,6 +98,7 @@ public class DebianAnalyzer {
 
         //----------------------------------------------------------------
         System.out.print("Exporting individual groups: ");
+        graph.clearPerGroupOutputDirectories();
         if (!groups.isEmpty()) {
             graph.labelLastGroup(groups);
             graph.exportDotByGroups(groups, outputFormat);

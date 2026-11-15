@@ -23,3 +23,4 @@ libxcb-glx0-dev:amd64
 mesa-common-dev:amd64
 mir-client-platform-mesa-dev
 mir-client-platform-mesa-dev:amd64
+freeglut3-dev:amd64

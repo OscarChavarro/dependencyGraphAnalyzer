@@ -66,3 +66,4 @@ emacs24-common-non-dfsg
 emacs24-el
 emacs24-lucid
 emacs24-nox
+emacsen-common

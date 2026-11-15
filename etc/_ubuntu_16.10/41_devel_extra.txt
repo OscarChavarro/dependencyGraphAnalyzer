@@ -50,8 +50,6 @@ libepoxy-dev
 libepoxy-dev:i386
 liborc-0.4-dev-bin
 libfl-dev:i386
-libfl-dev
-libfl-dev:amd64
 libgolang-1.6-std1
 snap-confine
 ubuntu-core-launcher

@@ -87,3 +87,4 @@ libxcb-glx0:amd64
 libxshmfence1:amd64
 libxxf86dga1:amd64
 libxxf86vm1:amd64
+freeglut3:amd64

@@ -23,7 +23,6 @@ libgconf-2-4
 libgconf-2-4:i386
 desktop-file-utils
 dictionaries-common
-emacsen-common
 libstartup-notification0
 libstartup-notification0:i386
 libcontent-hub-glib-dev

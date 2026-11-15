@@ -146,3 +146,6 @@ x11proto-scrnsaver-dev
 x11proto-video-dev
 x11proto-xf86bigfont-dev
 x11proto-xf86dri-dev
+libice-dev:amd64
+libsm-dev:amd64
+libxt-dev:amd64

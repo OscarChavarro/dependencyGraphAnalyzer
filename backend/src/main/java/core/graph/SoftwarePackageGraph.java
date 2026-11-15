@@ -28,6 +28,8 @@ import vsdk.toolkit.io.PersistenceElement;
 public class SoftwarePackageGraph {
     private static final Path CLEAN_RELATIONS_GRAPH_PATH = Path.of("output", "cleanRelationsGraph.txt");
     private static final int MAX_PRACTICAL_GRAPH_SIZE = 500;
+    private static final List<String> PER_GROUP_OUTPUT_DIRECTORIES =
+        List.of("dot", "svg", "png", "txt", "cleansh", "tops", "installsh");
     private final ArrayList<SoftwarePackageNode> nodes;
     private final Hashtable<String, SoftwarePackageNode> nodeIndex;
     private final DirectedPackageGraphOperations graph;
@@ -564,6 +566,29 @@ public class SoftwarePackageGraph {
     private void ungroupAllNodes() {
         for (SoftwarePackageNode node : nodes) {
             node.setGroup(false);
+        }
+    }
+
+    /**
+     * Deletes the files left in the per-group output folders by a previous generation.
+     * The exporters skip groups that have no nodes in the current graph, so without this
+     * step their old files (possibly from another project) would stay in output/.
+     */
+    public void clearPerGroupOutputDirectories() {
+        for (String directory : PER_GROUP_OUTPUT_DIRECTORIES) {
+            Path directoryPath = Path.of("output", directory);
+            if (!Files.isDirectory(directoryPath)) {
+                continue;
+            }
+            try (var entries = Files.list(directoryPath)) {
+                for (Path entry : (Iterable<Path>) entries::iterator) {
+                    if (Files.isRegularFile(entry)) {
+                        Files.delete(entry);
+                    }
+                }
+            } catch (IOException e) {
+                throw new IllegalStateException("Could not clear output directory: " + directoryPath, e);
+            }
         }
     }
 

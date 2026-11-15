@@ -20,3 +20,5 @@ libssl-dev:i386
 libbison-dev:amd64
 libpthread-stubs0-dev:amd64
 libssl-dev:amd64
+libfl-dev
+libfl-dev:amd64
