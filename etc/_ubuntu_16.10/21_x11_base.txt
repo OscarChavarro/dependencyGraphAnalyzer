@@ -48,3 +48,6 @@ libxfont1:amd64
 libxft2:amd64
 libxkbfile1:amd64
 libxm4:amd64
+libmrm4:amd64
+libuil4:amd64
+uil

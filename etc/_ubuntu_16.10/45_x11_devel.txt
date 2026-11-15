@@ -97,7 +97,6 @@ libpng-dev
 libpng-dev:i386
 libexpat1-dev
 libexpat1-dev:i386
-uil
 libprotobuf10
 libprotobuf10:i386
 libxine2-bin
@@ -149,3 +148,6 @@ x11proto-xf86dri-dev
 libice-dev:amd64
 libsm-dev:amd64
 libxt-dev:amd64
+libmotif-dev:amd64
+libexpat1-dev:amd64
+libfontconfig1-dev:amd64
