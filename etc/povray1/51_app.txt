@@ -4,7 +4,5 @@ app/ImageOutputAdapter.h
 app/main.cpp
 app/options/CommandLineOptions.cpp
 app/options/CommandLineOptions.h
-app/PovrayApplication.cpp
-app/PovrayApplication.h
 app/PovRayApplication.cpp
 app/PovRayApplication.h

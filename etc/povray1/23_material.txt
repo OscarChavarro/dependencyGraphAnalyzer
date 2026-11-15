@@ -1,7 +1,1 @@
 [23_MATERIAL]
-environment/material/Material.h
-environment/material/RendererConfiguration.cpp
-environment/material/RendererConfiguration.h
-environment/material/RenderOutput.h
-environment/material/PovRayRendererConfiguration.cpp
-environment/material/PovRayRendererConfiguration.h

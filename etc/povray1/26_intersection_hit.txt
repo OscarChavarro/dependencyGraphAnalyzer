@@ -1,0 +1,12 @@
+[26_INTERSECTION_HIT]
+environment/intersection/hit/DetailMask.h
+environment/intersection/hit/GeometryIntersectionEmissionContext.h
+environment/intersection/hit/IntersectionAttributes.h
+environment/intersection/hit/IntersectionCandidate.h
+environment/intersection/hit/PostRayHitElement.h
+environment/intersection/hit/RayCastingContainment.h
+environment/intersection/hit/RayCastingHit.h
+environment/intersection/hit/SurfaceDetailFamily.h
+environment/intersection/ray/RayCastingQueryAdapter.h
+environment/intersection/ray/RayWithTracingState.h
+environment/intersection/ray/RayWithTracingState.cpp

@@ -9,14 +9,10 @@ io/pov/material/PovColorMapSpan.cpp
 io/pov/material/PovColorMapSpan.h
 io/pov/material/TextureParser.cpp
 io/pov/material/TextureParser.h
-io/pov/material/ParseReportingConfiguration.cpp
-io/pov/material/ParseReportingConfiguration.h
-io/pov/material/DefaultTextureAliasTracker.h
 io/pov/material/LoadedImageRegistry.cpp
 io/pov/material/LoadedImageRegistry.h
 io/pov/material/PovRayMaterialBuilder.cpp
 io/pov/material/PovRayMaterialBuilder.h
-io/pov/material/PovRayMaterialConstancy.cpp
 io/pov/material/PovRayMaterialUtils.cpp
 io/pov/material/PovRayMaterialUtils.h
 io/pov/material/SolidTextureBumpyNames.h

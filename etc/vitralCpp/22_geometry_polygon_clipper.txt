@@ -1,6 +1,4 @@
 [22_GEOMETRY_POLYGON_CLIPPER]
-vsdk/toolkit/environment/geometry/geometricProcessing/polygonClipper/PolygonProcessor.cpp
-vsdk/toolkit/environment/geometry/geometricProcessing/polygonClipper/PolygonProcessor.h
 vsdk/toolkit/environment/geometry/geometricProcessing/polygonClipper/PolygonTopologicalMerger.cpp
 vsdk/toolkit/environment/geometry/geometricProcessing/polygonClipper/PolygonTopologicalMerger.h
 vsdk/toolkit/environment/geometry/geometricProcessing/polygonClipper/WeilerAthertonPolygonClipper.cpp

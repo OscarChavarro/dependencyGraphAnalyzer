@@ -1,5 +1,1 @@
 [12_STATISTICS]
-common/statistics/Statistics.cpp
-common/statistics/Statistics.h
-common/statistics/GeometryStatistics.h
-common/statistics/GeometryStatistics.cpp

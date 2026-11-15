@@ -17,3 +17,11 @@ memory
 strings.h
 mutex
 functional
+typeinfo
+algorithm
+cassert
+cxxabi.h
+deque
+unordered_map
+utility
+vector

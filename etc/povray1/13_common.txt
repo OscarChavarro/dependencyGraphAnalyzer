@@ -1,4 +1,1 @@
 [13_COMMON]
-common/Config.h
-common/RenderRuntimeState.cpp
-common/RenderRuntimeState.h

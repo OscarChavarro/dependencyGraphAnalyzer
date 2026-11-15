@@ -18,6 +18,8 @@ vsdk/toolkit/render/shaders/FlatTexturedShader.h
 vsdk/toolkit/render/shaders/GouraudTextureShader.h
 vsdk/toolkit/render/shaders/LightingShader.cpp
 vsdk/toolkit/render/shaders/LightingShader.h
+vsdk/toolkit/render/shaders/ShadowTransmittance.cpp
+vsdk/toolkit/render/shaders/ShadowTransmittance.h
 vsdk/toolkit/render/shaders/PhongBumpShader.h
 vsdk/toolkit/render/shaders/PhongShader.h
 vsdk/toolkit/render/shaders/PhongTextureBumpShader.h
@@ -40,6 +42,8 @@ vsdk/toolkit/render/raytracing/RasterTileGenerator.cpp
 vsdk/toolkit/render/raytracing/RasterTileGenerator.h
 vsdk/toolkit/render/raytracing/SimpleRaytracer.cpp
 vsdk/toolkit/render/raytracing/SimpleRaytracer.h
+vsdk/toolkit/render/raytracing/SnellRefraction.cpp
+vsdk/toolkit/render/raytracing/SnellRefraction.h
 vsdk/toolkit/render/SpherePolyhedralCache.cpp
 vsdk/toolkit/render/SpherePolyhedralCache.h
 vsdk/toolkit/render/dithering/CutBox.h

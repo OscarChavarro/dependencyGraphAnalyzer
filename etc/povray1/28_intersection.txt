@@ -1,0 +1,11 @@
+[28_INTERSECTION]
+environment/intersection/BoxInvertedCrossingSink.cpp
+environment/intersection/BoxInvertedCrossingSink.h
+environment/intersection/ProjectedTriangleTraversal.cpp
+environment/intersection/ProjectedTriangleTraversal.h
+environment/intersection/SurfaceBoundingVolume.cpp
+environment/intersection/SurfaceBoundingVolume.h
+environment/intersection/SurfaceDetailResolver.cpp
+environment/intersection/SurfaceDetailResolver.h
+environment/intersection/SurfaceIntersector.cpp
+environment/intersection/SurfaceIntersector.h

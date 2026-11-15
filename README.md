@@ -70,9 +70,7 @@ Start the Spring Boot API:
 Start the frontend in another terminal:
 
 ```bash
-cd frontend
-npm install
-npm start
+./scripts/runFrontend.sh
 ```
 
 The frontend reads `frontend/public/environment.json` at startup. If `backend.url` exists, it is used as the backend base URL; otherwise the UI falls back to `http://localhost:8080`.

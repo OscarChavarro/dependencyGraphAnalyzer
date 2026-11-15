@@ -13,4 +13,3 @@ io/pov/scene/ScenePostProcessor.cpp
 io/pov/scene/ScenePostProcessor.h
 io/pov/scene/ObjectParser.cpp
 io/pov/scene/ObjectParser.h
-io/pov/scene/ParsedTransformOp.h

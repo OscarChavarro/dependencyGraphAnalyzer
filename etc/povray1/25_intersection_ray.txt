@@ -1,0 +1,5 @@
+[25_INTERSECTION_RAY]
+environment/intersection/ray/IntersectionTolerances.h
+environment/intersection/ray/PriorityQueuePool.h
+environment/intersection/ray/PriorityQueuePool.txx
+environment/intersection/ray/TransformStep.h
