@@ -1,0 +1,6 @@
+[80_GNOME_DEPENDENCIES]
+libp11-kit-gnome-keyring
+libp11-kit-gnome-keyring:i386
+p11-kit
+p11-kit-modules
+p11-kit-modules:i386

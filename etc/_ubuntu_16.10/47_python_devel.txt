@@ -1,0 +1,7 @@
+[47_PYTHON_DEVEL]
+libpython3.5-dev
+libpython3.5-dev:i386
+libpython3-dev
+libpython3-dev:i386
+python3.5-dev
+python3-dev

@@ -1,0 +1,8 @@
+[73_QT_EXTRA]
+libqt5multimedia5-plugins
+libqt5multimedia5-plugins:i386
+libqt5multimediawidgets5
+libqt5multimediawidgets5-gles
+libqt5multimediawidgets5:i386
+libqgsttools-p1
+libqgsttools-p1:i386

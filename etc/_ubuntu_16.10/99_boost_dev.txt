@@ -1,0 +1,15 @@
+[99_BOOST_DEV]
+libboost-date-time-dev
+libboost-date-time-dev:i386
+libboost-date-time1.62-dev
+libboost-date-time1.62-dev:i386
+libboost-date-time1.62.0
+libboost-date-time1.62.0:i386
+libboost-serialization1.62-dev
+libboost-serialization1.62-dev:i386
+libboost-serialization1.62.0
+libboost-serialization1.62.0:i386
+libboost1.62-dev
+libboost1.62-dev:i386
+libboost-dev
+libboost-dev:i386

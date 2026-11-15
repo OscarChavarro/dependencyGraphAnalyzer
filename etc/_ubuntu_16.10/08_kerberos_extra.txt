@@ -1,0 +1,2 @@
+[08_KERBEROS_EXTRA]
+krb5-locales

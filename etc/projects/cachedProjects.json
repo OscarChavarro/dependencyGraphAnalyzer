@@ -26,6 +26,12 @@
     "cacheFile": "etc/caches/cache.txt.ubuntu2404taciturna"
   },
   {
+    "id": "ubuntu1610boobies",
+    "name": "Ubuntu 16.10 boobies",
+    "groupsDefinitionFolder": "etc/_ubuntu_16.10",
+    "cacheFile": "etc/caches/cache.txt.ubuntu1610boobies"
+  },
+  {
     "id": "ubuntu1704squirter",
     "name": "Ubuntu 17.04 squirter",
     "groupsDefinitionFolder": "etc/_ubuntu_17.04",

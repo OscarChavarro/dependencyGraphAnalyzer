@@ -1,0 +1,11 @@
+[84_GNOME_MULTIMEDIA_APPS]
+transmageddon
+pitivi
+gstreamer1.0-pulseaudio
+python3-cairo
+python3-gi-cairo
+python3-xdg
+gir1.2-gudev-1.0
+gir1.2-gudev-1.0:i386
+gir1.2-notify-0.7
+gir1.2-notify-0.7:i386

@@ -1,0 +1,9 @@
+[48_MULTIMEDIA_DEV_EXTRA]
+libasound2-dev
+libasound2-dev:i386
+libcaca-dev
+libpulse-dev
+libpulse-dev:i386
+libsdl1.2-dev
+libslang2-dev
+libslang2-dev:i386

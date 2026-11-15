@@ -1,0 +1,4 @@
+[34_CUPS_HP_PYTHON]
+python3-pil
+python3-pil.imagetk
+python3-pil:i386

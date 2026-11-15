@@ -1,0 +1,7 @@
+[12_COMMANDLINE_CPP]
+aptitude
+aptitude-common
+libyaml-cpp0.3v5
+libyaml-cpp0.3v5:i386
+libyaml-cpp0.5v5
+libyaml-cpp0.5v5:i386

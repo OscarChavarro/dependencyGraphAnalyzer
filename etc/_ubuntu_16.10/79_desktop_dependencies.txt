@@ -1,0 +1,16 @@
+[79_DESKTOP_DEPENDENCIES]
+libyelp0
+libyelp0:i386
+yelp
+yelp-xsl
+libwebkit2gtk-4.0-37
+libwebkit2gtk-4.0-37:i386
+libhyphen0
+libhyphen0:i386
+libjavascriptcoregtk-4.0-18
+libjavascriptcoregtk-4.0-18:i386
+libnih1
+libnih1:i386
+apport
+apport-symptoms
+mlocate

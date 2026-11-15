@@ -1,0 +1,14 @@
+[81_GNOME]
+gcr
+libgcr-3-common
+libgcr-base-3-1
+libgcr-base-3-1:i386
+libgcr-ui-3-1
+libgcr-ui-3-1:i386
+libgnome-keyring-common
+libgnome-keyring0
+libgnome-keyring0:i386
+libpam-gnome-keyring
+libpam-gnome-keyring:i386
+pinentry-gnome3
+gnome-keyring

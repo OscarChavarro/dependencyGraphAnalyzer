@@ -1,0 +1,4 @@
+[03_BOOT_EXTRA]
+libpam-cap
+libpam-cap:i386
+libpam-cap:amd64

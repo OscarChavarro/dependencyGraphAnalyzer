@@ -1,0 +1,2 @@
+[79_DESKTOP_GIR_PYTHON]
+python3-apport
