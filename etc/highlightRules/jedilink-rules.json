@@ -5544,6 +5544,13 @@
               "comment": "Adobe Lightroom replacement :)",
               "group": "markJedilinkCustom",
               "subGroup": "General"
+            },
+            {
+              "packageName": "*vitral",
+              "operation": "markPackageAndItsDependencies",
+              "comment": "",
+              "group": "markJedilinkCustom",
+              "subGroup": "General"
             }
           ]
         }

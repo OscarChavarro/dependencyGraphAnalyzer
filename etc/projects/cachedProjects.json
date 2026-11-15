@@ -4,7 +4,7 @@
     "name": "Ubuntu 22.04 custom",
     "groupsDefinitionFolder": "etc/_ubuntu_22.04",
     "cacheFile": "etc/caches/cache.txt.ubuntu2204custom",
-    "extra": "cache_extra.txt_",
+    "extra": "cache_extra.txt_2204",
     "linuxFromScratch": "$HOME/linux_from_scratch"
   },
   {
@@ -29,7 +29,8 @@
     "id": "ubuntu1610boobies",
     "name": "Ubuntu 16.10 boobies",
     "groupsDefinitionFolder": "etc/_ubuntu_16.10",
-    "cacheFile": "etc/caches/cache.txt.ubuntu1610boobies"
+    "cacheFile": "etc/caches/cache.txt.ubuntu1610boobies",
+    "extra": "cache_extra.txt_1610"
   },
   {
     "id": "ubuntu1704squirter",
