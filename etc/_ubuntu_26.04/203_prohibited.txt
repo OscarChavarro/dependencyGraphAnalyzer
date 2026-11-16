@@ -1,0 +1,13 @@
+[203_PROHIBITED]
+ubuntu-minimal
+update-manager-core
+ubuntu-release-upgrader-core
+libplymouth5
+libplymouth5:amd64
+plymouth
+plymouth-theme-ubuntu-text
+busybox-static
+iputils-tracepath
+ubuntu-pro-client
+ubuntu-pro-client-l10n
+ubuntu-standard

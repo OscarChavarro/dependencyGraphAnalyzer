@@ -26,6 +26,13 @@
     "cacheFile": "etc/caches/cache.txt.ubuntu2404taciturna"
   },
   {
+    "id": "ubuntu2604boobies",
+    "name": "Ubuntu26.04 boobies",
+    "groupsDefinitionFolder": "etc/_ubuntu_26.04",
+    "cacheFile": "etc/caches/cache.txt.ubuntu2604boobies",
+    "extra": "cache_extra.txt_2604"
+  },
+  {
     "id": "ubuntu1610boobies",
     "name": "Ubuntu 16.10 boobies",
     "groupsDefinitionFolder": "etc/_ubuntu_16.10",

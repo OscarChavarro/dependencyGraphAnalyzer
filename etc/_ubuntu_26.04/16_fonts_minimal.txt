@@ -1,0 +1,17 @@
+[16_FONTS_MINIMAL]
+libfontconfig1
+libfontconfig1:amd64
+libfontenc1
+libfontenc1:amd64
+fonts-croscore
+fonts-dejavu-core
+fonts-freefont-otf
+fonts-freefont-ttf
+fonts-liberation
+fonts-texgyre
+fontconfig
+fontconfig-config
+fonts-urw-base35
+fonts-noto-core
+fonts-dejavu-mono
+fonts-noto-color-emoji

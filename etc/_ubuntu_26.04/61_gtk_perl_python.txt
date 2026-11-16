@@ -1,0 +1,2 @@
+[61_GTK_PERL_PYTHON]
+python3-gi

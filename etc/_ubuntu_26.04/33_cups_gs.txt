@@ -1,0 +1,3 @@
+[33_CUPS_GS]
+libcups2t64
+libcups2t64:amd64

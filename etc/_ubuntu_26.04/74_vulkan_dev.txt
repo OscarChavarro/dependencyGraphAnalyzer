@@ -1,0 +1,7 @@
+[74_VULKAN_DEV]
+glslang-tools
+spirv-tools
+vulkan-tools
+vulkan-validationlayers
+vulkan-validationlayers:amd64
+glslc

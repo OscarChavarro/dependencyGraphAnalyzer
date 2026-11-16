@@ -1,0 +1,16 @@
+[14_PYTHON3_MINIMAL]
+libpython3-stdlib
+libpython3-stdlib:amd64
+python3
+python3-minimal
+nfs-common
+python3-cffi-backend
+python3-cffi-backend:amd64
+libpython3.14
+libpython3.14-minimal
+libpython3.14-minimal:amd64
+libpython3.14-stdlib
+libpython3.14-stdlib:amd64
+libpython3.14:amd64
+python3.14
+python3.14-minimal

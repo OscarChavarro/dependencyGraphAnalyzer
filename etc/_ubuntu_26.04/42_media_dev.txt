@@ -1,0 +1,11 @@
+[42_MEDIA_DEV]
+libjpeg-dev
+libjpeg-dev:amd64
+libjpeg-turbo8-dev
+libjpeg-turbo8-dev:amd64
+libjpeg8-dev
+libjpeg8-dev:amd64
+libpng-dev
+libpng-dev:amd64
+libfreetype-dev
+libfreetype-dev:amd64

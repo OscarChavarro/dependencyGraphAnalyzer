@@ -1,0 +1,5 @@
+[16_BOOT_GRUB]
+grub2-common
+grub-pc
+grub-pc-bin
+grub-gfxpayload-lists

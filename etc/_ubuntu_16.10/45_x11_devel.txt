@@ -93,7 +93,6 @@ libfontconfig1-dev
 libfontconfig1-dev:i386
 libfreetype6-dev
 libfreetype6-dev:i386
-libpng-dev
 libpng-dev:i386
 libexpat1-dev
 libexpat1-dev:i386
@@ -109,7 +108,6 @@ libmircookie-dev:amd64
 libmircore-dev:amd64
 libpciaccess-dev
 libpciaccess-dev:amd64
-libpng-dev:amd64
 libprotobuf-dev:amd64
 libprotobuf10:amd64
 libx11-dev:amd64

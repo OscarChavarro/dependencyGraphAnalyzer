@@ -1,0 +1,3 @@
+[68_GTK_PERL_DEV]
+libprotobuf-dev
+libprotobuf-dev:amd64

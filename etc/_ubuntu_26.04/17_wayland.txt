@@ -1,0 +1,11 @@
+[17_WAYLAND]
+libwayland-client0
+libwayland-client0:amd64
+libwayland-cursor0
+libwayland-cursor0:amd64
+libwayland-egl1
+libwayland-egl1:amd64
+libwayland-server0
+libwayland-server0:amd64
+libdecor-0-0:amd64
+libdecor-0-0

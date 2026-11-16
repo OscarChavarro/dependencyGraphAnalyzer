@@ -1,0 +1,8 @@
+[24_X11_MULTIMEDIA]
+libvdpau1
+libvdpau1:amd64
+imagemagick-7-common
+libmagickcore-7.q16-10
+libmagickcore-7.q16-10:amd64
+libmagickwand-7.q16-10
+libmagickwand-7.q16-10:amd64

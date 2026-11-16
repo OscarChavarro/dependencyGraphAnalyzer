@@ -1,0 +1,15 @@
+n *vitral good
+r *vitral libglu1-mesa
+r *vitral libpng-dev
+r *vitral *nvidiaDriver
+r *vitral freeglut3-dev
+r *vitral libglu1-mesa-dev
+r *vitral libmotif-dev
+r *vitral python3-minimal
+r *vitral libjpeg-dev
+r *vitral libfreetype-dev
+n *dependencyGraphAnalyzer good
+r *dependencyGraphAnalyzer imagemagick
+r *dependencyGraphAnalyzer graphviz
+r *dependencyGraphAnalyzer *vitral
+n *nvidiaDriver good

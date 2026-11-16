@@ -1,0 +1,11 @@
+[41_DEV_EXTRA]
+libtraceevent1
+libtraceevent1-plugin
+libtraceevent1-plugin:amd64
+libtraceevent1:amd64
+libtracefs1
+libtracefs1:amd64
+trace-cmd
+linux-perf
+linux-tools-7.0.0-43
+linux-tools-7.0.0-43-generic

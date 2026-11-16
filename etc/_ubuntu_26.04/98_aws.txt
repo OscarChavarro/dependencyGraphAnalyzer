@@ -1,0 +1,7 @@
+[98_AWS]
+chrony
+netplan.io
+libnetplan1
+libnetplan1:amd64
+netplan-generator
+python3-netplan

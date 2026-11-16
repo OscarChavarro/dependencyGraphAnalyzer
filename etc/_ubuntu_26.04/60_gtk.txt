@@ -1,0 +1,12 @@
+[60_GTK]
+gtk-update-icon-cache
+libgtk-3-common
+adwaita-icon-theme
+hicolor-icon-theme
+parted
+libgtk-3-0t64
+libgtk-3-0t64:amd64
+libprotobuf-lite32t64
+libprotobuf-lite32t64:amd64
+libprotobuf32t64
+libprotobuf32t64:amd64

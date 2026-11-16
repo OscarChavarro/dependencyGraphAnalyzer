@@ -1,0 +1,9 @@
+[46_X11_PERL_DEV]
+libmotif-dev
+libmotif-dev:amd64
+libxft-dev
+libxft-dev:amd64
+libfontconfig-dev
+libfontconfig-dev:amd64
+libfontconfig1-dev
+libfontconfig1-dev:amd64

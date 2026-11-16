@@ -4031,6 +4031,20 @@
               "subGroup": "NVIDIA"
             },
             {
+              "packageName": "nvidia-settings",
+              "operation": "markPackageAndItsDependencies",
+              "comment": "",
+              "group": "markOpenCvDependencies",
+              "subGroup": "NVIDIA"
+            },
+            {
+              "packageName": "xserver-xorg-video-nvidia-580",
+              "operation": "markPackageAndItsDependencies",
+              "comment": "",
+              "group": "markOpenCvDependencies",
+              "subGroup": "NVIDIA"
+            },
+            {
               "packageName": "libcudnn7-doc",
               "operation": "markPackageAndItsDependencies",
               "comment": "",

@@ -1,0 +1,3 @@
+[49_PYTHON_DEV]
+gdb
+python3-pygments

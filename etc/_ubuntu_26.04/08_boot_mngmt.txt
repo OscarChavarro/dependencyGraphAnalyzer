@@ -1,0 +1,16 @@
+[08_BOOT_MNGMT]
+grub-common
+busybox-initramfs
+initramfs-tools
+initramfs-tools-bin
+initramfs-tools-core
+klibc-utils
+libklibc
+libklibc:amd64
+os-prober
+dhcpcd-base
+dracut-install
+libefiboot1t64
+libefiboot1t64:amd64
+libefivar1t64
+libefivar1t64:amd64

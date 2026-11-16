@@ -51,3 +51,5 @@ libilmbase-dev
 libjpeg-dev:amd64
 libjpeg-turbo8-dev:amd64
 libjpeg8-dev:amd64
+libpng-dev
+libpng-dev:amd64

@@ -1,0 +1,8 @@
+[169_MONITORING]
+sysstat
+libbpfcc:amd64
+libbpfcc
+bpfcc-tools
+bpftrace
+python3-bpfcc
+ubuntu-kernel-accessories
