@@ -1,2 +1,5 @@
 [03_UNIX]
 unistd.h
+dirent.h
+pthread.h
+sys/stat.h

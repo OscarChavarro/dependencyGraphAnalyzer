@@ -18,3 +18,4 @@ vsdk/toolkit/raycasting/raytracing/ScreenIterateState.h
 vsdk/toolkit/raycasting/raytracing/SpecularSampler.cpp
 vsdk/toolkit/raycasting/raytracing/SpecularSampler.h
 vsdk/toolkit/raycasting/raytracing/SurfaceSampler.h
+vsdk/toolkit/raycasting/raytracing/ScreenIterate.txx

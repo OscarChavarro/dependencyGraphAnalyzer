@@ -1,8 +1,6 @@
 [23_TONEMAP]
 vsdk/toolkit/tonemap/FerwerdaToneMap.cpp
 vsdk/toolkit/tonemap/FerwerdaToneMap.h
-vsdk/toolkit/tonemap/IdentityToneMap.cpp
-vsdk/toolkit/tonemap/IdentityToneMap.h
 vsdk/toolkit/tonemap/LightnessToneMap.cpp
 vsdk/toolkit/tonemap/LightnessToneMap.h
 vsdk/toolkit/tonemap/RevisedTumblinRushmeierToneMap.cpp

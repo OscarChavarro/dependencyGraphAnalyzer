@@ -1,0 +1,7 @@
+[14_LINEAL_ALGEBRA]
+vsdk/toolkit/common/linealAlgebra/CoordinateAxis.h
+vsdk/toolkit/common/linealAlgebra/CoordinateSystem.cpp
+vsdk/toolkit/common/linealAlgebra/CoordinateSystem.h
+vsdk/toolkit/common/linealAlgebra/Numeric.cpp
+vsdk/toolkit/common/linealAlgebra/Numeric.h
+vsdk/toolkit/common/linealAlgebra/RpkRay.h

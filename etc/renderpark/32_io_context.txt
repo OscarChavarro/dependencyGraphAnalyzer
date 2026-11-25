@@ -4,7 +4,6 @@ vsdk/toolkit/io/context/ColorContext.h
 vsdk/toolkit/io/context/ColorRegistryContext.cpp
 vsdk/toolkit/io/context/ColorRegistryContext.h
 vsdk/toolkit/io/context/EntityDispatchContext.h
-vsdk/toolkit/io/context/EntityNamingContext.cpp
 vsdk/toolkit/io/context/EntityNamingContext.h
 vsdk/toolkit/io/context/EntityTypeContext.h
 vsdk/toolkit/io/context/FilePositionContext.h

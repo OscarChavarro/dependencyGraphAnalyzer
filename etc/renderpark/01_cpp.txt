@@ -11,3 +11,6 @@ cstrings
 new
 limits
 cctype
+cstdint
+ctime
+stdlib.h

@@ -15,3 +15,5 @@ vsdk/toolkit/render/Softids.cpp
 vsdk/toolkit/render/Softids.h
 vsdk/toolkit/render/SoftIdsWrapper.cpp
 vsdk/toolkit/render/SoftIdsWrapper.h
+vsdk/toolkit/render/FaceVisibilityBuffer.cpp
+vsdk/toolkit/render/FaceVisibilityBuffer.h

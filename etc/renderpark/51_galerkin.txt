@@ -65,3 +65,8 @@ vsdk/toolkit/galerkin/Shaft.h
 vsdk/toolkit/galerkin/ShaftCullStrategy.h
 vsdk/toolkit/galerkin/ShaftPlane.h
 vsdk/toolkit/galerkin/ShaftPlanePosition.h
+vsdk/toolkit/galerkin/GalerkinElementVisibilityBuffer.cpp
+vsdk/toolkit/galerkin/GalerkinElementVisibilityBuffer.h
+vsdk/toolkit/galerkin/processing/FormFactorWorkspace.cpp
+vsdk/toolkit/galerkin/processing/FormFactorWorkspace.h
+vsdk/toolkit/galerkin/processing/RefinementWorkspace.h
